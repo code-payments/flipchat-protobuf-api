@@ -30,7 +30,7 @@ type PushClient interface {
 	// AddToken adds a push token associated with a user/device.
 	AddToken(ctx context.Context, in *AddTokenRequest, opts ...grpc.CallOption) (*AddTokenResponse, error)
 	// DeleteToken removes a push token from a user/device.
-	DeleteToken(ctx context.Context, in *DeleteTokenResponse, opts ...grpc.CallOption) (*DeleteTokenResponse, error)
+	DeleteToken(ctx context.Context, in *DeleteTokenRequest, opts ...grpc.CallOption) (*DeleteTokenResponse, error)
 }
 
 type pushClient struct {
@@ -51,7 +51,7 @@ func (c *pushClient) AddToken(ctx context.Context, in *AddTokenRequest, opts ...
 	return out, nil
 }
 
-func (c *pushClient) DeleteToken(ctx context.Context, in *DeleteTokenResponse, opts ...grpc.CallOption) (*DeleteTokenResponse, error) {
+func (c *pushClient) DeleteToken(ctx context.Context, in *DeleteTokenRequest, opts ...grpc.CallOption) (*DeleteTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteTokenResponse)
 	err := c.cc.Invoke(ctx, Push_DeleteToken_FullMethodName, in, out, cOpts...)
@@ -68,7 +68,7 @@ type PushServer interface {
 	// AddToken adds a push token associated with a user/device.
 	AddToken(context.Context, *AddTokenRequest) (*AddTokenResponse, error)
 	// DeleteToken removes a push token from a user/device.
-	DeleteToken(context.Context, *DeleteTokenResponse) (*DeleteTokenResponse, error)
+	DeleteToken(context.Context, *DeleteTokenRequest) (*DeleteTokenResponse, error)
 	mustEmbedUnimplementedPushServer()
 }
 
@@ -82,7 +82,7 @@ type UnimplementedPushServer struct{}
 func (UnimplementedPushServer) AddToken(context.Context, *AddTokenRequest) (*AddTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddToken not implemented")
 }
-func (UnimplementedPushServer) DeleteToken(context.Context, *DeleteTokenResponse) (*DeleteTokenResponse, error) {
+func (UnimplementedPushServer) DeleteToken(context.Context, *DeleteTokenRequest) (*DeleteTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteToken not implemented")
 }
 func (UnimplementedPushServer) mustEmbedUnimplementedPushServer() {}
@@ -125,7 +125,7 @@ func _Push_AddToken_Handler(srv interface{}, ctx context.Context, dec func(inter
 }
 
 func _Push_DeleteToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteTokenResponse)
+	in := new(DeleteTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ func _Push_DeleteToken_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: Push_DeleteToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PushServer).DeleteToken(ctx, req.(*DeleteTokenResponse))
+		return srv.(PushServer).DeleteToken(ctx, req.(*DeleteTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

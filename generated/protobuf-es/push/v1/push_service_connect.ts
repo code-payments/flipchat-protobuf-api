@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddTokenRequest, AddTokenResponse, DeleteTokenResponse } from "./push_service_pb";
+import { AddTokenRequest, AddTokenResponse, DeleteTokenRequest, DeleteTokenResponse } from "./push_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -30,7 +30,7 @@ export const Push = {
      */
     deleteToken: {
       name: "DeleteToken",
-      I: DeleteTokenResponse,
+      I: DeleteTokenRequest,
       O: DeleteTokenResponse,
       kind: MethodKind.Unary,
     },

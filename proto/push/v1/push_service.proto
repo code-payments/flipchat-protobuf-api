@@ -14,7 +14,7 @@ service Push {
     rpc AddToken(AddTokenRequest) returns (AddTokenResponse);
 
     // DeleteToken removes a push token from a user/device.
-    rpc DeleteToken(DeleteTokenResponse) returns (DeleteTokenResponse);
+    rpc DeleteToken(DeleteTokenRequest) returns (DeleteTokenResponse);
 }
 
 enum TokenType {
