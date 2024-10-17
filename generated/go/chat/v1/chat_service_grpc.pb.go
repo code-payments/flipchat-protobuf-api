@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Chat_StreamChatEvents_FullMethodName = "/flipchat.chat.v1.Chat/StreamChatEvents"
 	Chat_GetChats_FullMethodName         = "/flipchat.chat.v1.Chat/GetChats"
+	Chat_GetChat_FullMethodName          = "/flipchat.chat.v1.Chat/GetChat"
 	Chat_StartChat_FullMethodName        = "/flipchat.chat.v1.Chat/StartChat"
 	Chat_JoinChat_FullMethodName         = "/flipchat.chat.v1.Chat/JoinChat"
 	Chat_LeaveChat_FullMethodName        = "/flipchat.chat.v1.Chat/LeaveChat"
@@ -50,6 +51,8 @@ type ChatClient interface {
 	// GetChats gets the set of chats for an owner account using a paged API.
 	// This RPC is aware of all identities tied to the owner account.
 	GetChats(ctx context.Context, in *GetChatsRequest, opts ...grpc.CallOption) (*GetChatsResponse, error)
+	// GetChat returns the metadata for a specific chat.
+	GetChat(ctx context.Context, in *GetChatRequest, opts ...grpc.CallOption) (*GetChatResponse, error)
 	// StartChat starts a chat. The RPC call is idempotent and will use existing
 	// chats whenever applicable within the context of message routing.
 	StartChat(ctx context.Context, in *StartChatRequest, opts ...grpc.CallOption) (*StartChatResponse, error)
@@ -86,6 +89,16 @@ func (c *chatClient) GetChats(ctx context.Context, in *GetChatsRequest, opts ...
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetChatsResponse)
 	err := c.cc.Invoke(ctx, Chat_GetChats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) GetChat(ctx context.Context, in *GetChatRequest, opts ...grpc.CallOption) (*GetChatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetChatResponse)
+	err := c.cc.Invoke(ctx, Chat_GetChat_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -155,6 +168,8 @@ type ChatServer interface {
 	// GetChats gets the set of chats for an owner account using a paged API.
 	// This RPC is aware of all identities tied to the owner account.
 	GetChats(context.Context, *GetChatsRequest) (*GetChatsResponse, error)
+	// GetChat returns the metadata for a specific chat.
+	GetChat(context.Context, *GetChatRequest) (*GetChatResponse, error)
 	// StartChat starts a chat. The RPC call is idempotent and will use existing
 	// chats whenever applicable within the context of message routing.
 	StartChat(context.Context, *StartChatRequest) (*StartChatResponse, error)
@@ -179,6 +194,9 @@ func (UnimplementedChatServer) StreamChatEvents(grpc.BidiStreamingServer[StreamC
 }
 func (UnimplementedChatServer) GetChats(context.Context, *GetChatsRequest) (*GetChatsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChats not implemented")
+}
+func (UnimplementedChatServer) GetChat(context.Context, *GetChatRequest) (*GetChatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChat not implemented")
 }
 func (UnimplementedChatServer) StartChat(context.Context, *StartChatRequest) (*StartChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartChat not implemented")
@@ -234,6 +252,24 @@ func _Chat_GetChats_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatServer).GetChats(ctx, req.(*GetChatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_GetChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).GetChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_GetChat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).GetChat(ctx, req.(*GetChatRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -320,6 +356,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetChats",
 			Handler:    _Chat_GetChats_Handler,
+		},
+		{
+			MethodName: "GetChat",
+			Handler:    _Chat_GetChat_Handler,
 		},
 		{
 			MethodName: "StartChat",

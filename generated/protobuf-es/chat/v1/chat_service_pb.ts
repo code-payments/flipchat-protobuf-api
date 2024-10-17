@@ -504,6 +504,133 @@ proto3.util.setEnumType(GetChatsResponse_Result, "flipchat.chat.v1.GetChatsRespo
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.GetChatRequest
+ */
+export class GetChatRequest extends Message<GetChatRequest> {
+  /**
+   * @generated from oneof flipchat.chat.v1.GetChatRequest.identifier
+   */
+  identifier: {
+    /**
+     * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+     */
+    value: ChatId;
+    case: "chatId";
+  } | {
+    /**
+     * @generated from field: uint64 room_number = 2;
+     */
+    value: bigint;
+    case: "roomNumber";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  /**
+   * Auth is an optional field that authenticates the call, which
+   * can be used to fill out extra information in the Metadata.
+   *
+   * @generated from field: flipchat.common.v1.Auth auth = 10;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<GetChatRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.GetChatRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
+    { no: 2, name: "room_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
+    { no: 10, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetChatRequest {
+    return new GetChatRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetChatRequest {
+    return new GetChatRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetChatRequest {
+    return new GetChatRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetChatRequest | PlainMessage<GetChatRequest> | undefined, b: GetChatRequest | PlainMessage<GetChatRequest> | undefined): boolean {
+    return proto3.util.equals(GetChatRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.GetChatResponse
+ */
+export class GetChatResponse extends Message<GetChatResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.GetChatResponse.Result result = 1;
+   */
+  result = GetChatResponse_Result.OK;
+
+  /**
+   * Metadata is the chat metadata, if result == OK.
+   *
+   * The contents of the metadata may change whether or not the
+   * call was authenticated.
+   *
+   * @generated from field: flipchat.chat.v1.Metadata metadata = 2;
+   */
+  metadata?: Metadata;
+
+  constructor(data?: PartialMessage<GetChatResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.GetChatResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(GetChatResponse_Result) },
+    { no: 2, name: "metadata", kind: "message", T: Metadata },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetChatResponse {
+    return new GetChatResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetChatResponse {
+    return new GetChatResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetChatResponse {
+    return new GetChatResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetChatResponse | PlainMessage<GetChatResponse> | undefined, b: GetChatResponse | PlainMessage<GetChatResponse> | undefined): boolean {
+    return proto3.util.equals(GetChatResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.GetChatResponse.Result
+ */
+export enum GetChatResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: NOT_FOUND = 1;
+   */
+  NOT_FOUND = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(GetChatResponse_Result)
+proto3.util.setEnumType(GetChatResponse_Result, "flipchat.chat.v1.GetChatResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "NOT_FOUND" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.StartChatRequest
  */
 export class StartChatRequest extends Message<StartChatRequest> {

@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./chat_service_pb";
+import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./chat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -47,6 +47,17 @@ export const Chat = {
       name: "GetChats",
       I: GetChatsRequest,
       O: GetChatsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * GetChat returns the metadata for a specific chat.
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.GetChat
+     */
+    getChat: {
+      name: "GetChat",
+      I: GetChatRequest,
+      O: GetChatResponse,
       kind: MethodKind.Unary,
     },
     /**
