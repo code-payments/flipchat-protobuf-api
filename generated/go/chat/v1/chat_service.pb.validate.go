@@ -1285,46 +1285,6 @@ func (m *JoinChatRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetChatId() == nil {
-		err := JoinChatRequestValidationError{
-			field:  "ChatId",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetChatId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, JoinChatRequestValidationError{
-					field:  "ChatId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, JoinChatRequestValidationError{
-					field:  "ChatId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return JoinChatRequestValidationError{
-				field:  "ChatId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if m.GetUserId() == nil {
 		err := JoinChatRequestValidationError{
 			field:  "UserId",
@@ -1403,6 +1363,77 @@ func (m *JoinChatRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	oneofIdentifierPresent := false
+	switch v := m.Identifier.(type) {
+	case *JoinChatRequest_ChatId:
+		if v == nil {
+			err := JoinChatRequestValidationError{
+				field:  "Identifier",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofIdentifierPresent = true
+
+		if all {
+			switch v := interface{}(m.GetChatId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, JoinChatRequestValidationError{
+						field:  "ChatId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, JoinChatRequestValidationError{
+						field:  "ChatId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return JoinChatRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *JoinChatRequest_RoomId:
+		if v == nil {
+			err := JoinChatRequestValidationError{
+				field:  "Identifier",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofIdentifierPresent = true
+		// no validation rules for RoomId
+	default:
+		_ = v // ensures v is used
+	}
+	if !oneofIdentifierPresent {
+		err := JoinChatRequestValidationError{
+			field:  "Identifier",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	if len(errors) > 0 {
@@ -2309,6 +2340,8 @@ func (m *Metadata) validate(all bool) error {
 		}
 		errors = append(errors, err)
 	}
+
+	// no validation rules for RoomNumber
 
 	if l := len(m.GetMembers()); l < 1 || l > 2 {
 		err := MetadataValidationError{

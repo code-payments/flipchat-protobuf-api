@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Message, proto3 } from "@bufbuild/protobuf";
+import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
 import { Auth, ChatId, ClientPong, ServerPing, UserId } from "../../common/v1/model_pb";
 import { IsTyping, Message as Message$1, Pointer } from "../../messaging/v1/model_pb";
 
@@ -737,17 +737,29 @@ proto3.util.setEnumType(StartChatResponse_Result, "flipchat.chat.v1.StartChatRes
  */
 export class JoinChatRequest extends Message<JoinChatRequest> {
   /**
-   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
-   */
-  chatId?: ChatId;
-
-  /**
-   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   * @generated from field: flipchat.common.v1.UserId user_id = 1;
    */
   userId?: UserId;
 
   /**
-   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   * @generated from oneof flipchat.chat.v1.JoinChatRequest.identifier
+   */
+  identifier: {
+    /**
+     * @generated from field: flipchat.common.v1.ChatId chat_id = 2;
+     */
+    value: ChatId;
+    case: "chatId";
+  } | {
+    /**
+     * @generated from field: uint64 room_id = 3;
+     */
+    value: bigint;
+    case: "roomId";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 10;
    */
   auth?: Auth;
 
@@ -759,9 +771,10 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "flipchat.chat.v1.JoinChatRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "chat_id", kind: "message", T: ChatId },
-    { no: 2, name: "user_id", kind: "message", T: UserId },
-    { no: 3, name: "auth", kind: "message", T: Auth },
+    { no: 1, name: "user_id", kind: "message", T: UserId },
+    { no: 2, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
+    { no: 3, name: "room_id", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
+    { no: 10, name: "auth", kind: "message", T: Auth },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JoinChatRequest {
@@ -1082,30 +1095,37 @@ export class Metadata extends Message<Metadata> {
   title = "";
 
   /**
+   * If non-zero, the room number associated with the chat.
+   *
+   * @generated from field: uint64 room_number = 5;
+   */
+  roomNumber = protoInt64.zero;
+
+  /**
    * The members in this chat.
    *
-   * @generated from field: repeated flipchat.chat.v1.Member members = 5;
+   * @generated from field: repeated flipchat.chat.v1.Member members = 6;
    */
   members: Member[] = [];
 
   /**
    * Whether or not the chat is muted (from the perspective of the caller).
    *
-   * @generated from field: bool is_muted = 6;
+   * @generated from field: bool is_muted = 7;
    */
   isMuted = false;
 
   /**
    * Whether or not the chat is mutable (from the persective of the caller).
    *
-   * @generated from field: bool muteable = 7;
+   * @generated from field: bool muteable = 8;
    */
   muteable = false;
 
   /**
    * Number of (estimated) unread message (from the perspective of the caller).
    *
-   * @generated from field: uint32 num_unread = 8;
+   * @generated from field: uint32 num_unread = 9;
    */
   numUnread = 0;
 
@@ -1121,10 +1141,11 @@ export class Metadata extends Message<Metadata> {
     { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(Metadata_ChatType) },
     { no: 3, name: "cursor", kind: "message", T: Cursor },
     { no: 4, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "members", kind: "message", T: Member, repeated: true },
-    { no: 6, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 7, name: "muteable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 8, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 5, name: "room_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 6, name: "members", kind: "message", T: Member, repeated: true },
+    { no: 7, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: "muteable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 9, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
