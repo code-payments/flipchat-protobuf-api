@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AuthorizePublicKeyRequest, AuthorizePublicKeyResponse, RegisterRequest, RegisterResponse, RevokePublicKeyRequest, RevokePublicKeyResponse } from "./account_service_pb";
+import { AuthorizePublicKeyRequest, AuthorizePublicKeyResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, RevokePublicKeyRequest, RevokePublicKeyResponse } from "./account_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -22,6 +22,18 @@ export const Account = {
       name: "Register",
       I: RegisterRequest,
       O: RegisterResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Login retrieves the UserId (and in the future, potentially other information)
+     * required for 'recovering' an account.
+     *
+     * @generated from rpc flipchat.account.v1.Account.Login
+     */
+    login: {
+      name: "Login",
+      I: LoginRequest,
+      O: LoginResponse,
       kind: MethodKind.Unary,
     },
     /**

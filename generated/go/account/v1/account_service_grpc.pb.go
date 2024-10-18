@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Account_Register_FullMethodName           = "/flipchat.account.v1.Account/Register"
+	Account_Login_FullMethodName              = "/flipchat.account.v1.Account/Login"
 	Account_AuthorizePublicKey_FullMethodName = "/flipchat.account.v1.Account/AuthorizePublicKey"
 	Account_RevokePublicKey_FullMethodName    = "/flipchat.account.v1.Account/RevokePublicKey"
 )
@@ -31,6 +32,9 @@ type AccountClient interface {
 	// Register registers a new user, bound to the provided PublicKey.
 	// If the PublicKey is already in use, the previous user account is returned.
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
+	// Login retrieves the UserId (and in the future, potentially other information)
+	// required for 'recovering' an account.
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	// AuthorizePublicKey authorizes an additional PublicKey to an account.
 	AuthorizePublicKey(ctx context.Context, in *AuthorizePublicKeyRequest, opts ...grpc.CallOption) (*AuthorizePublicKeyResponse, error)
 	// RevokePublicKey revokes a public key from an account.
@@ -52,6 +56,16 @@ func (c *accountClient) Register(ctx context.Context, in *RegisterRequest, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterResponse)
 	err := c.cc.Invoke(ctx, Account_Register_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoginResponse)
+	err := c.cc.Invoke(ctx, Account_Login_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -85,6 +99,9 @@ type AccountServer interface {
 	// Register registers a new user, bound to the provided PublicKey.
 	// If the PublicKey is already in use, the previous user account is returned.
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
+	// Login retrieves the UserId (and in the future, potentially other information)
+	// required for 'recovering' an account.
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	// AuthorizePublicKey authorizes an additional PublicKey to an account.
 	AuthorizePublicKey(context.Context, *AuthorizePublicKeyRequest) (*AuthorizePublicKeyResponse, error)
 	// RevokePublicKey revokes a public key from an account.
@@ -104,6 +121,9 @@ type UnimplementedAccountServer struct{}
 
 func (UnimplementedAccountServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedAccountServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
 func (UnimplementedAccountServer) AuthorizePublicKey(context.Context, *AuthorizePublicKeyRequest) (*AuthorizePublicKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AuthorizePublicKey not implemented")
@@ -146,6 +166,24 @@ func _Account_Register_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountServer).Register(ctx, req.(*RegisterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Account_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Account_Login_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServer).Login(ctx, req.(*LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -196,6 +234,10 @@ var Account_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Register",
 			Handler:    _Account_Register_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _Account_Login_Handler,
 		},
 		{
 			MethodName: "AuthorizePublicKey",

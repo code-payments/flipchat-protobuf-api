@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Message, proto3 } from "@bufbuild/protobuf";
+import { Message, proto3, Timestamp } from "@bufbuild/protobuf";
 import { Auth, PublicKey, Signature, UserId } from "../../common/v1/model_pb";
 
 /**
@@ -144,6 +144,131 @@ proto3.util.setEnumType(RegisterResponse_Result, "flipchat.account.v1.RegisterRe
   { no: 0, name: "OK" },
   { no: 1, name: "INVALID_SIGNATURE" },
   { no: 2, name: "INVALID_DISPLAY_NAME" },
+]);
+
+/**
+ * @generated from message flipchat.account.v1.LoginRequest
+ */
+export class LoginRequest extends Message<LoginRequest> {
+  /**
+   * Timestamp is the timestamp the request was generated.
+   *
+   * The server may reject the request if the timestamp is too far off
+   * the current (server) time. This is to prevent replay attacks.
+   *
+   * @generated from field: google.protobuf.Timestamp timestamp = 1;
+   */
+  timestamp?: Timestamp;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 2;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<LoginRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.account.v1.LoginRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "timestamp", kind: "message", T: Timestamp },
+    { no: 2, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LoginRequest {
+    return new LoginRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LoginRequest {
+    return new LoginRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LoginRequest {
+    return new LoginRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LoginRequest | PlainMessage<LoginRequest> | undefined, b: LoginRequest | PlainMessage<LoginRequest> | undefined): boolean {
+    return proto3.util.equals(LoginRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.account.v1.LoginResponse
+ */
+export class LoginResponse extends Message<LoginResponse> {
+  /**
+   * @generated from field: flipchat.account.v1.LoginResponse.Result result = 1;
+   */
+  result = LoginResponse_Result.OK;
+
+  /**
+   * UserId is the user associated with the PubKey/Auth.
+   *
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  constructor(data?: PartialMessage<LoginResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.account.v1.LoginResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(LoginResponse_Result) },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LoginResponse {
+    return new LoginResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LoginResponse {
+    return new LoginResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LoginResponse {
+    return new LoginResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LoginResponse | PlainMessage<LoginResponse> | undefined, b: LoginResponse | PlainMessage<LoginResponse> | undefined): boolean {
+    return proto3.util.equals(LoginResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.account.v1.LoginResponse.Result
+ */
+export enum LoginResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: INVALID_TIMESTAMP = 1;
+   */
+  INVALID_TIMESTAMP = 1,
+
+  /**
+   * @generated from enum value: NOT_FOUND = 2;
+   */
+  NOT_FOUND = 2,
+
+  /**
+   * @generated from enum value: DENIED = 3;
+   */
+  DENIED = 3,
+}
+// Retrieve enum metadata with: proto3.getEnumType(LoginResponse_Result)
+proto3.util.setEnumType(LoginResponse_Result, "flipchat.account.v1.LoginResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "INVALID_TIMESTAMP" },
+  { no: 2, name: "NOT_FOUND" },
+  { no: 3, name: "DENIED" },
 ]);
 
 /**
