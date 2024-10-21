@@ -76,8 +76,7 @@ message LoginResponse {
 	enum Result {
 		OK                = 0;
 		INVALID_TIMESTAMP = 1;
-		NOT_FOUND         = 2;
-		DENIED            = 3;
+		DENIED            = 2;
 	}
 
 	// UserId is the user associated with the PubKey/Auth.

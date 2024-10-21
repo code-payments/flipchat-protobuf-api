@@ -254,21 +254,15 @@ export enum LoginResponse_Result {
   INVALID_TIMESTAMP = 1,
 
   /**
-   * @generated from enum value: NOT_FOUND = 2;
+   * @generated from enum value: DENIED = 2;
    */
-  NOT_FOUND = 2,
-
-  /**
-   * @generated from enum value: DENIED = 3;
-   */
-  DENIED = 3,
+  DENIED = 2,
 }
 // Retrieve enum metadata with: proto3.getEnumType(LoginResponse_Result)
 proto3.util.setEnumType(LoginResponse_Result, "flipchat.account.v1.LoginResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "INVALID_TIMESTAMP" },
-  { no: 2, name: "NOT_FOUND" },
-  { no: 3, name: "DENIED" },
+  { no: 2, name: "DENIED" },
 ]);
 
 /**
