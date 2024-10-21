@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Duration, Message, proto3, Timestamp } from "@bufbuild/protobuf";
+import { Duration, Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 
 /**
  * Auth provides an authentication information for RPCs/messages.
@@ -422,4 +422,132 @@ export class ClientPong extends Message<ClientPong> {
     return proto3.util.equals(ClientPong, a, b);
   }
 }
+
+/**
+ * @generated from message flipchat.common.v1.PagingToken
+ */
+export class PagingToken extends Message<PagingToken> {
+  /**
+   * Value contains a value of an identifier of the collection in common.
+   *
+   * For example, GetChats uses the ChatId.Value, where GetMessages uses MessageId.Value
+   * as the contents. It does _not_ contain the serialized ChatId or MessageId.
+   *
+   * @generated from field: bytes value = 1;
+   */
+  value = new Uint8Array(0);
+
+  constructor(data?: PartialMessage<PagingToken>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.common.v1.PagingToken";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "value", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PagingToken {
+    return new PagingToken().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PagingToken {
+    return new PagingToken().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PagingToken {
+    return new PagingToken().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PagingToken | PlainMessage<PagingToken> | undefined, b: PagingToken | PlainMessage<PagingToken> | undefined): boolean {
+    return proto3.util.equals(PagingToken, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.common.v1.QueryOptions
+ */
+export class QueryOptions extends Message<QueryOptions> {
+  /**
+   * PageSize limits the maximum page size of a response.
+   *
+   * Server may choose to return less items. If empty, server
+   * may select an arbitrary page size.
+   *
+   * @generated from field: int64 page_size = 1;
+   */
+  pageSize = protoInt64.zero;
+
+  /**
+   * Offset specifies an offset into a collection being queries.
+   *
+   * @generated from field: int64 offset = 2;
+   */
+  offset = protoInt64.zero;
+
+  /**
+   * PagingToken is token that can be extracted from the identifier of a collection.
+   *
+   * @generated from field: flipchat.common.v1.PagingToken paging_token = 3;
+   */
+  pagingToken?: PagingToken;
+
+  /**
+   * Order is the order of elements, if applicable.
+   *
+   * @generated from field: flipchat.common.v1.QueryOptions.Order order = 4;
+   */
+  order = QueryOptions_Order.ASC;
+
+  constructor(data?: PartialMessage<QueryOptions>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.common.v1.QueryOptions";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "page_size", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "offset", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "paging_token", kind: "message", T: PagingToken },
+    { no: 4, name: "order", kind: "enum", T: proto3.getEnumType(QueryOptions_Order) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryOptions {
+    return new QueryOptions().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryOptions {
+    return new QueryOptions().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryOptions {
+    return new QueryOptions().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: QueryOptions | PlainMessage<QueryOptions> | undefined, b: QueryOptions | PlainMessage<QueryOptions> | undefined): boolean {
+    return proto3.util.equals(QueryOptions, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.common.v1.QueryOptions.Order
+ */
+export enum QueryOptions_Order {
+  /**
+   * @generated from enum value: ASC = 0;
+   */
+  ASC = 0,
+
+  /**
+   * @generated from enum value: DESC = 1;
+   */
+  DESC = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(QueryOptions_Order)
+proto3.util.setEnumType(QueryOptions_Order, "flipchat.common.v1.QueryOptions.Order", [
+  { no: 0, name: "ASC" },
+  { no: 1, name: "DESC" },
+]);
 

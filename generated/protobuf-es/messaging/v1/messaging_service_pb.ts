@@ -5,8 +5,8 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import { Auth, ChatId, ClientPong, ServerPing } from "../../common/v1/model_pb";
-import { Content, Cursor, Message as Message$1, MessageId, Pointer } from "./model_pb";
+import { Auth, ChatId, ClientPong, QueryOptions, ServerPing } from "../../common/v1/model_pb";
+import { Content, Message as Message$1, MessageId, Pointer } from "./model_pb";
 
 /**
  * @generated from message flipchat.messaging.v1.StreamMessagesRequest
@@ -281,19 +281,9 @@ export class GetMessagesRequest extends Message<GetMessagesRequest> {
   chatId?: ChatId;
 
   /**
-   * @generated from field: uint32 page_size = 2;
+   * @generated from field: flipchat.common.v1.QueryOptions query_options = 2;
    */
-  pageSize = 0;
-
-  /**
-   * @generated from field: flipchat.messaging.v1.Cursor cursor = 3;
-   */
-  cursor?: Cursor;
-
-  /**
-   * @generated from field: flipchat.messaging.v1.GetMessagesRequest.Direction direction = 4;
-   */
-  direction = GetMessagesRequest_Direction.ASC;
+  queryOptions?: QueryOptions;
 
   /**
    * @generated from field: flipchat.common.v1.Auth auth = 5;
@@ -309,9 +299,7 @@ export class GetMessagesRequest extends Message<GetMessagesRequest> {
   static readonly typeName = "flipchat.messaging.v1.GetMessagesRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
-    { no: 2, name: "page_size", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
-    { no: 3, name: "cursor", kind: "message", T: Cursor },
-    { no: 4, name: "direction", kind: "enum", T: proto3.getEnumType(GetMessagesRequest_Direction) },
+    { no: 2, name: "query_options", kind: "message", T: QueryOptions },
     { no: 5, name: "auth", kind: "message", T: Auth },
   ]);
 
@@ -331,26 +319,6 @@ export class GetMessagesRequest extends Message<GetMessagesRequest> {
     return proto3.util.equals(GetMessagesRequest, a, b);
   }
 }
-
-/**
- * @generated from enum flipchat.messaging.v1.GetMessagesRequest.Direction
- */
-export enum GetMessagesRequest_Direction {
-  /**
-   * @generated from enum value: ASC = 0;
-   */
-  ASC = 0,
-
-  /**
-   * @generated from enum value: DESC = 1;
-   */
-  DESC = 1,
-}
-// Retrieve enum metadata with: proto3.getEnumType(GetMessagesRequest_Direction)
-proto3.util.setEnumType(GetMessagesRequest_Direction, "flipchat.messaging.v1.GetMessagesRequest.Direction", [
-  { no: 0, name: "ASC" },
-  { no: 1, name: "DESC" },
-]);
 
 /**
  * @generated from message flipchat.messaging.v1.GetMessagesResponse

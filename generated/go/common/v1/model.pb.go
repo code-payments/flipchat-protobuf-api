@@ -23,6 +23,52 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type QueryOptions_Order int32
+
+const (
+	QueryOptions_ASC  QueryOptions_Order = 0
+	QueryOptions_DESC QueryOptions_Order = 1
+)
+
+// Enum value maps for QueryOptions_Order.
+var (
+	QueryOptions_Order_name = map[int32]string{
+		0: "ASC",
+		1: "DESC",
+	}
+	QueryOptions_Order_value = map[string]int32{
+		"ASC":  0,
+		"DESC": 1,
+	}
+)
+
+func (x QueryOptions_Order) Enum() *QueryOptions_Order {
+	p := new(QueryOptions_Order)
+	*p = x
+	return p
+}
+
+func (x QueryOptions_Order) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (QueryOptions_Order) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_model_proto_enumTypes[0].Descriptor()
+}
+
+func (QueryOptions_Order) Type() protoreflect.EnumType {
+	return &file_common_v1_model_proto_enumTypes[0]
+}
+
+func (x QueryOptions_Order) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use QueryOptions_Order.Descriptor instead.
+func (QueryOptions_Order) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_model_proto_rawDescGZIP(), []int{10, 0}
+}
+
 // Auth provides an authentication information for RPCs/messages.
 //
 // Currently, only a single form is supported, but it may be useful in
@@ -472,6 +518,131 @@ func (x *ClientPong) GetTimestamp() *timestamppb.Timestamp {
 	return nil
 }
 
+type PagingToken struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Value contains a value of an identifier of the collection in common.
+	//
+	// For example, GetChats uses the ChatId.Value, where GetMessages uses MessageId.Value
+	// as the contents. It does _not_ contain the serialized ChatId or MessageId.
+	Value []byte `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *PagingToken) Reset() {
+	*x = PagingToken{}
+	mi := &file_common_v1_model_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PagingToken) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PagingToken) ProtoMessage() {}
+
+func (x *PagingToken) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_model_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PagingToken.ProtoReflect.Descriptor instead.
+func (*PagingToken) Descriptor() ([]byte, []int) {
+	return file_common_v1_model_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *PagingToken) GetValue() []byte {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+type QueryOptions struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// PageSize limits the maximum page size of a response.
+	//
+	// Server may choose to return less items. If empty, server
+	// may select an arbitrary page size.
+	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Offset specifies an offset into a collection being queries.
+	Offset int64 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	// PagingToken is token that can be extracted from the identifier of a collection.
+	PagingToken *PagingToken `protobuf:"bytes,3,opt,name=paging_token,json=pagingToken,proto3" json:"paging_token,omitempty"`
+	// Order is the order of elements, if applicable.
+	Order QueryOptions_Order `protobuf:"varint,4,opt,name=order,proto3,enum=flipchat.common.v1.QueryOptions_Order" json:"order,omitempty"`
+}
+
+func (x *QueryOptions) Reset() {
+	*x = QueryOptions{}
+	mi := &file_common_v1_model_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QueryOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QueryOptions) ProtoMessage() {}
+
+func (x *QueryOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_model_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QueryOptions.ProtoReflect.Descriptor instead.
+func (*QueryOptions) Descriptor() ([]byte, []int) {
+	return file_common_v1_model_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *QueryOptions) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *QueryOptions) GetOffset() int64 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+func (x *QueryOptions) GetPagingToken() *PagingToken {
+	if x != nil {
+		return x.PagingToken
+	}
+	return nil
+}
+
+func (x *QueryOptions) GetOrder() QueryOptions_Order {
+	if x != nil {
+		return x.Order
+	}
+	return QueryOptions_ASC
+}
+
 // KeyPair uses a keypair to verify a message.
 //
 // The signature should be of the encapsulating proto message,
@@ -487,7 +658,7 @@ type Auth_KeyPair struct {
 
 func (x *Auth_KeyPair) Reset() {
 	*x = Auth_KeyPair{}
-	mi := &file_common_v1_model_proto_msgTypes[9]
+	mi := &file_common_v1_model_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -499,7 +670,7 @@ func (x *Auth_KeyPair) String() string {
 func (*Auth_KeyPair) ProtoMessage() {}
 
 func (x *Auth_KeyPair) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_model_proto_msgTypes[9]
+	mi := &file_common_v1_model_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -590,15 +761,33 @@ var file_common_v1_model_proto_rawDesc = []byte{
 	0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x08,
 	0xfa, 0x42, 0x05, 0xb2, 0x01, 0x02, 0x08, 0x01, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74,
-	0x61, 0x6d, 0x70, 0x42, 0x82, 0x01, 0x0a, 0x22, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x64, 0x65,
-	0x69, 0x6e, 0x63, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x67, 0x65, 0x6e,
-	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x5a, 0x4e, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x2d, 0x70, 0x61, 0x79, 0x6d,
-	0x65, 0x6e, 0x74, 0x73, 0x2f, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2d, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72,
-	0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x76,
-	0x31, 0x3b, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x70, 0x62, 0xa2, 0x02, 0x0b, 0x46, 0x50, 0x42,
-	0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x6d, 0x70, 0x22, 0x2f, 0x0a, 0x0b, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x67, 0x54, 0x6f, 0x6b,
+	0x65, 0x6e, 0x12, 0x20, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0c, 0x42, 0x0a, 0xfa, 0x42, 0x07, 0x7a, 0x05, 0x10, 0x01, 0x18, 0x80, 0x01, 0x52, 0x05, 0x76,
+	0x61, 0x6c, 0x75, 0x65, 0x22, 0xe1, 0x01, 0x0a, 0x0c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4f, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69,
+	0x7a, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69,
+	0x7a, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x42, 0x0a, 0x0c, 0x70, 0x61,
+	0x67, 0x69, 0x6e, 0x67, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1f, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
+	0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x67, 0x54, 0x6f, 0x6b, 0x65,
+	0x6e, 0x52, 0x0b, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x67, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x3c,
+	0x0a, 0x05, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x26, 0x2e,
+	0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
+	0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e,
+	0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x05, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x22, 0x1a, 0x0a, 0x05,
+	0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x07, 0x0a, 0x03, 0x41, 0x53, 0x43, 0x10, 0x00, 0x12, 0x08,
+	0x0a, 0x04, 0x44, 0x45, 0x53, 0x43, 0x10, 0x01, 0x42, 0x82, 0x01, 0x0a, 0x22, 0x63, 0x6f, 0x6d,
+	0x2e, 0x63, 0x6f, 0x64, 0x65, 0x69, 0x6e, 0x63, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61,
+	0x74, 0x2e, 0x67, 0x65, 0x6e, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x5a,
+	0x4e, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65,
+	0x2d, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68,
+	0x61, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61, 0x70, 0x69, 0x2f,
+	0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x63, 0x6f, 0x6d,
+	0x6d, 0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x70, 0x62, 0xa2,
+	0x02, 0x0b, 0x46, 0x50, 0x42, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x56, 0x31, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -613,33 +802,39 @@ func file_common_v1_model_proto_rawDescGZIP() []byte {
 	return file_common_v1_model_proto_rawDescData
 }
 
-var file_common_v1_model_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_common_v1_model_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_common_v1_model_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_common_v1_model_proto_goTypes = []any{
-	(*Auth)(nil),                  // 0: flipchat.common.v1.Auth
-	(*UserId)(nil),                // 1: flipchat.common.v1.UserId
-	(*ChatId)(nil),                // 2: flipchat.common.v1.ChatId
-	(*AppInstallId)(nil),          // 3: flipchat.common.v1.AppInstallId
-	(*Locale)(nil),                // 4: flipchat.common.v1.Locale
-	(*PublicKey)(nil),             // 5: flipchat.common.v1.PublicKey
-	(*Signature)(nil),             // 6: flipchat.common.v1.Signature
-	(*ServerPing)(nil),            // 7: flipchat.common.v1.ServerPing
-	(*ClientPong)(nil),            // 8: flipchat.common.v1.ClientPong
-	(*Auth_KeyPair)(nil),          // 9: flipchat.common.v1.Auth.KeyPair
-	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),   // 11: google.protobuf.Duration
+	(QueryOptions_Order)(0),       // 0: flipchat.common.v1.QueryOptions.Order
+	(*Auth)(nil),                  // 1: flipchat.common.v1.Auth
+	(*UserId)(nil),                // 2: flipchat.common.v1.UserId
+	(*ChatId)(nil),                // 3: flipchat.common.v1.ChatId
+	(*AppInstallId)(nil),          // 4: flipchat.common.v1.AppInstallId
+	(*Locale)(nil),                // 5: flipchat.common.v1.Locale
+	(*PublicKey)(nil),             // 6: flipchat.common.v1.PublicKey
+	(*Signature)(nil),             // 7: flipchat.common.v1.Signature
+	(*ServerPing)(nil),            // 8: flipchat.common.v1.ServerPing
+	(*ClientPong)(nil),            // 9: flipchat.common.v1.ClientPong
+	(*PagingToken)(nil),           // 10: flipchat.common.v1.PagingToken
+	(*QueryOptions)(nil),          // 11: flipchat.common.v1.QueryOptions
+	(*Auth_KeyPair)(nil),          // 12: flipchat.common.v1.Auth.KeyPair
+	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),   // 14: google.protobuf.Duration
 }
 var file_common_v1_model_proto_depIdxs = []int32{
-	9,  // 0: flipchat.common.v1.Auth.key_pair:type_name -> flipchat.common.v1.Auth.KeyPair
-	10, // 1: flipchat.common.v1.ServerPing.timestamp:type_name -> google.protobuf.Timestamp
-	11, // 2: flipchat.common.v1.ServerPing.ping_delay:type_name -> google.protobuf.Duration
-	10, // 3: flipchat.common.v1.ClientPong.timestamp:type_name -> google.protobuf.Timestamp
-	5,  // 4: flipchat.common.v1.Auth.KeyPair.pub_key:type_name -> flipchat.common.v1.PublicKey
-	6,  // 5: flipchat.common.v1.Auth.KeyPair.signature:type_name -> flipchat.common.v1.Signature
-	6,  // [6:6] is the sub-list for method output_type
-	6,  // [6:6] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	12, // 0: flipchat.common.v1.Auth.key_pair:type_name -> flipchat.common.v1.Auth.KeyPair
+	13, // 1: flipchat.common.v1.ServerPing.timestamp:type_name -> google.protobuf.Timestamp
+	14, // 2: flipchat.common.v1.ServerPing.ping_delay:type_name -> google.protobuf.Duration
+	13, // 3: flipchat.common.v1.ClientPong.timestamp:type_name -> google.protobuf.Timestamp
+	10, // 4: flipchat.common.v1.QueryOptions.paging_token:type_name -> flipchat.common.v1.PagingToken
+	0,  // 5: flipchat.common.v1.QueryOptions.order:type_name -> flipchat.common.v1.QueryOptions.Order
+	6,  // 6: flipchat.common.v1.Auth.KeyPair.pub_key:type_name -> flipchat.common.v1.PublicKey
+	7,  // 7: flipchat.common.v1.Auth.KeyPair.signature:type_name -> flipchat.common.v1.Signature
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_common_v1_model_proto_init() }
@@ -655,13 +850,14 @@ func file_common_v1_model_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_common_v1_model_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   10,
+			NumEnums:      1,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_common_v1_model_proto_goTypes,
 		DependencyIndexes: file_common_v1_model_proto_depIdxs,
+		EnumInfos:         file_common_v1_model_proto_enumTypes,
 		MessageInfos:      file_common_v1_model_proto_msgTypes,
 	}.Build()
 	File_common_v1_model_proto = out.File

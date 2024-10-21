@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
-import { Auth, ChatId, ClientPong, ServerPing, UserId } from "../../common/v1/model_pb";
+import { Auth, ChatId, ClientPong, QueryOptions, ServerPing, UserId } from "../../common/v1/model_pb";
 import { IsTyping, Message as Message$1, Pointer } from "../../messaging/v1/model_pb";
 
 /**
@@ -375,19 +375,9 @@ export class GetChatsRequest extends Message<GetChatsRequest> {
   account?: UserId;
 
   /**
-   * @generated from field: uint32 page_size = 2;
+   * @generated from field: flipchat.common.v1.QueryOptions query_options = 2;
    */
-  pageSize = 0;
-
-  /**
-   * @generated from field: flipchat.chat.v1.Cursor cursor = 3;
-   */
-  cursor?: Cursor;
-
-  /**
-   * @generated from field: flipchat.chat.v1.GetChatsRequest.Direction direction = 4;
-   */
-  direction = GetChatsRequest_Direction.ASC;
+  queryOptions?: QueryOptions;
 
   /**
    * @generated from field: flipchat.common.v1.Auth auth = 5;
@@ -403,9 +393,7 @@ export class GetChatsRequest extends Message<GetChatsRequest> {
   static readonly typeName = "flipchat.chat.v1.GetChatsRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "account", kind: "message", T: UserId },
-    { no: 2, name: "page_size", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
-    { no: 3, name: "cursor", kind: "message", T: Cursor },
-    { no: 4, name: "direction", kind: "enum", T: proto3.getEnumType(GetChatsRequest_Direction) },
+    { no: 2, name: "query_options", kind: "message", T: QueryOptions },
     { no: 5, name: "auth", kind: "message", T: Auth },
   ]);
 
@@ -425,26 +413,6 @@ export class GetChatsRequest extends Message<GetChatsRequest> {
     return proto3.util.equals(GetChatsRequest, a, b);
   }
 }
-
-/**
- * @generated from enum flipchat.chat.v1.GetChatsRequest.Direction
- */
-export enum GetChatsRequest_Direction {
-  /**
-   * @generated from enum value: ASC = 0;
-   */
-  ASC = 0,
-
-  /**
-   * @generated from enum value: DESC = 1;
-   */
-  DESC = 1,
-}
-// Retrieve enum metadata with: proto3.getEnumType(GetChatsRequest_Direction)
-proto3.util.setEnumType(GetChatsRequest_Direction, "flipchat.chat.v1.GetChatsRequest.Direction", [
-  { no: 0, name: "ASC" },
-  { no: 1, name: "DESC" },
-]);
 
 /**
  * @generated from message flipchat.chat.v1.GetChatsResponse
@@ -1207,52 +1175,45 @@ export class Metadata extends Message<Metadata> {
   type = Metadata_ChatType.UNKNOWN;
 
   /**
-   * Cursor value for this chat for reference in subsequent GetChatsRequest
-   *
-   * @generated from field: flipchat.chat.v1.Cursor cursor = 3;
-   */
-  cursor?: Cursor;
-
-  /**
    * The chat title, which is _only_ set by server if an explicit title
    * was set. Otherwise, clients should fill in an appropriate chat title.
    *
-   * @generated from field: string title = 4;
+   * @generated from field: string title = 3;
    */
   title = "";
 
   /**
    * If non-zero, the room number associated with the chat.
    *
-   * @generated from field: uint64 room_number = 5;
+   * @generated from field: uint64 room_number = 4;
    */
   roomNumber = protoInt64.zero;
 
   /**
    * The members in this chat.
    *
-   * @generated from field: repeated flipchat.chat.v1.Member members = 6;
+   * @generated from field: repeated flipchat.chat.v1.Member members = 5;
    */
   members: Member[] = [];
 
   /**
    * Whether or not the chat is muted (from the perspective of the caller).
    *
-   * @generated from field: bool is_muted = 7;
+   * @generated from field: bool is_muted = 6;
    */
   isMuted = false;
 
   /**
    * Whether or not the chat is mutable (from the persective of the caller).
    *
-   * @generated from field: bool muteable = 8;
+   * @generated from field: bool muteable = 7;
    */
   muteable = false;
 
   /**
    * Number of (estimated) unread message (from the perspective of the caller).
    *
-   * @generated from field: uint32 num_unread = 9;
+   * @generated from field: uint32 num_unread = 8;
    */
   numUnread = 0;
 
@@ -1266,13 +1227,12 @@ export class Metadata extends Message<Metadata> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
     { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(Metadata_ChatType) },
-    { no: 3, name: "cursor", kind: "message", T: Cursor },
-    { no: 4, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "room_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 6, name: "members", kind: "message", T: Member, repeated: true },
-    { no: 7, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 8, name: "muteable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 9, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "room_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 5, name: "members", kind: "message", T: Member, repeated: true },
+    { no: 6, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "muteable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
@@ -1429,47 +1389,6 @@ export class MemberIdentity extends Message<MemberIdentity> {
 
   static equals(a: MemberIdentity | PlainMessage<MemberIdentity> | undefined, b: MemberIdentity | PlainMessage<MemberIdentity> | undefined): boolean {
     return proto3.util.equals(MemberIdentity, a, b);
-  }
-}
-
-/**
- * Opaque cursor used across paged APIs. Underlying bytes may change as paging
- * strategies evolve. Expected length value will vary based on the RPC being
- * executed.
- *
- * @generated from message flipchat.chat.v1.Cursor
- */
-export class Cursor extends Message<Cursor> {
-  /**
-   * @generated from field: bytes value = 1;
-   */
-  value = new Uint8Array(0);
-
-  constructor(data?: PartialMessage<Cursor>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.chat.v1.Cursor";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "value", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Cursor {
-    return new Cursor().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Cursor {
-    return new Cursor().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Cursor {
-    return new Cursor().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: Cursor | PlainMessage<Cursor> | undefined, b: Cursor | PlainMessage<Cursor> | undefined): boolean {
-    return proto3.util.equals(Cursor, a, b);
   }
 }
 

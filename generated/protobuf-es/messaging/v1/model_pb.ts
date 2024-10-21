@@ -83,13 +83,6 @@ export class Message extends Message$1<Message> {
    */
   ts?: Timestamp;
 
-  /**
-   * Cursor value for this message for reference in a paged GetMessagesRequest
-   *
-   * @generated from field: flipchat.messaging.v1.Cursor cursor = 5;
-   */
-  cursor?: Cursor;
-
   constructor(data?: PartialMessage<Message>) {
     super();
     proto3.util.initPartial(data, this);
@@ -102,7 +95,6 @@ export class Message extends Message$1<Message> {
     { no: 2, name: "sender_id", kind: "message", T: UserId },
     { no: 3, name: "content", kind: "message", T: Content, repeated: true },
     { no: 4, name: "ts", kind: "message", T: Timestamp },
-    { no: 5, name: "cursor", kind: "message", T: Cursor },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Message {
@@ -252,43 +244,6 @@ export class IsTyping extends Message$1<IsTyping> {
 
   static equals(a: IsTyping | PlainMessage<IsTyping> | undefined, b: IsTyping | PlainMessage<IsTyping> | undefined): boolean {
     return proto3.util.equals(IsTyping, a, b);
-  }
-}
-
-/**
- * @generated from message flipchat.messaging.v1.Cursor
- */
-export class Cursor extends Message$1<Cursor> {
-  /**
-   * @generated from field: bytes value = 1;
-   */
-  value = new Uint8Array(0);
-
-  constructor(data?: PartialMessage<Cursor>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.messaging.v1.Cursor";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "value", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Cursor {
-    return new Cursor().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Cursor {
-    return new Cursor().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Cursor {
-    return new Cursor().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: Cursor | PlainMessage<Cursor> | undefined, b: Cursor | PlainMessage<Cursor> | undefined): boolean {
-    return proto3.util.equals(Cursor, a, b);
   }
 }
 

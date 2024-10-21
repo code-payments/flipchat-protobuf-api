@@ -543,23 +543,12 @@ func (m *GetMessagesRequest) validate(all bool) error {
 		}
 	}
 
-	if m.GetPageSize() > 100 {
-		err := GetMessagesRequestValidationError{
-			field:  "PageSize",
-			reason: "value must be less than or equal to 100",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if all {
-		switch v := interface{}(m.GetCursor()).(type) {
+		switch v := interface{}(m.GetQueryOptions()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, GetMessagesRequestValidationError{
-					field:  "Cursor",
+					field:  "QueryOptions",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -567,23 +556,21 @@ func (m *GetMessagesRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, GetMessagesRequestValidationError{
-					field:  "Cursor",
+					field:  "QueryOptions",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetCursor()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetQueryOptions()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return GetMessagesRequestValidationError{
-				field:  "Cursor",
+				field:  "QueryOptions",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
 	}
-
-	// no validation rules for Direction
 
 	if all {
 		switch v := interface{}(m.GetAuth()).(type) {
