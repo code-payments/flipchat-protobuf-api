@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
-import { Auth, ChatId, ClientPong, QueryOptions, ServerPing, UserId } from "../../common/v1/model_pb";
+import { Auth, ChatId, ClientPong, QueryOptions, ServerPing, UserId } from "../../common/v1/flipchat_pb";
 import { IsTyping, Message as Message$1, Pointer } from "../../messaging/v1/model_pb";
 
 /**

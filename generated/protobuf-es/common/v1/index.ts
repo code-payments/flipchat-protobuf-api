@@ -1,1 +1,1 @@
-export * from './model_pb';
+export * from './flipchat_pb';

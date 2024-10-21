@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import { AppInstallId, Auth, UserId } from "../../common/v1/model_pb";
+import { AppInstallId, Auth, UserId } from "../../common/v1/flipchat_pb";
 
 /**
  * @generated from enum flipchat.push.v1.TokenType

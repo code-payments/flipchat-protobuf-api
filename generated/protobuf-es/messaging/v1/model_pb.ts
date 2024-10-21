@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message as Message$1, proto3, Timestamp } from "@bufbuild/protobuf";
-import { PublicKey, UserId } from "../../common/v1/model_pb";
+import { PublicKey, UserId } from "../../common/v1/flipchat_pb";
 
 /**
  * @generated from message flipchat.messaging.v1.MessageId
