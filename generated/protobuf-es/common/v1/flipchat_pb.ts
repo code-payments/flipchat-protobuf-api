@@ -480,23 +480,16 @@ export class QueryOptions extends Message<QueryOptions> {
   pageSize = protoInt64.zero;
 
   /**
-   * Offset specifies an offset into a collection being queries.
-   *
-   * @generated from field: int64 offset = 2;
-   */
-  offset = protoInt64.zero;
-
-  /**
    * PagingToken is token that can be extracted from the identifier of a collection.
    *
-   * @generated from field: flipchat.common.v1.PagingToken paging_token = 3;
+   * @generated from field: flipchat.common.v1.PagingToken paging_token = 2;
    */
   pagingToken?: PagingToken;
 
   /**
    * Order is the order of elements, if applicable.
    *
-   * @generated from field: flipchat.common.v1.QueryOptions.Order order = 4;
+   * @generated from field: flipchat.common.v1.QueryOptions.Order order = 3;
    */
   order = QueryOptions_Order.ASC;
 
@@ -509,9 +502,8 @@ export class QueryOptions extends Message<QueryOptions> {
   static readonly typeName = "flipchat.common.v1.QueryOptions";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "page_size", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "offset", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 3, name: "paging_token", kind: "message", T: PagingToken },
-    { no: 4, name: "order", kind: "enum", T: proto3.getEnumType(QueryOptions_Order) },
+    { no: 2, name: "paging_token", kind: "message", T: PagingToken },
+    { no: 3, name: "order", kind: "enum", T: proto3.getEnumType(QueryOptions_Order) },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryOptions {

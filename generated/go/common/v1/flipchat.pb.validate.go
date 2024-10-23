@@ -1215,8 +1215,6 @@ func (m *QueryOptions) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for Offset
-
 	if all {
 		switch v := interface{}(m.GetPagingToken()).(type) {
 		case interface{ ValidateAll() error }:
