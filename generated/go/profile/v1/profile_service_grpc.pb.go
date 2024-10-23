@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.21.12
-// source: user/v1/profile_service.proto
+// source: profile/v1/profile_service.proto
 
-package userpb
+package profilepb
 
 import (
 	context "context"
@@ -19,14 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Profile_GetUserProfile_FullMethodName = "/flipchat.user.v1.Profile/GetUserProfile"
+	Profile_GetProfile_FullMethodName     = "/flipchat.profile.v1.Profile/GetProfile"
+	Profile_SetDisplayName_FullMethodName = "/flipchat.profile.v1.Profile/SetDisplayName"
 )
 
 // ProfileClient is the client API for Profile service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProfileClient interface {
-	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
+	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*GetProfileResponse, error)
+	SetDisplayName(ctx context.Context, in *SetDisplayNameRequest, opts ...grpc.CallOption) (*SetDisplayNameResponse, error)
 }
 
 type profileClient struct {
@@ -37,10 +39,20 @@ func NewProfileClient(cc grpc.ClientConnInterface) ProfileClient {
 	return &profileClient{cc}
 }
 
-func (c *profileClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
+func (c *profileClient) GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*GetProfileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserProfileResponse)
-	err := c.cc.Invoke(ctx, Profile_GetUserProfile_FullMethodName, in, out, cOpts...)
+	out := new(GetProfileResponse)
+	err := c.cc.Invoke(ctx, Profile_GetProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileClient) SetDisplayName(ctx context.Context, in *SetDisplayNameRequest, opts ...grpc.CallOption) (*SetDisplayNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDisplayNameResponse)
+	err := c.cc.Invoke(ctx, Profile_SetDisplayName_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +63,8 @@ func (c *profileClient) GetUserProfile(ctx context.Context, in *GetUserProfileRe
 // All implementations must embed UnimplementedProfileServer
 // for forward compatibility.
 type ProfileServer interface {
-	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
+	GetProfile(context.Context, *GetProfileRequest) (*GetProfileResponse, error)
+	SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error)
 	mustEmbedUnimplementedProfileServer()
 }
 
@@ -62,8 +75,11 @@ type ProfileServer interface {
 // pointer dereference when methods are called.
 type UnimplementedProfileServer struct{}
 
-func (UnimplementedProfileServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
+func (UnimplementedProfileServer) GetProfile(context.Context, *GetProfileRequest) (*GetProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProfile not implemented")
+}
+func (UnimplementedProfileServer) SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetDisplayName not implemented")
 }
 func (UnimplementedProfileServer) mustEmbedUnimplementedProfileServer() {}
 func (UnimplementedProfileServer) testEmbeddedByValue()                 {}
@@ -86,20 +102,38 @@ func RegisterProfileServer(s grpc.ServiceRegistrar, srv ProfileServer) {
 	s.RegisterService(&Profile_ServiceDesc, srv)
 }
 
-func _Profile_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserProfileRequest)
+func _Profile_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProfileServer).GetUserProfile(ctx, in)
+		return srv.(ProfileServer).GetProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Profile_GetUserProfile_FullMethodName,
+		FullMethod: Profile_GetProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProfileServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
+		return srv.(ProfileServer).GetProfile(ctx, req.(*GetProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Profile_SetDisplayName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDisplayNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServer).SetDisplayName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Profile_SetDisplayName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServer).SetDisplayName(ctx, req.(*SetDisplayNameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -108,14 +142,18 @@ func _Profile_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Profile_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "flipchat.user.v1.Profile",
+	ServiceName: "flipchat.profile.v1.Profile",
 	HandlerType: (*ProfileServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetUserProfile",
-			Handler:    _Profile_GetUserProfile_Handler,
+			MethodName: "GetProfile",
+			Handler:    _Profile_GetProfile_Handler,
+		},
+		{
+			MethodName: "SetDisplayName",
+			Handler:    _Profile_SetDisplayName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "user/v1/profile_service.proto",
+	Metadata: "profile/v1/profile_service.proto",
 }
