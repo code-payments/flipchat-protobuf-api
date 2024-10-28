@@ -4362,10 +4362,10 @@ func (m *StartChatRequest_StartGroupChatParameters) validate(all bool) error {
 
 	var errors []error
 
-	if l := len(m.GetUsers()); l < 1 || l > 32 {
+	if len(m.GetUsers()) > 32 {
 		err := StartChatRequest_StartGroupChatParametersValidationError{
 			field:  "Users",
-			reason: "value must contain between 1 and 32 items, inclusive",
+			reason: "value must contain no more than 32 item(s)",
 		}
 		if !all {
 			return err

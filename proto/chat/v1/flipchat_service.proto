@@ -210,7 +210,7 @@ message StartChatRequest {
     message StartGroupChatParameters {
         // A set of users (not including self) to initially set in the group chat.
         repeated common.v1.UserId users = 1 [(validate.rules).repeated = {
-            min_items: 1
+            min_items: 0
             max_items: 32 // Arbitrary
         }];
 
