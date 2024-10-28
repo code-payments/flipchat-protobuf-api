@@ -118,19 +118,14 @@ proto3.util.setEnumType(GetProfileResponse_Result, "flipchat.profile.v1.GetProfi
  */
 export class SetDisplayNameRequest extends Message<SetDisplayNameRequest> {
   /**
-   * @generated from field: flipchat.common.v1.UserId user_id = 1;
-   */
-  userId?: UserId;
-
-  /**
    * DisplayName is the new name to set.
    *
-   * @generated from field: string display_name = 2;
+   * @generated from field: string display_name = 1;
    */
   displayName = "";
 
   /**
-   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   * @generated from field: flipchat.common.v1.Auth auth = 10;
    */
   auth?: Auth;
 
@@ -142,9 +137,8 @@ export class SetDisplayNameRequest extends Message<SetDisplayNameRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "flipchat.profile.v1.SetDisplayNameRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "user_id", kind: "message", T: UserId },
-    { no: 2, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "auth", kind: "message", T: Auth },
+    { no: 1, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 10, name: "auth", kind: "message", T: Auth },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetDisplayNameRequest {
