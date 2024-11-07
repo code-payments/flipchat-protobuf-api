@@ -1390,6 +1390,13 @@ export class Member extends Message<Member> {
    */
   isSelf = false;
 
+  /**
+   * NOTE: We may switch to 'roles' in the future.
+   *
+   * @generated from field: bool is_host = 5;
+   */
+  isHost = false;
+
   constructor(data?: PartialMessage<Member>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1402,6 +1409,7 @@ export class Member extends Message<Member> {
     { no: 2, name: "identity", kind: "message", T: MemberIdentity },
     { no: 3, name: "pointers", kind: "message", T: Pointer, repeated: true },
     { no: 4, name: "is_self", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "is_host", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Member {

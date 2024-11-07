@@ -347,6 +347,9 @@ message Member {
 
     // If the member is the caller (where applicable), will be set to true.
     bool is_self = 4;
+
+    // NOTE: We may switch to 'roles' in the future.
+    bool is_host = 5;
 }
 
 message MemberIdentity {
