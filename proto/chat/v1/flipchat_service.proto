@@ -329,6 +329,12 @@ message Metadata {
 
     // Number of (estimated) unread message (from the perspective of the caller).
     uint32 num_unread = 7;
+
+    // Owner is the owner/creator of the chat.
+    //
+    // This is a super priviledge role, in which there can only be one.
+    // This role is displayed as a 'host' currently.
+    common.v1.UserId owner = 8;
 }
 
 message Member {

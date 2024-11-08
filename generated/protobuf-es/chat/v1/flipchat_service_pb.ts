@@ -1302,6 +1302,16 @@ export class Metadata extends Message<Metadata> {
    */
   numUnread = 0;
 
+  /**
+   * Owner is the owner/creator of the chat.
+   *
+   * This is a super priviledge role, in which there can only be one.
+   * This role is displayed as a 'host' currently.
+   *
+   * @generated from field: flipchat.common.v1.UserId owner = 8;
+   */
+  owner?: UserId;
+
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1317,6 +1327,7 @@ export class Metadata extends Message<Metadata> {
     { no: 5, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "muteable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 8, name: "owner", kind: "message", T: UserId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
