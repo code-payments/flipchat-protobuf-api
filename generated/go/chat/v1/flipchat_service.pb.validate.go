@@ -3056,6 +3056,17 @@ func (m *StreamChatEventsRequest_Params) validate(all bool) error {
 		}
 	}
 
+	if m.GetTs() == nil {
+		err := StreamChatEventsRequest_ParamsValidationError{
+			field:  "Ts",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return StreamChatEventsRequest_ParamsMultiError(errors)
 	}

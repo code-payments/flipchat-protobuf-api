@@ -8,6 +8,7 @@ option objc_class_prefix = "FCPBChatV1";
 
 import "common/v1/flipchat.proto";
 import "messaging/v1/model.proto";
+import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
 
 service Chat {
@@ -59,6 +60,12 @@ message StreamChatEventsRequest {
 
     message Params {
         common.v1.Auth auth = 1 [(validate.rules).message.required = true];
+
+        // ts contains the time for stream open.
+        //
+        // It is used primarily as a nonce for auth. Server may reject
+        // timestamps that are too far in the future or past.
+        google.protobuf.Timestamp ts = 2 [(validate.rules).timestamp.required = true];
     }
 }
 message StreamChatEventsResponse {

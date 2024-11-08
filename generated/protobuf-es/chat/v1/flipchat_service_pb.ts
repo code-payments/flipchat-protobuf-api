@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
+import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 import { Auth, ChatId, ClientPong, QueryOptions, ServerPing, UserId } from "../../common/v1/flipchat_pb";
 import { IsTyping, Message as Message$1, Pointer } from "../../messaging/v1/model_pb";
 
@@ -67,6 +67,16 @@ export class StreamChatEventsRequest_Params extends Message<StreamChatEventsRequ
    */
   auth?: Auth;
 
+  /**
+   * ts contains the time for stream open.
+   *
+   * It is used primarily as a nonce for auth. Server may reject
+   * timestamps that are too far in the future or past.
+   *
+   * @generated from field: google.protobuf.Timestamp ts = 2;
+   */
+  ts?: Timestamp;
+
   constructor(data?: PartialMessage<StreamChatEventsRequest_Params>) {
     super();
     proto3.util.initPartial(data, this);
@@ -76,6 +86,7 @@ export class StreamChatEventsRequest_Params extends Message<StreamChatEventsRequ
   static readonly typeName = "flipchat.chat.v1.StreamChatEventsRequest.Params";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "auth", kind: "message", T: Auth },
+    { no: 2, name: "ts", kind: "message", T: Timestamp },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsRequest_Params {
