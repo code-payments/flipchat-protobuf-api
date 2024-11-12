@@ -1045,6 +1045,62 @@ proto3.util.setEnumType(JoinChatResponse_Result, "flipchat.chat.v1.JoinChatRespo
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.JoinChatPaymentMetadata
+ */
+export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
+  /**
+   * @generated from field: flipchat.chat.v1.Member member = 1;
+   */
+  member?: Member;
+
+  /**
+   * @generated from oneof flipchat.chat.v1.JoinChatPaymentMetadata.identifier
+   */
+  identifier: {
+    /**
+     * @generated from field: flipchat.common.v1.ChatId chat_id = 2;
+     */
+    value: ChatId;
+    case: "chatId";
+  } | {
+    /**
+     * @generated from field: uint64 room_id = 3;
+     */
+    value: bigint;
+    case: "roomId";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<JoinChatPaymentMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.JoinChatPaymentMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: Member },
+    { no: 2, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
+    { no: 3, name: "room_id", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JoinChatPaymentMetadata {
+    return new JoinChatPaymentMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): JoinChatPaymentMetadata {
+    return new JoinChatPaymentMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): JoinChatPaymentMetadata {
+    return new JoinChatPaymentMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: JoinChatPaymentMetadata | PlainMessage<JoinChatPaymentMetadata> | undefined, b: JoinChatPaymentMetadata | PlainMessage<JoinChatPaymentMetadata> | undefined): boolean {
+    return proto3.util.equals(JoinChatPaymentMetadata, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.chat.v1.LeaveChatRequest
  */
 export class LeaveChatRequest extends Message<LeaveChatRequest> {

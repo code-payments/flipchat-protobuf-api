@@ -271,6 +271,17 @@ message JoinChatResponse {
     repeated Member members = 3;
 }
 
+message JoinChatPaymentMetadata {
+    Member member = 1 [(validate.rules).message.required = true];
+
+    oneof identifier {
+        option (validate.required) = true;
+
+        common.v1.ChatId chat_id = 2;
+        uint64 room_id = 3;
+    }
+}
+
 message LeaveChatRequest {
     common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
     common.v1.Auth auth = 2 [(validate.rules).message.required = true];
