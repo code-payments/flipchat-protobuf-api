@@ -1049,9 +1049,9 @@ proto3.util.setEnumType(JoinChatResponse_Result, "flipchat.chat.v1.JoinChatRespo
  */
 export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
   /**
-   * @generated from field: flipchat.chat.v1.Member member = 1;
+   * @generated from field: flipchat.common.v1.UserId user_id = 1;
    */
-  member?: Member;
+  userId?: UserId;
 
   /**
    * @generated from oneof flipchat.chat.v1.JoinChatPaymentMetadata.identifier
@@ -1078,7 +1078,7 @@ export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "flipchat.chat.v1.JoinChatPaymentMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "member", kind: "message", T: Member },
+    { no: 1, name: "user_id", kind: "message", T: UserId },
     { no: 2, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
     { no: 3, name: "room_id", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
   ]);

@@ -1933,9 +1933,9 @@ func (m *JoinChatPaymentMetadata) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetMember() == nil {
+	if m.GetUserId() == nil {
 		err := JoinChatPaymentMetadataValidationError{
-			field:  "Member",
+			field:  "UserId",
 			reason: "value is required",
 		}
 		if !all {
@@ -1945,11 +1945,11 @@ func (m *JoinChatPaymentMetadata) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetMember()).(type) {
+		switch v := interface{}(m.GetUserId()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, JoinChatPaymentMetadataValidationError{
-					field:  "Member",
+					field:  "UserId",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1957,16 +1957,16 @@ func (m *JoinChatPaymentMetadata) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, JoinChatPaymentMetadataValidationError{
-					field:  "Member",
+					field:  "UserId",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return JoinChatPaymentMetadataValidationError{
-				field:  "Member",
+				field:  "UserId",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
