@@ -1557,6 +1557,46 @@ func (m *JoinChatRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.GetPaymentIntent() == nil {
+		err := JoinChatRequestValidationError{
+			field:  "PaymentIntent",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetPaymentIntent()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, JoinChatRequestValidationError{
+					field:  "PaymentIntent",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, JoinChatRequestValidationError{
+					field:  "PaymentIntent",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPaymentIntent()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return JoinChatRequestValidationError{
+				field:  "PaymentIntent",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.GetAuth() == nil {
 		err := JoinChatRequestValidationError{
 			field:  "Auth",

@@ -253,7 +253,7 @@ message JoinChatRequest {
         uint64 room_id = 2;
     }
 
-    // TODO: Payment information (if required)
+    common.v1.IntentId payment_intent = 9 [(validate.rules).message.required = true];
 
     common.v1.Auth auth = 10 [(validate.rules).message.required = true];
 }

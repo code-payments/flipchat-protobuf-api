@@ -299,6 +299,43 @@ export class PublicKey extends Message<PublicKey> {
 }
 
 /**
+ * @generated from message flipchat.common.v1.IntentId
+ */
+export class IntentId extends Message<IntentId> {
+  /**
+   * @generated from field: bytes value = 1;
+   */
+  value = new Uint8Array(0);
+
+  constructor(data?: PartialMessage<IntentId>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.common.v1.IntentId";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "value", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): IntentId {
+    return new IntentId().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): IntentId {
+    return new IntentId().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): IntentId {
+    return new IntentId().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: IntentId | PlainMessage<IntentId> | undefined, b: IntentId | PlainMessage<IntentId> | undefined): boolean {
+    return proto3.util.equals(IntentId, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.common.v1.Signature
  */
 export class Signature extends Message<Signature> {

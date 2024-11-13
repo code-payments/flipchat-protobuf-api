@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
-import { Auth, ChatId, ClientPong, QueryOptions, ServerPing, UserId } from "../../common/v1/flipchat_pb";
+import { Auth, ChatId, ClientPong, IntentId, QueryOptions, ServerPing, UserId } from "../../common/v1/flipchat_pb";
 import { IsTyping, Message as Message$1, Pointer } from "../../messaging/v1/model_pb";
 
 /**
@@ -937,6 +937,11 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
+   * @generated from field: flipchat.common.v1.IntentId payment_intent = 9;
+   */
+  paymentIntent?: IntentId;
+
+  /**
    * @generated from field: flipchat.common.v1.Auth auth = 10;
    */
   auth?: Auth;
@@ -951,6 +956,7 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
     { no: 2, name: "room_id", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
+    { no: 9, name: "payment_intent", kind: "message", T: IntentId },
     { no: 10, name: "auth", kind: "message", T: Auth },
   ]);
 
