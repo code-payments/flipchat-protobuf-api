@@ -1055,26 +1055,18 @@ proto3.util.setEnumType(JoinChatResponse_Result, "flipchat.chat.v1.JoinChatRespo
  */
 export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
   /**
+   * The user joining the chat
+   *
    * @generated from field: flipchat.common.v1.UserId user_id = 1;
    */
   userId?: UserId;
 
   /**
-   * @generated from oneof flipchat.chat.v1.JoinChatPaymentMetadata.identifier
+   * The chat that the user is joining
+   *
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 2;
    */
-  identifier: {
-    /**
-     * @generated from field: flipchat.common.v1.ChatId chat_id = 2;
-     */
-    value: ChatId;
-    case: "chatId";
-  } | {
-    /**
-     * @generated from field: uint64 room_id = 3;
-     */
-    value: bigint;
-    case: "roomId";
-  } | { case: undefined; value?: undefined } = { case: undefined };
+  chatId?: ChatId;
 
   constructor(data?: PartialMessage<JoinChatPaymentMetadata>) {
     super();
@@ -1085,8 +1077,7 @@ export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
   static readonly typeName = "flipchat.chat.v1.JoinChatPaymentMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "user_id", kind: "message", T: UserId },
-    { no: 2, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
-    { no: 3, name: "room_id", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
+    { no: 2, name: "chat_id", kind: "message", T: ChatId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JoinChatPaymentMetadata {

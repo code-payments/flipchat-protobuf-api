@@ -2013,75 +2013,44 @@ func (m *JoinChatPaymentMetadata) validate(all bool) error {
 		}
 	}
 
-	oneofIdentifierPresent := false
-	switch v := m.Identifier.(type) {
-	case *JoinChatPaymentMetadata_ChatId:
-		if v == nil {
-			err := JoinChatPaymentMetadataValidationError{
-				field:  "Identifier",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofIdentifierPresent = true
-
-		if all {
-			switch v := interface{}(m.GetChatId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, JoinChatPaymentMetadataValidationError{
-						field:  "ChatId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, JoinChatPaymentMetadataValidationError{
-						field:  "ChatId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return JoinChatPaymentMetadataValidationError{
-					field:  "ChatId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *JoinChatPaymentMetadata_RoomId:
-		if v == nil {
-			err := JoinChatPaymentMetadataValidationError{
-				field:  "Identifier",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofIdentifierPresent = true
-		// no validation rules for RoomId
-	default:
-		_ = v // ensures v is used
-	}
-	if !oneofIdentifierPresent {
+	if m.GetChatId() == nil {
 		err := JoinChatPaymentMetadataValidationError{
-			field:  "Identifier",
+			field:  "ChatId",
 			reason: "value is required",
 		}
 		if !all {
 			return err
 		}
 		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, JoinChatPaymentMetadataValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, JoinChatPaymentMetadataValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return JoinChatPaymentMetadataValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {
