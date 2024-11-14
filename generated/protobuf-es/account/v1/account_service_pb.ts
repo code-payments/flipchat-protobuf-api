@@ -500,3 +500,107 @@ proto3.util.setEnumType(RevokePublicKeyResponse_Result, "flipchat.account.v1.Rev
   { no: 2, name: "LAST_PUB_KEY" },
 ]);
 
+/**
+ * @generated from message flipchat.account.v1.GetPaymentDestinationRequest
+ */
+export class GetPaymentDestinationRequest extends Message<GetPaymentDestinationRequest> {
+  /**
+   * UserId to get the payment destination from.
+   *
+   * @generated from field: flipchat.common.v1.UserId user_id = 1;
+   */
+  userId?: UserId;
+
+  constructor(data?: PartialMessage<GetPaymentDestinationRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.account.v1.GetPaymentDestinationRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "user_id", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetPaymentDestinationRequest {
+    return new GetPaymentDestinationRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetPaymentDestinationRequest {
+    return new GetPaymentDestinationRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetPaymentDestinationRequest {
+    return new GetPaymentDestinationRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetPaymentDestinationRequest | PlainMessage<GetPaymentDestinationRequest> | undefined, b: GetPaymentDestinationRequest | PlainMessage<GetPaymentDestinationRequest> | undefined): boolean {
+    return proto3.util.equals(GetPaymentDestinationRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.account.v1.GetPaymentDestinationResponse
+ */
+export class GetPaymentDestinationResponse extends Message<GetPaymentDestinationResponse> {
+  /**
+   * @generated from field: flipchat.account.v1.GetPaymentDestinationResponse.Result result = 1;
+   */
+  result = GetPaymentDestinationResponse_Result.OK;
+
+  /**
+   * Payment destination for the UserId.
+   *
+   * @generated from field: flipchat.common.v1.PublicKey payment_destination = 2;
+   */
+  paymentDestination?: PublicKey;
+
+  constructor(data?: PartialMessage<GetPaymentDestinationResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.account.v1.GetPaymentDestinationResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(GetPaymentDestinationResponse_Result) },
+    { no: 2, name: "payment_destination", kind: "message", T: PublicKey },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetPaymentDestinationResponse {
+    return new GetPaymentDestinationResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetPaymentDestinationResponse {
+    return new GetPaymentDestinationResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetPaymentDestinationResponse {
+    return new GetPaymentDestinationResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetPaymentDestinationResponse | PlainMessage<GetPaymentDestinationResponse> | undefined, b: GetPaymentDestinationResponse | PlainMessage<GetPaymentDestinationResponse> | undefined): boolean {
+    return proto3.util.equals(GetPaymentDestinationResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.account.v1.GetPaymentDestinationResponse.Result
+ */
+export enum GetPaymentDestinationResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: NOT_FOUND = 1;
+   */
+  NOT_FOUND = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(GetPaymentDestinationResponse_Result)
+proto3.util.setEnumType(GetPaymentDestinationResponse_Result, "flipchat.account.v1.GetPaymentDestinationResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "NOT_FOUND" },
+]);
+

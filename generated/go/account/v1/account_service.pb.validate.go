@@ -1331,3 +1331,280 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RevokePublicKeyResponseValidationError{}
+
+// Validate checks the field values on GetPaymentDestinationRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPaymentDestinationRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPaymentDestinationRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPaymentDestinationRequestMultiError, or nil if none found.
+func (m *GetPaymentDestinationRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPaymentDestinationRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetUserId() == nil {
+		err := GetPaymentDestinationRequestValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPaymentDestinationRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPaymentDestinationRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPaymentDestinationRequestValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetPaymentDestinationRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPaymentDestinationRequestMultiError is an error wrapping multiple
+// validation errors returned by GetPaymentDestinationRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetPaymentDestinationRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPaymentDestinationRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPaymentDestinationRequestMultiError) AllErrors() []error { return m }
+
+// GetPaymentDestinationRequestValidationError is the validation error returned
+// by GetPaymentDestinationRequest.Validate if the designated constraints
+// aren't met.
+type GetPaymentDestinationRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPaymentDestinationRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPaymentDestinationRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPaymentDestinationRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPaymentDestinationRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPaymentDestinationRequestValidationError) ErrorName() string {
+	return "GetPaymentDestinationRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPaymentDestinationRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPaymentDestinationRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPaymentDestinationRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPaymentDestinationRequestValidationError{}
+
+// Validate checks the field values on GetPaymentDestinationResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPaymentDestinationResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPaymentDestinationResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetPaymentDestinationResponseMultiError, or nil if none found.
+func (m *GetPaymentDestinationResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPaymentDestinationResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if all {
+		switch v := interface{}(m.GetPaymentDestination()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPaymentDestinationResponseValidationError{
+					field:  "PaymentDestination",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPaymentDestinationResponseValidationError{
+					field:  "PaymentDestination",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPaymentDestination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPaymentDestinationResponseValidationError{
+				field:  "PaymentDestination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetPaymentDestinationResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPaymentDestinationResponseMultiError is an error wrapping multiple
+// validation errors returned by GetPaymentDestinationResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetPaymentDestinationResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPaymentDestinationResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPaymentDestinationResponseMultiError) AllErrors() []error { return m }
+
+// GetPaymentDestinationResponseValidationError is the validation error
+// returned by GetPaymentDestinationResponse.Validate if the designated
+// constraints aren't met.
+type GetPaymentDestinationResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPaymentDestinationResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPaymentDestinationResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPaymentDestinationResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPaymentDestinationResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPaymentDestinationResponseValidationError) ErrorName() string {
+	return "GetPaymentDestinationResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPaymentDestinationResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPaymentDestinationResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPaymentDestinationResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPaymentDestinationResponseValidationError{}

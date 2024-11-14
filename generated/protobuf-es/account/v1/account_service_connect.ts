@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AuthorizePublicKeyRequest, AuthorizePublicKeyResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, RevokePublicKeyRequest, RevokePublicKeyResponse } from "./account_service_pb";
+import { AuthorizePublicKeyRequest, AuthorizePublicKeyResponse, GetPaymentDestinationRequest, GetPaymentDestinationResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, RevokePublicKeyRequest, RevokePublicKeyResponse } from "./account_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -59,6 +59,17 @@ export const Account = {
       name: "RevokePublicKey",
       I: RevokePublicKeyRequest,
       O: RevokePublicKeyResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * GetPaymentDestination gets the payment destination for a UserId
+     *
+     * @generated from rpc flipchat.account.v1.Account.GetPaymentDestination
+     */
+    getPaymentDestination: {
+      name: "GetPaymentDestination",
+      I: GetPaymentDestinationRequest,
+      O: GetPaymentDestinationResponse,
       kind: MethodKind.Unary,
     },
   }
