@@ -24,7 +24,7 @@ const (
 	Account_AuthorizePublicKey_FullMethodName    = "/flipchat.account.v1.Account/AuthorizePublicKey"
 	Account_RevokePublicKey_FullMethodName       = "/flipchat.account.v1.Account/RevokePublicKey"
 	Account_GetPaymentDestination_FullMethodName = "/flipchat.account.v1.Account/GetPaymentDestination"
-	Account_GetFlags_FullMethodName              = "/flipchat.account.v1.Account/GetFlags"
+	Account_GetUserFlags_FullMethodName          = "/flipchat.account.v1.Account/GetUserFlags"
 )
 
 // AccountClient is the client API for Account service.
@@ -46,8 +46,8 @@ type AccountClient interface {
 	RevokePublicKey(ctx context.Context, in *RevokePublicKeyRequest, opts ...grpc.CallOption) (*RevokePublicKeyResponse, error)
 	// GetPaymentDestination gets the payment destination for a UserId
 	GetPaymentDestination(ctx context.Context, in *GetPaymentDestinationRequest, opts ...grpc.CallOption) (*GetPaymentDestinationResponse, error)
-	// GetFlags gets user-specific flags
-	GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error)
+	// GetUserFlags gets user-specific flags
+	GetUserFlags(ctx context.Context, in *GetUserFlagsRequest, opts ...grpc.CallOption) (*GetUserFlagsResponse, error)
 }
 
 type accountClient struct {
@@ -108,10 +108,10 @@ func (c *accountClient) GetPaymentDestination(ctx context.Context, in *GetPaymen
 	return out, nil
 }
 
-func (c *accountClient) GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error) {
+func (c *accountClient) GetUserFlags(ctx context.Context, in *GetUserFlagsRequest, opts ...grpc.CallOption) (*GetUserFlagsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetFlagsResponse)
-	err := c.cc.Invoke(ctx, Account_GetFlags_FullMethodName, in, out, cOpts...)
+	out := new(GetUserFlagsResponse)
+	err := c.cc.Invoke(ctx, Account_GetUserFlags_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -137,8 +137,8 @@ type AccountServer interface {
 	RevokePublicKey(context.Context, *RevokePublicKeyRequest) (*RevokePublicKeyResponse, error)
 	// GetPaymentDestination gets the payment destination for a UserId
 	GetPaymentDestination(context.Context, *GetPaymentDestinationRequest) (*GetPaymentDestinationResponse, error)
-	// GetFlags gets user-specific flags
-	GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error)
+	// GetUserFlags gets user-specific flags
+	GetUserFlags(context.Context, *GetUserFlagsRequest) (*GetUserFlagsResponse, error)
 	mustEmbedUnimplementedAccountServer()
 }
 
@@ -164,8 +164,8 @@ func (UnimplementedAccountServer) RevokePublicKey(context.Context, *RevokePublic
 func (UnimplementedAccountServer) GetPaymentDestination(context.Context, *GetPaymentDestinationRequest) (*GetPaymentDestinationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentDestination not implemented")
 }
-func (UnimplementedAccountServer) GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFlags not implemented")
+func (UnimplementedAccountServer) GetUserFlags(context.Context, *GetUserFlagsRequest) (*GetUserFlagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserFlags not implemented")
 }
 func (UnimplementedAccountServer) mustEmbedUnimplementedAccountServer() {}
 func (UnimplementedAccountServer) testEmbeddedByValue()                 {}
@@ -278,20 +278,20 @@ func _Account_GetPaymentDestination_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Account_GetFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFlagsRequest)
+func _Account_GetUserFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserFlagsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServer).GetFlags(ctx, in)
+		return srv.(AccountServer).GetUserFlags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Account_GetFlags_FullMethodName,
+		FullMethod: Account_GetUserFlags_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServer).GetFlags(ctx, req.(*GetFlagsRequest))
+		return srv.(AccountServer).GetUserFlags(ctx, req.(*GetUserFlagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -324,8 +324,8 @@ var Account_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Account_GetPaymentDestination_Handler,
 		},
 		{
-			MethodName: "GetFlags",
-			Handler:    _Account_GetFlags_Handler,
+			MethodName: "GetUserFlags",
+			Handler:    _Account_GetUserFlags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

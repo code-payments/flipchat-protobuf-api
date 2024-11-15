@@ -1609,22 +1609,22 @@ var _ interface {
 	ErrorName() string
 } = GetPaymentDestinationResponseValidationError{}
 
-// Validate checks the field values on GetFlagsRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *GetFlagsRequest) Validate() error {
+// Validate checks the field values on GetUserFlagsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserFlagsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetFlagsRequest with the rules
+// ValidateAll checks the field values on GetUserFlagsRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetFlagsRequestMultiError, or nil if none found.
-func (m *GetFlagsRequest) ValidateAll() error {
+// GetUserFlagsRequestMultiError, or nil if none found.
+func (m *GetUserFlagsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetFlagsRequest) validate(all bool) error {
+func (m *GetUserFlagsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1632,7 +1632,7 @@ func (m *GetFlagsRequest) validate(all bool) error {
 	var errors []error
 
 	if m.GetUserId() == nil {
-		err := GetFlagsRequestValidationError{
+		err := GetUserFlagsRequestValidationError{
 			field:  "UserId",
 			reason: "value is required",
 		}
@@ -1646,7 +1646,7 @@ func (m *GetFlagsRequest) validate(all bool) error {
 		switch v := interface{}(m.GetUserId()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetFlagsRequestValidationError{
+				errors = append(errors, GetUserFlagsRequestValidationError{
 					field:  "UserId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1654,7 +1654,7 @@ func (m *GetFlagsRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetFlagsRequestValidationError{
+				errors = append(errors, GetUserFlagsRequestValidationError{
 					field:  "UserId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1663,7 +1663,7 @@ func (m *GetFlagsRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetFlagsRequestValidationError{
+			return GetUserFlagsRequestValidationError{
 				field:  "UserId",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1672,7 +1672,7 @@ func (m *GetFlagsRequest) validate(all bool) error {
 	}
 
 	if m.GetAuth() == nil {
-		err := GetFlagsRequestValidationError{
+		err := GetUserFlagsRequestValidationError{
 			field:  "Auth",
 			reason: "value is required",
 		}
@@ -1686,7 +1686,7 @@ func (m *GetFlagsRequest) validate(all bool) error {
 		switch v := interface{}(m.GetAuth()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetFlagsRequestValidationError{
+				errors = append(errors, GetUserFlagsRequestValidationError{
 					field:  "Auth",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1694,7 +1694,7 @@ func (m *GetFlagsRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetFlagsRequestValidationError{
+				errors = append(errors, GetUserFlagsRequestValidationError{
 					field:  "Auth",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1703,7 +1703,7 @@ func (m *GetFlagsRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetFlagsRequestValidationError{
+			return GetUserFlagsRequestValidationError{
 				field:  "Auth",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1712,19 +1712,19 @@ func (m *GetFlagsRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetFlagsRequestMultiError(errors)
+		return GetUserFlagsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetFlagsRequestMultiError is an error wrapping multiple validation errors
-// returned by GetFlagsRequest.ValidateAll() if the designated constraints
-// aren't met.
-type GetFlagsRequestMultiError []error
+// GetUserFlagsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetUserFlagsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserFlagsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetFlagsRequestMultiError) Error() string {
+func (m GetUserFlagsRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1733,11 +1733,11 @@ func (m GetFlagsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetFlagsRequestMultiError) AllErrors() []error { return m }
+func (m GetUserFlagsRequestMultiError) AllErrors() []error { return m }
 
-// GetFlagsRequestValidationError is the validation error returned by
-// GetFlagsRequest.Validate if the designated constraints aren't met.
-type GetFlagsRequestValidationError struct {
+// GetUserFlagsRequestValidationError is the validation error returned by
+// GetUserFlagsRequest.Validate if the designated constraints aren't met.
+type GetUserFlagsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1745,22 +1745,24 @@ type GetFlagsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetFlagsRequestValidationError) Field() string { return e.field }
+func (e GetUserFlagsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetFlagsRequestValidationError) Reason() string { return e.reason }
+func (e GetUserFlagsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetFlagsRequestValidationError) Cause() error { return e.cause }
+func (e GetUserFlagsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetFlagsRequestValidationError) Key() bool { return e.key }
+func (e GetUserFlagsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetFlagsRequestValidationError) ErrorName() string { return "GetFlagsRequestValidationError" }
+func (e GetUserFlagsRequestValidationError) ErrorName() string {
+	return "GetUserFlagsRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e GetFlagsRequestValidationError) Error() string {
+func (e GetUserFlagsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1772,14 +1774,14 @@ func (e GetFlagsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetFlagsRequest.%s: %s%s",
+		"invalid %sGetUserFlagsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetFlagsRequestValidationError{}
+var _ error = GetUserFlagsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1787,24 +1789,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetFlagsRequestValidationError{}
+} = GetUserFlagsRequestValidationError{}
 
-// Validate checks the field values on GetFlagsResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *GetFlagsResponse) Validate() error {
+// Validate checks the field values on GetUserFlagsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserFlagsResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetFlagsResponse with the rules
+// ValidateAll checks the field values on GetUserFlagsResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetFlagsResponseMultiError, or nil if none found.
-func (m *GetFlagsResponse) ValidateAll() error {
+// GetUserFlagsResponseMultiError, or nil if none found.
+func (m *GetUserFlagsResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetFlagsResponse) validate(all bool) error {
+func (m *GetUserFlagsResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1814,28 +1816,28 @@ func (m *GetFlagsResponse) validate(all bool) error {
 	// no validation rules for Result
 
 	if all {
-		switch v := interface{}(m.GetFlags()).(type) {
+		switch v := interface{}(m.GetUserFlags()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetFlagsResponseValidationError{
-					field:  "Flags",
+				errors = append(errors, GetUserFlagsResponseValidationError{
+					field:  "UserFlags",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetFlagsResponseValidationError{
-					field:  "Flags",
+				errors = append(errors, GetUserFlagsResponseValidationError{
+					field:  "UserFlags",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetFlags()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetUserFlags()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetFlagsResponseValidationError{
-				field:  "Flags",
+			return GetUserFlagsResponseValidationError{
+				field:  "UserFlags",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1843,19 +1845,19 @@ func (m *GetFlagsResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetFlagsResponseMultiError(errors)
+		return GetUserFlagsResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetFlagsResponseMultiError is an error wrapping multiple validation errors
-// returned by GetFlagsResponse.ValidateAll() if the designated constraints
-// aren't met.
-type GetFlagsResponseMultiError []error
+// GetUserFlagsResponseMultiError is an error wrapping multiple validation
+// errors returned by GetUserFlagsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserFlagsResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetFlagsResponseMultiError) Error() string {
+func (m GetUserFlagsResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1864,11 +1866,11 @@ func (m GetFlagsResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetFlagsResponseMultiError) AllErrors() []error { return m }
+func (m GetUserFlagsResponseMultiError) AllErrors() []error { return m }
 
-// GetFlagsResponseValidationError is the validation error returned by
-// GetFlagsResponse.Validate if the designated constraints aren't met.
-type GetFlagsResponseValidationError struct {
+// GetUserFlagsResponseValidationError is the validation error returned by
+// GetUserFlagsResponse.Validate if the designated constraints aren't met.
+type GetUserFlagsResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1876,22 +1878,24 @@ type GetFlagsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetFlagsResponseValidationError) Field() string { return e.field }
+func (e GetUserFlagsResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetFlagsResponseValidationError) Reason() string { return e.reason }
+func (e GetUserFlagsResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetFlagsResponseValidationError) Cause() error { return e.cause }
+func (e GetUserFlagsResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetFlagsResponseValidationError) Key() bool { return e.key }
+func (e GetUserFlagsResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetFlagsResponseValidationError) ErrorName() string { return "GetFlagsResponseValidationError" }
+func (e GetUserFlagsResponseValidationError) ErrorName() string {
+	return "GetUserFlagsResponseValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e GetFlagsResponseValidationError) Error() string {
+func (e GetUserFlagsResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1903,14 +1907,14 @@ func (e GetFlagsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetFlagsResponse.%s: %s%s",
+		"invalid %sGetUserFlagsResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetFlagsResponseValidationError{}
+var _ error = GetUserFlagsResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1918,23 +1922,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetFlagsResponseValidationError{}
+} = GetUserFlagsResponseValidationError{}
 
-// Validate checks the field values on Flags with the rules defined in the
+// Validate checks the field values on UserFlags with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *Flags) Validate() error {
+func (m *UserFlags) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on Flags with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in FlagsMultiError, or nil if none found.
-func (m *Flags) ValidateAll() error {
+// ValidateAll checks the field values on UserFlags with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in UserFlagsMultiError, or nil
+// if none found.
+func (m *UserFlags) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *Flags) validate(all bool) error {
+func (m *UserFlags) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1944,7 +1949,7 @@ func (m *Flags) validate(all bool) error {
 	// no validation rules for IsStaff
 
 	if m.GetStartGroupCost() == nil {
-		err := FlagsValidationError{
+		err := UserFlagsValidationError{
 			field:  "StartGroupCost",
 			reason: "value is required",
 		}
@@ -1958,7 +1963,7 @@ func (m *Flags) validate(all bool) error {
 		switch v := interface{}(m.GetStartGroupCost()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, FlagsValidationError{
+				errors = append(errors, UserFlagsValidationError{
 					field:  "StartGroupCost",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1966,7 +1971,7 @@ func (m *Flags) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, FlagsValidationError{
+				errors = append(errors, UserFlagsValidationError{
 					field:  "StartGroupCost",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1975,7 +1980,7 @@ func (m *Flags) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetStartGroupCost()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return FlagsValidationError{
+			return UserFlagsValidationError{
 				field:  "StartGroupCost",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1984,18 +1989,18 @@ func (m *Flags) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return FlagsMultiError(errors)
+		return UserFlagsMultiError(errors)
 	}
 
 	return nil
 }
 
-// FlagsMultiError is an error wrapping multiple validation errors returned by
-// Flags.ValidateAll() if the designated constraints aren't met.
-type FlagsMultiError []error
+// UserFlagsMultiError is an error wrapping multiple validation errors returned
+// by UserFlags.ValidateAll() if the designated constraints aren't met.
+type UserFlagsMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m FlagsMultiError) Error() string {
+func (m UserFlagsMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2004,11 +2009,11 @@ func (m FlagsMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m FlagsMultiError) AllErrors() []error { return m }
+func (m UserFlagsMultiError) AllErrors() []error { return m }
 
-// FlagsValidationError is the validation error returned by Flags.Validate if
-// the designated constraints aren't met.
-type FlagsValidationError struct {
+// UserFlagsValidationError is the validation error returned by
+// UserFlags.Validate if the designated constraints aren't met.
+type UserFlagsValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2016,22 +2021,22 @@ type FlagsValidationError struct {
 }
 
 // Field function returns field value.
-func (e FlagsValidationError) Field() string { return e.field }
+func (e UserFlagsValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e FlagsValidationError) Reason() string { return e.reason }
+func (e UserFlagsValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e FlagsValidationError) Cause() error { return e.cause }
+func (e UserFlagsValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e FlagsValidationError) Key() bool { return e.key }
+func (e UserFlagsValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e FlagsValidationError) ErrorName() string { return "FlagsValidationError" }
+func (e UserFlagsValidationError) ErrorName() string { return "UserFlagsValidationError" }
 
 // Error satisfies the builtin error interface
-func (e FlagsValidationError) Error() string {
+func (e UserFlagsValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2043,14 +2048,14 @@ func (e FlagsValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sFlags.%s: %s%s",
+		"invalid %sUserFlags.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = FlagsValidationError{}
+var _ error = UserFlagsValidationError{}
 
 var _ interface {
 	Field() string
@@ -2058,4 +2063,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = FlagsValidationError{}
+} = UserFlagsValidationError{}

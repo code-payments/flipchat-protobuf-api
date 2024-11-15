@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AuthorizePublicKeyRequest, AuthorizePublicKeyResponse, GetFlagsRequest, GetFlagsResponse, GetPaymentDestinationRequest, GetPaymentDestinationResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, RevokePublicKeyRequest, RevokePublicKeyResponse } from "./account_service_pb";
+import { AuthorizePublicKeyRequest, AuthorizePublicKeyResponse, GetPaymentDestinationRequest, GetPaymentDestinationResponse, GetUserFlagsRequest, GetUserFlagsResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, RevokePublicKeyRequest, RevokePublicKeyResponse } from "./account_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -73,14 +73,14 @@ export const Account = {
       kind: MethodKind.Unary,
     },
     /**
-     * GetFlags gets user-specific flags
+     * GetUserFlags gets user-specific flags
      *
-     * @generated from rpc flipchat.account.v1.Account.GetFlags
+     * @generated from rpc flipchat.account.v1.Account.GetUserFlags
      */
-    getFlags: {
-      name: "GetFlags",
-      I: GetFlagsRequest,
-      O: GetFlagsResponse,
+    getUserFlags: {
+      name: "GetUserFlags",
+      I: GetUserFlagsRequest,
+      O: GetUserFlagsResponse,
       kind: MethodKind.Unary,
     },
   }

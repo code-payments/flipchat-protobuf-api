@@ -31,8 +31,8 @@ service Account {
 	// GetPaymentDestination gets the payment destination for a UserId
 	rpc GetPaymentDestination(GetPaymentDestinationRequest) returns (GetPaymentDestinationResponse);
 
-	// GetFlags gets user-specific flags
-	rpc GetFlags(GetFlagsRequest) returns (GetFlagsResponse);
+	// GetUserFlags gets user-specific flags
+	rpc GetUserFlags(GetUserFlagsRequest) returns (GetUserFlagsResponse);
 }
 
 message RegisterRequest {
@@ -143,23 +143,23 @@ message GetPaymentDestinationResponse {
 	common.v1.PublicKey payment_destination = 2;
 }
 
-message GetFlagsRequest {
-	// UserId to bound the new public key to.
+message GetUserFlagsRequest {
+	// UserId to get user flags for.
 	common.v1.UserId user_id = 1 [(validate.rules).message.required = true];
 
 	common.v1.Auth auth = 2 [(validate.rules).message.required = true];
 }
-message GetFlagsResponse {
+message GetUserFlagsResponse {
 	Result result = 1;
 	enum Result {
 		OK     = 0;
 		DENIED = 1;
 	}
 
-	Flags flags = 2;
+	UserFlags user_flags = 2;
 }
 
-message Flags {
+message UserFlags {
 	bool is_staff = 1;
 
 	common.v1.PaymentAmount start_group_cost = 2 [(validate.rules).message.required = true];
