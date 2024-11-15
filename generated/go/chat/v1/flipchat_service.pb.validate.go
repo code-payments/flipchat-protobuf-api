@@ -1535,6 +1535,149 @@ var _ interface {
 	ErrorName() string
 } = StartChatResponseValidationError{}
 
+// Validate checks the field values on StartGroupChatPaymentMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *StartGroupChatPaymentMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on StartGroupChatPaymentMetadata with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// StartGroupChatPaymentMetadataMultiError, or nil if none found.
+func (m *StartGroupChatPaymentMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *StartGroupChatPaymentMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetUserId() == nil {
+		err := StartGroupChatPaymentMetadataValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, StartGroupChatPaymentMetadataValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, StartGroupChatPaymentMetadataValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StartGroupChatPaymentMetadataValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return StartGroupChatPaymentMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// StartGroupChatPaymentMetadataMultiError is an error wrapping multiple
+// validation errors returned by StartGroupChatPaymentMetadata.ValidateAll()
+// if the designated constraints aren't met.
+type StartGroupChatPaymentMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m StartGroupChatPaymentMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m StartGroupChatPaymentMetadataMultiError) AllErrors() []error { return m }
+
+// StartGroupChatPaymentMetadataValidationError is the validation error
+// returned by StartGroupChatPaymentMetadata.Validate if the designated
+// constraints aren't met.
+type StartGroupChatPaymentMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StartGroupChatPaymentMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StartGroupChatPaymentMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StartGroupChatPaymentMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StartGroupChatPaymentMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StartGroupChatPaymentMetadataValidationError) ErrorName() string {
+	return "StartGroupChatPaymentMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StartGroupChatPaymentMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStartGroupChatPaymentMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StartGroupChatPaymentMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StartGroupChatPaymentMetadataValidationError{}
+
 // Validate checks the field values on JoinChatRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -1556,17 +1699,6 @@ func (m *JoinChatRequest) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if m.GetPaymentIntent() == nil {
-		err := JoinChatRequestValidationError{
-			field:  "PaymentIntent",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
 
 	if all {
 		switch v := interface{}(m.GetPaymentIntent()).(type) {
@@ -2705,6 +2837,321 @@ var _ interface {
 	ErrorName() string
 } = SetMuteStateResponseValidationError{}
 
+// Validate checks the field values on SetCoverChargeRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetCoverChargeRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetCoverChargeRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetCoverChargeRequestMultiError, or nil if none found.
+func (m *SetCoverChargeRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetCoverChargeRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := SetCoverChargeRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetCoverChargeRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetCoverChargeRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetCoverChargeRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetCoverCharge()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetCoverChargeRequestValidationError{
+					field:  "CoverCharge",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetCoverChargeRequestValidationError{
+					field:  "CoverCharge",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCoverCharge()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetCoverChargeRequestValidationError{
+				field:  "CoverCharge",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := SetCoverChargeRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetCoverChargeRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetCoverChargeRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetCoverChargeRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SetCoverChargeRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetCoverChargeRequestMultiError is an error wrapping multiple validation
+// errors returned by SetCoverChargeRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetCoverChargeRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetCoverChargeRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetCoverChargeRequestMultiError) AllErrors() []error { return m }
+
+// SetCoverChargeRequestValidationError is the validation error returned by
+// SetCoverChargeRequest.Validate if the designated constraints aren't met.
+type SetCoverChargeRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetCoverChargeRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetCoverChargeRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetCoverChargeRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetCoverChargeRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetCoverChargeRequestValidationError) ErrorName() string {
+	return "SetCoverChargeRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetCoverChargeRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetCoverChargeRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetCoverChargeRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetCoverChargeRequestValidationError{}
+
+// Validate checks the field values on SetCoverChargeResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetCoverChargeResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetCoverChargeResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetCoverChargeResponseMultiError, or nil if none found.
+func (m *SetCoverChargeResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetCoverChargeResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return SetCoverChargeResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetCoverChargeResponseMultiError is an error wrapping multiple validation
+// errors returned by SetCoverChargeResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetCoverChargeResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetCoverChargeResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetCoverChargeResponseMultiError) AllErrors() []error { return m }
+
+// SetCoverChargeResponseValidationError is the validation error returned by
+// SetCoverChargeResponse.Validate if the designated constraints aren't met.
+type SetCoverChargeResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetCoverChargeResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetCoverChargeResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetCoverChargeResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetCoverChargeResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetCoverChargeResponseValidationError) ErrorName() string {
+	return "SetCoverChargeResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetCoverChargeResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetCoverChargeResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetCoverChargeResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetCoverChargeResponseValidationError{}
+
 // Validate checks the field values on Metadata with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -2820,6 +3267,35 @@ func (m *Metadata) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return MetadataValidationError{
 				field:  "Owner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetCoverCharge()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MetadataValidationError{
+					field:  "CoverCharge",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MetadataValidationError{
+					field:  "CoverCharge",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCoverCharge()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MetadataValidationError{
+				field:  "CoverCharge",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -4672,6 +5148,46 @@ func (m *StartChatRequest_StartGroupChatParameters) validate(all bool) error {
 	}
 
 	// no validation rules for Title
+
+	if m.GetPaymentIntent() == nil {
+		err := StartChatRequest_StartGroupChatParametersValidationError{
+			field:  "PaymentIntent",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetPaymentIntent()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, StartChatRequest_StartGroupChatParametersValidationError{
+					field:  "PaymentIntent",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, StartChatRequest_StartGroupChatParametersValidationError{
+					field:  "PaymentIntent",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPaymentIntent()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StartChatRequest_StartGroupChatParametersValidationError{
+				field:  "PaymentIntent",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return StartChatRequest_StartGroupChatParametersMultiError(errors)

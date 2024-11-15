@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
+import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -103,6 +103,17 @@ export const Chat = {
       name: "SetMuteState",
       I: SetMuteStateRequest,
       O: SetMuteStateResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * SetCoverCharge sets a chat's cover charge
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.SetCoverCharge
+     */
+    setCoverCharge: {
+      name: "SetCoverCharge",
+      I: SetCoverChargeRequest,
+      O: SetCoverChargeResponse,
       kind: MethodKind.Unary,
     },
   }

@@ -373,6 +373,43 @@ export class Signature extends Message<Signature> {
 }
 
 /**
+ * @generated from message flipchat.common.v1.PaymentAmount
+ */
+export class PaymentAmount extends Message<PaymentAmount> {
+  /**
+   * @generated from field: uint64 quarks = 1;
+   */
+  quarks = protoInt64.zero;
+
+  constructor(data?: PartialMessage<PaymentAmount>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.common.v1.PaymentAmount";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "quarks", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PaymentAmount {
+    return new PaymentAmount().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PaymentAmount {
+    return new PaymentAmount().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PaymentAmount {
+    return new PaymentAmount().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PaymentAmount | PlainMessage<PaymentAmount> | undefined, b: PaymentAmount | PlainMessage<PaymentAmount> | undefined): boolean {
+    return proto3.util.equals(PaymentAmount, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.common.v1.ServerPing
  */
 export class ServerPing extends Message<ServerPing> {

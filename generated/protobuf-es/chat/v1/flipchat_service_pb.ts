@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
-import { Auth, ChatId, ClientPong, IntentId, QueryOptions, ServerPing, UserId } from "../../common/v1/flipchat_pb";
+import { Auth, ChatId, ClientPong, IntentId, PaymentAmount, QueryOptions, ServerPing, UserId } from "../../common/v1/flipchat_pb";
 import { IsTyping, Message as Message$1, Pointer } from "../../messaging/v1/model_pb";
 
 /**
@@ -811,6 +811,13 @@ export class StartChatRequest_StartGroupChatParameters extends Message<StartChat
    */
   title = "";
 
+  /**
+   * The payment for creating the group
+   *
+   * @generated from field: flipchat.common.v1.IntentId payment_intent = 3;
+   */
+  paymentIntent?: IntentId;
+
   constructor(data?: PartialMessage<StartChatRequest_StartGroupChatParameters>) {
     super();
     proto3.util.initPartial(data, this);
@@ -821,6 +828,7 @@ export class StartChatRequest_StartGroupChatParameters extends Message<StartChat
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "users", kind: "message", T: UserId, repeated: true },
     { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "payment_intent", kind: "message", T: IntentId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartChatRequest_StartGroupChatParameters {
@@ -916,6 +924,45 @@ proto3.util.setEnumType(StartChatResponse_Result, "flipchat.chat.v1.StartChatRes
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.StartGroupChatPaymentMetadata
+ */
+export class StartGroupChatPaymentMetadata extends Message<StartGroupChatPaymentMetadata> {
+  /**
+   * The user creating the group chat, who will be the initial owner
+   *
+   * @generated from field: flipchat.common.v1.UserId user_id = 1;
+   */
+  userId?: UserId;
+
+  constructor(data?: PartialMessage<StartGroupChatPaymentMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StartGroupChatPaymentMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "user_id", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartGroupChatPaymentMetadata {
+    return new StartGroupChatPaymentMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartGroupChatPaymentMetadata {
+    return new StartGroupChatPaymentMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartGroupChatPaymentMetadata {
+    return new StartGroupChatPaymentMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StartGroupChatPaymentMetadata | PlainMessage<StartGroupChatPaymentMetadata> | undefined, b: StartGroupChatPaymentMetadata | PlainMessage<StartGroupChatPaymentMetadata> | undefined): boolean {
+    return proto3.util.equals(StartGroupChatPaymentMetadata, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.chat.v1.JoinChatRequest
  */
 export class JoinChatRequest extends Message<JoinChatRequest> {
@@ -937,6 +984,9 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
+   * The payment for joining a chat, which is required when the user isn't
+   * the chat owner
+   *
    * @generated from field: flipchat.common.v1.IntentId payment_intent = 9;
    */
   paymentIntent?: IntentId;
@@ -1304,6 +1354,118 @@ proto3.util.setEnumType(SetMuteStateResponse_Result, "flipchat.chat.v1.SetMuteSt
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.SetCoverChargeRequest
+ */
+export class SetCoverChargeRequest extends Message<SetCoverChargeRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.PaymentAmount cover_charge = 2;
+   */
+  coverCharge?: PaymentAmount;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<SetCoverChargeRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.SetCoverChargeRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "cover_charge", kind: "message", T: PaymentAmount },
+    { no: 3, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetCoverChargeRequest {
+    return new SetCoverChargeRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetCoverChargeRequest {
+    return new SetCoverChargeRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetCoverChargeRequest {
+    return new SetCoverChargeRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetCoverChargeRequest | PlainMessage<SetCoverChargeRequest> | undefined, b: SetCoverChargeRequest | PlainMessage<SetCoverChargeRequest> | undefined): boolean {
+    return proto3.util.equals(SetCoverChargeRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.SetCoverChargeResponse
+ */
+export class SetCoverChargeResponse extends Message<SetCoverChargeResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.SetCoverChargeResponse.Result result = 1;
+   */
+  result = SetCoverChargeResponse_Result.OK;
+
+  constructor(data?: PartialMessage<SetCoverChargeResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.SetCoverChargeResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(SetCoverChargeResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetCoverChargeResponse {
+    return new SetCoverChargeResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetCoverChargeResponse {
+    return new SetCoverChargeResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetCoverChargeResponse {
+    return new SetCoverChargeResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetCoverChargeResponse | PlainMessage<SetCoverChargeResponse> | undefined, b: SetCoverChargeResponse | PlainMessage<SetCoverChargeResponse> | undefined): boolean {
+    return proto3.util.equals(SetCoverChargeResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.SetCoverChargeResponse.Result
+ */
+export enum SetCoverChargeResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * @generated from enum value: CANT_SET = 2;
+   */
+  CANT_SET = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(SetCoverChargeResponse_Result)
+proto3.util.setEnumType(SetCoverChargeResponse_Result, "flipchat.chat.v1.SetCoverChargeResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "CANT_SET" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.Metadata
  */
 export class Metadata extends Message<Metadata> {
@@ -1365,6 +1527,13 @@ export class Metadata extends Message<Metadata> {
    */
   owner?: UserId;
 
+  /**
+   * If present, the cover charge that must be paid to join the chat
+   *
+   * @generated from field: flipchat.common.v1.PaymentAmount cover_charge = 9;
+   */
+  coverCharge?: PaymentAmount;
+
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1381,6 +1550,7 @@ export class Metadata extends Message<Metadata> {
     { no: 6, name: "muteable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 8, name: "owner", kind: "message", T: UserId },
+    { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {

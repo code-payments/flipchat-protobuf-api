@@ -26,6 +26,7 @@ const (
 	Chat_JoinChat_FullMethodName         = "/flipchat.chat.v1.Chat/JoinChat"
 	Chat_LeaveChat_FullMethodName        = "/flipchat.chat.v1.Chat/LeaveChat"
 	Chat_SetMuteState_FullMethodName     = "/flipchat.chat.v1.Chat/SetMuteState"
+	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 )
 
 // ChatClient is the client API for Chat service.
@@ -62,6 +63,8 @@ type ChatClient interface {
 	LeaveChat(ctx context.Context, in *LeaveChatRequest, opts ...grpc.CallOption) (*LeaveChatResponse, error)
 	// SetMuteState configures a chat member's mute state.
 	SetMuteState(ctx context.Context, in *SetMuteStateRequest, opts ...grpc.CallOption) (*SetMuteStateResponse, error)
+	// SetCoverCharge sets a chat's cover charge
+	SetCoverCharge(ctx context.Context, in *SetCoverChargeRequest, opts ...grpc.CallOption) (*SetCoverChargeResponse, error)
 }
 
 type chatClient struct {
@@ -145,6 +148,16 @@ func (c *chatClient) SetMuteState(ctx context.Context, in *SetMuteStateRequest, 
 	return out, nil
 }
 
+func (c *chatClient) SetCoverCharge(ctx context.Context, in *SetCoverChargeRequest, opts ...grpc.CallOption) (*SetCoverChargeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetCoverChargeResponse)
+	err := c.cc.Invoke(ctx, Chat_SetCoverCharge_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServer is the server API for Chat service.
 // All implementations must embed UnimplementedChatServer
 // for forward compatibility.
@@ -179,6 +192,8 @@ type ChatServer interface {
 	LeaveChat(context.Context, *LeaveChatRequest) (*LeaveChatResponse, error)
 	// SetMuteState configures a chat member's mute state.
 	SetMuteState(context.Context, *SetMuteStateRequest) (*SetMuteStateResponse, error)
+	// SetCoverCharge sets a chat's cover charge
+	SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error)
 	mustEmbedUnimplementedChatServer()
 }
 
@@ -209,6 +224,9 @@ func (UnimplementedChatServer) LeaveChat(context.Context, *LeaveChatRequest) (*L
 }
 func (UnimplementedChatServer) SetMuteState(context.Context, *SetMuteStateRequest) (*SetMuteStateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetMuteState not implemented")
+}
+func (UnimplementedChatServer) SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetCoverCharge not implemented")
 }
 func (UnimplementedChatServer) mustEmbedUnimplementedChatServer() {}
 func (UnimplementedChatServer) testEmbeddedByValue()              {}
@@ -346,6 +364,24 @@ func _Chat_SetMuteState_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_SetCoverCharge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCoverChargeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).SetCoverCharge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_SetCoverCharge_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).SetCoverCharge(ctx, req.(*SetCoverChargeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Chat_ServiceDesc is the grpc.ServiceDesc for Chat service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -376,6 +412,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetMuteState",
 			Handler:    _Chat_SetMuteState_Handler,
+		},
+		{
+			MethodName: "SetCoverCharge",
+			Handler:    _Chat_SetCoverCharge_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
