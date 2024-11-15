@@ -24,6 +24,7 @@ const (
 	Account_AuthorizePublicKey_FullMethodName    = "/flipchat.account.v1.Account/AuthorizePublicKey"
 	Account_RevokePublicKey_FullMethodName       = "/flipchat.account.v1.Account/RevokePublicKey"
 	Account_GetPaymentDestination_FullMethodName = "/flipchat.account.v1.Account/GetPaymentDestination"
+	Account_GetFlags_FullMethodName              = "/flipchat.account.v1.Account/GetFlags"
 )
 
 // AccountClient is the client API for Account service.
@@ -45,6 +46,8 @@ type AccountClient interface {
 	RevokePublicKey(ctx context.Context, in *RevokePublicKeyRequest, opts ...grpc.CallOption) (*RevokePublicKeyResponse, error)
 	// GetPaymentDestination gets the payment destination for a UserId
 	GetPaymentDestination(ctx context.Context, in *GetPaymentDestinationRequest, opts ...grpc.CallOption) (*GetPaymentDestinationResponse, error)
+	// GetFlags gets user-specific flags
+	GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error)
 }
 
 type accountClient struct {
@@ -105,6 +108,16 @@ func (c *accountClient) GetPaymentDestination(ctx context.Context, in *GetPaymen
 	return out, nil
 }
 
+func (c *accountClient) GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFlagsResponse)
+	err := c.cc.Invoke(ctx, Account_GetFlags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountServer is the server API for Account service.
 // All implementations must embed UnimplementedAccountServer
 // for forward compatibility.
@@ -124,6 +137,8 @@ type AccountServer interface {
 	RevokePublicKey(context.Context, *RevokePublicKeyRequest) (*RevokePublicKeyResponse, error)
 	// GetPaymentDestination gets the payment destination for a UserId
 	GetPaymentDestination(context.Context, *GetPaymentDestinationRequest) (*GetPaymentDestinationResponse, error)
+	// GetFlags gets user-specific flags
+	GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error)
 	mustEmbedUnimplementedAccountServer()
 }
 
@@ -148,6 +163,9 @@ func (UnimplementedAccountServer) RevokePublicKey(context.Context, *RevokePublic
 }
 func (UnimplementedAccountServer) GetPaymentDestination(context.Context, *GetPaymentDestinationRequest) (*GetPaymentDestinationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentDestination not implemented")
+}
+func (UnimplementedAccountServer) GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFlags not implemented")
 }
 func (UnimplementedAccountServer) mustEmbedUnimplementedAccountServer() {}
 func (UnimplementedAccountServer) testEmbeddedByValue()                 {}
@@ -260,6 +278,24 @@ func _Account_GetPaymentDestination_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Account_GetFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountServer).GetFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Account_GetFlags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountServer).GetFlags(ctx, req.(*GetFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Account_ServiceDesc is the grpc.ServiceDesc for Account service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -286,6 +322,10 @@ var Account_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPaymentDestination",
 			Handler:    _Account_GetPaymentDestination_Handler,
+		},
+		{
+			MethodName: "GetFlags",
+			Handler:    _Account_GetFlags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

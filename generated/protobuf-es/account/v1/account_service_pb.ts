@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, Timestamp } from "@bufbuild/protobuf";
-import { Auth, PublicKey, Signature, UserId } from "../../common/v1/flipchat_pb";
+import { Auth, PaymentAmount, PublicKey, Signature, UserId } from "../../common/v1/flipchat_pb";
 
 /**
  * @generated from message flipchat.account.v1.RegisterRequest
@@ -603,4 +603,155 @@ proto3.util.setEnumType(GetPaymentDestinationResponse_Result, "flipchat.account.
   { no: 0, name: "OK" },
   { no: 1, name: "NOT_FOUND" },
 ]);
+
+/**
+ * @generated from message flipchat.account.v1.GetFlagsRequest
+ */
+export class GetFlagsRequest extends Message<GetFlagsRequest> {
+  /**
+   * UserId to bound the new public key to.
+   *
+   * @generated from field: flipchat.common.v1.UserId user_id = 1;
+   */
+  userId?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 2;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<GetFlagsRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.account.v1.GetFlagsRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "user_id", kind: "message", T: UserId },
+    { no: 2, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetFlagsRequest {
+    return new GetFlagsRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetFlagsRequest {
+    return new GetFlagsRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetFlagsRequest {
+    return new GetFlagsRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetFlagsRequest | PlainMessage<GetFlagsRequest> | undefined, b: GetFlagsRequest | PlainMessage<GetFlagsRequest> | undefined): boolean {
+    return proto3.util.equals(GetFlagsRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.account.v1.GetFlagsResponse
+ */
+export class GetFlagsResponse extends Message<GetFlagsResponse> {
+  /**
+   * @generated from field: flipchat.account.v1.GetFlagsResponse.Result result = 1;
+   */
+  result = GetFlagsResponse_Result.OK;
+
+  /**
+   * @generated from field: flipchat.account.v1.Flags flags = 2;
+   */
+  flags?: Flags;
+
+  constructor(data?: PartialMessage<GetFlagsResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.account.v1.GetFlagsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(GetFlagsResponse_Result) },
+    { no: 2, name: "flags", kind: "message", T: Flags },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetFlagsResponse {
+    return new GetFlagsResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetFlagsResponse {
+    return new GetFlagsResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetFlagsResponse {
+    return new GetFlagsResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetFlagsResponse | PlainMessage<GetFlagsResponse> | undefined, b: GetFlagsResponse | PlainMessage<GetFlagsResponse> | undefined): boolean {
+    return proto3.util.equals(GetFlagsResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.account.v1.GetFlagsResponse.Result
+ */
+export enum GetFlagsResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(GetFlagsResponse_Result)
+proto3.util.setEnumType(GetFlagsResponse_Result, "flipchat.account.v1.GetFlagsResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message flipchat.account.v1.Flags
+ */
+export class Flags extends Message<Flags> {
+  /**
+   * @generated from field: bool is_staff = 1;
+   */
+  isStaff = false;
+
+  /**
+   * @generated from field: flipchat.common.v1.PaymentAmount start_group_cost = 2;
+   */
+  startGroupCost?: PaymentAmount;
+
+  constructor(data?: PartialMessage<Flags>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.account.v1.Flags";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "is_staff", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "start_group_cost", kind: "message", T: PaymentAmount },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Flags {
+    return new Flags().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Flags {
+    return new Flags().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Flags {
+    return new Flags().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: Flags | PlainMessage<Flags> | undefined, b: Flags | PlainMessage<Flags> | undefined): boolean {
+    return proto3.util.equals(Flags, a, b);
+  }
+}
 

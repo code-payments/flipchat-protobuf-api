@@ -1608,3 +1608,454 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetPaymentDestinationResponseValidationError{}
+
+// Validate checks the field values on GetFlagsRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetFlagsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetFlagsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetFlagsRequestMultiError, or nil if none found.
+func (m *GetFlagsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetFlagsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetUserId() == nil {
+		err := GetFlagsRequestValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetFlagsRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetFlagsRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetFlagsRequestValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := GetFlagsRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetFlagsRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetFlagsRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetFlagsRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetFlagsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetFlagsRequestMultiError is an error wrapping multiple validation errors
+// returned by GetFlagsRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetFlagsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetFlagsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetFlagsRequestMultiError) AllErrors() []error { return m }
+
+// GetFlagsRequestValidationError is the validation error returned by
+// GetFlagsRequest.Validate if the designated constraints aren't met.
+type GetFlagsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetFlagsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetFlagsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetFlagsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetFlagsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetFlagsRequestValidationError) ErrorName() string { return "GetFlagsRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetFlagsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetFlagsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetFlagsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetFlagsRequestValidationError{}
+
+// Validate checks the field values on GetFlagsResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetFlagsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetFlagsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetFlagsResponseMultiError, or nil if none found.
+func (m *GetFlagsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetFlagsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if all {
+		switch v := interface{}(m.GetFlags()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetFlagsResponseValidationError{
+					field:  "Flags",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetFlagsResponseValidationError{
+					field:  "Flags",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFlags()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetFlagsResponseValidationError{
+				field:  "Flags",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetFlagsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetFlagsResponseMultiError is an error wrapping multiple validation errors
+// returned by GetFlagsResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetFlagsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetFlagsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetFlagsResponseMultiError) AllErrors() []error { return m }
+
+// GetFlagsResponseValidationError is the validation error returned by
+// GetFlagsResponse.Validate if the designated constraints aren't met.
+type GetFlagsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetFlagsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetFlagsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetFlagsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetFlagsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetFlagsResponseValidationError) ErrorName() string { return "GetFlagsResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetFlagsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetFlagsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetFlagsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetFlagsResponseValidationError{}
+
+// Validate checks the field values on Flags with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Flags) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Flags with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in FlagsMultiError, or nil if none found.
+func (m *Flags) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Flags) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsStaff
+
+	if m.GetStartGroupCost() == nil {
+		err := FlagsValidationError{
+			field:  "StartGroupCost",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetStartGroupCost()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, FlagsValidationError{
+					field:  "StartGroupCost",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, FlagsValidationError{
+					field:  "StartGroupCost",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartGroupCost()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return FlagsValidationError{
+				field:  "StartGroupCost",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return FlagsMultiError(errors)
+	}
+
+	return nil
+}
+
+// FlagsMultiError is an error wrapping multiple validation errors returned by
+// Flags.ValidateAll() if the designated constraints aren't met.
+type FlagsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FlagsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FlagsMultiError) AllErrors() []error { return m }
+
+// FlagsValidationError is the validation error returned by Flags.Validate if
+// the designated constraints aren't met.
+type FlagsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FlagsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FlagsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FlagsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FlagsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FlagsValidationError) ErrorName() string { return "FlagsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e FlagsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFlags.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FlagsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FlagsValidationError{}
