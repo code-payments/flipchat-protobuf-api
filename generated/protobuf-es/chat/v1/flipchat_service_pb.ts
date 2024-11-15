@@ -812,7 +812,8 @@ export class StartChatRequest_StartGroupChatParameters extends Message<StartChat
   title = "";
 
   /**
-   * The payment for creating the group
+   * Optional payment for creating the group. It's up to server to decide
+   * if the user is allowed to create a group without payment.
    *
    * @generated from field: flipchat.common.v1.IntentId payment_intent = 3;
    */
