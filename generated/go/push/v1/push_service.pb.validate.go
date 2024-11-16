@@ -57,39 +57,10 @@ func (m *AddTokenRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetUserId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddTokenRequestValidationError{
-					field:  "UserId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddTokenRequestValidationError{
-					field:  "UserId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddTokenRequestValidationError{
-				field:  "UserId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if l := utf8.RuneCountInString(m.GetPushToken()); l < 1 || l > 4096 {
+	if _, ok := _AddTokenRequest_TokenType_InLookup[m.GetTokenType()]; !ok {
 		err := AddTokenRequestValidationError{
-			field:  "PushToken",
-			reason: "value length must be between 1 and 4096 runes, inclusive",
+			field:  "TokenType",
+			reason: "value must be in list [FCM_ANDROID FCM_APNS]",
 		}
 		if !all {
 			return err
@@ -97,10 +68,10 @@ func (m *AddTokenRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if _, ok := _AddTokenRequest_TokenType_InLookup[m.GetTokenType()]; !ok {
+	if l := utf8.RuneCountInString(m.GetPushToken()); l < 1 || l > 4096 {
 		err := AddTokenRequestValidationError{
-			field:  "TokenType",
-			reason: "value must be in list [FCM_ANDROID FCM_APNS]",
+			field:  "PushToken",
+			reason: "value length must be between 1 and 4096 runes, inclusive",
 		}
 		if !all {
 			return err
@@ -373,46 +344,6 @@ func (m *DeleteTokenRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetUserId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, DeleteTokenRequestValidationError{
-					field:  "UserId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, DeleteTokenRequestValidationError{
-					field:  "UserId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return DeleteTokenRequestValidationError{
-				field:  "UserId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if l := utf8.RuneCountInString(m.GetPushToken()); l < 1 || l > 4096 {
-		err := DeleteTokenRequestValidationError{
-			field:  "PushToken",
-			reason: "value length must be between 1 and 4096 runes, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if _, ok := _DeleteTokenRequest_TokenType_InLookup[m.GetTokenType()]; !ok {
 		err := DeleteTokenRequestValidationError{
 			field:  "TokenType",
@@ -424,33 +355,15 @@ func (m *DeleteTokenRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if all {
-		switch v := interface{}(m.GetAppInstall()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, DeleteTokenRequestValidationError{
-					field:  "AppInstall",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, DeleteTokenRequestValidationError{
-					field:  "AppInstall",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
+	if l := utf8.RuneCountInString(m.GetPushToken()); l < 1 || l > 4096 {
+		err := DeleteTokenRequestValidationError{
+			field:  "PushToken",
+			reason: "value length must be between 1 and 4096 runes, inclusive",
 		}
-	} else if v, ok := interface{}(m.GetAppInstall()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return DeleteTokenRequestValidationError{
-				field:  "AppInstall",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
+		if !all {
+			return err
 		}
+		errors = append(errors, err)
 	}
 
 	if m.GetAuth() == nil {

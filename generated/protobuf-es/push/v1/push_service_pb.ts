@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import { AppInstallId, Auth, UserId } from "../../common/v1/flipchat_pb";
+import { AppInstallId, Auth } from "../../common/v1/flipchat_pb";
 
 /**
  * @generated from enum flipchat.push.v1.TokenType
@@ -42,9 +42,9 @@ proto3.util.setEnumType(TokenType, "flipchat.push.v1.TokenType", [
  */
 export class AddTokenRequest extends Message<AddTokenRequest> {
   /**
-   * @generated from field: flipchat.common.v1.UserId user_id = 1;
+   * @generated from field: flipchat.push.v1.TokenType token_type = 1;
    */
-  userId?: UserId;
+  tokenType = TokenType.UNKNOWN;
 
   /**
    * @generated from field: string push_token = 2;
@@ -52,17 +52,12 @@ export class AddTokenRequest extends Message<AddTokenRequest> {
   pushToken = "";
 
   /**
-   * @generated from field: flipchat.push.v1.TokenType token_type = 3;
-   */
-  tokenType = TokenType.UNKNOWN;
-
-  /**
-   * @generated from field: flipchat.common.v1.AppInstallId app_install = 4;
+   * @generated from field: flipchat.common.v1.AppInstallId app_install = 3;
    */
   appInstall?: AppInstallId;
 
   /**
-   * @generated from field: flipchat.common.v1.Auth auth = 5;
+   * @generated from field: flipchat.common.v1.Auth auth = 4;
    */
   auth?: Auth;
 
@@ -74,11 +69,10 @@ export class AddTokenRequest extends Message<AddTokenRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "flipchat.push.v1.AddTokenRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "user_id", kind: "message", T: UserId },
+    { no: 1, name: "token_type", kind: "enum", T: proto3.getEnumType(TokenType) },
     { no: 2, name: "push_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "token_type", kind: "enum", T: proto3.getEnumType(TokenType) },
-    { no: 4, name: "app_install", kind: "message", T: AppInstallId },
-    { no: 5, name: "auth", kind: "message", T: Auth },
+    { no: 3, name: "app_install", kind: "message", T: AppInstallId },
+    { no: 4, name: "auth", kind: "message", T: Auth },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddTokenRequest {
@@ -160,9 +154,9 @@ proto3.util.setEnumType(AddTokenResponse_Result, "flipchat.push.v1.AddTokenRespo
  */
 export class DeleteTokenRequest extends Message<DeleteTokenRequest> {
   /**
-   * @generated from field: flipchat.common.v1.UserId user_id = 1;
+   * @generated from field: flipchat.push.v1.TokenType token_type = 1;
    */
-  userId?: UserId;
+  tokenType = TokenType.UNKNOWN;
 
   /**
    * @generated from field: string push_token = 2;
@@ -170,17 +164,7 @@ export class DeleteTokenRequest extends Message<DeleteTokenRequest> {
   pushToken = "";
 
   /**
-   * @generated from field: flipchat.push.v1.TokenType token_type = 3;
-   */
-  tokenType = TokenType.UNKNOWN;
-
-  /**
-   * @generated from field: flipchat.common.v1.AppInstallId app_install = 4;
-   */
-  appInstall?: AppInstallId;
-
-  /**
-   * @generated from field: flipchat.common.v1.Auth auth = 5;
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
    */
   auth?: Auth;
 
@@ -192,11 +176,9 @@ export class DeleteTokenRequest extends Message<DeleteTokenRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "flipchat.push.v1.DeleteTokenRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "user_id", kind: "message", T: UserId },
+    { no: 1, name: "token_type", kind: "enum", T: proto3.getEnumType(TokenType) },
     { no: 2, name: "push_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "token_type", kind: "enum", T: proto3.getEnumType(TokenType) },
-    { no: 4, name: "app_install", kind: "message", T: AppInstallId },
-    { no: 5, name: "auth", kind: "message", T: Auth },
+    { no: 3, name: "auth", kind: "message", T: Auth },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteTokenRequest {
