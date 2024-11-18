@@ -722,9 +722,9 @@ export class UserFlags extends Message<UserFlags> {
   isStaff = false;
 
   /**
-   * @generated from field: flipchat.common.v1.PaymentAmount start_group_cost = 2;
+   * @generated from field: flipchat.common.v1.PaymentAmount start_group_fee = 2;
    */
-  startGroupCost?: PaymentAmount;
+  startGroupFee?: PaymentAmount;
 
   /**
    * @generated from field: flipchat.common.v1.PublicKey fee_destination = 3;
@@ -740,7 +740,7 @@ export class UserFlags extends Message<UserFlags> {
   static readonly typeName = "flipchat.account.v1.UserFlags";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "is_staff", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "start_group_cost", kind: "message", T: PaymentAmount },
+    { no: 2, name: "start_group_fee", kind: "message", T: PaymentAmount },
     { no: 3, name: "fee_destination", kind: "message", T: PublicKey },
   ]);
 
