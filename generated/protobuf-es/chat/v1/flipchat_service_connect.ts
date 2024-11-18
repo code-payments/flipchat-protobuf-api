@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
+import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, RemoveUserRequest, RemoveUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -114,6 +114,17 @@ export const Chat = {
       name: "SetCoverCharge",
       I: SetCoverChargeRequest,
       O: SetCoverChargeResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * RemoveUser removes a user from a chat
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.RemoveUser
+     */
+    removeUser: {
+      name: "RemoveUser",
+      I: RemoveUserRequest,
+      O: RemoveUserResponse,
       kind: MethodKind.Unary,
     },
   }

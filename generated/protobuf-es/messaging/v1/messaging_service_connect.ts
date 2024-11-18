@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AdvancePointerRequest, AdvancePointerResponse, GetMessagesRequest, GetMessagesResponse, NotifyIsTypingRequest, NotifyIsTypingResponse, SendMessageRequest, SendMessageResponse, StreamMessagesRequest, StreamMessagesResponse } from "./messaging_service_pb";
+import { AdvancePointerRequest, AdvancePointerResponse, DeleteMessageRequest, DeleteMessageResponse, GetMessagesRequest, GetMessagesResponse, NotifyIsTypingRequest, NotifyIsTypingResponse, SendMessageRequest, SendMessageResponse, StreamMessagesRequest, StreamMessagesResponse } from "./messaging_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -71,6 +71,17 @@ export const Messaging = {
       name: "NotifyIsTyping",
       I: NotifyIsTypingRequest,
       O: NotifyIsTypingResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * DeleteMessage deletes a message
+     *
+     * @generated from rpc flipchat.messaging.v1.Messaging.DeleteMessage
+     */
+    deleteMessage: {
+      name: "DeleteMessage",
+      I: DeleteMessageRequest,
+      O: DeleteMessageResponse,
       kind: MethodKind.Unary,
     },
   }

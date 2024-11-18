@@ -3152,6 +3152,332 @@ var _ interface {
 	ErrorName() string
 } = SetCoverChargeResponseValidationError{}
 
+// Validate checks the field values on RemoveUserRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *RemoveUserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RemoveUserRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RemoveUserRequestMultiError, or nil if none found.
+func (m *RemoveUserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RemoveUserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := RemoveUserRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RemoveUserRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RemoveUserRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RemoveUserRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetUserId() == nil {
+		err := RemoveUserRequestValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RemoveUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RemoveUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RemoveUserRequestValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := RemoveUserRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RemoveUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RemoveUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RemoveUserRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RemoveUserRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RemoveUserRequestMultiError is an error wrapping multiple validation errors
+// returned by RemoveUserRequest.ValidateAll() if the designated constraints
+// aren't met.
+type RemoveUserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RemoveUserRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RemoveUserRequestMultiError) AllErrors() []error { return m }
+
+// RemoveUserRequestValidationError is the validation error returned by
+// RemoveUserRequest.Validate if the designated constraints aren't met.
+type RemoveUserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RemoveUserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RemoveUserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RemoveUserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RemoveUserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RemoveUserRequestValidationError) ErrorName() string {
+	return "RemoveUserRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RemoveUserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRemoveUserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RemoveUserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RemoveUserRequestValidationError{}
+
+// Validate checks the field values on RemoveUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RemoveUserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RemoveUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RemoveUserResponseMultiError, or nil if none found.
+func (m *RemoveUserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RemoveUserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return RemoveUserResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RemoveUserResponseMultiError is an error wrapping multiple validation errors
+// returned by RemoveUserResponse.ValidateAll() if the designated constraints
+// aren't met.
+type RemoveUserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RemoveUserResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RemoveUserResponseMultiError) AllErrors() []error { return m }
+
+// RemoveUserResponseValidationError is the validation error returned by
+// RemoveUserResponse.Validate if the designated constraints aren't met.
+type RemoveUserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RemoveUserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RemoveUserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RemoveUserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RemoveUserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RemoveUserResponseValidationError) ErrorName() string {
+	return "RemoveUserResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RemoveUserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRemoveUserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RemoveUserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RemoveUserResponseValidationError{}
+
 // Validate checks the field values on Metadata with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.

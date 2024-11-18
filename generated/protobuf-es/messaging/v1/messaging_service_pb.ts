@@ -395,7 +395,6 @@ export class SendMessageRequest extends Message<SendMessageRequest> {
   /**
    * Allowed content types that can be sent by client:
    *  - TextContent
-   *  - ThankYouContent
    *
    * @generated from field: repeated flipchat.messaging.v1.Content content = 2;
    */
@@ -722,6 +721,106 @@ export enum NotifyIsTypingResponse_Result {
 }
 // Retrieve enum metadata with: proto3.getEnumType(NotifyIsTypingResponse_Result)
 proto3.util.setEnumType(NotifyIsTypingResponse_Result, "flipchat.messaging.v1.NotifyIsTypingResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message flipchat.messaging.v1.DeleteMessageRequest
+ */
+export class DeleteMessageRequest extends Message<DeleteMessageRequest> {
+  /**
+   * @generated from field: flipchat.messaging.v1.MessageId message_id = 1;
+   */
+  messageId?: MessageId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 2;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<DeleteMessageRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.DeleteMessageRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "message_id", kind: "message", T: MessageId },
+    { no: 2, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteMessageRequest {
+    return new DeleteMessageRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteMessageRequest {
+    return new DeleteMessageRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteMessageRequest {
+    return new DeleteMessageRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteMessageRequest | PlainMessage<DeleteMessageRequest> | undefined, b: DeleteMessageRequest | PlainMessage<DeleteMessageRequest> | undefined): boolean {
+    return proto3.util.equals(DeleteMessageRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.DeleteMessageResponse
+ */
+export class DeleteMessageResponse extends Message<DeleteMessageResponse> {
+  /**
+   * @generated from field: flipchat.messaging.v1.DeleteMessageResponse.Result result = 1;
+   */
+  result = DeleteMessageResponse_Result.OK;
+
+  constructor(data?: PartialMessage<DeleteMessageResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.DeleteMessageResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(DeleteMessageResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteMessageResponse {
+    return new DeleteMessageResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteMessageResponse {
+    return new DeleteMessageResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteMessageResponse {
+    return new DeleteMessageResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteMessageResponse | PlainMessage<DeleteMessageResponse> | undefined, b: DeleteMessageResponse | PlainMessage<DeleteMessageResponse> | undefined): boolean {
+    return proto3.util.equals(DeleteMessageResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.messaging.v1.DeleteMessageResponse.Result
+ */
+export enum DeleteMessageResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(DeleteMessageResponse_Result)
+proto3.util.setEnumType(DeleteMessageResponse_Result, "flipchat.messaging.v1.DeleteMessageResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "DENIED" },
 ]);

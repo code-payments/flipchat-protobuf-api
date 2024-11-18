@@ -1467,6 +1467,112 @@ proto3.util.setEnumType(SetCoverChargeResponse_Result, "flipchat.chat.v1.SetCove
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.RemoveUserRequest
+ */
+export class RemoveUserRequest extends Message<RemoveUserRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<RemoveUserRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.RemoveUserRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+    { no: 3, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RemoveUserRequest {
+    return new RemoveUserRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RemoveUserRequest {
+    return new RemoveUserRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RemoveUserRequest {
+    return new RemoveUserRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: RemoveUserRequest | PlainMessage<RemoveUserRequest> | undefined, b: RemoveUserRequest | PlainMessage<RemoveUserRequest> | undefined): boolean {
+    return proto3.util.equals(RemoveUserRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.RemoveUserResponse
+ */
+export class RemoveUserResponse extends Message<RemoveUserResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.RemoveUserResponse.Result result = 1;
+   */
+  result = RemoveUserResponse_Result.OK;
+
+  constructor(data?: PartialMessage<RemoveUserResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.RemoveUserResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(RemoveUserResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RemoveUserResponse {
+    return new RemoveUserResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RemoveUserResponse {
+    return new RemoveUserResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RemoveUserResponse {
+    return new RemoveUserResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: RemoveUserResponse | PlainMessage<RemoveUserResponse> | undefined, b: RemoveUserResponse | PlainMessage<RemoveUserResponse> | undefined): boolean {
+    return proto3.util.equals(RemoveUserResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.RemoveUserResponse.Result
+ */
+export enum RemoveUserResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(RemoveUserResponse_Result)
+proto3.util.setEnumType(RemoveUserResponse_Result, "flipchat.chat.v1.RemoveUserResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.Metadata
  */
 export class Metadata extends Message<Metadata> {
