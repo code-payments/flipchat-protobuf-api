@@ -163,4 +163,6 @@ message UserFlags {
 	bool is_staff = 1;
 
 	common.v1.PaymentAmount start_group_cost = 2 [(validate.rules).message.required = true];
+
+	common.v1.PublicKey fee_payer = 3 [(validate.rules).message.required = true];
 }
