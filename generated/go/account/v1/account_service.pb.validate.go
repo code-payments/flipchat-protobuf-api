@@ -1988,9 +1988,9 @@ func (m *UserFlags) validate(all bool) error {
 		}
 	}
 
-	if m.GetFeePayer() == nil {
+	if m.GetFeeDestination() == nil {
 		err := UserFlagsValidationError{
-			field:  "FeePayer",
+			field:  "FeeDestination",
 			reason: "value is required",
 		}
 		if !all {
@@ -2000,11 +2000,11 @@ func (m *UserFlags) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetFeePayer()).(type) {
+		switch v := interface{}(m.GetFeeDestination()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, UserFlagsValidationError{
-					field:  "FeePayer",
+					field:  "FeeDestination",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -2012,16 +2012,16 @@ func (m *UserFlags) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, UserFlagsValidationError{
-					field:  "FeePayer",
+					field:  "FeeDestination",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetFeePayer()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetFeeDestination()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return UserFlagsValidationError{
-				field:  "FeePayer",
+				field:  "FeeDestination",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

@@ -164,5 +164,5 @@ message UserFlags {
 
 	common.v1.PaymentAmount start_group_cost = 2 [(validate.rules).message.required = true];
 
-	common.v1.PublicKey fee_payer = 3 [(validate.rules).message.required = true];
+	common.v1.PublicKey fee_destination = 3 [(validate.rules).message.required = true];
 }

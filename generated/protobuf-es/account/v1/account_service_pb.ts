@@ -727,9 +727,9 @@ export class UserFlags extends Message<UserFlags> {
   startGroupCost?: PaymentAmount;
 
   /**
-   * @generated from field: flipchat.common.v1.PublicKey fee_payer = 3;
+   * @generated from field: flipchat.common.v1.PublicKey fee_destination = 3;
    */
-  feePayer?: PublicKey;
+  feeDestination?: PublicKey;
 
   constructor(data?: PartialMessage<UserFlags>) {
     super();
@@ -741,7 +741,7 @@ export class UserFlags extends Message<UserFlags> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "is_staff", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "start_group_cost", kind: "message", T: PaymentAmount },
-    { no: 3, name: "fee_payer", kind: "message", T: PublicKey },
+    { no: 3, name: "fee_destination", kind: "message", T: PublicKey },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserFlags {
