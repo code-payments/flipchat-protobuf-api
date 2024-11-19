@@ -727,7 +727,7 @@ func (m *Content) validate(all bool) error {
 			}
 		}
 
-	case *Content_LocalizedAnnoucement:
+	case *Content_LocalizedAnnouncement:
 		if v == nil {
 			err := ContentValidationError{
 				field:  "Type",
@@ -741,11 +741,11 @@ func (m *Content) validate(all bool) error {
 		oneofTypePresent = true
 
 		if all {
-			switch v := interface{}(m.GetLocalizedAnnoucement()).(type) {
+			switch v := interface{}(m.GetLocalizedAnnouncement()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ContentValidationError{
-						field:  "LocalizedAnnoucement",
+						field:  "LocalizedAnnouncement",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -753,16 +753,16 @@ func (m *Content) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ContentValidationError{
-						field:  "LocalizedAnnoucement",
+						field:  "LocalizedAnnouncement",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetLocalizedAnnoucement()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetLocalizedAnnouncement()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ContentValidationError{
-					field:  "LocalizedAnnoucement",
+					field:  "LocalizedAnnouncement",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

@@ -264,10 +264,10 @@ export class Content extends Message$1<Content> {
     case: "text";
   } | {
     /**
-     * @generated from field: flipchat.messaging.v1.LocalizedAnnouncementContent localized_annoucement = 2;
+     * @generated from field: flipchat.messaging.v1.LocalizedAnnouncementContent localized_announcement = 2;
      */
     value: LocalizedAnnouncementContent;
-    case: "localizedAnnoucement";
+    case: "localizedAnnouncement";
   } | {
     /**
      * ExchangeDataContent         exchange_data     = 3;
@@ -287,7 +287,7 @@ export class Content extends Message$1<Content> {
   static readonly typeName = "flipchat.messaging.v1.Content";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "text", kind: "message", T: TextContent, oneof: "type" },
-    { no: 2, name: "localized_annoucement", kind: "message", T: LocalizedAnnouncementContent, oneof: "type" },
+    { no: 2, name: "localized_announcement", kind: "message", T: LocalizedAnnouncementContent, oneof: "type" },
     { no: 4, name: "nacl_box", kind: "message", T: NaclBoxEncryptedContent, oneof: "type" },
   ]);
 

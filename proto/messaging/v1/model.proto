@@ -74,7 +74,7 @@ message Content {
         option (validate.required) = true;
 
         TextContent                   text              = 1;
-        LocalizedAnnouncementContent  localized_annoucement  = 2;
+        LocalizedAnnouncementContent  localized_announcement  = 2;
         //ExchangeDataContent         exchange_data     = 3;
         NaclBoxEncryptedContent       nacl_box          = 4;
     }
