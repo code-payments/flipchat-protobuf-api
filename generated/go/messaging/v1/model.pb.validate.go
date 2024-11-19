@@ -727,7 +727,7 @@ func (m *Content) validate(all bool) error {
 			}
 		}
 
-	case *Content_LocalizedStatus:
+	case *Content_LocalizedAnnoucement:
 		if v == nil {
 			err := ContentValidationError{
 				field:  "Type",
@@ -741,11 +741,11 @@ func (m *Content) validate(all bool) error {
 		oneofTypePresent = true
 
 		if all {
-			switch v := interface{}(m.GetLocalizedStatus()).(type) {
+			switch v := interface{}(m.GetLocalizedAnnoucement()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ContentValidationError{
-						field:  "LocalizedStatus",
+						field:  "LocalizedAnnoucement",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -753,16 +753,16 @@ func (m *Content) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ContentValidationError{
-						field:  "LocalizedStatus",
+						field:  "LocalizedAnnoucement",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetLocalizedStatus()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetLocalizedAnnoucement()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ContentValidationError{
-					field:  "LocalizedStatus",
+					field:  "LocalizedAnnoucement",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1012,22 +1012,22 @@ var _ interface {
 	ErrorName() string
 } = TextContentValidationError{}
 
-// Validate checks the field values on LocalizedStatusContent with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on LocalizedAnnouncementContent with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *LocalizedStatusContent) Validate() error {
+func (m *LocalizedAnnouncementContent) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on LocalizedStatusContent with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on LocalizedAnnouncementContent with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// LocalizedStatusContentMultiError, or nil if none found.
-func (m *LocalizedStatusContent) ValidateAll() error {
+// LocalizedAnnouncementContentMultiError, or nil if none found.
+func (m *LocalizedAnnouncementContent) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *LocalizedStatusContent) validate(all bool) error {
+func (m *LocalizedAnnouncementContent) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1035,7 +1035,7 @@ func (m *LocalizedStatusContent) validate(all bool) error {
 	var errors []error
 
 	if l := utf8.RuneCountInString(m.GetKeyOrText()); l < 1 || l > 1024 {
-		err := LocalizedStatusContentValidationError{
+		err := LocalizedAnnouncementContentValidationError{
 			field:  "KeyOrText",
 			reason: "value length must be between 1 and 1024 runes, inclusive",
 		}
@@ -1046,19 +1046,19 @@ func (m *LocalizedStatusContent) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return LocalizedStatusContentMultiError(errors)
+		return LocalizedAnnouncementContentMultiError(errors)
 	}
 
 	return nil
 }
 
-// LocalizedStatusContentMultiError is an error wrapping multiple validation
-// errors returned by LocalizedStatusContent.ValidateAll() if the designated
-// constraints aren't met.
-type LocalizedStatusContentMultiError []error
+// LocalizedAnnouncementContentMultiError is an error wrapping multiple
+// validation errors returned by LocalizedAnnouncementContent.ValidateAll() if
+// the designated constraints aren't met.
+type LocalizedAnnouncementContentMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m LocalizedStatusContentMultiError) Error() string {
+func (m LocalizedAnnouncementContentMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1067,11 +1067,12 @@ func (m LocalizedStatusContentMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m LocalizedStatusContentMultiError) AllErrors() []error { return m }
+func (m LocalizedAnnouncementContentMultiError) AllErrors() []error { return m }
 
-// LocalizedStatusContentValidationError is the validation error returned by
-// LocalizedStatusContent.Validate if the designated constraints aren't met.
-type LocalizedStatusContentValidationError struct {
+// LocalizedAnnouncementContentValidationError is the validation error returned
+// by LocalizedAnnouncementContent.Validate if the designated constraints
+// aren't met.
+type LocalizedAnnouncementContentValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1079,24 +1080,24 @@ type LocalizedStatusContentValidationError struct {
 }
 
 // Field function returns field value.
-func (e LocalizedStatusContentValidationError) Field() string { return e.field }
+func (e LocalizedAnnouncementContentValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e LocalizedStatusContentValidationError) Reason() string { return e.reason }
+func (e LocalizedAnnouncementContentValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e LocalizedStatusContentValidationError) Cause() error { return e.cause }
+func (e LocalizedAnnouncementContentValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e LocalizedStatusContentValidationError) Key() bool { return e.key }
+func (e LocalizedAnnouncementContentValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e LocalizedStatusContentValidationError) ErrorName() string {
-	return "LocalizedStatusContentValidationError"
+func (e LocalizedAnnouncementContentValidationError) ErrorName() string {
+	return "LocalizedAnnouncementContentValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e LocalizedStatusContentValidationError) Error() string {
+func (e LocalizedAnnouncementContentValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1108,14 +1109,14 @@ func (e LocalizedStatusContentValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sLocalizedStatusContent.%s: %s%s",
+		"invalid %sLocalizedAnnouncementContent.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = LocalizedStatusContentValidationError{}
+var _ error = LocalizedAnnouncementContentValidationError{}
 
 var _ interface {
 	Field() string
@@ -1123,7 +1124,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = LocalizedStatusContentValidationError{}
+} = LocalizedAnnouncementContentValidationError{}
 
 // Validate checks the field values on NaclBoxEncryptedContent with the rules
 // defined in the proto definition for this message. If any rules are

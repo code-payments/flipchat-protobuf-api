@@ -73,10 +73,10 @@ message Content {
     oneof type {
         option (validate.required) = true;
 
-        TextContent             text              = 1;
-        LocalizedStatusContent  localized_status  = 2;
-        //ExchangeDataContent     exchange_data     = 3;
-        NaclBoxEncryptedContent nacl_box          = 4;
+        TextContent                   text              = 1;
+        LocalizedAnnouncementContent  localized_annoucement  = 2;
+        //ExchangeDataContent         exchange_data     = 3;
+        NaclBoxEncryptedContent       nacl_box          = 4;
     }
 }
 
@@ -88,9 +88,10 @@ message TextContent {
     }];
 }
 
-// Status text content that is either a localization key that should be
-// translated on client, or a server-side translated piece of text.
-message LocalizedStatusContent {
+// LocalizedAnnouncementContent content is an annoucement that is either a
+// localization key that should be translated on client, or a server-side
+// translated piece of text.
+message LocalizedAnnouncementContent {
     string key_or_text = 1 [(validate.rules).string = {
         min_len: 1
         max_len: 1024

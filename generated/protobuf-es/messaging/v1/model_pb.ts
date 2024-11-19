@@ -264,13 +264,13 @@ export class Content extends Message$1<Content> {
     case: "text";
   } | {
     /**
-     * @generated from field: flipchat.messaging.v1.LocalizedStatusContent localized_status = 2;
+     * @generated from field: flipchat.messaging.v1.LocalizedAnnouncementContent localized_annoucement = 2;
      */
-    value: LocalizedStatusContent;
-    case: "localizedStatus";
+    value: LocalizedAnnouncementContent;
+    case: "localizedAnnoucement";
   } | {
     /**
-     * ExchangeDataContent     exchange_data     = 3;
+     * ExchangeDataContent         exchange_data     = 3;
      *
      * @generated from field: flipchat.messaging.v1.NaclBoxEncryptedContent nacl_box = 4;
      */
@@ -287,7 +287,7 @@ export class Content extends Message$1<Content> {
   static readonly typeName = "flipchat.messaging.v1.Content";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "text", kind: "message", T: TextContent, oneof: "type" },
-    { no: 2, name: "localized_status", kind: "message", T: LocalizedStatusContent, oneof: "type" },
+    { no: 2, name: "localized_annoucement", kind: "message", T: LocalizedAnnouncementContent, oneof: "type" },
     { no: 4, name: "nacl_box", kind: "message", T: NaclBoxEncryptedContent, oneof: "type" },
   ]);
 
@@ -348,42 +348,43 @@ export class TextContent extends Message$1<TextContent> {
 }
 
 /**
- * Status text content that is either a localization key that should be
- * translated on client, or a server-side translated piece of text.
+ * LocalizedAnnouncementContent content is an annoucement that is either a
+ * localization key that should be translated on client, or a server-side
+ * translated piece of text.
  *
- * @generated from message flipchat.messaging.v1.LocalizedStatusContent
+ * @generated from message flipchat.messaging.v1.LocalizedAnnouncementContent
  */
-export class LocalizedStatusContent extends Message$1<LocalizedStatusContent> {
+export class LocalizedAnnouncementContent extends Message$1<LocalizedAnnouncementContent> {
   /**
    * @generated from field: string key_or_text = 1;
    */
   keyOrText = "";
 
-  constructor(data?: PartialMessage<LocalizedStatusContent>) {
+  constructor(data?: PartialMessage<LocalizedAnnouncementContent>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.messaging.v1.LocalizedStatusContent";
+  static readonly typeName = "flipchat.messaging.v1.LocalizedAnnouncementContent";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "key_or_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LocalizedStatusContent {
-    return new LocalizedStatusContent().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LocalizedAnnouncementContent {
+    return new LocalizedAnnouncementContent().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LocalizedStatusContent {
-    return new LocalizedStatusContent().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LocalizedAnnouncementContent {
+    return new LocalizedAnnouncementContent().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LocalizedStatusContent {
-    return new LocalizedStatusContent().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LocalizedAnnouncementContent {
+    return new LocalizedAnnouncementContent().fromJsonString(jsonString, options);
   }
 
-  static equals(a: LocalizedStatusContent | PlainMessage<LocalizedStatusContent> | undefined, b: LocalizedStatusContent | PlainMessage<LocalizedStatusContent> | undefined): boolean {
-    return proto3.util.equals(LocalizedStatusContent, a, b);
+  static equals(a: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined, b: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined): boolean {
+    return proto3.util.equals(LocalizedAnnouncementContent, a, b);
   }
 }
 
