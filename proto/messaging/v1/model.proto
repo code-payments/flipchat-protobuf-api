@@ -74,7 +74,7 @@ message Content {
         option (validate.required) = true;
 
         TextContent             text              = 1;
-        LocalizedContent        localized         = 2;
+        LocalizedStatusContent  localized_status  = 2;
         //ExchangeDataContent     exchange_data     = 3;
         NaclBoxEncryptedContent nacl_box          = 4;
     }
@@ -88,13 +88,15 @@ message TextContent {
     }];
 }
 
-// Text content that is either a localization key that should be translated on
-// client, or a server-side translated piece of text.
-message LocalizedContent {
+// Status text content that is either a localization key that should be
+// translated on client, or a server-side translated piece of text.
+message LocalizedStatusContent {
     string key_or_text = 1 [(validate.rules).string = {
         min_len: 1
         max_len: 1024
     }];
+
+    // todo: define arguments
 }
 
 // Encrypted piece of content using NaCl box encryption
