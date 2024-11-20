@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 import { Auth, ChatId, ClientPong, IntentId, PaymentAmount, QueryOptions, ServerPing, UserId } from "../../common/v1/flipchat_pb";
-import { IsTyping, Message as Message$1, Pointer } from "../../messaging/v1/model_pb";
+import { IsTyping, Message as Message$1, MessageId, Pointer } from "../../messaging/v1/model_pb";
 
 /**
  * @generated from message flipchat.chat.v1.StreamChatEventsRequest
@@ -1570,6 +1570,106 @@ export enum RemoveUserResponse_Result {
 proto3.util.setEnumType(RemoveUserResponse_Result, "flipchat.chat.v1.RemoveUserResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message flipchat.chat.v1.ReportUserRequest
+ */
+export class ReportUserRequest extends Message<ReportUserRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId user_id = 1;
+   */
+  userId?: UserId;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.MessageId message_id = 2;
+   */
+  messageId?: MessageId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<ReportUserRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.ReportUserRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "user_id", kind: "message", T: UserId },
+    { no: 2, name: "message_id", kind: "message", T: MessageId },
+    { no: 3, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReportUserRequest {
+    return new ReportUserRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReportUserRequest {
+    return new ReportUserRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReportUserRequest {
+    return new ReportUserRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ReportUserRequest | PlainMessage<ReportUserRequest> | undefined, b: ReportUserRequest | PlainMessage<ReportUserRequest> | undefined): boolean {
+    return proto3.util.equals(ReportUserRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.ReportUserResponse
+ */
+export class ReportUserResponse extends Message<ReportUserResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.ReportUserResponse.Result result = 1;
+   */
+  result = ReportUserResponse_Result.OK;
+
+  constructor(data?: PartialMessage<ReportUserResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.ReportUserResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(ReportUserResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReportUserResponse {
+    return new ReportUserResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReportUserResponse {
+    return new ReportUserResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReportUserResponse {
+    return new ReportUserResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ReportUserResponse | PlainMessage<ReportUserResponse> | undefined, b: ReportUserResponse | PlainMessage<ReportUserResponse> | undefined): boolean {
+    return proto3.util.equals(ReportUserResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.ReportUserResponse.Result
+ */
+export enum ReportUserResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+}
+// Retrieve enum metadata with: proto3.getEnumType(ReportUserResponse_Result)
+proto3.util.setEnumType(ReportUserResponse_Result, "flipchat.chat.v1.ReportUserResponse.Result", [
+  { no: 0, name: "OK" },
 ]);
 
 /**

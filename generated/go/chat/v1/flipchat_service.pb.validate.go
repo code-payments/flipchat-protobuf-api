@@ -3478,6 +3478,332 @@ var _ interface {
 	ErrorName() string
 } = RemoveUserResponseValidationError{}
 
+// Validate checks the field values on ReportUserRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ReportUserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReportUserRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReportUserRequestMultiError, or nil if none found.
+func (m *ReportUserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReportUserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetUserId() == nil {
+		err := ReportUserRequestValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReportUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReportUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReportUserRequestValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetMessageId() == nil {
+		err := ReportUserRequestValidationError{
+			field:  "MessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMessageId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReportUserRequestValidationError{
+					field:  "MessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReportUserRequestValidationError{
+					field:  "MessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMessageId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReportUserRequestValidationError{
+				field:  "MessageId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := ReportUserRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReportUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReportUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReportUserRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ReportUserRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReportUserRequestMultiError is an error wrapping multiple validation errors
+// returned by ReportUserRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ReportUserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReportUserRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReportUserRequestMultiError) AllErrors() []error { return m }
+
+// ReportUserRequestValidationError is the validation error returned by
+// ReportUserRequest.Validate if the designated constraints aren't met.
+type ReportUserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReportUserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReportUserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReportUserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReportUserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReportUserRequestValidationError) ErrorName() string {
+	return "ReportUserRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReportUserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReportUserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReportUserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReportUserRequestValidationError{}
+
+// Validate checks the field values on ReportUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReportUserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReportUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReportUserResponseMultiError, or nil if none found.
+func (m *ReportUserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReportUserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return ReportUserResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReportUserResponseMultiError is an error wrapping multiple validation errors
+// returned by ReportUserResponse.ValidateAll() if the designated constraints
+// aren't met.
+type ReportUserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReportUserResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReportUserResponseMultiError) AllErrors() []error { return m }
+
+// ReportUserResponseValidationError is the validation error returned by
+// ReportUserResponse.Validate if the designated constraints aren't met.
+type ReportUserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReportUserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReportUserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReportUserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReportUserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReportUserResponseValidationError) ErrorName() string {
+	return "ReportUserResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReportUserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReportUserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReportUserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReportUserResponseValidationError{}
+
 // Validate checks the field values on Metadata with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.

@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, RemoveUserRequest, RemoveUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
+import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -125,6 +125,19 @@ export const Chat = {
       name: "RemoveUser",
       I: RemoveUserRequest,
       O: RemoveUserResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * ReportUser reports a user for a given message
+     *
+     * todo: might belong in a different service long-term
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.ReportUser
+     */
+    reportUser: {
+      name: "ReportUser",
+      I: ReportUserRequest,
+      O: ReportUserResponse,
       kind: MethodKind.Unary,
     },
   }

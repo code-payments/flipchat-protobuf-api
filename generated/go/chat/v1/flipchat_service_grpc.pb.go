@@ -28,6 +28,7 @@ const (
 	Chat_SetMuteState_FullMethodName     = "/flipchat.chat.v1.Chat/SetMuteState"
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 	Chat_RemoveUser_FullMethodName       = "/flipchat.chat.v1.Chat/RemoveUser"
+	Chat_ReportUser_FullMethodName       = "/flipchat.chat.v1.Chat/ReportUser"
 )
 
 // ChatClient is the client API for Chat service.
@@ -68,6 +69,10 @@ type ChatClient interface {
 	SetCoverCharge(ctx context.Context, in *SetCoverChargeRequest, opts ...grpc.CallOption) (*SetCoverChargeResponse, error)
 	// RemoveUser removes a user from a chat
 	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error)
+	// ReportUser reports a user for a given message
+	//
+	// todo: might belong in a different service long-term
+	ReportUser(ctx context.Context, in *ReportUserRequest, opts ...grpc.CallOption) (*ReportUserResponse, error)
 }
 
 type chatClient struct {
@@ -171,6 +176,16 @@ func (c *chatClient) RemoveUser(ctx context.Context, in *RemoveUserRequest, opts
 	return out, nil
 }
 
+func (c *chatClient) ReportUser(ctx context.Context, in *ReportUserRequest, opts ...grpc.CallOption) (*ReportUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReportUserResponse)
+	err := c.cc.Invoke(ctx, Chat_ReportUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServer is the server API for Chat service.
 // All implementations must embed UnimplementedChatServer
 // for forward compatibility.
@@ -209,6 +224,10 @@ type ChatServer interface {
 	SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error)
 	// RemoveUser removes a user from a chat
 	RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error)
+	// ReportUser reports a user for a given message
+	//
+	// todo: might belong in a different service long-term
+	ReportUser(context.Context, *ReportUserRequest) (*ReportUserResponse, error)
 	mustEmbedUnimplementedChatServer()
 }
 
@@ -245,6 +264,9 @@ func (UnimplementedChatServer) SetCoverCharge(context.Context, *SetCoverChargeRe
 }
 func (UnimplementedChatServer) RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveUser not implemented")
+}
+func (UnimplementedChatServer) ReportUser(context.Context, *ReportUserRequest) (*ReportUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportUser not implemented")
 }
 func (UnimplementedChatServer) mustEmbedUnimplementedChatServer() {}
 func (UnimplementedChatServer) testEmbeddedByValue()              {}
@@ -418,6 +440,24 @@ func _Chat_RemoveUser_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_ReportUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).ReportUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_ReportUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).ReportUser(ctx, req.(*ReportUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Chat_ServiceDesc is the grpc.ServiceDesc for Chat service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -456,6 +496,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveUser",
 			Handler:    _Chat_RemoveUser_Handler,
+		},
+		{
+			MethodName: "ReportUser",
+			Handler:    _Chat_ReportUser_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
