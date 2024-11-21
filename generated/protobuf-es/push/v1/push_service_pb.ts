@@ -202,6 +202,11 @@ export class DeleteTokenRequest extends Message<DeleteTokenRequest> {
  * @generated from message flipchat.push.v1.DeleteTokenResponse
  */
 export class DeleteTokenResponse extends Message<DeleteTokenResponse> {
+  /**
+   * @generated from field: flipchat.push.v1.DeleteTokenResponse.Result result = 1;
+   */
+  result = DeleteTokenResponse_Result.OK;
+
   constructor(data?: PartialMessage<DeleteTokenResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -210,6 +215,7 @@ export class DeleteTokenResponse extends Message<DeleteTokenResponse> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "flipchat.push.v1.DeleteTokenResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(DeleteTokenResponse_Result) },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteTokenResponse {
@@ -228,4 +234,18 @@ export class DeleteTokenResponse extends Message<DeleteTokenResponse> {
     return proto3.util.equals(DeleteTokenResponse, a, b);
   }
 }
+
+/**
+ * @generated from enum flipchat.push.v1.DeleteTokenResponse.Result
+ */
+export enum DeleteTokenResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+}
+// Retrieve enum metadata with: proto3.getEnumType(DeleteTokenResponse_Result)
+proto3.util.setEnumType(DeleteTokenResponse_Result, "flipchat.push.v1.DeleteTokenResponse.Result", [
+  { no: 0, name: "OK" },
+]);
 

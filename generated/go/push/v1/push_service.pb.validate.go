@@ -513,6 +513,8 @@ func (m *DeleteTokenResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Result
+
 	if len(errors) > 0 {
 		return DeleteTokenResponseMultiError(errors)
 	}
