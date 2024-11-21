@@ -25,7 +25,6 @@ const (
 	Chat_StartChat_FullMethodName        = "/flipchat.chat.v1.Chat/StartChat"
 	Chat_JoinChat_FullMethodName         = "/flipchat.chat.v1.Chat/JoinChat"
 	Chat_LeaveChat_FullMethodName        = "/flipchat.chat.v1.Chat/LeaveChat"
-	Chat_SetMuteState_FullMethodName     = "/flipchat.chat.v1.Chat/SetMuteState"
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 	Chat_RemoveUser_FullMethodName       = "/flipchat.chat.v1.Chat/RemoveUser"
 	Chat_MuteUser_FullMethodName         = "/flipchat.chat.v1.Chat/MuteUser"
@@ -64,8 +63,6 @@ type ChatClient interface {
 	JoinChat(ctx context.Context, in *JoinChatRequest, opts ...grpc.CallOption) (*JoinChatResponse, error)
 	// LeaveChat leaves a given chat.
 	LeaveChat(ctx context.Context, in *LeaveChatRequest, opts ...grpc.CallOption) (*LeaveChatResponse, error)
-	// SetMuteState configures a chat member's mute state.
-	SetMuteState(ctx context.Context, in *SetMuteStateRequest, opts ...grpc.CallOption) (*SetMuteStateResponse, error)
 	// SetCoverCharge sets a chat's cover charge
 	SetCoverCharge(ctx context.Context, in *SetCoverChargeRequest, opts ...grpc.CallOption) (*SetCoverChargeResponse, error)
 	// RemoveUser removes a user from a chat
@@ -149,16 +146,6 @@ func (c *chatClient) LeaveChat(ctx context.Context, in *LeaveChatRequest, opts .
 	return out, nil
 }
 
-func (c *chatClient) SetMuteState(ctx context.Context, in *SetMuteStateRequest, opts ...grpc.CallOption) (*SetMuteStateResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetMuteStateResponse)
-	err := c.cc.Invoke(ctx, Chat_SetMuteState_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *chatClient) SetCoverCharge(ctx context.Context, in *SetCoverChargeRequest, opts ...grpc.CallOption) (*SetCoverChargeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetCoverChargeResponse)
@@ -231,8 +218,6 @@ type ChatServer interface {
 	JoinChat(context.Context, *JoinChatRequest) (*JoinChatResponse, error)
 	// LeaveChat leaves a given chat.
 	LeaveChat(context.Context, *LeaveChatRequest) (*LeaveChatResponse, error)
-	// SetMuteState configures a chat member's mute state.
-	SetMuteState(context.Context, *SetMuteStateRequest) (*SetMuteStateResponse, error)
 	// SetCoverCharge sets a chat's cover charge
 	SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error)
 	// RemoveUser removes a user from a chat
@@ -270,9 +255,6 @@ func (UnimplementedChatServer) JoinChat(context.Context, *JoinChatRequest) (*Joi
 }
 func (UnimplementedChatServer) LeaveChat(context.Context, *LeaveChatRequest) (*LeaveChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LeaveChat not implemented")
-}
-func (UnimplementedChatServer) SetMuteState(context.Context, *SetMuteStateRequest) (*SetMuteStateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetMuteState not implemented")
 }
 func (UnimplementedChatServer) SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCoverCharge not implemented")
@@ -404,24 +386,6 @@ func _Chat_LeaveChat_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chat_SetMuteState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetMuteStateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ChatServer).SetMuteState(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Chat_SetMuteState_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatServer).SetMuteState(ctx, req.(*SetMuteStateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Chat_SetCoverCharge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetCoverChargeRequest)
 	if err := dec(in); err != nil {
@@ -520,10 +484,6 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LeaveChat",
 			Handler:    _Chat_LeaveChat_Handler,
-		},
-		{
-			MethodName: "SetMuteState",
-			Handler:    _Chat_SetMuteState_Handler,
 		},
 		{
 			MethodName: "SetCoverCharge",

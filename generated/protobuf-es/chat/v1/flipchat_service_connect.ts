@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteUserRequest, MuteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
+import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteUserRequest, MuteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -92,17 +92,6 @@ export const Chat = {
       name: "LeaveChat",
       I: LeaveChatRequest,
       O: LeaveChatResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * SetMuteState configures a chat member's mute state.
-     *
-     * @generated from rpc flipchat.chat.v1.Chat.SetMuteState
-     */
-    setMuteState: {
-      name: "SetMuteState",
-      I: SetMuteStateRequest,
-      O: SetMuteStateResponse,
       kind: MethodKind.Unary,
     },
     /**
