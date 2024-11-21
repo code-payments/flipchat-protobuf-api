@@ -3478,6 +3478,328 @@ var _ interface {
 	ErrorName() string
 } = RemoveUserResponseValidationError{}
 
+// Validate checks the field values on MuteUserRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *MuteUserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MuteUserRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MuteUserRequestMultiError, or nil if none found.
+func (m *MuteUserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MuteUserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := MuteUserRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MuteUserRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MuteUserRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MuteUserRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetUserId() == nil {
+		err := MuteUserRequestValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MuteUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MuteUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MuteUserRequestValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := MuteUserRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MuteUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MuteUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MuteUserRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MuteUserRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// MuteUserRequestMultiError is an error wrapping multiple validation errors
+// returned by MuteUserRequest.ValidateAll() if the designated constraints
+// aren't met.
+type MuteUserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MuteUserRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MuteUserRequestMultiError) AllErrors() []error { return m }
+
+// MuteUserRequestValidationError is the validation error returned by
+// MuteUserRequest.Validate if the designated constraints aren't met.
+type MuteUserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MuteUserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MuteUserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MuteUserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MuteUserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MuteUserRequestValidationError) ErrorName() string { return "MuteUserRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MuteUserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMuteUserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MuteUserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MuteUserRequestValidationError{}
+
+// Validate checks the field values on MuteUserResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *MuteUserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MuteUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MuteUserResponseMultiError, or nil if none found.
+func (m *MuteUserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MuteUserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return MuteUserResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// MuteUserResponseMultiError is an error wrapping multiple validation errors
+// returned by MuteUserResponse.ValidateAll() if the designated constraints
+// aren't met.
+type MuteUserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MuteUserResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MuteUserResponseMultiError) AllErrors() []error { return m }
+
+// MuteUserResponseValidationError is the validation error returned by
+// MuteUserResponse.Validate if the designated constraints aren't met.
+type MuteUserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MuteUserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MuteUserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MuteUserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MuteUserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MuteUserResponseValidationError) ErrorName() string { return "MuteUserResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MuteUserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMuteUserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MuteUserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MuteUserResponseValidationError{}
+
 // Validate checks the field values on ReportUserRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -4173,6 +4495,8 @@ func (m *Member) validate(all bool) error {
 	// no validation rules for IsSelf
 
 	// no validation rules for IsHost
+
+	// no validation rules for IsMuted
 
 	if len(errors) > 0 {
 		return MemberMultiError(errors)

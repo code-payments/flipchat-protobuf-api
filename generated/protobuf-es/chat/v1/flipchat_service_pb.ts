@@ -1573,6 +1573,112 @@ proto3.util.setEnumType(RemoveUserResponse_Result, "flipchat.chat.v1.RemoveUserR
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.MuteUserRequest
+ */
+export class MuteUserRequest extends Message<MuteUserRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<MuteUserRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MuteUserRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+    { no: 3, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MuteUserRequest {
+    return new MuteUserRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MuteUserRequest {
+    return new MuteUserRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MuteUserRequest {
+    return new MuteUserRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MuteUserRequest | PlainMessage<MuteUserRequest> | undefined, b: MuteUserRequest | PlainMessage<MuteUserRequest> | undefined): boolean {
+    return proto3.util.equals(MuteUserRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.MuteUserResponse
+ */
+export class MuteUserResponse extends Message<MuteUserResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.MuteUserResponse.Result result = 1;
+   */
+  result = MuteUserResponse_Result.OK;
+
+  constructor(data?: PartialMessage<MuteUserResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MuteUserResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(MuteUserResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MuteUserResponse {
+    return new MuteUserResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MuteUserResponse {
+    return new MuteUserResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MuteUserResponse {
+    return new MuteUserResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MuteUserResponse | PlainMessage<MuteUserResponse> | undefined, b: MuteUserResponse | PlainMessage<MuteUserResponse> | undefined): boolean {
+    return proto3.util.equals(MuteUserResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.MuteUserResponse.Result
+ */
+export enum MuteUserResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(MuteUserResponse_Result)
+proto3.util.setEnumType(MuteUserResponse_Result, "flipchat.chat.v1.MuteUserResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.ReportUserRequest
  */
 export class ReportUserRequest extends Message<ReportUserRequest> {
@@ -1849,6 +1955,13 @@ export class Member extends Message<Member> {
    */
   isHost = false;
 
+  /**
+   * Cant this user send messages in the chat?
+   *
+   * @generated from field: bool is_muted = 6;
+   */
+  isMuted = false;
+
   constructor(data?: PartialMessage<Member>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1862,6 +1975,7 @@ export class Member extends Message<Member> {
     { no: 3, name: "pointers", kind: "message", T: Pointer, repeated: true },
     { no: 4, name: "is_self", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 5, name: "is_host", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Member {

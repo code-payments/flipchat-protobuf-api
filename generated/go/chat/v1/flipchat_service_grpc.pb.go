@@ -28,6 +28,7 @@ const (
 	Chat_SetMuteState_FullMethodName     = "/flipchat.chat.v1.Chat/SetMuteState"
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 	Chat_RemoveUser_FullMethodName       = "/flipchat.chat.v1.Chat/RemoveUser"
+	Chat_MuteUser_FullMethodName         = "/flipchat.chat.v1.Chat/MuteUser"
 	Chat_ReportUser_FullMethodName       = "/flipchat.chat.v1.Chat/ReportUser"
 )
 
@@ -69,6 +70,8 @@ type ChatClient interface {
 	SetCoverCharge(ctx context.Context, in *SetCoverChargeRequest, opts ...grpc.CallOption) (*SetCoverChargeResponse, error)
 	// RemoveUser removes a user from a chat
 	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error)
+	// MuteUser mutes a user in the chat and removes their ability to send messages
+	MuteUser(ctx context.Context, in *MuteUserRequest, opts ...grpc.CallOption) (*MuteUserResponse, error)
 	// ReportUser reports a user for a given message
 	//
 	// todo: might belong in a different service long-term
@@ -176,6 +179,16 @@ func (c *chatClient) RemoveUser(ctx context.Context, in *RemoveUserRequest, opts
 	return out, nil
 }
 
+func (c *chatClient) MuteUser(ctx context.Context, in *MuteUserRequest, opts ...grpc.CallOption) (*MuteUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MuteUserResponse)
+	err := c.cc.Invoke(ctx, Chat_MuteUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *chatClient) ReportUser(ctx context.Context, in *ReportUserRequest, opts ...grpc.CallOption) (*ReportUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReportUserResponse)
@@ -224,6 +237,8 @@ type ChatServer interface {
 	SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error)
 	// RemoveUser removes a user from a chat
 	RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error)
+	// MuteUser mutes a user in the chat and removes their ability to send messages
+	MuteUser(context.Context, *MuteUserRequest) (*MuteUserResponse, error)
 	// ReportUser reports a user for a given message
 	//
 	// todo: might belong in a different service long-term
@@ -264,6 +279,9 @@ func (UnimplementedChatServer) SetCoverCharge(context.Context, *SetCoverChargeRe
 }
 func (UnimplementedChatServer) RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveUser not implemented")
+}
+func (UnimplementedChatServer) MuteUser(context.Context, *MuteUserRequest) (*MuteUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MuteUser not implemented")
 }
 func (UnimplementedChatServer) ReportUser(context.Context, *ReportUserRequest) (*ReportUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportUser not implemented")
@@ -440,6 +458,24 @@ func _Chat_RemoveUser_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_MuteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MuteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).MuteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_MuteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).MuteUser(ctx, req.(*MuteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Chat_ReportUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReportUserRequest)
 	if err := dec(in); err != nil {
@@ -496,6 +532,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveUser",
 			Handler:    _Chat_RemoveUser_Handler,
+		},
+		{
+			MethodName: "MuteUser",
+			Handler:    _Chat_MuteUser_Handler,
 		},
 		{
 			MethodName: "ReportUser",

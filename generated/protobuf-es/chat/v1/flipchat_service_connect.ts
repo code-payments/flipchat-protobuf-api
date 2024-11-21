@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
+import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteUserRequest, MuteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetMuteStateRequest, SetMuteStateResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -125,6 +125,17 @@ export const Chat = {
       name: "RemoveUser",
       I: RemoveUserRequest,
       O: RemoveUserResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * MuteUser mutes a user in the chat and removes their ability to send messages
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.MuteUser
+     */
+    muteUser: {
+      name: "MuteUser",
+      I: MuteUserRequest,
+      O: MuteUserResponse,
       kind: MethodKind.Unary,
     },
     /**

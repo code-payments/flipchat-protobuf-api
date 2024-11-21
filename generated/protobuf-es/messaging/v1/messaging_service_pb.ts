@@ -494,17 +494,11 @@ export enum SendMessageResponse_Result {
    * @generated from enum value: DENIED = 1;
    */
   DENIED = 1,
-
-  /**
-   * @generated from enum value: INVALID_CONTENT_TYPE = 2;
-   */
-  INVALID_CONTENT_TYPE = 2,
 }
 // Retrieve enum metadata with: proto3.getEnumType(SendMessageResponse_Result)
 proto3.util.setEnumType(SendMessageResponse_Result, "flipchat.messaging.v1.SendMessageResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "DENIED" },
-  { no: 2, name: "INVALID_CONTENT_TYPE" },
 ]);
 
 /**
