@@ -1698,13 +1698,6 @@ export class Metadata extends Message<Metadata> {
   roomNumber = protoInt64.zero;
 
   /**
-   * Whether or not the chat is muted (from the perspective of the caller).
-   *
-   * @generated from field: bool is_muted = 5;
-   */
-  isMuted = false;
-
-  /**
    * Number of (estimated) unread message (from the perspective of the caller).
    *
    * @generated from field: uint32 num_unread = 7;
@@ -1740,7 +1733,6 @@ export class Metadata extends Message<Metadata> {
     { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(Metadata_ChatType) },
     { no: 3, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "room_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 5, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 8, name: "owner", kind: "message", T: UserId },
     { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },

@@ -382,9 +382,6 @@ message Metadata {
     // If non-zero, the room number associated with the chat.
     uint64 room_number = 4;
 
-    // Whether or not the chat is muted (from the perspective of the caller).
-    bool is_muted = 5;
-
     // Number of (estimated) unread message (from the perspective of the caller).
     uint32 num_unread = 7;
 
