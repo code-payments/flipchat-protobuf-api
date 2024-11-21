@@ -3926,8 +3926,6 @@ func (m *Metadata) validate(all bool) error {
 
 	// no validation rules for IsMuted
 
-	// no validation rules for Muteable
-
 	// no validation rules for NumUnread
 
 	if all {

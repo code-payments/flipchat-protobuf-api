@@ -1705,13 +1705,6 @@ export class Metadata extends Message<Metadata> {
   isMuted = false;
 
   /**
-   * Whether or not the chat is mutable (from the persective of the caller).
-   *
-   * @generated from field: bool muteable = 6;
-   */
-  muteable = false;
-
-  /**
    * Number of (estimated) unread message (from the perspective of the caller).
    *
    * @generated from field: uint32 num_unread = 7;
@@ -1748,7 +1741,6 @@ export class Metadata extends Message<Metadata> {
     { no: 3, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "room_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 5, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 6, name: "muteable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 8, name: "owner", kind: "message", T: UserId },
     { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },

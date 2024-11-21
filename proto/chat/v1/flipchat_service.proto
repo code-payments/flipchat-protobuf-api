@@ -385,9 +385,6 @@ message Metadata {
     // Whether or not the chat is muted (from the perspective of the caller).
     bool is_muted = 5;
 
-    // Whether or not the chat is mutable (from the persective of the caller).
-    bool muteable = 6;
-
     // Number of (estimated) unread message (from the perspective of the caller).
     uint32 num_unread = 7;
 
