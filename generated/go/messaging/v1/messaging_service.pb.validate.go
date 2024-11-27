@@ -705,17 +705,6 @@ func (m *GetMessagesResponse) validate(all bool) error {
 
 	// no validation rules for Result
 
-	if len(m.GetMessages()) > 100 {
-		err := GetMessagesResponseValidationError{
-			field:  "Messages",
-			reason: "value must contain no more than 100 item(s)",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	for idx, item := range m.GetMessages() {
 		_, _ = idx, item
 
