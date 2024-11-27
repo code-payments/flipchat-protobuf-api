@@ -28,6 +28,8 @@ const (
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 	Chat_RemoveUser_FullMethodName       = "/flipchat.chat.v1.Chat/RemoveUser"
 	Chat_MuteUser_FullMethodName         = "/flipchat.chat.v1.Chat/MuteUser"
+	Chat_MuteChat_FullMethodName         = "/flipchat.chat.v1.Chat/MuteChat"
+	Chat_UnmuteChat_FullMethodName       = "/flipchat.chat.v1.Chat/UnmuteChat"
 	Chat_ReportUser_FullMethodName       = "/flipchat.chat.v1.Chat/ReportUser"
 )
 
@@ -69,6 +71,10 @@ type ChatClient interface {
 	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error)
 	// MuteUser mutes a user in the chat and removes their ability to send messages
 	MuteUser(ctx context.Context, in *MuteUserRequest, opts ...grpc.CallOption) (*MuteUserResponse, error)
+	// MuteChat mutes a chat and disables push notifications
+	MuteChat(ctx context.Context, in *MuteChatRequest, opts ...grpc.CallOption) (*MuteChatResponse, error)
+	// UnmuteChat unmutes a chat and enables push notifications
+	UnmuteChat(ctx context.Context, in *UnmuteChatRequest, opts ...grpc.CallOption) (*UnmuteChatResponse, error)
 	// ReportUser reports a user for a given message
 	//
 	// todo: might belong in a different service long-term
@@ -176,6 +182,26 @@ func (c *chatClient) MuteUser(ctx context.Context, in *MuteUserRequest, opts ...
 	return out, nil
 }
 
+func (c *chatClient) MuteChat(ctx context.Context, in *MuteChatRequest, opts ...grpc.CallOption) (*MuteChatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MuteChatResponse)
+	err := c.cc.Invoke(ctx, Chat_MuteChat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) UnmuteChat(ctx context.Context, in *UnmuteChatRequest, opts ...grpc.CallOption) (*UnmuteChatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnmuteChatResponse)
+	err := c.cc.Invoke(ctx, Chat_UnmuteChat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *chatClient) ReportUser(ctx context.Context, in *ReportUserRequest, opts ...grpc.CallOption) (*ReportUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReportUserResponse)
@@ -224,6 +250,10 @@ type ChatServer interface {
 	RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error)
 	// MuteUser mutes a user in the chat and removes their ability to send messages
 	MuteUser(context.Context, *MuteUserRequest) (*MuteUserResponse, error)
+	// MuteChat mutes a chat and disables push notifications
+	MuteChat(context.Context, *MuteChatRequest) (*MuteChatResponse, error)
+	// UnmuteChat unmutes a chat and enables push notifications
+	UnmuteChat(context.Context, *UnmuteChatRequest) (*UnmuteChatResponse, error)
 	// ReportUser reports a user for a given message
 	//
 	// todo: might belong in a different service long-term
@@ -264,6 +294,12 @@ func (UnimplementedChatServer) RemoveUser(context.Context, *RemoveUserRequest) (
 }
 func (UnimplementedChatServer) MuteUser(context.Context, *MuteUserRequest) (*MuteUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MuteUser not implemented")
+}
+func (UnimplementedChatServer) MuteChat(context.Context, *MuteChatRequest) (*MuteChatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MuteChat not implemented")
+}
+func (UnimplementedChatServer) UnmuteChat(context.Context, *UnmuteChatRequest) (*UnmuteChatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnmuteChat not implemented")
 }
 func (UnimplementedChatServer) ReportUser(context.Context, *ReportUserRequest) (*ReportUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportUser not implemented")
@@ -440,6 +476,42 @@ func _Chat_MuteUser_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_MuteChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MuteChatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).MuteChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_MuteChat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).MuteChat(ctx, req.(*MuteChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_UnmuteChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnmuteChatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).UnmuteChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_UnmuteChat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).UnmuteChat(ctx, req.(*UnmuteChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Chat_ReportUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReportUserRequest)
 	if err := dec(in); err != nil {
@@ -496,6 +568,14 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MuteUser",
 			Handler:    _Chat_MuteUser_Handler,
+		},
+		{
+			MethodName: "MuteChat",
+			Handler:    _Chat_MuteChat_Handler,
+		},
+		{
+			MethodName: "UnmuteChat",
+			Handler:    _Chat_UnmuteChat_Handler,
 		},
 		{
 			MethodName: "ReportUser",

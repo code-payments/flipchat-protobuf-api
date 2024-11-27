@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteUserRequest, MuteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse } from "./flipchat_service_pb";
+import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./flipchat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -125,6 +125,28 @@ export const Chat = {
       name: "MuteUser",
       I: MuteUserRequest,
       O: MuteUserResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * MuteChat mutes a chat and disables push notifications
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.MuteChat
+     */
+    muteChat: {
+      name: "MuteChat",
+      I: MuteChatRequest,
+      O: MuteChatResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * UnmuteChat unmutes a chat and enables push notifications
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.UnmuteChat
+     */
+    unmuteChat: {
+      name: "UnmuteChat",
+      I: UnmuteChatRequest,
+      O: UnmuteChatResponse,
       kind: MethodKind.Unary,
     },
     /**
