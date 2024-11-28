@@ -1935,6 +1935,13 @@ export class Metadata extends Message<Metadata> {
    */
   coverCharge?: PaymentAmount;
 
+  /**
+   * The timestamp of the last activity in this chat
+   *
+   * @generated from field: google.protobuf.Timestamp last_activity = 10;
+   */
+  lastActivity?: Timestamp;
+
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1952,6 +1959,7 @@ export class Metadata extends Message<Metadata> {
     { no: 7, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 8, name: "owner", kind: "message", T: UserId },
     { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },
+    { no: 10, name: "last_activity", kind: "message", T: Timestamp },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {

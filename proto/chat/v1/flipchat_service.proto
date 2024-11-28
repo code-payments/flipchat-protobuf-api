@@ -431,6 +431,9 @@ message Metadata {
 
     // If present, the cover charge that must be paid to join the chat
     common.v1.PaymentAmount cover_charge = 9;
+
+    // The timestamp of the last activity in this chat
+    google.protobuf.Timestamp last_activity = 10;
 }
 
 message Member {
