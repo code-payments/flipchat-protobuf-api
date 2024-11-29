@@ -434,6 +434,10 @@ message Metadata {
 
     // The timestamp of the last activity in this chat
     google.protobuf.Timestamp last_activity = 10;
+
+    // If there are more unread messages than indicated by num_unread. If this is
+    // true, client should show num_unread+ as the unread count.
+    bool has_more_unread = 11;
 }
 
 message Member {

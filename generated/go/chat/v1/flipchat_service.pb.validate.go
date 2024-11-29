@@ -4585,6 +4585,8 @@ func (m *Metadata) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for HasMoreUnread
+
 	if len(errors) > 0 {
 		return MetadataMultiError(errors)
 	}

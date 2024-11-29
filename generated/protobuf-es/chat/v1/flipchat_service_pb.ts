@@ -1942,6 +1942,14 @@ export class Metadata extends Message<Metadata> {
    */
   lastActivity?: Timestamp;
 
+  /**
+   * If there are more unread messages than indicated by num_unread. If this is
+   * true, client should show num_unread+ as the unread count.
+   *
+   * @generated from field: bool has_more_unread = 11;
+   */
+  hasMoreUnread = false;
+
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1960,6 +1968,7 @@ export class Metadata extends Message<Metadata> {
     { no: 8, name: "owner", kind: "message", T: UserId },
     { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },
     { no: 10, name: "last_activity", kind: "message", T: Timestamp },
+    { no: 11, name: "has_more_unread", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
