@@ -271,6 +271,11 @@ message JoinChatRequest {
     repeated ChatPermission permissions = 8 [(validate.rules).repeated = {
         min_items: 0
         max_items: 1
+        items: {
+            enum: {
+                in: [1] // SEND_MESSAGE
+            }
+        }
     }];
 
     // The payment for joining a chat, which is required for elevated chat
@@ -306,6 +311,11 @@ message JoinChatPaymentMetadata {
     repeated ChatPermission permissions = 8 [(validate.rules).repeated = {
         min_items: 0
         max_items: 1
+        items: {
+            enum: {
+                in: [1] // SEND_MESSAGE
+            }
+        }
     }];
 }
 
@@ -501,4 +511,5 @@ message MemberIdentity {
 enum ChatPermission {
     UNKNOWN      = 0;
     SEND_MESSAGE = 1;
+    MODERATOR    = 2;
 }

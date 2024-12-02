@@ -1711,6 +1711,22 @@ func (m *JoinChatRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	for idx, item := range m.GetPermissions() {
+		_, _ = idx, item
+
+		if _, ok := _JoinChatRequest_Permissions_InLookup[item]; !ok {
+			err := JoinChatRequestValidationError{
+				field:  fmt.Sprintf("Permissions[%v]", idx),
+				reason: "value must be in list [1]",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
 	if all {
 		switch v := interface{}(m.GetPaymentIntent()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1928,6 +1944,10 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = JoinChatRequestValidationError{}
+
+var _JoinChatRequest_Permissions_InLookup = map[ChatPermission]struct{}{
+	1: {},
+}
 
 // Validate checks the field values on JoinChatResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, the
@@ -2207,6 +2227,22 @@ func (m *JoinChatPaymentMetadata) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	for idx, item := range m.GetPermissions() {
+		_, _ = idx, item
+
+		if _, ok := _JoinChatPaymentMetadata_Permissions_InLookup[item]; !ok {
+			err := JoinChatPaymentMetadataValidationError{
+				field:  fmt.Sprintf("Permissions[%v]", idx),
+				reason: "value must be in list [1]",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return JoinChatPaymentMetadataMultiError(errors)
 	}
@@ -2286,6 +2322,10 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = JoinChatPaymentMetadataValidationError{}
+
+var _JoinChatPaymentMetadata_Permissions_InLookup = map[ChatPermission]struct{}{
+	1: {},
+}
 
 // Validate checks the field values on LeaveChatRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the

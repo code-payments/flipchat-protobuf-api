@@ -21,11 +21,17 @@ export enum ChatPermission {
    * @generated from enum value: SEND_MESSAGE = 1;
    */
   SEND_MESSAGE = 1,
+
+  /**
+   * @generated from enum value: MODERATOR = 2;
+   */
+  MODERATOR = 2,
 }
 // Retrieve enum metadata with: proto3.getEnumType(ChatPermission)
 proto3.util.setEnumType(ChatPermission, "flipchat.chat.v1.ChatPermission", [
   { no: 0, name: "UNKNOWN" },
   { no: 1, name: "SEND_MESSAGE" },
+  { no: 2, name: "MODERATOR" },
 ]);
 
 /**
