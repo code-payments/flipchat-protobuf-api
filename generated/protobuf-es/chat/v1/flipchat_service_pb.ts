@@ -9,6 +9,26 @@ import { Auth, ChatId, ClientPong, IntentId, PaymentAmount, QueryOptions, Server
 import { IsTyping, Message as Message$1, MessageId, Pointer } from "../../messaging/v1/model_pb";
 
 /**
+ * @generated from enum flipchat.chat.v1.ChatPermission
+ */
+export enum ChatPermission {
+  /**
+   * @generated from enum value: UNKNOWN = 0;
+   */
+  UNKNOWN = 0,
+
+  /**
+   * @generated from enum value: SEND_MESSAGE = 1;
+   */
+  SEND_MESSAGE = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(ChatPermission)
+proto3.util.setEnumType(ChatPermission, "flipchat.chat.v1.ChatPermission", [
+  { no: 0, name: "UNKNOWN" },
+  { no: 1, name: "SEND_MESSAGE" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.StreamChatEventsRequest
  */
 export class StreamChatEventsRequest extends Message<StreamChatEventsRequest> {
@@ -985,8 +1005,18 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
-   * The payment for joining a chat, which is required when the user isn't
-   * the chat owner
+   * Permissions to apply for a member of a chat. An empty permission list is
+   * free and has the member in an initial spectator mode.
+   *
+   * @generated from field: repeated flipchat.chat.v1.ChatPermission permissions = 8;
+   */
+  permissions: ChatPermission[] = [];
+
+  /**
+   * The payment for joining a chat, which is required for elevated chat
+   * permissions.
+   *
+   * Note: The chat owner can join with any permissions without payment.
    *
    * @generated from field: flipchat.common.v1.IntentId payment_intent = 9;
    */
@@ -1007,6 +1037,7 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
     { no: 2, name: "room_id", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
+    { no: 8, name: "permissions", kind: "enum", T: proto3.getEnumType(ChatPermission), repeated: true },
     { no: 9, name: "payment_intent", kind: "message", T: IntentId },
     { no: 10, name: "auth", kind: "message", T: Auth },
   ]);
@@ -1119,6 +1150,13 @@ export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
    */
   chatId?: ChatId;
 
+  /**
+   * The permissions the user wants applied in the chat
+   *
+   * @generated from field: repeated flipchat.chat.v1.ChatPermission permissions = 8;
+   */
+  permissions: ChatPermission[] = [];
+
   constructor(data?: PartialMessage<JoinChatPaymentMetadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1129,6 +1167,7 @@ export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "user_id", kind: "message", T: UserId },
     { no: 2, name: "chat_id", kind: "message", T: ChatId },
+    { no: 8, name: "permissions", kind: "enum", T: proto3.getEnumType(ChatPermission), repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JoinChatPaymentMetadata {

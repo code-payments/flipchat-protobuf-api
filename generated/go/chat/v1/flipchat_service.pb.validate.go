@@ -1700,6 +1700,17 @@ func (m *JoinChatRequest) validate(all bool) error {
 
 	var errors []error
 
+	if len(m.GetPermissions()) > 1 {
+		err := JoinChatRequestValidationError{
+			field:  "Permissions",
+			reason: "value must contain no more than 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if all {
 		switch v := interface{}(m.GetPaymentIntent()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2183,6 +2194,17 @@ func (m *JoinChatPaymentMetadata) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if len(m.GetPermissions()) != 1 {
+		err := JoinChatPaymentMetadataValidationError{
+			field:  "Permissions",
+			reason: "value must contain exactly 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	if len(errors) > 0 {

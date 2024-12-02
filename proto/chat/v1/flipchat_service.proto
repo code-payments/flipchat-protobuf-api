@@ -266,8 +266,17 @@ message JoinChatRequest {
         uint64 room_id = 2;
     }
 
-    // The payment for joining a chat, which is required when the user isn't
-    // the chat owner
+    // Permissions to apply for a member of a chat. An empty permission list is
+    // free and has the member in an initial spectator mode.
+    repeated ChatPermission permissions = 8 [(validate.rules).repeated = {
+        min_items: 0
+        max_items: 1
+    }];
+
+    // The payment for joining a chat, which is required for elevated chat
+    // permissions.
+    //
+    // Note: The chat owner can join with any permissions without payment.
     common.v1.IntentId payment_intent = 9;
 
     common.v1.Auth auth = 10 [(validate.rules).message.required = true];
@@ -292,6 +301,12 @@ message JoinChatPaymentMetadata {
 
     // The chat that the user is joining
     common.v1.ChatId chat_id = 2 [(validate.rules).message.required = true];
+
+    // The permissions the user wants applied in the chat
+    repeated ChatPermission permissions = 8 [(validate.rules).repeated = {
+        min_items: 1
+        max_items: 1
+    }];
 }
 
 message LeaveChatRequest {
@@ -481,4 +496,9 @@ message MemberIdentity {
     string profile_pic_url = 2 [(validate.rules).string = {
         max_len: 255 // Arbitrary limit
     }];
+}
+
+enum ChatPermission {
+    UNKNOWN      = 0;
+    SEND_MESSAGE = 1;
 }
