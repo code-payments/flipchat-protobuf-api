@@ -2099,11 +2099,11 @@ export class Member extends Message<Member> {
   isSelf = false;
 
   /**
-   * NOTE: We may switch to 'roles' in the future.
+   * Is the chat member able to perform moderation actions in the chat?
    *
-   * @generated from field: bool is_host = 5;
+   * @generated from field: bool is_moderator = 5;
    */
-  isHost = false;
+  isModerator = false;
 
   /**
    * Cant this user send messages in the chat?
@@ -2124,7 +2124,7 @@ export class Member extends Message<Member> {
     { no: 2, name: "identity", kind: "message", T: MemberIdentity },
     { no: 3, name: "pointers", kind: "message", T: Pointer, repeated: true },
     { no: 4, name: "is_self", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 5, name: "is_host", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "is_moderator", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 

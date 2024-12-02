@@ -4867,7 +4867,7 @@ func (m *Member) validate(all bool) error {
 
 	// no validation rules for IsSelf
 
-	// no validation rules for IsHost
+	// no validation rules for IsModerator
 
 	// no validation rules for IsMuted
 

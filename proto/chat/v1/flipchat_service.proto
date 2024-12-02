@@ -489,8 +489,8 @@ message Member {
     // If the member is the caller (where applicable), will be set to true.
     bool is_self = 4;
 
-    // NOTE: We may switch to 'roles' in the future.
-    bool is_host = 5;
+    // Is the chat member able to perform moderation actions in the chat?
+    bool is_moderator = 5;
 
     // Cant this user send messages in the chat?
     bool is_muted = 6;
