@@ -304,7 +304,7 @@ message JoinChatPaymentMetadata {
 
     // The permissions the user wants applied in the chat
     repeated ChatPermission permissions = 8 [(validate.rules).repeated = {
-        min_items: 1
+        min_items: 0
         max_items: 1
     }];
 }

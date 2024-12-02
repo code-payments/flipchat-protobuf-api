@@ -2196,10 +2196,10 @@ func (m *JoinChatPaymentMetadata) validate(all bool) error {
 		}
 	}
 
-	if len(m.GetPermissions()) != 1 {
+	if len(m.GetPermissions()) > 1 {
 		err := JoinChatPaymentMetadataValidationError{
 			field:  "Permissions",
-			reason: "value must contain exactly 1 item(s)",
+			reason: "value must contain no more than 1 item(s)",
 		}
 		if !all {
 			return err
