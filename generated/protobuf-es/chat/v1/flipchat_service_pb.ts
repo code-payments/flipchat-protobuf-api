@@ -9,32 +9,6 @@ import { Auth, ChatId, ClientPong, IntentId, PaymentAmount, QueryOptions, Server
 import { IsTyping, Message as Message$1, MessageId, Pointer } from "../../messaging/v1/model_pb";
 
 /**
- * @generated from enum flipchat.chat.v1.ChatPermission
- */
-export enum ChatPermission {
-  /**
-   * @generated from enum value: UNKNOWN = 0;
-   */
-  UNKNOWN = 0,
-
-  /**
-   * @generated from enum value: SEND_MESSAGE = 1;
-   */
-  SEND_MESSAGE = 1,
-
-  /**
-   * @generated from enum value: MODERATOR = 2;
-   */
-  MODERATOR = 2,
-}
-// Retrieve enum metadata with: proto3.getEnumType(ChatPermission)
-proto3.util.setEnumType(ChatPermission, "flipchat.chat.v1.ChatPermission", [
-  { no: 0, name: "UNKNOWN" },
-  { no: 1, name: "SEND_MESSAGE" },
-  { no: 2, name: "MODERATOR" },
-]);
-
-/**
  * @generated from message flipchat.chat.v1.StreamChatEventsRequest
  */
 export class StreamChatEventsRequest extends Message<StreamChatEventsRequest> {
@@ -1019,18 +993,18 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
-   * Permissions to apply for a member of a chat. An empty permission list is
-   * free and has the member in an initial spectator mode.
+   * Does the user want to join with the ability to send messages in the chat?
+   * If not, then payment_intent is not required? Otherwise, it is.
    *
-   * @generated from field: repeated flipchat.chat.v1.ChatPermission permissions = 8;
+   * @generated from field: bool with_send_permission = 8;
    */
-  permissions: ChatPermission[] = [];
+  withSendPermission = false;
 
   /**
-   * The payment for joining a chat, which is required for elevated chat
-   * permissions.
+   * The payment for joining a chat, which is required for sending messages in
+   * the chat.
    *
-   * Note: The chat owner can join with any permissions without payment.
+   * Note: The chat owner can always bypass payment.
    *
    * @generated from field: flipchat.common.v1.IntentId payment_intent = 9;
    */
@@ -1051,7 +1025,7 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
     { no: 2, name: "room_id", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
-    { no: 8, name: "permissions", kind: "enum", T: proto3.getEnumType(ChatPermission), repeated: true },
+    { no: 8, name: "with_send_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 9, name: "payment_intent", kind: "message", T: IntentId },
     { no: 10, name: "auth", kind: "message", T: Auth },
   ]);
@@ -1164,13 +1138,6 @@ export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
    */
   chatId?: ChatId;
 
-  /**
-   * The permissions the user wants applied in the chat
-   *
-   * @generated from field: repeated flipchat.chat.v1.ChatPermission permissions = 8;
-   */
-  permissions: ChatPermission[] = [];
-
   constructor(data?: PartialMessage<JoinChatPaymentMetadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1181,7 +1148,6 @@ export class JoinChatPaymentMetadata extends Message<JoinChatPaymentMetadata> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "user_id", kind: "message", T: UserId },
     { no: 2, name: "chat_id", kind: "message", T: ChatId },
-    { no: 8, name: "permissions", kind: "enum", T: proto3.getEnumType(ChatPermission), repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JoinChatPaymentMetadata {
@@ -2107,19 +2073,28 @@ export class Member extends Message<Member> {
   isSelf = false;
 
   /**
-   * Is the chat member able to perform moderation actions in the chat?
+   * Does the chat member have permission to perform moderation actions in
+   * the chat?
    *
-   * @generated from field: bool is_moderator = 5;
+   * @generated from field: bool has_moderator_permission = 5;
    */
-  isModerator = false;
+  hasModeratorPermission = false;
 
   /**
-   * Has this user been muted by a mod? If so, they cannot send messages, even
-   * if they paid for the permission.
+   * Has the chat member been muted by a moderator? If so, they cannot send
+   * messages, even if they paid for the permission.
    *
    * @generated from field: bool is_muted = 6;
    */
   isMuted = false;
+
+  /**
+   * Does the chat member have permission to send messages in the chat? If
+   * not, the user is considered to be a spectator.
+   *
+   * @generated from field: bool has_send_permission = 7;
+   */
+  hasSendPermission = false;
 
   constructor(data?: PartialMessage<Member>) {
     super();
@@ -2133,8 +2108,9 @@ export class Member extends Message<Member> {
     { no: 2, name: "identity", kind: "message", T: MemberIdentity },
     { no: 3, name: "pointers", kind: "message", T: Pointer, repeated: true },
     { no: 4, name: "is_self", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 5, name: "is_moderator", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "has_moderator_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "is_muted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "has_send_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Member {

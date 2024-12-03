@@ -269,22 +269,14 @@ message JoinChatRequest {
         uint64 room_id = 2;
     }
 
-    // Permissions to apply for a member of a chat. An empty permission list is
-    // free and has the member in an initial spectator mode.
-    repeated ChatPermission permissions = 8 [(validate.rules).repeated = {
-        min_items: 0
-        max_items: 1
-        items: {
-            enum: {
-                in: [1] // SEND_MESSAGE
-            }
-        }
-    }];
+    // Does the user want to join with the ability to send messages in the chat?
+    // If not, then payment_intent is not required? Otherwise, it is.
+    bool with_send_permission = 8;
 
-    // The payment for joining a chat, which is required for elevated chat
-    // permissions.
+    // The payment for joining a chat, which is required for sending messages in
+    // the chat.
     //
-    // Note: The chat owner can join with any permissions without payment.
+    // Note: The chat owner can always bypass payment.
     common.v1.IntentId payment_intent = 9;
 
     common.v1.Auth auth = 10 [(validate.rules).message.required = true];
@@ -309,17 +301,6 @@ message JoinChatPaymentMetadata {
 
     // The chat that the user is joining
     common.v1.ChatId chat_id = 2 [(validate.rules).message.required = true];
-
-    // The permissions the user wants applied in the chat
-    repeated ChatPermission permissions = 8 [(validate.rules).repeated = {
-        min_items: 0
-        max_items: 1
-        items: {
-            enum: {
-                in: [1] // SEND_MESSAGE
-            }
-        }
-    }];
 }
 
 message LeaveChatRequest {
@@ -492,12 +473,17 @@ message Member {
     // If the member is the caller (where applicable), will be set to true.
     bool is_self = 4;
 
-    // Is the chat member able to perform moderation actions in the chat?
-    bool is_moderator = 5;
+    // Does the chat member have permission to perform moderation actions in
+    // the chat?
+    bool has_moderator_permission = 5;
 
-    // Has this user been muted by a mod? If so, they cannot send messages, even
-    // if they paid for the permission.
+    // Has the chat member been muted by a moderator? If so, they cannot send
+    // messages, even if they paid for the permission.
     bool is_muted = 6;
+
+    // Does the chat member have permission to send messages in the chat? If
+    // not, the user is considered to be a spectator.
+    bool has_send_permission = 7;
 }
 
 message MemberIdentity {
@@ -510,10 +496,4 @@ message MemberIdentity {
     string profile_pic_url = 2 [(validate.rules).string = {
         max_len: 255 // Arbitrary limit
     }];
-}
-
-enum ChatPermission {
-    UNKNOWN      = 0;
-    SEND_MESSAGE = 1;
-    MODERATOR    = 2;
 }
