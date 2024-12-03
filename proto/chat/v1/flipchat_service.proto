@@ -250,8 +250,11 @@ message StartChatResponse {
         USER_NOT_FOUND = 2;
     }
 
-    // The chat to use if the RPC was successful.
+    // The chat to use, if result == OK.
     Metadata chat = 2;
+
+    // Members contains the chat members, if result == OK.
+    repeated Member members = 3;
 }
 message StartGroupChatPaymentMetadata {
     // The user creating the group chat, who will be the initial owner

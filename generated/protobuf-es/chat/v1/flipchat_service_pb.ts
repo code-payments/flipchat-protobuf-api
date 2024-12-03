@@ -885,11 +885,18 @@ export class StartChatResponse extends Message<StartChatResponse> {
   result = StartChatResponse_Result.OK;
 
   /**
-   * The chat to use if the RPC was successful.
+   * The chat to use, if result == OK.
    *
    * @generated from field: flipchat.chat.v1.Metadata chat = 2;
    */
   chat?: Metadata;
+
+  /**
+   * Members contains the chat members, if result == OK.
+   *
+   * @generated from field: repeated flipchat.chat.v1.Member members = 3;
+   */
+  members: Member[] = [];
 
   constructor(data?: PartialMessage<StartChatResponse>) {
     super();
@@ -901,6 +908,7 @@ export class StartChatResponse extends Message<StartChatResponse> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(StartChatResponse_Result) },
     { no: 2, name: "chat", kind: "message", T: Metadata },
+    { no: 3, name: "members", kind: "message", T: Member, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartChatResponse {
