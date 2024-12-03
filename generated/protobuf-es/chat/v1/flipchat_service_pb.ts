@@ -2114,7 +2114,8 @@ export class Member extends Message<Member> {
   isModerator = false;
 
   /**
-   * Cant this user send messages in the chat?
+   * Has this user been muted by a mod? If so, they cannot send messages, even
+   * if they paid for the permission.
    *
    * @generated from field: bool is_muted = 6;
    */

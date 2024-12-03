@@ -2416,7 +2416,8 @@ type Member struct {
 	IsSelf bool `protobuf:"varint,4,opt,name=is_self,json=isSelf,proto3" json:"is_self,omitempty"`
 	// Is the chat member able to perform moderation actions in the chat?
 	IsModerator bool `protobuf:"varint,5,opt,name=is_moderator,json=isModerator,proto3" json:"is_moderator,omitempty"`
-	// Cant this user send messages in the chat?
+	// Has this user been muted by a mod? If so, they cannot send messages, even
+	// if they paid for the permission.
 	IsMuted bool `protobuf:"varint,6,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
 }
 
