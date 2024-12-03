@@ -1734,7 +1734,7 @@ func (m *JoinChatRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for WithSendPermission
+	// no validation rules for WithoutSendPermission
 
 	if all {
 		switch v := interface{}(m.GetPaymentIntent()).(type) {

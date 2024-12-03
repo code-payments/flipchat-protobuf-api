@@ -993,12 +993,12 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
-   * Does the user want to join with the ability to send messages in the chat?
-   * If not, then payment_intent is not required? Otherwise, it is.
+   * Does the user want to join without the ability to send messages in the chat?
+   * If so, then payment_intent is not required? Otherwise, it is.
    *
-   * @generated from field: bool with_send_permission = 8;
+   * @generated from field: bool without_send_permission = 8;
    */
-  withSendPermission = false;
+  withoutSendPermission = false;
 
   /**
    * The payment for joining a chat, which is required for sending messages in
@@ -1025,7 +1025,7 @@ export class JoinChatRequest extends Message<JoinChatRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
     { no: 2, name: "room_id", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
-    { no: 8, name: "with_send_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: "without_send_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 9, name: "payment_intent", kind: "message", T: IntentId },
     { no: 10, name: "auth", kind: "message", T: Auth },
   ]);

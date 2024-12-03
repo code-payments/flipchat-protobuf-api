@@ -269,9 +269,9 @@ message JoinChatRequest {
         uint64 room_id = 2;
     }
 
-    // Does the user want to join with the ability to send messages in the chat?
-    // If not, then payment_intent is not required? Otherwise, it is.
-    bool with_send_permission = 8;
+    // Does the user want to join without the ability to send messages in the chat?
+    // If so, then payment_intent is not required? Otherwise, it is.
+    bool without_send_permission = 8;
 
     // The payment for joining a chat, which is required for sending messages in
     // the chat.
