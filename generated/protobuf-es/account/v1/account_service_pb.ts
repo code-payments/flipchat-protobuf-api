@@ -27,7 +27,7 @@ export class RegisterRequest extends Message<RegisterRequest> {
   signature?: Signature;
 
   /**
-   * DisplayName of the new user.
+   * Optional DisplayName of the new user
    *
    * If the user already exists, this is not used.
    *

@@ -43,11 +43,11 @@ message RegisterRequest {
 	// Signature of this message (without the signature), using the provided keypaid.
 	common.v1.Signature signature = 2 [(validate.rules).message.required = true];
 
-	// DisplayName of the new user.
+	// Optional DisplayName of the new user
 	//
 	// If the user already exists, this is not used.
 	string display_name = 3 [(validate.rules).string = {
-		min_len: 1
+		min_len: 0
 		max_len: 64
 	}];
 }

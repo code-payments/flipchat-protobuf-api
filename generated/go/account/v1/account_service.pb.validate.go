@@ -137,10 +137,10 @@ func (m *RegisterRequest) validate(all bool) error {
 		}
 	}
 
-	if l := utf8.RuneCountInString(m.GetDisplayName()); l < 1 || l > 64 {
+	if l := utf8.RuneCountInString(m.GetDisplayName()); l < 0 || l > 64 {
 		err := RegisterRequestValidationError{
 			field:  "DisplayName",
-			reason: "value length must be between 1 and 64 runes, inclusive",
+			reason: "value length must be between 0 and 64 runes, inclusive",
 		}
 		if !all {
 			return err
