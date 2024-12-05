@@ -235,10 +235,10 @@ func (m *Message) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetContent()); l < 1 || l > 2 {
+	if len(m.GetContent()) != 1 {
 		err := MessageValidationError{
 			field:  "Content",
-			reason: "value must contain between 1 and 2 items, inclusive",
+			reason: "value must contain exactly 1 item(s)",
 		}
 		if !all {
 			return err

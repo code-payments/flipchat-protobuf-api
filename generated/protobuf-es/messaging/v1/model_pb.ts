@@ -69,7 +69,7 @@ export class Message extends Message$1<Message> {
   senderId?: UserId;
 
   /**
-   * Ordered message content. A message may have more than one piece of content.
+   * Message content, which is currently guaranteed to have exactly one item.
    *
    * @generated from field: repeated flipchat.messaging.v1.Content content = 3;
    */
