@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AdvancePointerRequest, AdvancePointerResponse, DeleteMessageRequest, DeleteMessageResponse, GetMessagesRequest, GetMessagesResponse, NotifyIsTypingRequest, NotifyIsTypingResponse, SendMessageRequest, SendMessageResponse, StreamMessagesRequest, StreamMessagesResponse } from "./messaging_service_pb";
+import { AdvancePointerRequest, AdvancePointerResponse, DeleteMessageRequest, DeleteMessageResponse, GetMessageRequest, GetMessageResponse, GetMessagesRequest, GetMessagesResponse, NotifyIsTypingRequest, NotifyIsTypingResponse, SendMessageRequest, SendMessageResponse, StreamMessagesRequest, StreamMessagesResponse } from "./messaging_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -28,7 +28,18 @@ export const Messaging = {
       kind: MethodKind.BiDiStreaming,
     },
     /**
-     * GetMessages gets the set of messages for a chat member using a paged API
+     * GetMessage gets a single message in a chat
+     *
+     * @generated from rpc flipchat.messaging.v1.Messaging.GetMessage
+     */
+    getMessage: {
+      name: "GetMessage",
+      I: GetMessageRequest,
+      O: GetMessageResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * GetMessages gets the set of messages for a chat using a paged API
      *
      * @generated from rpc flipchat.messaging.v1.Messaging.GetMessages
      */

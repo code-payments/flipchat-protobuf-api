@@ -272,6 +272,124 @@ export class StreamMessagesResponse_MessageBatch extends Message<StreamMessagesR
 }
 
 /**
+ * @generated from message flipchat.messaging.v1.GetMessageRequest
+ */
+export class GetMessageRequest extends Message<GetMessageRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.MessageId message_id = 2;
+   */
+  messageId?: MessageId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<GetMessageRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.GetMessageRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "message_id", kind: "message", T: MessageId },
+    { no: 3, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetMessageRequest {
+    return new GetMessageRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetMessageRequest {
+    return new GetMessageRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetMessageRequest {
+    return new GetMessageRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetMessageRequest | PlainMessage<GetMessageRequest> | undefined, b: GetMessageRequest | PlainMessage<GetMessageRequest> | undefined): boolean {
+    return proto3.util.equals(GetMessageRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.GetMessageResponse
+ */
+export class GetMessageResponse extends Message<GetMessageResponse> {
+  /**
+   * @generated from field: flipchat.messaging.v1.GetMessageResponse.Result result = 1;
+   */
+  result = GetMessageResponse_Result.OK;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.Message message = 2;
+   */
+  message?: Message$1;
+
+  constructor(data?: PartialMessage<GetMessageResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.GetMessageResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(GetMessageResponse_Result) },
+    { no: 2, name: "message", kind: "message", T: Message$1 },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetMessageResponse {
+    return new GetMessageResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetMessageResponse {
+    return new GetMessageResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetMessageResponse {
+    return new GetMessageResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetMessageResponse | PlainMessage<GetMessageResponse> | undefined, b: GetMessageResponse | PlainMessage<GetMessageResponse> | undefined): boolean {
+    return proto3.util.equals(GetMessageResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.messaging.v1.GetMessageResponse.Result
+ */
+export enum GetMessageResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * @generated from enum value: NOT_FOUND = 2;
+   */
+  NOT_FOUND = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(GetMessageResponse_Result)
+proto3.util.setEnumType(GetMessageResponse_Result, "flipchat.messaging.v1.GetMessageResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "NOT_FOUND" },
+]);
+
+/**
  * @generated from message flipchat.messaging.v1.GetMessagesRequest
  */
 export class GetMessagesRequest extends Message<GetMessagesRequest> {

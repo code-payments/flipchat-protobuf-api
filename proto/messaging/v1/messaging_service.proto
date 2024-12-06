@@ -18,7 +18,10 @@ service Messaging {
     // 'latest_only'.
     rpc StreamMessages(stream StreamMessagesRequest) returns (stream StreamMessagesResponse);
 
-    // GetMessages gets the set of messages for a chat member using a paged API
+    // GetMessage gets a single message in a chat
+    rpc GetMessage(GetMessageRequest) returns (GetMessageResponse);
+
+    // GetMessages gets the set of messages for a chat using a paged API
     rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse);
 
     // SendMessage sends a message to a chat.
@@ -82,6 +85,25 @@ message StreamMessagesResponse {
             max_items: 1024 // Arbitrary
         }];
     }
+}
+
+message GetMessageRequest {
+    common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
+
+    MessageId message_id = 2 [(validate.rules).message.required = true];
+
+    common.v1.Auth auth = 3;
+}
+
+message GetMessageResponse {
+    Result result = 1;
+    enum Result {
+        OK        = 0;
+        DENIED    = 1;
+        NOT_FOUND = 2;
+    }
+
+    Message message = 2;
 }
 
 

@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Messaging_StreamMessages_FullMethodName = "/flipchat.messaging.v1.Messaging/StreamMessages"
+	Messaging_GetMessage_FullMethodName     = "/flipchat.messaging.v1.Messaging/GetMessage"
 	Messaging_GetMessages_FullMethodName    = "/flipchat.messaging.v1.Messaging/GetMessages"
 	Messaging_SendMessage_FullMethodName    = "/flipchat.messaging.v1.Messaging/SendMessage"
 	Messaging_AdvancePointer_FullMethodName = "/flipchat.messaging.v1.Messaging/AdvancePointer"
@@ -37,7 +38,9 @@ type MessagingClient interface {
 	// pointer of the caller. This can be overridden by setting 'last_message',
 	// 'latest_only'.
 	StreamMessages(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamMessagesRequest, StreamMessagesResponse], error)
-	// GetMessages gets the set of messages for a chat member using a paged API
+	// GetMessage gets a single message in a chat
+	GetMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*GetMessageResponse, error)
+	// GetMessages gets the set of messages for a chat using a paged API
 	GetMessages(ctx context.Context, in *GetMessagesRequest, opts ...grpc.CallOption) (*GetMessagesResponse, error)
 	// SendMessage sends a message to a chat.
 	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error)
@@ -71,6 +74,16 @@ func (c *messagingClient) StreamMessages(ctx context.Context, opts ...grpc.CallO
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type Messaging_StreamMessagesClient = grpc.BidiStreamingClient[StreamMessagesRequest, StreamMessagesResponse]
+
+func (c *messagingClient) GetMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*GetMessageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMessageResponse)
+	err := c.cc.Invoke(ctx, Messaging_GetMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
 func (c *messagingClient) GetMessages(ctx context.Context, in *GetMessagesRequest, opts ...grpc.CallOption) (*GetMessagesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -132,7 +145,9 @@ type MessagingServer interface {
 	// pointer of the caller. This can be overridden by setting 'last_message',
 	// 'latest_only'.
 	StreamMessages(grpc.BidiStreamingServer[StreamMessagesRequest, StreamMessagesResponse]) error
-	// GetMessages gets the set of messages for a chat member using a paged API
+	// GetMessage gets a single message in a chat
+	GetMessage(context.Context, *GetMessageRequest) (*GetMessageResponse, error)
+	// GetMessages gets the set of messages for a chat using a paged API
 	GetMessages(context.Context, *GetMessagesRequest) (*GetMessagesResponse, error)
 	// SendMessage sends a message to a chat.
 	SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error)
@@ -156,6 +171,9 @@ type UnimplementedMessagingServer struct{}
 
 func (UnimplementedMessagingServer) StreamMessages(grpc.BidiStreamingServer[StreamMessagesRequest, StreamMessagesResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMessages not implemented")
+}
+func (UnimplementedMessagingServer) GetMessage(context.Context, *GetMessageRequest) (*GetMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMessage not implemented")
 }
 func (UnimplementedMessagingServer) GetMessages(context.Context, *GetMessagesRequest) (*GetMessagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMessages not implemented")
@@ -199,6 +217,24 @@ func _Messaging_StreamMessages_Handler(srv interface{}, stream grpc.ServerStream
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type Messaging_StreamMessagesServer = grpc.BidiStreamingServer[StreamMessagesRequest, StreamMessagesResponse]
+
+func _Messaging_GetMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessagingServer).GetMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Messaging_GetMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessagingServer).GetMessage(ctx, req.(*GetMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
 
 func _Messaging_GetMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMessagesRequest)
@@ -297,6 +333,10 @@ var Messaging_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "flipchat.messaging.v1.Messaging",
 	HandlerType: (*MessagingServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetMessage",
+			Handler:    _Messaging_GetMessage_Handler,
+		},
 		{
 			MethodName: "GetMessages",
 			Handler:    _Messaging_GetMessages_Handler,
