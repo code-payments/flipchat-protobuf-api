@@ -160,9 +160,15 @@ message GetUserFlagsResponse {
 }
 
 message UserFlags {
+	// Is this user associated with a Flipchat staff member?
 	bool is_staff = 1;
 
+	// The fee payment amount for starting a new group
 	common.v1.PaymentAmount start_group_fee = 2 [(validate.rules).message.required = true];
 
+	// The destination account where fees should be paid to
 	common.v1.PublicKey fee_destination = 3 [(validate.rules).message.required = true];
+
+	// Is this a fully registered account using IAP for account creation?
+	bool is_registered_account = 4;
 }

@@ -2028,6 +2028,8 @@ func (m *UserFlags) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for IsRegisteredAccount
+
 	if len(errors) > 0 {
 		return UserFlagsMultiError(errors)
 	}

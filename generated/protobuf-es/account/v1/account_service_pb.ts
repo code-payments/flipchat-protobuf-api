@@ -717,19 +717,32 @@ proto3.util.setEnumType(GetUserFlagsResponse_Result, "flipchat.account.v1.GetUse
  */
 export class UserFlags extends Message<UserFlags> {
   /**
+   * Is this user associated with a Flipchat staff member?
+   *
    * @generated from field: bool is_staff = 1;
    */
   isStaff = false;
 
   /**
+   * The fee payment amount for starting a new group
+   *
    * @generated from field: flipchat.common.v1.PaymentAmount start_group_fee = 2;
    */
   startGroupFee?: PaymentAmount;
 
   /**
+   * The destination account where fees should be paid to
+   *
    * @generated from field: flipchat.common.v1.PublicKey fee_destination = 3;
    */
   feeDestination?: PublicKey;
+
+  /**
+   * Is this a fully registered account using IAP for account creation?
+   *
+   * @generated from field: bool is_registered_account = 4;
+   */
+  isRegisteredAccount = false;
 
   constructor(data?: PartialMessage<UserFlags>) {
     super();
@@ -742,6 +755,7 @@ export class UserFlags extends Message<UserFlags> {
     { no: 1, name: "is_staff", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "start_group_fee", kind: "message", T: PaymentAmount },
     { no: 3, name: "fee_destination", kind: "message", T: PublicKey },
+    { no: 4, name: "is_registered_account", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserFlags {
