@@ -513,6 +513,8 @@ export class SendMessageRequest extends Message<SendMessageRequest> {
   /**
    * Allowed content types that can be sent by client:
    *  - TextContent
+   *  - ReactionContent
+   *  - ReplyContent
    *
    * @generated from field: repeated flipchat.messaging.v1.Content content = 2;
    */

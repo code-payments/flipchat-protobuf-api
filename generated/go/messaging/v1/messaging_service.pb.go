@@ -755,6 +755,8 @@ type SendMessageRequest struct {
 	ChatId *v1.ChatId `protobuf:"bytes,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
 	// Allowed content types that can be sent by client:
 	//   - TextContent
+	//   - ReactionContent
+	//   - ReplyContent
 	Content []*Content `protobuf:"bytes,2,rep,name=content,proto3" json:"content,omitempty"`
 	Auth    *v1.Auth   `protobuf:"bytes,3,opt,name=auth,proto3" json:"auth,omitempty"`
 }

@@ -268,6 +268,18 @@ export class Content extends Message$1<Content> {
      */
     value: LocalizedAnnouncementContent;
     case: "localizedAnnouncement";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.ReactionContent reaction = 5;
+     */
+    value: ReactionContent;
+    case: "reaction";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.ReplyContent reply = 6;
+     */
+    value: ReplyContent;
+    case: "reply";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<Content>) {
@@ -280,6 +292,8 @@ export class Content extends Message$1<Content> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "text", kind: "message", T: TextContent, oneof: "type" },
     { no: 2, name: "localized_announcement", kind: "message", T: LocalizedAnnouncementContent, oneof: "type" },
+    { no: 5, name: "reaction", kind: "message", T: ReactionContent, oneof: "type" },
+    { no: 6, name: "reply", kind: "message", T: ReplyContent, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content {
@@ -376,6 +390,104 @@ export class LocalizedAnnouncementContent extends Message$1<LocalizedAnnouncemen
 
   static equals(a: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined, b: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined): boolean {
     return proto3.util.equals(LocalizedAnnouncementContent, a, b);
+  }
+}
+
+/**
+ * Emoji reaction to another message
+ *
+ * @generated from message flipchat.messaging.v1.ReactionContent
+ */
+export class ReactionContent extends Message$1<ReactionContent> {
+  /**
+   * The message ID of the message this reaction is associated with
+   *
+   * @generated from field: flipchat.messaging.v1.MessageId original_message_id = 1;
+   */
+  originalMessageId?: MessageId;
+
+  /**
+   * The emoji or reaction symbol
+   *
+   * @generated from field: string emoji = 2;
+   */
+  emoji = "";
+
+  constructor(data?: PartialMessage<ReactionContent>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.ReactionContent";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "original_message_id", kind: "message", T: MessageId },
+    { no: 2, name: "emoji", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReactionContent {
+    return new ReactionContent().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReactionContent {
+    return new ReactionContent().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReactionContent {
+    return new ReactionContent().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ReactionContent | PlainMessage<ReactionContent> | undefined, b: ReactionContent | PlainMessage<ReactionContent> | undefined): boolean {
+    return proto3.util.equals(ReactionContent, a, b);
+  }
+}
+
+/**
+ * Text reply of another message
+ *
+ * @generated from message flipchat.messaging.v1.ReplyContent
+ */
+export class ReplyContent extends Message$1<ReplyContent> {
+  /**
+   * The message ID of the message this reply is referencing
+   *
+   * @generated from field: flipchat.messaging.v1.MessageId original_message_id = 1;
+   */
+  originalMessageId?: MessageId;
+
+  /**
+   * The reply text, which can be handled similarly to TextContent
+   *
+   * @generated from field: string reply_text = 2;
+   */
+  replyText = "";
+
+  constructor(data?: PartialMessage<ReplyContent>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.ReplyContent";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "original_message_id", kind: "message", T: MessageId },
+    { no: 2, name: "reply_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReplyContent {
+    return new ReplyContent().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReplyContent {
+    return new ReplyContent().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReplyContent {
+    return new ReplyContent().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ReplyContent | PlainMessage<ReplyContent> | undefined, b: ReplyContent | PlainMessage<ReplyContent> | undefined): boolean {
+    return proto3.util.equals(ReplyContent, a, b);
   }
 }
 

@@ -75,6 +75,8 @@ message Content {
 
         TextContent                   text                    = 1;
         LocalizedAnnouncementContent  localized_announcement  = 2;
+        ReactionContent               reaction                = 5;
+        ReplyContent                  reply                   = 6;
     }
 
     reserved 3; // ExchangeDataContent
@@ -99,4 +101,28 @@ message LocalizedAnnouncementContent {
     }];
 
     // todo: define arguments
+}
+
+// Emoji reaction to another message
+message ReactionContent {
+    // The message ID of the message this reaction is associated with
+    MessageId original_message_id = 1  [(validate.rules).message.required = true];
+
+    // The emoji or reaction symbol
+    string emoji = 2 [(validate.rules).string = {
+        min_len: 1
+        max_len: 16
+    }];
+}
+
+// Text reply of another message
+message ReplyContent {
+    // The message ID of the message this reply is referencing
+    MessageId original_message_id = 1  [(validate.rules).message.required = true];
+
+    // The reply text, which can be handled similarly to TextContent
+    string reply_text = 2 [(validate.rules).string = {
+        min_len: 1
+        max_len: 1024
+    }];
 }

@@ -769,6 +769,90 @@ func (m *Content) validate(all bool) error {
 			}
 		}
 
+	case *Content_Reaction:
+		if v == nil {
+			err := ContentValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetReaction()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "Reaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "Reaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetReaction()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ContentValidationError{
+					field:  "Reaction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Content_Reply:
+		if v == nil {
+			err := ContentValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetReply()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "Reply",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "Reply",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetReply()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ContentValidationError{
+					field:  "Reply",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		_ = v // ensures v is used
 	}
@@ -1083,3 +1167,304 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LocalizedAnnouncementContentValidationError{}
+
+// Validate checks the field values on ReactionContent with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ReactionContent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReactionContent with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReactionContentMultiError, or nil if none found.
+func (m *ReactionContent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReactionContent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOriginalMessageId() == nil {
+		err := ReactionContentValidationError{
+			field:  "OriginalMessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetOriginalMessageId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReactionContentValidationError{
+					field:  "OriginalMessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReactionContentValidationError{
+					field:  "OriginalMessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOriginalMessageId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReactionContentValidationError{
+				field:  "OriginalMessageId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetEmoji()); l < 1 || l > 16 {
+		err := ReactionContentValidationError{
+			field:  "Emoji",
+			reason: "value length must be between 1 and 16 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ReactionContentMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReactionContentMultiError is an error wrapping multiple validation errors
+// returned by ReactionContent.ValidateAll() if the designated constraints
+// aren't met.
+type ReactionContentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReactionContentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReactionContentMultiError) AllErrors() []error { return m }
+
+// ReactionContentValidationError is the validation error returned by
+// ReactionContent.Validate if the designated constraints aren't met.
+type ReactionContentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReactionContentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReactionContentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReactionContentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReactionContentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReactionContentValidationError) ErrorName() string { return "ReactionContentValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ReactionContentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReactionContent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReactionContentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReactionContentValidationError{}
+
+// Validate checks the field values on ReplyContent with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ReplyContent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReplyContent with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ReplyContentMultiError, or
+// nil if none found.
+func (m *ReplyContent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReplyContent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOriginalMessageId() == nil {
+		err := ReplyContentValidationError{
+			field:  "OriginalMessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetOriginalMessageId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReplyContentValidationError{
+					field:  "OriginalMessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReplyContentValidationError{
+					field:  "OriginalMessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOriginalMessageId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReplyContentValidationError{
+				field:  "OriginalMessageId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetReplyText()); l < 1 || l > 1024 {
+		err := ReplyContentValidationError{
+			field:  "ReplyText",
+			reason: "value length must be between 1 and 1024 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ReplyContentMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReplyContentMultiError is an error wrapping multiple validation errors
+// returned by ReplyContent.ValidateAll() if the designated constraints aren't met.
+type ReplyContentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReplyContentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReplyContentMultiError) AllErrors() []error { return m }
+
+// ReplyContentValidationError is the validation error returned by
+// ReplyContent.Validate if the designated constraints aren't met.
+type ReplyContentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReplyContentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReplyContentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReplyContentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReplyContentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReplyContentValidationError) ErrorName() string { return "ReplyContentValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ReplyContentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReplyContent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReplyContentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReplyContentValidationError{}
