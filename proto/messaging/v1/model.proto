@@ -73,11 +73,12 @@ message Content {
     oneof type {
         option (validate.required) = true;
 
-        TextContent                   text              = 1;
+        TextContent                   text                    = 1;
         LocalizedAnnouncementContent  localized_announcement  = 2;
-        //ExchangeDataContent         exchange_data     = 3;
-        NaclBoxEncryptedContent       nacl_box          = 4;
     }
+
+    reserved 3; // ExchangeDataContent
+    reserved 4; // NaclBoxEncryptedContent
 }
 
 // Raw text content
@@ -99,23 +100,3 @@ message LocalizedAnnouncementContent {
 
     // todo: define arguments
 }
-
-// Encrypted piece of content using NaCl box encryption
-message NaclBoxEncryptedContent {
-    // The sender's public key that is used to derive the shared private key for
-    // decryption for message content.
-    common.v1.PublicKey peer_public_key = 1 [(validate.rules).message.required = true];
-
-    // Globally random nonce that is unique to this encrypted piece of content
-    bytes nonce = 2 [(validate.rules).bytes = {
-        min_len: 24
-        max_len: 24
-    }];
-
-    // The encrypted piece of message content
-    bytes encrypted_payload = 3 [(validate.rules).bytes = {
-        min_len: 1
-        max_len: 1024
-    }];
-}
-

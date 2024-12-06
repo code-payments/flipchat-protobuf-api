@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message as Message$1, proto3, Timestamp } from "@bufbuild/protobuf";
-import { PublicKey, UserId } from "../../common/v1/flipchat_pb";
+import { UserId } from "../../common/v1/flipchat_pb";
 
 /**
  * @generated from message flipchat.messaging.v1.MessageId
@@ -268,14 +268,6 @@ export class Content extends Message$1<Content> {
      */
     value: LocalizedAnnouncementContent;
     case: "localizedAnnouncement";
-  } | {
-    /**
-     * ExchangeDataContent         exchange_data     = 3;
-     *
-     * @generated from field: flipchat.messaging.v1.NaclBoxEncryptedContent nacl_box = 4;
-     */
-    value: NaclBoxEncryptedContent;
-    case: "naclBox";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<Content>) {
@@ -288,7 +280,6 @@ export class Content extends Message$1<Content> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "text", kind: "message", T: TextContent, oneof: "type" },
     { no: 2, name: "localized_announcement", kind: "message", T: LocalizedAnnouncementContent, oneof: "type" },
-    { no: 4, name: "nacl_box", kind: "message", T: NaclBoxEncryptedContent, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content {
@@ -385,64 +376,6 @@ export class LocalizedAnnouncementContent extends Message$1<LocalizedAnnouncemen
 
   static equals(a: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined, b: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined): boolean {
     return proto3.util.equals(LocalizedAnnouncementContent, a, b);
-  }
-}
-
-/**
- * Encrypted piece of content using NaCl box encryption
- *
- * @generated from message flipchat.messaging.v1.NaclBoxEncryptedContent
- */
-export class NaclBoxEncryptedContent extends Message$1<NaclBoxEncryptedContent> {
-  /**
-   * The sender's public key that is used to derive the shared private key for
-   * decryption for message content.
-   *
-   * @generated from field: flipchat.common.v1.PublicKey peer_public_key = 1;
-   */
-  peerPublicKey?: PublicKey;
-
-  /**
-   * Globally random nonce that is unique to this encrypted piece of content
-   *
-   * @generated from field: bytes nonce = 2;
-   */
-  nonce = new Uint8Array(0);
-
-  /**
-   * The encrypted piece of message content
-   *
-   * @generated from field: bytes encrypted_payload = 3;
-   */
-  encryptedPayload = new Uint8Array(0);
-
-  constructor(data?: PartialMessage<NaclBoxEncryptedContent>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.messaging.v1.NaclBoxEncryptedContent";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "peer_public_key", kind: "message", T: PublicKey },
-    { no: 2, name: "nonce", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-    { no: 3, name: "encrypted_payload", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NaclBoxEncryptedContent {
-    return new NaclBoxEncryptedContent().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NaclBoxEncryptedContent {
-    return new NaclBoxEncryptedContent().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NaclBoxEncryptedContent {
-    return new NaclBoxEncryptedContent().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: NaclBoxEncryptedContent | PlainMessage<NaclBoxEncryptedContent> | undefined, b: NaclBoxEncryptedContent | PlainMessage<NaclBoxEncryptedContent> | undefined): boolean {
-    return proto3.util.equals(NaclBoxEncryptedContent, a, b);
   }
 }
 
