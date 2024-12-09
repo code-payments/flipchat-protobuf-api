@@ -4823,10 +4823,10 @@ func (m *Metadata) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if l := utf8.RuneCountInString(m.GetTitle()); l < 0 || l > 1024 {
+	if l := utf8.RuneCountInString(m.GetDisplayName()); l < 0 || l > 64 {
 		err := MetadataValidationError{
-			field:  "Title",
-			reason: "value length must be between 0 and 1024 runes, inclusive",
+			field:  "DisplayName",
+			reason: "value length must be between 0 and 64 runes, inclusive",
 		}
 		if !all {
 			return err
@@ -4930,17 +4930,6 @@ func (m *Metadata) validate(all bool) error {
 	}
 
 	// no validation rules for HasMoreUnread
-
-	if l := utf8.RuneCountInString(m.GetDisplayName()); l < 0 || l > 64 {
-		err := MetadataValidationError{
-			field:  "DisplayName",
-			reason: "value length must be between 0 and 64 runes, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
 
 	if len(errors) > 0 {
 		return MetadataMultiError(errors)

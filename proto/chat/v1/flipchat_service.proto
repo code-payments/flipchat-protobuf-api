@@ -441,11 +441,10 @@ message Metadata {
         GROUP   = 2;
     }
 
-    // The chat title, which is _only_ set by server if an explicit title
-    // was set. Otherwise, clients should fill in an appropriate chat title.
-    string title = 3 [(validate.rules).string = {
+    // The chat display name
+    string display_name = 3 [(validate.rules).string = {
         min_len: 0
-        max_len: 1024
+        max_len: 64
     }];
 
     // If non-zero, the room number associated with the chat.
@@ -475,11 +474,6 @@ message Metadata {
     // If there are more unread messages than indicated by num_unread. If this is
     // true, client should show num_unread+ as the unread count.
     bool has_more_unread = 11;
-
-    string display_name = 12 [(validate.rules).string = {
-		min_len: 0
-		max_len: 64
-	}];
 }
 
 message Member {

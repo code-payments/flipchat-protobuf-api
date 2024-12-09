@@ -2020,12 +2020,11 @@ export class Metadata extends Message<Metadata> {
   type = Metadata_ChatType.UNKNOWN;
 
   /**
-   * The chat title, which is _only_ set by server if an explicit title
-   * was set. Otherwise, clients should fill in an appropriate chat title.
+   * The chat display name
    *
-   * @generated from field: string title = 3;
+   * @generated from field: string display_name = 3;
    */
-  title = "";
+  displayName = "";
 
   /**
    * If non-zero, the room number associated with the chat.
@@ -2087,11 +2086,6 @@ export class Metadata extends Message<Metadata> {
    */
   hasMoreUnread = false;
 
-  /**
-   * @generated from field: string display_name = 12;
-   */
-  displayName = "";
-
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2102,7 +2096,7 @@ export class Metadata extends Message<Metadata> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
     { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(Metadata_ChatType) },
-    { no: 3, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "room_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 5, name: "is_push_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "can_disable_push", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
@@ -2111,7 +2105,6 @@ export class Metadata extends Message<Metadata> {
     { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },
     { no: 10, name: "last_activity", kind: "message", T: Timestamp },
     { no: 11, name: "has_more_unread", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 12, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
