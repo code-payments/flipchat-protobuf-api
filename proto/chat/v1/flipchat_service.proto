@@ -232,8 +232,8 @@ message StartChatRequest {
             max_items: 32 // Arbitrary
         }];
 
-        // Optional title to set for the group.
-        string title = 2;
+        // Reserved for display_name field
+        reserved 2;
 
         // Optional payment for creating the group. It's up to server to decide
         // if the user is allowed to create a group without payment.

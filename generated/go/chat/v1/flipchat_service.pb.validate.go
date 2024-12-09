@@ -6780,8 +6780,6 @@ func (m *StartChatRequest_StartGroupChatParameters) validate(all bool) error {
 
 	}
 
-	// no validation rules for Title
-
 	if all {
 		switch v := interface{}(m.GetPaymentIntent()).(type) {
 		case interface{ ValidateAll() error }:

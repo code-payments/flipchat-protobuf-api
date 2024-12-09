@@ -805,13 +805,6 @@ export class StartChatRequest_StartGroupChatParameters extends Message<StartChat
   users: UserId[] = [];
 
   /**
-   * Optional title to set for the group.
-   *
-   * @generated from field: string title = 2;
-   */
-  title = "";
-
-  /**
    * Optional payment for creating the group. It's up to server to decide
    * if the user is allowed to create a group without payment.
    *
@@ -828,7 +821,6 @@ export class StartChatRequest_StartGroupChatParameters extends Message<StartChat
   static readonly typeName = "flipchat.chat.v1.StartChatRequest.StartGroupChatParameters";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "users", kind: "message", T: UserId, repeated: true },
-    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "payment_intent", kind: "message", T: IntentId },
   ]);
 
