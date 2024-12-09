@@ -2585,6 +2585,314 @@ var _ interface {
 	ErrorName() string
 } = LeaveChatResponseValidationError{}
 
+// Validate checks the field values on SetDisplayNameRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetDisplayNameRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetDisplayNameRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetDisplayNameRequestMultiError, or nil if none found.
+func (m *SetDisplayNameRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetDisplayNameRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := SetDisplayNameRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetDisplayNameRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetDisplayNameRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetDisplayNameRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetDisplayName()); l < 1 || l > 64 {
+		err := SetDisplayNameRequestValidationError{
+			field:  "DisplayName",
+			reason: "value length must be between 1 and 64 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAuth() == nil {
+		err := SetDisplayNameRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetDisplayNameRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetDisplayNameRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetDisplayNameRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SetDisplayNameRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetDisplayNameRequestMultiError is an error wrapping multiple validation
+// errors returned by SetDisplayNameRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetDisplayNameRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetDisplayNameRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetDisplayNameRequestMultiError) AllErrors() []error { return m }
+
+// SetDisplayNameRequestValidationError is the validation error returned by
+// SetDisplayNameRequest.Validate if the designated constraints aren't met.
+type SetDisplayNameRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetDisplayNameRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetDisplayNameRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetDisplayNameRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetDisplayNameRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetDisplayNameRequestValidationError) ErrorName() string {
+	return "SetDisplayNameRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetDisplayNameRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetDisplayNameRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetDisplayNameRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetDisplayNameRequestValidationError{}
+
+// Validate checks the field values on SetDisplayNameResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetDisplayNameResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetDisplayNameResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetDisplayNameResponseMultiError, or nil if none found.
+func (m *SetDisplayNameResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetDisplayNameResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(m.GetAlternateSuggestions()) > 10 {
+		err := SetDisplayNameResponseValidationError{
+			field:  "AlternateSuggestions",
+			reason: "value must contain no more than 10 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return SetDisplayNameResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetDisplayNameResponseMultiError is an error wrapping multiple validation
+// errors returned by SetDisplayNameResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetDisplayNameResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetDisplayNameResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetDisplayNameResponseMultiError) AllErrors() []error { return m }
+
+// SetDisplayNameResponseValidationError is the validation error returned by
+// SetDisplayNameResponse.Validate if the designated constraints aren't met.
+type SetDisplayNameResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetDisplayNameResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetDisplayNameResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetDisplayNameResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetDisplayNameResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetDisplayNameResponseValidationError) ErrorName() string {
+	return "SetDisplayNameResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetDisplayNameResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetDisplayNameResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetDisplayNameResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetDisplayNameResponseValidationError{}
+
 // Validate checks the field values on SetCoverChargeRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -4622,6 +4930,17 @@ func (m *Metadata) validate(all bool) error {
 	}
 
 	// no validation rules for HasMoreUnread
+
+	if l := utf8.RuneCountInString(m.GetDisplayName()); l < 0 || l > 64 {
+		err := MetadataValidationError{
+			field:  "DisplayName",
+			reason: "value length must be between 0 and 64 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return MetadataMultiError(errors)

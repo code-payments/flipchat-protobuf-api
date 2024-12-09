@@ -296,6 +296,55 @@ func (LeaveChatResponse_Result) EnumDescriptor() ([]byte, []int) {
 	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{13, 0}
 }
 
+type SetDisplayNameResponse_Result int32
+
+const (
+	SetDisplayNameResponse_OK       SetDisplayNameResponse_Result = 0
+	SetDisplayNameResponse_DENIED   SetDisplayNameResponse_Result = 1
+	SetDisplayNameResponse_CANT_SET SetDisplayNameResponse_Result = 2
+)
+
+// Enum value maps for SetDisplayNameResponse_Result.
+var (
+	SetDisplayNameResponse_Result_name = map[int32]string{
+		0: "OK",
+		1: "DENIED",
+		2: "CANT_SET",
+	}
+	SetDisplayNameResponse_Result_value = map[string]int32{
+		"OK":       0,
+		"DENIED":   1,
+		"CANT_SET": 2,
+	}
+)
+
+func (x SetDisplayNameResponse_Result) Enum() *SetDisplayNameResponse_Result {
+	p := new(SetDisplayNameResponse_Result)
+	*p = x
+	return p
+}
+
+func (x SetDisplayNameResponse_Result) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SetDisplayNameResponse_Result) Descriptor() protoreflect.EnumDescriptor {
+	return file_chat_v1_flipchat_service_proto_enumTypes[6].Descriptor()
+}
+
+func (SetDisplayNameResponse_Result) Type() protoreflect.EnumType {
+	return &file_chat_v1_flipchat_service_proto_enumTypes[6]
+}
+
+func (x SetDisplayNameResponse_Result) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SetDisplayNameResponse_Result.Descriptor instead.
+func (SetDisplayNameResponse_Result) EnumDescriptor() ([]byte, []int) {
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{15, 0}
+}
+
 type SetCoverChargeResponse_Result int32
 
 const (
@@ -329,11 +378,11 @@ func (x SetCoverChargeResponse_Result) String() string {
 }
 
 func (SetCoverChargeResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_chat_v1_flipchat_service_proto_enumTypes[6].Descriptor()
+	return file_chat_v1_flipchat_service_proto_enumTypes[7].Descriptor()
 }
 
 func (SetCoverChargeResponse_Result) Type() protoreflect.EnumType {
-	return &file_chat_v1_flipchat_service_proto_enumTypes[6]
+	return &file_chat_v1_flipchat_service_proto_enumTypes[7]
 }
 
 func (x SetCoverChargeResponse_Result) Number() protoreflect.EnumNumber {
@@ -342,7 +391,7 @@ func (x SetCoverChargeResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SetCoverChargeResponse_Result.Descriptor instead.
 func (SetCoverChargeResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{15, 0}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{17, 0}
 }
 
 type RemoveUserResponse_Result int32
@@ -375,11 +424,11 @@ func (x RemoveUserResponse_Result) String() string {
 }
 
 func (RemoveUserResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_chat_v1_flipchat_service_proto_enumTypes[7].Descriptor()
+	return file_chat_v1_flipchat_service_proto_enumTypes[8].Descriptor()
 }
 
 func (RemoveUserResponse_Result) Type() protoreflect.EnumType {
-	return &file_chat_v1_flipchat_service_proto_enumTypes[7]
+	return &file_chat_v1_flipchat_service_proto_enumTypes[8]
 }
 
 func (x RemoveUserResponse_Result) Number() protoreflect.EnumNumber {
@@ -388,7 +437,7 @@ func (x RemoveUserResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RemoveUserResponse_Result.Descriptor instead.
 func (RemoveUserResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{17, 0}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{19, 0}
 }
 
 type MuteUserResponse_Result int32
@@ -421,11 +470,11 @@ func (x MuteUserResponse_Result) String() string {
 }
 
 func (MuteUserResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_chat_v1_flipchat_service_proto_enumTypes[8].Descriptor()
+	return file_chat_v1_flipchat_service_proto_enumTypes[9].Descriptor()
 }
 
 func (MuteUserResponse_Result) Type() protoreflect.EnumType {
-	return &file_chat_v1_flipchat_service_proto_enumTypes[8]
+	return &file_chat_v1_flipchat_service_proto_enumTypes[9]
 }
 
 func (x MuteUserResponse_Result) Number() protoreflect.EnumNumber {
@@ -434,7 +483,7 @@ func (x MuteUserResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MuteUserResponse_Result.Descriptor instead.
 func (MuteUserResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{19, 0}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{21, 0}
 }
 
 type MuteChatResponse_Result int32
@@ -467,11 +516,11 @@ func (x MuteChatResponse_Result) String() string {
 }
 
 func (MuteChatResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_chat_v1_flipchat_service_proto_enumTypes[9].Descriptor()
+	return file_chat_v1_flipchat_service_proto_enumTypes[10].Descriptor()
 }
 
 func (MuteChatResponse_Result) Type() protoreflect.EnumType {
-	return &file_chat_v1_flipchat_service_proto_enumTypes[9]
+	return &file_chat_v1_flipchat_service_proto_enumTypes[10]
 }
 
 func (x MuteChatResponse_Result) Number() protoreflect.EnumNumber {
@@ -480,7 +529,7 @@ func (x MuteChatResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MuteChatResponse_Result.Descriptor instead.
 func (MuteChatResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{21, 0}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{23, 0}
 }
 
 type UnmuteChatResponse_Result int32
@@ -513,11 +562,11 @@ func (x UnmuteChatResponse_Result) String() string {
 }
 
 func (UnmuteChatResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_chat_v1_flipchat_service_proto_enumTypes[10].Descriptor()
+	return file_chat_v1_flipchat_service_proto_enumTypes[11].Descriptor()
 }
 
 func (UnmuteChatResponse_Result) Type() protoreflect.EnumType {
-	return &file_chat_v1_flipchat_service_proto_enumTypes[10]
+	return &file_chat_v1_flipchat_service_proto_enumTypes[11]
 }
 
 func (x UnmuteChatResponse_Result) Number() protoreflect.EnumNumber {
@@ -526,7 +575,7 @@ func (x UnmuteChatResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use UnmuteChatResponse_Result.Descriptor instead.
 func (UnmuteChatResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{23, 0}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{25, 0}
 }
 
 type ReportUserResponse_Result int32
@@ -556,11 +605,11 @@ func (x ReportUserResponse_Result) String() string {
 }
 
 func (ReportUserResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_chat_v1_flipchat_service_proto_enumTypes[11].Descriptor()
+	return file_chat_v1_flipchat_service_proto_enumTypes[12].Descriptor()
 }
 
 func (ReportUserResponse_Result) Type() protoreflect.EnumType {
-	return &file_chat_v1_flipchat_service_proto_enumTypes[11]
+	return &file_chat_v1_flipchat_service_proto_enumTypes[12]
 }
 
 func (x ReportUserResponse_Result) Number() protoreflect.EnumNumber {
@@ -569,7 +618,7 @@ func (x ReportUserResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ReportUserResponse_Result.Descriptor instead.
 func (ReportUserResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{25, 0}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{27, 0}
 }
 
 type Metadata_ChatType int32
@@ -605,11 +654,11 @@ func (x Metadata_ChatType) String() string {
 }
 
 func (Metadata_ChatType) Descriptor() protoreflect.EnumDescriptor {
-	return file_chat_v1_flipchat_service_proto_enumTypes[12].Descriptor()
+	return file_chat_v1_flipchat_service_proto_enumTypes[13].Descriptor()
 }
 
 func (Metadata_ChatType) Type() protoreflect.EnumType {
-	return &file_chat_v1_flipchat_service_proto_enumTypes[12]
+	return &file_chat_v1_flipchat_service_proto_enumTypes[13]
 }
 
 func (x Metadata_ChatType) Number() protoreflect.EnumNumber {
@@ -618,7 +667,7 @@ func (x Metadata_ChatType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Metadata_ChatType.Descriptor instead.
 func (Metadata_ChatType) EnumDescriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{26, 0}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{28, 0}
 }
 
 type StreamChatEventsRequest struct {
@@ -1575,6 +1624,120 @@ func (x *LeaveChatResponse) GetResult() LeaveChatResponse_Result {
 	return LeaveChatResponse_OK
 }
 
+type SetDisplayNameRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ChatId      *v1.ChatId `protobuf:"bytes,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
+	DisplayName string     `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Auth        *v1.Auth   `protobuf:"bytes,3,opt,name=auth,proto3" json:"auth,omitempty"`
+}
+
+func (x *SetDisplayNameRequest) Reset() {
+	*x = SetDisplayNameRequest{}
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDisplayNameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDisplayNameRequest) ProtoMessage() {}
+
+func (x *SetDisplayNameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDisplayNameRequest.ProtoReflect.Descriptor instead.
+func (*SetDisplayNameRequest) Descriptor() ([]byte, []int) {
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SetDisplayNameRequest) GetChatId() *v1.ChatId {
+	if x != nil {
+		return x.ChatId
+	}
+	return nil
+}
+
+func (x *SetDisplayNameRequest) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *SetDisplayNameRequest) GetAuth() *v1.Auth {
+	if x != nil {
+		return x.Auth
+	}
+	return nil
+}
+
+type SetDisplayNameResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result               SetDisplayNameResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=flipchat.chat.v1.SetDisplayNameResponse_Result" json:"result,omitempty"`
+	AlternateSuggestions []string                      `protobuf:"bytes,2,rep,name=alternate_suggestions,json=alternateSuggestions,proto3" json:"alternate_suggestions,omitempty"`
+}
+
+func (x *SetDisplayNameResponse) Reset() {
+	*x = SetDisplayNameResponse{}
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDisplayNameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDisplayNameResponse) ProtoMessage() {}
+
+func (x *SetDisplayNameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDisplayNameResponse.ProtoReflect.Descriptor instead.
+func (*SetDisplayNameResponse) Descriptor() ([]byte, []int) {
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *SetDisplayNameResponse) GetResult() SetDisplayNameResponse_Result {
+	if x != nil {
+		return x.Result
+	}
+	return SetDisplayNameResponse_OK
+}
+
+func (x *SetDisplayNameResponse) GetAlternateSuggestions() []string {
+	if x != nil {
+		return x.AlternateSuggestions
+	}
+	return nil
+}
+
 type SetCoverChargeRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1587,7 +1750,7 @@ type SetCoverChargeRequest struct {
 
 func (x *SetCoverChargeRequest) Reset() {
 	*x = SetCoverChargeRequest{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[14]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1599,7 +1762,7 @@ func (x *SetCoverChargeRequest) String() string {
 func (*SetCoverChargeRequest) ProtoMessage() {}
 
 func (x *SetCoverChargeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[14]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1612,7 +1775,7 @@ func (x *SetCoverChargeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetCoverChargeRequest.ProtoReflect.Descriptor instead.
 func (*SetCoverChargeRequest) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{14}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SetCoverChargeRequest) GetChatId() *v1.ChatId {
@@ -1646,7 +1809,7 @@ type SetCoverChargeResponse struct {
 
 func (x *SetCoverChargeResponse) Reset() {
 	*x = SetCoverChargeResponse{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[15]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1658,7 +1821,7 @@ func (x *SetCoverChargeResponse) String() string {
 func (*SetCoverChargeResponse) ProtoMessage() {}
 
 func (x *SetCoverChargeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[15]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1671,7 +1834,7 @@ func (x *SetCoverChargeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetCoverChargeResponse.ProtoReflect.Descriptor instead.
 func (*SetCoverChargeResponse) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{15}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *SetCoverChargeResponse) GetResult() SetCoverChargeResponse_Result {
@@ -1693,7 +1856,7 @@ type RemoveUserRequest struct {
 
 func (x *RemoveUserRequest) Reset() {
 	*x = RemoveUserRequest{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[16]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1705,7 +1868,7 @@ func (x *RemoveUserRequest) String() string {
 func (*RemoveUserRequest) ProtoMessage() {}
 
 func (x *RemoveUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[16]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1718,7 +1881,7 @@ func (x *RemoveUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveUserRequest.ProtoReflect.Descriptor instead.
 func (*RemoveUserRequest) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{16}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RemoveUserRequest) GetChatId() *v1.ChatId {
@@ -1752,7 +1915,7 @@ type RemoveUserResponse struct {
 
 func (x *RemoveUserResponse) Reset() {
 	*x = RemoveUserResponse{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[17]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1764,7 +1927,7 @@ func (x *RemoveUserResponse) String() string {
 func (*RemoveUserResponse) ProtoMessage() {}
 
 func (x *RemoveUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[17]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1777,7 +1940,7 @@ func (x *RemoveUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveUserResponse.ProtoReflect.Descriptor instead.
 func (*RemoveUserResponse) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{17}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *RemoveUserResponse) GetResult() RemoveUserResponse_Result {
@@ -1799,7 +1962,7 @@ type MuteUserRequest struct {
 
 func (x *MuteUserRequest) Reset() {
 	*x = MuteUserRequest{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[18]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1811,7 +1974,7 @@ func (x *MuteUserRequest) String() string {
 func (*MuteUserRequest) ProtoMessage() {}
 
 func (x *MuteUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[18]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1824,7 +1987,7 @@ func (x *MuteUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MuteUserRequest.ProtoReflect.Descriptor instead.
 func (*MuteUserRequest) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{18}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *MuteUserRequest) GetChatId() *v1.ChatId {
@@ -1858,7 +2021,7 @@ type MuteUserResponse struct {
 
 func (x *MuteUserResponse) Reset() {
 	*x = MuteUserResponse{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[19]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1870,7 +2033,7 @@ func (x *MuteUserResponse) String() string {
 func (*MuteUserResponse) ProtoMessage() {}
 
 func (x *MuteUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[19]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1883,7 +2046,7 @@ func (x *MuteUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MuteUserResponse.ProtoReflect.Descriptor instead.
 func (*MuteUserResponse) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{19}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *MuteUserResponse) GetResult() MuteUserResponse_Result {
@@ -1904,7 +2067,7 @@ type MuteChatRequest struct {
 
 func (x *MuteChatRequest) Reset() {
 	*x = MuteChatRequest{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[20]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1916,7 +2079,7 @@ func (x *MuteChatRequest) String() string {
 func (*MuteChatRequest) ProtoMessage() {}
 
 func (x *MuteChatRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[20]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1929,7 +2092,7 @@ func (x *MuteChatRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MuteChatRequest.ProtoReflect.Descriptor instead.
 func (*MuteChatRequest) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{20}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *MuteChatRequest) GetChatId() *v1.ChatId {
@@ -1956,7 +2119,7 @@ type MuteChatResponse struct {
 
 func (x *MuteChatResponse) Reset() {
 	*x = MuteChatResponse{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[21]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1968,7 +2131,7 @@ func (x *MuteChatResponse) String() string {
 func (*MuteChatResponse) ProtoMessage() {}
 
 func (x *MuteChatResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[21]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1981,7 +2144,7 @@ func (x *MuteChatResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MuteChatResponse.ProtoReflect.Descriptor instead.
 func (*MuteChatResponse) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{21}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *MuteChatResponse) GetResult() MuteChatResponse_Result {
@@ -2002,7 +2165,7 @@ type UnmuteChatRequest struct {
 
 func (x *UnmuteChatRequest) Reset() {
 	*x = UnmuteChatRequest{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[22]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2014,7 +2177,7 @@ func (x *UnmuteChatRequest) String() string {
 func (*UnmuteChatRequest) ProtoMessage() {}
 
 func (x *UnmuteChatRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[22]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2027,7 +2190,7 @@ func (x *UnmuteChatRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnmuteChatRequest.ProtoReflect.Descriptor instead.
 func (*UnmuteChatRequest) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{22}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *UnmuteChatRequest) GetChatId() *v1.ChatId {
@@ -2054,7 +2217,7 @@ type UnmuteChatResponse struct {
 
 func (x *UnmuteChatResponse) Reset() {
 	*x = UnmuteChatResponse{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[23]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2066,7 +2229,7 @@ func (x *UnmuteChatResponse) String() string {
 func (*UnmuteChatResponse) ProtoMessage() {}
 
 func (x *UnmuteChatResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[23]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2079,7 +2242,7 @@ func (x *UnmuteChatResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnmuteChatResponse.ProtoReflect.Descriptor instead.
 func (*UnmuteChatResponse) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{23}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *UnmuteChatResponse) GetResult() UnmuteChatResponse_Result {
@@ -2101,7 +2264,7 @@ type ReportUserRequest struct {
 
 func (x *ReportUserRequest) Reset() {
 	*x = ReportUserRequest{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[24]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2113,7 +2276,7 @@ func (x *ReportUserRequest) String() string {
 func (*ReportUserRequest) ProtoMessage() {}
 
 func (x *ReportUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[24]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2126,7 +2289,7 @@ func (x *ReportUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportUserRequest.ProtoReflect.Descriptor instead.
 func (*ReportUserRequest) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{24}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ReportUserRequest) GetUserId() *v1.UserId {
@@ -2160,7 +2323,7 @@ type ReportUserResponse struct {
 
 func (x *ReportUserResponse) Reset() {
 	*x = ReportUserResponse{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[25]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2172,7 +2335,7 @@ func (x *ReportUserResponse) String() string {
 func (*ReportUserResponse) ProtoMessage() {}
 
 func (x *ReportUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[25]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2185,7 +2348,7 @@ func (x *ReportUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportUserResponse.ProtoReflect.Descriptor instead.
 func (*ReportUserResponse) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{25}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ReportUserResponse) GetResult() ReportUserResponse_Result {
@@ -2225,12 +2388,13 @@ type Metadata struct {
 	LastActivity *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=last_activity,json=lastActivity,proto3" json:"last_activity,omitempty"`
 	// If there are more unread messages than indicated by num_unread. If this is
 	// true, client should show num_unread+ as the unread count.
-	HasMoreUnread bool `protobuf:"varint,11,opt,name=has_more_unread,json=hasMoreUnread,proto3" json:"has_more_unread,omitempty"`
+	HasMoreUnread bool   `protobuf:"varint,11,opt,name=has_more_unread,json=hasMoreUnread,proto3" json:"has_more_unread,omitempty"`
+	DisplayName   string `protobuf:"bytes,12,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
 }
 
 func (x *Metadata) Reset() {
 	*x = Metadata{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[26]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2242,7 +2406,7 @@ func (x *Metadata) String() string {
 func (*Metadata) ProtoMessage() {}
 
 func (x *Metadata) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[26]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2255,7 +2419,7 @@ func (x *Metadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Metadata.ProtoReflect.Descriptor instead.
 func (*Metadata) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{26}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *Metadata) GetChatId() *v1.ChatId {
@@ -2335,6 +2499,13 @@ func (x *Metadata) GetHasMoreUnread() bool {
 	return false
 }
 
+func (x *Metadata) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
 type Member struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2369,7 +2540,7 @@ type Member struct {
 
 func (x *Member) Reset() {
 	*x = Member{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[27]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2381,7 +2552,7 @@ func (x *Member) String() string {
 func (*Member) ProtoMessage() {}
 
 func (x *Member) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[27]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2394,7 +2565,7 @@ func (x *Member) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Member.ProtoReflect.Descriptor instead.
 func (*Member) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{27}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *Member) GetUserId() *v1.UserId {
@@ -2459,7 +2630,7 @@ type MemberIdentity struct {
 
 func (x *MemberIdentity) Reset() {
 	*x = MemberIdentity{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[28]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2471,7 +2642,7 @@ func (x *MemberIdentity) String() string {
 func (*MemberIdentity) ProtoMessage() {}
 
 func (x *MemberIdentity) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[28]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2484,7 +2655,7 @@ func (x *MemberIdentity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemberIdentity.ProtoReflect.Descriptor instead.
 func (*MemberIdentity) Descriptor() ([]byte, []int) {
-	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{28}
+	return file_chat_v1_flipchat_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *MemberIdentity) GetDisplayName() string {
@@ -2516,7 +2687,7 @@ type StreamChatEventsRequest_Params struct {
 
 func (x *StreamChatEventsRequest_Params) Reset() {
 	*x = StreamChatEventsRequest_Params{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[29]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2528,7 +2699,7 @@ func (x *StreamChatEventsRequest_Params) String() string {
 func (*StreamChatEventsRequest_Params) ProtoMessage() {}
 
 func (x *StreamChatEventsRequest_Params) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[29]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2568,7 +2739,7 @@ type StreamChatEventsResponse_StreamError struct {
 
 func (x *StreamChatEventsResponse_StreamError) Reset() {
 	*x = StreamChatEventsResponse_StreamError{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[30]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2580,7 +2751,7 @@ func (x *StreamChatEventsResponse_StreamError) String() string {
 func (*StreamChatEventsResponse_StreamError) ProtoMessage() {}
 
 func (x *StreamChatEventsResponse_StreamError) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[30]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2613,7 +2784,7 @@ type StreamChatEventsResponse_EventBatch struct {
 
 func (x *StreamChatEventsResponse_EventBatch) Reset() {
 	*x = StreamChatEventsResponse_EventBatch{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[31]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2625,7 +2796,7 @@ func (x *StreamChatEventsResponse_EventBatch) String() string {
 func (*StreamChatEventsResponse_EventBatch) ProtoMessage() {}
 
 func (x *StreamChatEventsResponse_EventBatch) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[31]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2673,7 +2844,7 @@ type StreamChatEventsResponse_ChatUpdate struct {
 
 func (x *StreamChatEventsResponse_ChatUpdate) Reset() {
 	*x = StreamChatEventsResponse_ChatUpdate{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[32]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2685,7 +2856,7 @@ func (x *StreamChatEventsResponse_ChatUpdate) String() string {
 func (*StreamChatEventsResponse_ChatUpdate) ProtoMessage() {}
 
 func (x *StreamChatEventsResponse_ChatUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[32]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2756,7 +2927,7 @@ type StreamChatEventsResponse_MemberUpdate struct {
 
 func (x *StreamChatEventsResponse_MemberUpdate) Reset() {
 	*x = StreamChatEventsResponse_MemberUpdate{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[33]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2768,7 +2939,7 @@ func (x *StreamChatEventsResponse_MemberUpdate) String() string {
 func (*StreamChatEventsResponse_MemberUpdate) ProtoMessage() {}
 
 func (x *StreamChatEventsResponse_MemberUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[33]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2820,7 +2991,7 @@ type StreamChatEventsResponse_ChatUpdate_PointerUpdate struct {
 
 func (x *StreamChatEventsResponse_ChatUpdate_PointerUpdate) Reset() {
 	*x = StreamChatEventsResponse_ChatUpdate_PointerUpdate{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[34]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2832,7 +3003,7 @@ func (x *StreamChatEventsResponse_ChatUpdate_PointerUpdate) String() string {
 func (*StreamChatEventsResponse_ChatUpdate_PointerUpdate) ProtoMessage() {}
 
 func (x *StreamChatEventsResponse_ChatUpdate_PointerUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[34]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2872,7 +3043,7 @@ type StreamChatEventsResponse_MemberUpdate_Refresh struct {
 
 func (x *StreamChatEventsResponse_MemberUpdate_Refresh) Reset() {
 	*x = StreamChatEventsResponse_MemberUpdate_Refresh{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[35]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2884,7 +3055,7 @@ func (x *StreamChatEventsResponse_MemberUpdate_Refresh) String() string {
 func (*StreamChatEventsResponse_MemberUpdate_Refresh) ProtoMessage() {}
 
 func (x *StreamChatEventsResponse_MemberUpdate_Refresh) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[35]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2923,7 +3094,7 @@ type StartChatRequest_StartTwoWayChatParameters struct {
 
 func (x *StartChatRequest_StartTwoWayChatParameters) Reset() {
 	*x = StartChatRequest_StartTwoWayChatParameters{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[36]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2935,7 +3106,7 @@ func (x *StartChatRequest_StartTwoWayChatParameters) String() string {
 func (*StartChatRequest_StartTwoWayChatParameters) ProtoMessage() {}
 
 func (x *StartChatRequest_StartTwoWayChatParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[36]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2974,7 +3145,7 @@ type StartChatRequest_StartGroupChatParameters struct {
 
 func (x *StartChatRequest_StartGroupChatParameters) Reset() {
 	*x = StartChatRequest_StartGroupChatParameters{}
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[37]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2986,7 +3157,7 @@ func (x *StartChatRequest_StartGroupChatParameters) String() string {
 func (*StartChatRequest_StartGroupChatParameters) ProtoMessage() {}
 
 func (x *StartChatRequest_StartGroupChatParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_v1_flipchat_service_proto_msgTypes[37]
+	mi := &file_chat_v1_flipchat_service_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3293,7 +3464,32 @@ var file_chat_v1_flipchat_service_proto_rawDesc = []byte{
 	0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x43, 0x68, 0x61,
 	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74,
 	0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x10, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75,
-	0x6c, 0x74, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x22, 0xd4, 0x01, 0x0a, 0x15, 0x53,
+	0x6c, 0x74, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x22, 0xbc, 0x01, 0x0a, 0x15, 0x53,
+	0x65, 0x74, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x3d, 0x0a, 0x07, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74,
+	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x49,
+	0x64, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x06, 0x63, 0x68, 0x61,
+	0x74, 0x49, 0x64, 0x12, 0x2c, 0x0a, 0x0c, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x5f, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x09, 0xfa, 0x42, 0x06, 0x72, 0x04,
+	0x10, 0x01, 0x18, 0x40, 0x52, 0x0b, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x36, 0x0a, 0x04, 0x61, 0x75, 0x74, 0x68, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x18, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x8a, 0x01,
+	0x02, 0x10, 0x01, 0x52, 0x04, 0x61, 0x75, 0x74, 0x68, 0x22, 0xce, 0x01, 0x0a, 0x16, 0x53, 0x65,
+	0x74, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x47, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0e, 0x32, 0x2f, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x44, 0x69, 0x73, 0x70, 0x6c,
+	0x61, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52,
+	0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x3f, 0x0a,
+	0x15, 0x61, 0x6c, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x74, 0x65, 0x5f, 0x73, 0x75, 0x67, 0x67, 0x65,
+	0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x42, 0x0a, 0xfa, 0x42,
+	0x07, 0x92, 0x01, 0x04, 0x08, 0x00, 0x10, 0x0a, 0x52, 0x14, 0x61, 0x6c, 0x74, 0x65, 0x72, 0x6e,
+	0x61, 0x74, 0x65, 0x53, 0x75, 0x67, 0x67, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x2a,
+	0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00,
+	0x12, 0x0a, 0x0a, 0x06, 0x44, 0x45, 0x4e, 0x49, 0x45, 0x44, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08,
+	0x43, 0x41, 0x4e, 0x54, 0x5f, 0x53, 0x45, 0x54, 0x10, 0x02, 0x22, 0xd4, 0x01, 0x0a, 0x15, 0x53,
 	0x65, 0x74, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x43, 0x68, 0x61, 0x72, 0x67, 0x65, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x12, 0x3d, 0x0a, 0x07, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x69, 0x64, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74,
@@ -3409,7 +3605,7 @@ var file_chat_v1_flipchat_service_proto_rawDesc = []byte{
 	0x6f, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e,
 	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x10,
 	0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00,
-	0x22, 0xd2, 0x04, 0x0a, 0x08, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x3d, 0x0a,
+	0x22, 0x80, 0x05, 0x0a, 0x08, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x3d, 0x0a,
 	0x07, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a,
 	0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
 	0x2e, 0x76, 0x31, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x49, 0x64, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x8a,
@@ -3443,115 +3639,124 @@ var file_chat_v1_flipchat_service_proto_rawDesc = []byte{
 	0x6c, 0x61, 0x73, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x12, 0x26, 0x0a, 0x0f,
 	0x68, 0x61, 0x73, 0x5f, 0x6d, 0x6f, 0x72, 0x65, 0x5f, 0x75, 0x6e, 0x72, 0x65, 0x61, 0x64, 0x18,
 	0x0b, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0d, 0x68, 0x61, 0x73, 0x4d, 0x6f, 0x72, 0x65, 0x55, 0x6e,
-	0x72, 0x65, 0x61, 0x64, 0x22, 0x2f, 0x0a, 0x08, 0x43, 0x68, 0x61, 0x74, 0x54, 0x79, 0x70, 0x65,
-	0x12, 0x0b, 0x0a, 0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x0b, 0x0a,
-	0x07, 0x54, 0x57, 0x4f, 0x5f, 0x57, 0x41, 0x59, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x47, 0x52,
-	0x4f, 0x55, 0x50, 0x10, 0x02, 0x22, 0xeb, 0x02, 0x0a, 0x06, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72,
-	0x12, 0x3d, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x1a, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x6f, 0x6d,
-	0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x42, 0x08, 0xfa,
-	0x42, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12,
-	0x3c, 0x0a, 0x08, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x20, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61,
-	0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x65, 0x6e, 0x74,
-	0x69, 0x74, 0x79, 0x52, 0x08, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x46, 0x0a,
-	0x08, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32,
-	0x1e, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x42,
-	0x0a, 0xfa, 0x42, 0x07, 0x92, 0x01, 0x04, 0x08, 0x00, 0x10, 0x02, 0x52, 0x08, 0x70, 0x6f, 0x69,
-	0x6e, 0x74, 0x65, 0x72, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x69, 0x73, 0x5f, 0x73, 0x65, 0x6c, 0x66,
-	0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x69, 0x73, 0x53, 0x65, 0x6c, 0x66, 0x12, 0x38,
-	0x0a, 0x18, 0x68, 0x61, 0x73, 0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x5f,
-	0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08,
-	0x52, 0x16, 0x68, 0x61, 0x73, 0x4d, 0x6f, 0x64, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x50, 0x65,
-	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x19, 0x0a, 0x08, 0x69, 0x73, 0x5f, 0x6d,
-	0x75, 0x74, 0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69, 0x73, 0x4d, 0x75,
-	0x74, 0x65, 0x64, 0x12, 0x2e, 0x0a, 0x13, 0x68, 0x61, 0x73, 0x5f, 0x73, 0x65, 0x6e, 0x64, 0x5f,
-	0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08,
-	0x52, 0x11, 0x68, 0x61, 0x73, 0x53, 0x65, 0x6e, 0x64, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73,
-	0x69, 0x6f, 0x6e, 0x22, 0x6f, 0x0a, 0x0e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x65,
-	0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x2b, 0x0a, 0x0c, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79,
-	0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xfa, 0x42, 0x05,
-	0x72, 0x03, 0x18, 0xff, 0x01, 0x52, 0x0b, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61,
-	0x6d, 0x65, 0x12, 0x30, 0x0a, 0x0f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x70, 0x69,
-	0x63, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xfa, 0x42, 0x05,
-	0x72, 0x03, 0x18, 0xff, 0x01, 0x52, 0x0d, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x50, 0x69,
-	0x63, 0x55, 0x72, 0x6c, 0x32, 0xad, 0x08, 0x0a, 0x04, 0x43, 0x68, 0x61, 0x74, 0x12, 0x6d, 0x0a,
-	0x10, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74,
-	0x73, 0x12, 0x29, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61,
-	0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x74, 0x45,
-	0x76, 0x65, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x66,
-	0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e,
-	0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x30, 0x01, 0x12, 0x51, 0x0a, 0x08,
-	0x47, 0x65, 0x74, 0x43, 0x68, 0x61, 0x74, 0x73, 0x12, 0x21, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63,
+	0x72, 0x65, 0x61, 0x64, 0x12, 0x2c, 0x0a, 0x0c, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x5f,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x42, 0x09, 0xfa, 0x42, 0x06, 0x72,
+	0x04, 0x10, 0x00, 0x18, 0x40, 0x52, 0x0b, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61,
+	0x6d, 0x65, 0x22, 0x2f, 0x0a, 0x08, 0x43, 0x68, 0x61, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0b,
+	0x0a, 0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x54,
+	0x57, 0x4f, 0x5f, 0x57, 0x41, 0x59, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x47, 0x52, 0x4f, 0x55,
+	0x50, 0x10, 0x02, 0x22, 0xeb, 0x02, 0x0a, 0x06, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x3d,
+	0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1a, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x42, 0x08, 0xfa, 0x42, 0x05,
+	0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x3c, 0x0a,
+	0x08, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x20, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e,
+	0x76, 0x31, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74,
+	0x79, 0x52, 0x08, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x46, 0x0a, 0x08, 0x70,
+	0x6f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e,
+	0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x69,
+	0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x42, 0x0a, 0xfa,
+	0x42, 0x07, 0x92, 0x01, 0x04, 0x08, 0x00, 0x10, 0x02, 0x52, 0x08, 0x70, 0x6f, 0x69, 0x6e, 0x74,
+	0x65, 0x72, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x69, 0x73, 0x5f, 0x73, 0x65, 0x6c, 0x66, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x69, 0x73, 0x53, 0x65, 0x6c, 0x66, 0x12, 0x38, 0x0a, 0x18,
+	0x68, 0x61, 0x73, 0x5f, 0x6d, 0x6f, 0x64, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x70, 0x65,
+	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x16,
+	0x68, 0x61, 0x73, 0x4d, 0x6f, 0x64, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x50, 0x65, 0x72, 0x6d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x19, 0x0a, 0x08, 0x69, 0x73, 0x5f, 0x6d, 0x75, 0x74,
+	0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69, 0x73, 0x4d, 0x75, 0x74, 0x65,
+	0x64, 0x12, 0x2e, 0x0a, 0x13, 0x68, 0x61, 0x73, 0x5f, 0x73, 0x65, 0x6e, 0x64, 0x5f, 0x70, 0x65,
+	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x11,
+	0x68, 0x61, 0x73, 0x53, 0x65, 0x6e, 0x64, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x22, 0x6f, 0x0a, 0x0e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x65, 0x6e, 0x74,
+	0x69, 0x74, 0x79, 0x12, 0x2b, 0x0a, 0x0c, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x5f, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x72, 0x03,
+	0x18, 0xff, 0x01, 0x52, 0x0b, 0x64, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61, 0x6d, 0x65,
+	0x12, 0x30, 0x0a, 0x0f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x70, 0x69, 0x63, 0x5f,
+	0x75, 0x72, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x72, 0x03,
+	0x18, 0xff, 0x01, 0x52, 0x0d, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x50, 0x69, 0x63, 0x55,
+	0x72, 0x6c, 0x32, 0x92, 0x09, 0x0a, 0x04, 0x43, 0x68, 0x61, 0x74, 0x12, 0x6d, 0x0a, 0x10, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x12,
+	0x29, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e,
+	0x76, 0x31, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x74, 0x45, 0x76, 0x65,
+	0x6e, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x66, 0x6c, 0x69,
+	0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x30, 0x01, 0x12, 0x51, 0x0a, 0x08, 0x47, 0x65,
+	0x74, 0x43, 0x68, 0x61, 0x74, 0x73, 0x12, 0x21, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61,
+	0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x68, 0x61,
+	0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x66, 0x6c, 0x69, 0x70,
+	0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74,
+	0x43, 0x68, 0x61, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a,
+	0x07, 0x47, 0x65, 0x74, 0x43, 0x68, 0x61, 0x74, 0x12, 0x20, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63,
 	0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x43,
-	0x68, 0x61, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x66, 0x6c,
-	0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x47,
-	0x65, 0x74, 0x43, 0x68, 0x61, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x4e, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x43, 0x68, 0x61, 0x74, 0x12, 0x20, 0x2e, 0x66, 0x6c, 0x69,
+	0x68, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x66, 0x6c, 0x69,
 	0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65,
-	0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x66,
-	0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e,
-	0x47, 0x65, 0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x54, 0x0a, 0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x68, 0x61, 0x74, 0x12, 0x22, 0x2e, 0x66,
-	0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e,
-	0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x23, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74,
-	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x08, 0x4a, 0x6f, 0x69, 0x6e, 0x43, 0x68, 0x61,
-	0x74, 0x12, 0x21, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61,
-	0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4a, 0x6f, 0x69, 0x6e, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e,
-	0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4a, 0x6f, 0x69, 0x6e, 0x43, 0x68, 0x61, 0x74,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x54, 0x0a, 0x09, 0x4c, 0x65, 0x61, 0x76,
-	0x65, 0x43, 0x68, 0x61, 0x74, 0x12, 0x22, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74,
-	0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x43, 0x68,
-	0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x66, 0x6c, 0x69, 0x70,
-	0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x65, 0x61,
-	0x76, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x63,
-	0x0a, 0x0e, 0x53, 0x65, 0x74, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x43, 0x68, 0x61, 0x72, 0x67, 0x65,
-	0x12, 0x27, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74,
-	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x43, 0x68, 0x61, 0x72,
-	0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x66, 0x6c, 0x69, 0x70,
-	0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74,
-	0x43, 0x6f, 0x76, 0x65, 0x72, 0x43, 0x68, 0x61, 0x72, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x0a, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x55, 0x73, 0x65,
-	0x72, 0x12, 0x23, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61,
-	0x74, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61,
-	0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65,
-	0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x08,
-	0x4d, 0x75, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x21, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63,
-	0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x75, 0x74, 0x65,
-	0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x66, 0x6c,
-	0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
-	0x75, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x51, 0x0a, 0x08, 0x4d, 0x75, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x12, 0x21, 0x2e, 0x66, 0x6c,
-	0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
-	0x75, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22,
+	0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x54, 0x0a,
+	0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x68, 0x61, 0x74, 0x12, 0x22, 0x2e, 0x66, 0x6c, 0x69,
+	0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74,
+	0x61, 0x72, 0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23,
 	0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76,
-	0x31, 0x2e, 0x4d, 0x75, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x57, 0x0a, 0x0a, 0x55, 0x6e, 0x6d, 0x75, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74,
-	0x12, 0x23, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74,
-	0x2e, 0x76, 0x31, 0x2e, 0x55, 0x6e, 0x6d, 0x75, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74,
-	0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x6e, 0x6d, 0x75, 0x74, 0x65, 0x43,
-	0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x0a, 0x52,
-	0x65, 0x70, 0x6f, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x12, 0x23, 0x2e, 0x66, 0x6c, 0x69, 0x70,
-	0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x70,
-	0x6f, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24,
+	0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x08, 0x4a, 0x6f, 0x69, 0x6e, 0x43, 0x68, 0x61, 0x74, 0x12,
+	0x21, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e,
+	0x76, 0x31, 0x2e, 0x4a, 0x6f, 0x69, 0x6e, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x22, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68,
+	0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4a, 0x6f, 0x69, 0x6e, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x54, 0x0a, 0x09, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x43,
+	0x68, 0x61, 0x74, 0x12, 0x22, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x43, 0x68, 0x61, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68,
+	0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x65, 0x61, 0x76, 0x65,
+	0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x63, 0x0a, 0x0e,
+	0x53, 0x65, 0x74, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x27,
 	0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76,
-	0x31, 0x2e, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x42, 0x7b, 0x0a, 0x20, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x64, 0x65,
-	0x69, 0x6e, 0x63, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x67, 0x65, 0x6e,
-	0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x5a, 0x4a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x2d, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e,
-	0x74, 0x73, 0x2f, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2d, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74,
-	0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x76, 0x31, 0x3b, 0x63, 0x68,
-	0x61, 0x74, 0x70, 0x62, 0xa2, 0x02, 0x0a, 0x46, 0x43, 0x50, 0x42, 0x43, 0x68, 0x61, 0x74, 0x56,
-	0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x31, 0x2e, 0x53, 0x65, 0x74, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61, 0x6d, 0x65,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68,
+	0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x44, 0x69,
+	0x73, 0x70, 0x6c, 0x61, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x63, 0x0a, 0x0e, 0x53, 0x65, 0x74, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x43, 0x68, 0x61,
+	0x72, 0x67, 0x65, 0x12, 0x27, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x74, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x43,
+	0x68, 0x61, 0x72, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x66,
+	0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e,
+	0x53, 0x65, 0x74, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x43, 0x68, 0x61, 0x72, 0x67, 0x65, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x0a, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65,
+	0x55, 0x73, 0x65, 0x72, 0x12, 0x23, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x55, 0x73,
+	0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x66, 0x6c, 0x69, 0x70,
+	0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x6d,
+	0x6f, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x51, 0x0a, 0x08, 0x4d, 0x75, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x21, 0x2e, 0x66, 0x6c,
+	0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
+	0x75, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22,
+	0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76,
+	0x31, 0x2e, 0x4d, 0x75, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x51, 0x0a, 0x08, 0x4d, 0x75, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x12, 0x21,
+	0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76,
+	0x31, 0x2e, 0x4d, 0x75, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x22, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x75, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x0a, 0x55, 0x6e, 0x6d, 0x75, 0x74, 0x65, 0x43,
+	0x68, 0x61, 0x74, 0x12, 0x23, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x6e, 0x6d, 0x75, 0x74, 0x65, 0x43, 0x68, 0x61,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63,
+	0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x6e, 0x6d, 0x75,
+	0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57,
+	0x0a, 0x0a, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x12, 0x23, 0x2e, 0x66,
+	0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x2e,
+	0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x24, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x68, 0x61,
+	0x74, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x7b, 0x0a, 0x20, 0x63, 0x6f, 0x6d, 0x2e, 0x63,
+	0x6f, 0x64, 0x65, 0x69, 0x6e, 0x63, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e,
+	0x67, 0x65, 0x6e, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x76, 0x31, 0x5a, 0x4a, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x2d, 0x70, 0x61, 0x79,
+	0x6d, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2d, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x65,
+	0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x76, 0x31,
+	0x3b, 0x63, 0x68, 0x61, 0x74, 0x70, 0x62, 0xa2, 0x02, 0x0a, 0x46, 0x43, 0x50, 0x42, 0x43, 0x68,
+	0x61, 0x74, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3566,8 +3771,8 @@ func file_chat_v1_flipchat_service_proto_rawDescGZIP() []byte {
 	return file_chat_v1_flipchat_service_proto_rawDescData
 }
 
-var file_chat_v1_flipchat_service_proto_enumTypes = make([]protoimpl.EnumInfo, 13)
-var file_chat_v1_flipchat_service_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
+var file_chat_v1_flipchat_service_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
+var file_chat_v1_flipchat_service_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_chat_v1_flipchat_service_proto_goTypes = []any{
 	(StreamChatEventsResponse_StreamError_Code)(0),            // 0: flipchat.chat.v1.StreamChatEventsResponse.StreamError.Code
 	(GetChatsResponse_Result)(0),                              // 1: flipchat.chat.v1.GetChatsResponse.Result
@@ -3575,174 +3780,182 @@ var file_chat_v1_flipchat_service_proto_goTypes = []any{
 	(StartChatResponse_Result)(0),                             // 3: flipchat.chat.v1.StartChatResponse.Result
 	(JoinChatResponse_Result)(0),                              // 4: flipchat.chat.v1.JoinChatResponse.Result
 	(LeaveChatResponse_Result)(0),                             // 5: flipchat.chat.v1.LeaveChatResponse.Result
-	(SetCoverChargeResponse_Result)(0),                        // 6: flipchat.chat.v1.SetCoverChargeResponse.Result
-	(RemoveUserResponse_Result)(0),                            // 7: flipchat.chat.v1.RemoveUserResponse.Result
-	(MuteUserResponse_Result)(0),                              // 8: flipchat.chat.v1.MuteUserResponse.Result
-	(MuteChatResponse_Result)(0),                              // 9: flipchat.chat.v1.MuteChatResponse.Result
-	(UnmuteChatResponse_Result)(0),                            // 10: flipchat.chat.v1.UnmuteChatResponse.Result
-	(ReportUserResponse_Result)(0),                            // 11: flipchat.chat.v1.ReportUserResponse.Result
-	(Metadata_ChatType)(0),                                    // 12: flipchat.chat.v1.Metadata.ChatType
-	(*StreamChatEventsRequest)(nil),                           // 13: flipchat.chat.v1.StreamChatEventsRequest
-	(*StreamChatEventsResponse)(nil),                          // 14: flipchat.chat.v1.StreamChatEventsResponse
-	(*GetChatsRequest)(nil),                                   // 15: flipchat.chat.v1.GetChatsRequest
-	(*GetChatsResponse)(nil),                                  // 16: flipchat.chat.v1.GetChatsResponse
-	(*GetChatRequest)(nil),                                    // 17: flipchat.chat.v1.GetChatRequest
-	(*GetChatResponse)(nil),                                   // 18: flipchat.chat.v1.GetChatResponse
-	(*StartChatRequest)(nil),                                  // 19: flipchat.chat.v1.StartChatRequest
-	(*StartChatResponse)(nil),                                 // 20: flipchat.chat.v1.StartChatResponse
-	(*StartGroupChatPaymentMetadata)(nil),                     // 21: flipchat.chat.v1.StartGroupChatPaymentMetadata
-	(*JoinChatRequest)(nil),                                   // 22: flipchat.chat.v1.JoinChatRequest
-	(*JoinChatResponse)(nil),                                  // 23: flipchat.chat.v1.JoinChatResponse
-	(*JoinChatPaymentMetadata)(nil),                           // 24: flipchat.chat.v1.JoinChatPaymentMetadata
-	(*LeaveChatRequest)(nil),                                  // 25: flipchat.chat.v1.LeaveChatRequest
-	(*LeaveChatResponse)(nil),                                 // 26: flipchat.chat.v1.LeaveChatResponse
-	(*SetCoverChargeRequest)(nil),                             // 27: flipchat.chat.v1.SetCoverChargeRequest
-	(*SetCoverChargeResponse)(nil),                            // 28: flipchat.chat.v1.SetCoverChargeResponse
-	(*RemoveUserRequest)(nil),                                 // 29: flipchat.chat.v1.RemoveUserRequest
-	(*RemoveUserResponse)(nil),                                // 30: flipchat.chat.v1.RemoveUserResponse
-	(*MuteUserRequest)(nil),                                   // 31: flipchat.chat.v1.MuteUserRequest
-	(*MuteUserResponse)(nil),                                  // 32: flipchat.chat.v1.MuteUserResponse
-	(*MuteChatRequest)(nil),                                   // 33: flipchat.chat.v1.MuteChatRequest
-	(*MuteChatResponse)(nil),                                  // 34: flipchat.chat.v1.MuteChatResponse
-	(*UnmuteChatRequest)(nil),                                 // 35: flipchat.chat.v1.UnmuteChatRequest
-	(*UnmuteChatResponse)(nil),                                // 36: flipchat.chat.v1.UnmuteChatResponse
-	(*ReportUserRequest)(nil),                                 // 37: flipchat.chat.v1.ReportUserRequest
-	(*ReportUserResponse)(nil),                                // 38: flipchat.chat.v1.ReportUserResponse
-	(*Metadata)(nil),                                          // 39: flipchat.chat.v1.Metadata
-	(*Member)(nil),                                            // 40: flipchat.chat.v1.Member
-	(*MemberIdentity)(nil),                                    // 41: flipchat.chat.v1.MemberIdentity
-	(*StreamChatEventsRequest_Params)(nil),                    // 42: flipchat.chat.v1.StreamChatEventsRequest.Params
-	(*StreamChatEventsResponse_StreamError)(nil),              // 43: flipchat.chat.v1.StreamChatEventsResponse.StreamError
-	(*StreamChatEventsResponse_EventBatch)(nil),               // 44: flipchat.chat.v1.StreamChatEventsResponse.EventBatch
-	(*StreamChatEventsResponse_ChatUpdate)(nil),               // 45: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate
-	(*StreamChatEventsResponse_MemberUpdate)(nil),             // 46: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate
-	(*StreamChatEventsResponse_ChatUpdate_PointerUpdate)(nil), // 47: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate
-	(*StreamChatEventsResponse_MemberUpdate_Refresh)(nil),     // 48: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh
-	(*StartChatRequest_StartTwoWayChatParameters)(nil),        // 49: flipchat.chat.v1.StartChatRequest.StartTwoWayChatParameters
-	(*StartChatRequest_StartGroupChatParameters)(nil),         // 50: flipchat.chat.v1.StartChatRequest.StartGroupChatParameters
-	(*v1.ClientPong)(nil),                                     // 51: flipchat.common.v1.ClientPong
-	(*v1.ServerPing)(nil),                                     // 52: flipchat.common.v1.ServerPing
-	(*v1.QueryOptions)(nil),                                   // 53: flipchat.common.v1.QueryOptions
-	(*v1.Auth)(nil),                                           // 54: flipchat.common.v1.Auth
-	(*v1.ChatId)(nil),                                         // 55: flipchat.common.v1.ChatId
-	(*v1.UserId)(nil),                                         // 56: flipchat.common.v1.UserId
-	(*v1.IntentId)(nil),                                       // 57: flipchat.common.v1.IntentId
-	(*v1.PaymentAmount)(nil),                                  // 58: flipchat.common.v1.PaymentAmount
-	(*v11.MessageId)(nil),                                     // 59: flipchat.messaging.v1.MessageId
-	(*timestamppb.Timestamp)(nil),                             // 60: google.protobuf.Timestamp
-	(*v11.Pointer)(nil),                                       // 61: flipchat.messaging.v1.Pointer
-	(*v11.Message)(nil),                                       // 62: flipchat.messaging.v1.Message
-	(*v11.IsTyping)(nil),                                      // 63: flipchat.messaging.v1.IsTyping
+	(SetDisplayNameResponse_Result)(0),                        // 6: flipchat.chat.v1.SetDisplayNameResponse.Result
+	(SetCoverChargeResponse_Result)(0),                        // 7: flipchat.chat.v1.SetCoverChargeResponse.Result
+	(RemoveUserResponse_Result)(0),                            // 8: flipchat.chat.v1.RemoveUserResponse.Result
+	(MuteUserResponse_Result)(0),                              // 9: flipchat.chat.v1.MuteUserResponse.Result
+	(MuteChatResponse_Result)(0),                              // 10: flipchat.chat.v1.MuteChatResponse.Result
+	(UnmuteChatResponse_Result)(0),                            // 11: flipchat.chat.v1.UnmuteChatResponse.Result
+	(ReportUserResponse_Result)(0),                            // 12: flipchat.chat.v1.ReportUserResponse.Result
+	(Metadata_ChatType)(0),                                    // 13: flipchat.chat.v1.Metadata.ChatType
+	(*StreamChatEventsRequest)(nil),                           // 14: flipchat.chat.v1.StreamChatEventsRequest
+	(*StreamChatEventsResponse)(nil),                          // 15: flipchat.chat.v1.StreamChatEventsResponse
+	(*GetChatsRequest)(nil),                                   // 16: flipchat.chat.v1.GetChatsRequest
+	(*GetChatsResponse)(nil),                                  // 17: flipchat.chat.v1.GetChatsResponse
+	(*GetChatRequest)(nil),                                    // 18: flipchat.chat.v1.GetChatRequest
+	(*GetChatResponse)(nil),                                   // 19: flipchat.chat.v1.GetChatResponse
+	(*StartChatRequest)(nil),                                  // 20: flipchat.chat.v1.StartChatRequest
+	(*StartChatResponse)(nil),                                 // 21: flipchat.chat.v1.StartChatResponse
+	(*StartGroupChatPaymentMetadata)(nil),                     // 22: flipchat.chat.v1.StartGroupChatPaymentMetadata
+	(*JoinChatRequest)(nil),                                   // 23: flipchat.chat.v1.JoinChatRequest
+	(*JoinChatResponse)(nil),                                  // 24: flipchat.chat.v1.JoinChatResponse
+	(*JoinChatPaymentMetadata)(nil),                           // 25: flipchat.chat.v1.JoinChatPaymentMetadata
+	(*LeaveChatRequest)(nil),                                  // 26: flipchat.chat.v1.LeaveChatRequest
+	(*LeaveChatResponse)(nil),                                 // 27: flipchat.chat.v1.LeaveChatResponse
+	(*SetDisplayNameRequest)(nil),                             // 28: flipchat.chat.v1.SetDisplayNameRequest
+	(*SetDisplayNameResponse)(nil),                            // 29: flipchat.chat.v1.SetDisplayNameResponse
+	(*SetCoverChargeRequest)(nil),                             // 30: flipchat.chat.v1.SetCoverChargeRequest
+	(*SetCoverChargeResponse)(nil),                            // 31: flipchat.chat.v1.SetCoverChargeResponse
+	(*RemoveUserRequest)(nil),                                 // 32: flipchat.chat.v1.RemoveUserRequest
+	(*RemoveUserResponse)(nil),                                // 33: flipchat.chat.v1.RemoveUserResponse
+	(*MuteUserRequest)(nil),                                   // 34: flipchat.chat.v1.MuteUserRequest
+	(*MuteUserResponse)(nil),                                  // 35: flipchat.chat.v1.MuteUserResponse
+	(*MuteChatRequest)(nil),                                   // 36: flipchat.chat.v1.MuteChatRequest
+	(*MuteChatResponse)(nil),                                  // 37: flipchat.chat.v1.MuteChatResponse
+	(*UnmuteChatRequest)(nil),                                 // 38: flipchat.chat.v1.UnmuteChatRequest
+	(*UnmuteChatResponse)(nil),                                // 39: flipchat.chat.v1.UnmuteChatResponse
+	(*ReportUserRequest)(nil),                                 // 40: flipchat.chat.v1.ReportUserRequest
+	(*ReportUserResponse)(nil),                                // 41: flipchat.chat.v1.ReportUserResponse
+	(*Metadata)(nil),                                          // 42: flipchat.chat.v1.Metadata
+	(*Member)(nil),                                            // 43: flipchat.chat.v1.Member
+	(*MemberIdentity)(nil),                                    // 44: flipchat.chat.v1.MemberIdentity
+	(*StreamChatEventsRequest_Params)(nil),                    // 45: flipchat.chat.v1.StreamChatEventsRequest.Params
+	(*StreamChatEventsResponse_StreamError)(nil),              // 46: flipchat.chat.v1.StreamChatEventsResponse.StreamError
+	(*StreamChatEventsResponse_EventBatch)(nil),               // 47: flipchat.chat.v1.StreamChatEventsResponse.EventBatch
+	(*StreamChatEventsResponse_ChatUpdate)(nil),               // 48: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate
+	(*StreamChatEventsResponse_MemberUpdate)(nil),             // 49: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate
+	(*StreamChatEventsResponse_ChatUpdate_PointerUpdate)(nil), // 50: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate
+	(*StreamChatEventsResponse_MemberUpdate_Refresh)(nil),     // 51: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh
+	(*StartChatRequest_StartTwoWayChatParameters)(nil),        // 52: flipchat.chat.v1.StartChatRequest.StartTwoWayChatParameters
+	(*StartChatRequest_StartGroupChatParameters)(nil),         // 53: flipchat.chat.v1.StartChatRequest.StartGroupChatParameters
+	(*v1.ClientPong)(nil),                                     // 54: flipchat.common.v1.ClientPong
+	(*v1.ServerPing)(nil),                                     // 55: flipchat.common.v1.ServerPing
+	(*v1.QueryOptions)(nil),                                   // 56: flipchat.common.v1.QueryOptions
+	(*v1.Auth)(nil),                                           // 57: flipchat.common.v1.Auth
+	(*v1.ChatId)(nil),                                         // 58: flipchat.common.v1.ChatId
+	(*v1.UserId)(nil),                                         // 59: flipchat.common.v1.UserId
+	(*v1.IntentId)(nil),                                       // 60: flipchat.common.v1.IntentId
+	(*v1.PaymentAmount)(nil),                                  // 61: flipchat.common.v1.PaymentAmount
+	(*v11.MessageId)(nil),                                     // 62: flipchat.messaging.v1.MessageId
+	(*timestamppb.Timestamp)(nil),                             // 63: google.protobuf.Timestamp
+	(*v11.Pointer)(nil),                                       // 64: flipchat.messaging.v1.Pointer
+	(*v11.Message)(nil),                                       // 65: flipchat.messaging.v1.Message
+	(*v11.IsTyping)(nil),                                      // 66: flipchat.messaging.v1.IsTyping
 }
 var file_chat_v1_flipchat_service_proto_depIdxs = []int32{
-	42, // 0: flipchat.chat.v1.StreamChatEventsRequest.params:type_name -> flipchat.chat.v1.StreamChatEventsRequest.Params
-	51, // 1: flipchat.chat.v1.StreamChatEventsRequest.pong:type_name -> flipchat.common.v1.ClientPong
-	52, // 2: flipchat.chat.v1.StreamChatEventsResponse.ping:type_name -> flipchat.common.v1.ServerPing
-	43, // 3: flipchat.chat.v1.StreamChatEventsResponse.error:type_name -> flipchat.chat.v1.StreamChatEventsResponse.StreamError
-	44, // 4: flipchat.chat.v1.StreamChatEventsResponse.events:type_name -> flipchat.chat.v1.StreamChatEventsResponse.EventBatch
-	53, // 5: flipchat.chat.v1.GetChatsRequest.query_options:type_name -> flipchat.common.v1.QueryOptions
-	54, // 6: flipchat.chat.v1.GetChatsRequest.auth:type_name -> flipchat.common.v1.Auth
+	45, // 0: flipchat.chat.v1.StreamChatEventsRequest.params:type_name -> flipchat.chat.v1.StreamChatEventsRequest.Params
+	54, // 1: flipchat.chat.v1.StreamChatEventsRequest.pong:type_name -> flipchat.common.v1.ClientPong
+	55, // 2: flipchat.chat.v1.StreamChatEventsResponse.ping:type_name -> flipchat.common.v1.ServerPing
+	46, // 3: flipchat.chat.v1.StreamChatEventsResponse.error:type_name -> flipchat.chat.v1.StreamChatEventsResponse.StreamError
+	47, // 4: flipchat.chat.v1.StreamChatEventsResponse.events:type_name -> flipchat.chat.v1.StreamChatEventsResponse.EventBatch
+	56, // 5: flipchat.chat.v1.GetChatsRequest.query_options:type_name -> flipchat.common.v1.QueryOptions
+	57, // 6: flipchat.chat.v1.GetChatsRequest.auth:type_name -> flipchat.common.v1.Auth
 	1,  // 7: flipchat.chat.v1.GetChatsResponse.result:type_name -> flipchat.chat.v1.GetChatsResponse.Result
-	39, // 8: flipchat.chat.v1.GetChatsResponse.chats:type_name -> flipchat.chat.v1.Metadata
-	55, // 9: flipchat.chat.v1.GetChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
-	54, // 10: flipchat.chat.v1.GetChatRequest.auth:type_name -> flipchat.common.v1.Auth
+	42, // 8: flipchat.chat.v1.GetChatsResponse.chats:type_name -> flipchat.chat.v1.Metadata
+	58, // 9: flipchat.chat.v1.GetChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	57, // 10: flipchat.chat.v1.GetChatRequest.auth:type_name -> flipchat.common.v1.Auth
 	2,  // 11: flipchat.chat.v1.GetChatResponse.result:type_name -> flipchat.chat.v1.GetChatResponse.Result
-	39, // 12: flipchat.chat.v1.GetChatResponse.metadata:type_name -> flipchat.chat.v1.Metadata
-	40, // 13: flipchat.chat.v1.GetChatResponse.members:type_name -> flipchat.chat.v1.Member
-	49, // 14: flipchat.chat.v1.StartChatRequest.two_way_chat:type_name -> flipchat.chat.v1.StartChatRequest.StartTwoWayChatParameters
-	50, // 15: flipchat.chat.v1.StartChatRequest.group_chat:type_name -> flipchat.chat.v1.StartChatRequest.StartGroupChatParameters
-	54, // 16: flipchat.chat.v1.StartChatRequest.auth:type_name -> flipchat.common.v1.Auth
+	42, // 12: flipchat.chat.v1.GetChatResponse.metadata:type_name -> flipchat.chat.v1.Metadata
+	43, // 13: flipchat.chat.v1.GetChatResponse.members:type_name -> flipchat.chat.v1.Member
+	52, // 14: flipchat.chat.v1.StartChatRequest.two_way_chat:type_name -> flipchat.chat.v1.StartChatRequest.StartTwoWayChatParameters
+	53, // 15: flipchat.chat.v1.StartChatRequest.group_chat:type_name -> flipchat.chat.v1.StartChatRequest.StartGroupChatParameters
+	57, // 16: flipchat.chat.v1.StartChatRequest.auth:type_name -> flipchat.common.v1.Auth
 	3,  // 17: flipchat.chat.v1.StartChatResponse.result:type_name -> flipchat.chat.v1.StartChatResponse.Result
-	39, // 18: flipchat.chat.v1.StartChatResponse.chat:type_name -> flipchat.chat.v1.Metadata
-	40, // 19: flipchat.chat.v1.StartChatResponse.members:type_name -> flipchat.chat.v1.Member
-	56, // 20: flipchat.chat.v1.StartGroupChatPaymentMetadata.user_id:type_name -> flipchat.common.v1.UserId
-	55, // 21: flipchat.chat.v1.JoinChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
-	57, // 22: flipchat.chat.v1.JoinChatRequest.payment_intent:type_name -> flipchat.common.v1.IntentId
-	54, // 23: flipchat.chat.v1.JoinChatRequest.auth:type_name -> flipchat.common.v1.Auth
+	42, // 18: flipchat.chat.v1.StartChatResponse.chat:type_name -> flipchat.chat.v1.Metadata
+	43, // 19: flipchat.chat.v1.StartChatResponse.members:type_name -> flipchat.chat.v1.Member
+	59, // 20: flipchat.chat.v1.StartGroupChatPaymentMetadata.user_id:type_name -> flipchat.common.v1.UserId
+	58, // 21: flipchat.chat.v1.JoinChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	60, // 22: flipchat.chat.v1.JoinChatRequest.payment_intent:type_name -> flipchat.common.v1.IntentId
+	57, // 23: flipchat.chat.v1.JoinChatRequest.auth:type_name -> flipchat.common.v1.Auth
 	4,  // 24: flipchat.chat.v1.JoinChatResponse.result:type_name -> flipchat.chat.v1.JoinChatResponse.Result
-	39, // 25: flipchat.chat.v1.JoinChatResponse.metadata:type_name -> flipchat.chat.v1.Metadata
-	40, // 26: flipchat.chat.v1.JoinChatResponse.members:type_name -> flipchat.chat.v1.Member
-	56, // 27: flipchat.chat.v1.JoinChatPaymentMetadata.user_id:type_name -> flipchat.common.v1.UserId
-	55, // 28: flipchat.chat.v1.JoinChatPaymentMetadata.chat_id:type_name -> flipchat.common.v1.ChatId
-	55, // 29: flipchat.chat.v1.LeaveChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
-	54, // 30: flipchat.chat.v1.LeaveChatRequest.auth:type_name -> flipchat.common.v1.Auth
+	42, // 25: flipchat.chat.v1.JoinChatResponse.metadata:type_name -> flipchat.chat.v1.Metadata
+	43, // 26: flipchat.chat.v1.JoinChatResponse.members:type_name -> flipchat.chat.v1.Member
+	59, // 27: flipchat.chat.v1.JoinChatPaymentMetadata.user_id:type_name -> flipchat.common.v1.UserId
+	58, // 28: flipchat.chat.v1.JoinChatPaymentMetadata.chat_id:type_name -> flipchat.common.v1.ChatId
+	58, // 29: flipchat.chat.v1.LeaveChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	57, // 30: flipchat.chat.v1.LeaveChatRequest.auth:type_name -> flipchat.common.v1.Auth
 	5,  // 31: flipchat.chat.v1.LeaveChatResponse.result:type_name -> flipchat.chat.v1.LeaveChatResponse.Result
-	55, // 32: flipchat.chat.v1.SetCoverChargeRequest.chat_id:type_name -> flipchat.common.v1.ChatId
-	58, // 33: flipchat.chat.v1.SetCoverChargeRequest.cover_charge:type_name -> flipchat.common.v1.PaymentAmount
-	54, // 34: flipchat.chat.v1.SetCoverChargeRequest.auth:type_name -> flipchat.common.v1.Auth
-	6,  // 35: flipchat.chat.v1.SetCoverChargeResponse.result:type_name -> flipchat.chat.v1.SetCoverChargeResponse.Result
-	55, // 36: flipchat.chat.v1.RemoveUserRequest.chat_id:type_name -> flipchat.common.v1.ChatId
-	56, // 37: flipchat.chat.v1.RemoveUserRequest.user_id:type_name -> flipchat.common.v1.UserId
-	54, // 38: flipchat.chat.v1.RemoveUserRequest.auth:type_name -> flipchat.common.v1.Auth
-	7,  // 39: flipchat.chat.v1.RemoveUserResponse.result:type_name -> flipchat.chat.v1.RemoveUserResponse.Result
-	55, // 40: flipchat.chat.v1.MuteUserRequest.chat_id:type_name -> flipchat.common.v1.ChatId
-	56, // 41: flipchat.chat.v1.MuteUserRequest.user_id:type_name -> flipchat.common.v1.UserId
-	54, // 42: flipchat.chat.v1.MuteUserRequest.auth:type_name -> flipchat.common.v1.Auth
-	8,  // 43: flipchat.chat.v1.MuteUserResponse.result:type_name -> flipchat.chat.v1.MuteUserResponse.Result
-	55, // 44: flipchat.chat.v1.MuteChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
-	54, // 45: flipchat.chat.v1.MuteChatRequest.auth:type_name -> flipchat.common.v1.Auth
-	9,  // 46: flipchat.chat.v1.MuteChatResponse.result:type_name -> flipchat.chat.v1.MuteChatResponse.Result
-	55, // 47: flipchat.chat.v1.UnmuteChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
-	54, // 48: flipchat.chat.v1.UnmuteChatRequest.auth:type_name -> flipchat.common.v1.Auth
-	10, // 49: flipchat.chat.v1.UnmuteChatResponse.result:type_name -> flipchat.chat.v1.UnmuteChatResponse.Result
-	56, // 50: flipchat.chat.v1.ReportUserRequest.user_id:type_name -> flipchat.common.v1.UserId
-	59, // 51: flipchat.chat.v1.ReportUserRequest.message_id:type_name -> flipchat.messaging.v1.MessageId
-	54, // 52: flipchat.chat.v1.ReportUserRequest.auth:type_name -> flipchat.common.v1.Auth
-	11, // 53: flipchat.chat.v1.ReportUserResponse.result:type_name -> flipchat.chat.v1.ReportUserResponse.Result
-	55, // 54: flipchat.chat.v1.Metadata.chat_id:type_name -> flipchat.common.v1.ChatId
-	12, // 55: flipchat.chat.v1.Metadata.type:type_name -> flipchat.chat.v1.Metadata.ChatType
-	56, // 56: flipchat.chat.v1.Metadata.owner:type_name -> flipchat.common.v1.UserId
-	58, // 57: flipchat.chat.v1.Metadata.cover_charge:type_name -> flipchat.common.v1.PaymentAmount
-	60, // 58: flipchat.chat.v1.Metadata.last_activity:type_name -> google.protobuf.Timestamp
-	56, // 59: flipchat.chat.v1.Member.user_id:type_name -> flipchat.common.v1.UserId
-	41, // 60: flipchat.chat.v1.Member.identity:type_name -> flipchat.chat.v1.MemberIdentity
-	61, // 61: flipchat.chat.v1.Member.pointers:type_name -> flipchat.messaging.v1.Pointer
-	54, // 62: flipchat.chat.v1.StreamChatEventsRequest.Params.auth:type_name -> flipchat.common.v1.Auth
-	60, // 63: flipchat.chat.v1.StreamChatEventsRequest.Params.ts:type_name -> google.protobuf.Timestamp
-	0,  // 64: flipchat.chat.v1.StreamChatEventsResponse.StreamError.code:type_name -> flipchat.chat.v1.StreamChatEventsResponse.StreamError.Code
-	45, // 65: flipchat.chat.v1.StreamChatEventsResponse.EventBatch.updates:type_name -> flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate
-	55, // 66: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.chat_id:type_name -> flipchat.common.v1.ChatId
-	39, // 67: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.metadata:type_name -> flipchat.chat.v1.Metadata
-	46, // 68: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.member_update:type_name -> flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate
-	62, // 69: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.last_message:type_name -> flipchat.messaging.v1.Message
-	47, // 70: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.pointer:type_name -> flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate
-	63, // 71: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.is_typing:type_name -> flipchat.messaging.v1.IsTyping
-	48, // 72: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.refresh:type_name -> flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh
-	56, // 73: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate.member:type_name -> flipchat.common.v1.UserId
-	61, // 74: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate.pointer:type_name -> flipchat.messaging.v1.Pointer
-	40, // 75: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh.members:type_name -> flipchat.chat.v1.Member
-	56, // 76: flipchat.chat.v1.StartChatRequest.StartTwoWayChatParameters.other_user_id:type_name -> flipchat.common.v1.UserId
-	56, // 77: flipchat.chat.v1.StartChatRequest.StartGroupChatParameters.users:type_name -> flipchat.common.v1.UserId
-	57, // 78: flipchat.chat.v1.StartChatRequest.StartGroupChatParameters.payment_intent:type_name -> flipchat.common.v1.IntentId
-	13, // 79: flipchat.chat.v1.Chat.StreamChatEvents:input_type -> flipchat.chat.v1.StreamChatEventsRequest
-	15, // 80: flipchat.chat.v1.Chat.GetChats:input_type -> flipchat.chat.v1.GetChatsRequest
-	17, // 81: flipchat.chat.v1.Chat.GetChat:input_type -> flipchat.chat.v1.GetChatRequest
-	19, // 82: flipchat.chat.v1.Chat.StartChat:input_type -> flipchat.chat.v1.StartChatRequest
-	22, // 83: flipchat.chat.v1.Chat.JoinChat:input_type -> flipchat.chat.v1.JoinChatRequest
-	25, // 84: flipchat.chat.v1.Chat.LeaveChat:input_type -> flipchat.chat.v1.LeaveChatRequest
-	27, // 85: flipchat.chat.v1.Chat.SetCoverCharge:input_type -> flipchat.chat.v1.SetCoverChargeRequest
-	29, // 86: flipchat.chat.v1.Chat.RemoveUser:input_type -> flipchat.chat.v1.RemoveUserRequest
-	31, // 87: flipchat.chat.v1.Chat.MuteUser:input_type -> flipchat.chat.v1.MuteUserRequest
-	33, // 88: flipchat.chat.v1.Chat.MuteChat:input_type -> flipchat.chat.v1.MuteChatRequest
-	35, // 89: flipchat.chat.v1.Chat.UnmuteChat:input_type -> flipchat.chat.v1.UnmuteChatRequest
-	37, // 90: flipchat.chat.v1.Chat.ReportUser:input_type -> flipchat.chat.v1.ReportUserRequest
-	14, // 91: flipchat.chat.v1.Chat.StreamChatEvents:output_type -> flipchat.chat.v1.StreamChatEventsResponse
-	16, // 92: flipchat.chat.v1.Chat.GetChats:output_type -> flipchat.chat.v1.GetChatsResponse
-	18, // 93: flipchat.chat.v1.Chat.GetChat:output_type -> flipchat.chat.v1.GetChatResponse
-	20, // 94: flipchat.chat.v1.Chat.StartChat:output_type -> flipchat.chat.v1.StartChatResponse
-	23, // 95: flipchat.chat.v1.Chat.JoinChat:output_type -> flipchat.chat.v1.JoinChatResponse
-	26, // 96: flipchat.chat.v1.Chat.LeaveChat:output_type -> flipchat.chat.v1.LeaveChatResponse
-	28, // 97: flipchat.chat.v1.Chat.SetCoverCharge:output_type -> flipchat.chat.v1.SetCoverChargeResponse
-	30, // 98: flipchat.chat.v1.Chat.RemoveUser:output_type -> flipchat.chat.v1.RemoveUserResponse
-	32, // 99: flipchat.chat.v1.Chat.MuteUser:output_type -> flipchat.chat.v1.MuteUserResponse
-	34, // 100: flipchat.chat.v1.Chat.MuteChat:output_type -> flipchat.chat.v1.MuteChatResponse
-	36, // 101: flipchat.chat.v1.Chat.UnmuteChat:output_type -> flipchat.chat.v1.UnmuteChatResponse
-	38, // 102: flipchat.chat.v1.Chat.ReportUser:output_type -> flipchat.chat.v1.ReportUserResponse
-	91, // [91:103] is the sub-list for method output_type
-	79, // [79:91] is the sub-list for method input_type
-	79, // [79:79] is the sub-list for extension type_name
-	79, // [79:79] is the sub-list for extension extendee
-	0,  // [0:79] is the sub-list for field type_name
+	58, // 32: flipchat.chat.v1.SetDisplayNameRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	57, // 33: flipchat.chat.v1.SetDisplayNameRequest.auth:type_name -> flipchat.common.v1.Auth
+	6,  // 34: flipchat.chat.v1.SetDisplayNameResponse.result:type_name -> flipchat.chat.v1.SetDisplayNameResponse.Result
+	58, // 35: flipchat.chat.v1.SetCoverChargeRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	61, // 36: flipchat.chat.v1.SetCoverChargeRequest.cover_charge:type_name -> flipchat.common.v1.PaymentAmount
+	57, // 37: flipchat.chat.v1.SetCoverChargeRequest.auth:type_name -> flipchat.common.v1.Auth
+	7,  // 38: flipchat.chat.v1.SetCoverChargeResponse.result:type_name -> flipchat.chat.v1.SetCoverChargeResponse.Result
+	58, // 39: flipchat.chat.v1.RemoveUserRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	59, // 40: flipchat.chat.v1.RemoveUserRequest.user_id:type_name -> flipchat.common.v1.UserId
+	57, // 41: flipchat.chat.v1.RemoveUserRequest.auth:type_name -> flipchat.common.v1.Auth
+	8,  // 42: flipchat.chat.v1.RemoveUserResponse.result:type_name -> flipchat.chat.v1.RemoveUserResponse.Result
+	58, // 43: flipchat.chat.v1.MuteUserRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	59, // 44: flipchat.chat.v1.MuteUserRequest.user_id:type_name -> flipchat.common.v1.UserId
+	57, // 45: flipchat.chat.v1.MuteUserRequest.auth:type_name -> flipchat.common.v1.Auth
+	9,  // 46: flipchat.chat.v1.MuteUserResponse.result:type_name -> flipchat.chat.v1.MuteUserResponse.Result
+	58, // 47: flipchat.chat.v1.MuteChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	57, // 48: flipchat.chat.v1.MuteChatRequest.auth:type_name -> flipchat.common.v1.Auth
+	10, // 49: flipchat.chat.v1.MuteChatResponse.result:type_name -> flipchat.chat.v1.MuteChatResponse.Result
+	58, // 50: flipchat.chat.v1.UnmuteChatRequest.chat_id:type_name -> flipchat.common.v1.ChatId
+	57, // 51: flipchat.chat.v1.UnmuteChatRequest.auth:type_name -> flipchat.common.v1.Auth
+	11, // 52: flipchat.chat.v1.UnmuteChatResponse.result:type_name -> flipchat.chat.v1.UnmuteChatResponse.Result
+	59, // 53: flipchat.chat.v1.ReportUserRequest.user_id:type_name -> flipchat.common.v1.UserId
+	62, // 54: flipchat.chat.v1.ReportUserRequest.message_id:type_name -> flipchat.messaging.v1.MessageId
+	57, // 55: flipchat.chat.v1.ReportUserRequest.auth:type_name -> flipchat.common.v1.Auth
+	12, // 56: flipchat.chat.v1.ReportUserResponse.result:type_name -> flipchat.chat.v1.ReportUserResponse.Result
+	58, // 57: flipchat.chat.v1.Metadata.chat_id:type_name -> flipchat.common.v1.ChatId
+	13, // 58: flipchat.chat.v1.Metadata.type:type_name -> flipchat.chat.v1.Metadata.ChatType
+	59, // 59: flipchat.chat.v1.Metadata.owner:type_name -> flipchat.common.v1.UserId
+	61, // 60: flipchat.chat.v1.Metadata.cover_charge:type_name -> flipchat.common.v1.PaymentAmount
+	63, // 61: flipchat.chat.v1.Metadata.last_activity:type_name -> google.protobuf.Timestamp
+	59, // 62: flipchat.chat.v1.Member.user_id:type_name -> flipchat.common.v1.UserId
+	44, // 63: flipchat.chat.v1.Member.identity:type_name -> flipchat.chat.v1.MemberIdentity
+	64, // 64: flipchat.chat.v1.Member.pointers:type_name -> flipchat.messaging.v1.Pointer
+	57, // 65: flipchat.chat.v1.StreamChatEventsRequest.Params.auth:type_name -> flipchat.common.v1.Auth
+	63, // 66: flipchat.chat.v1.StreamChatEventsRequest.Params.ts:type_name -> google.protobuf.Timestamp
+	0,  // 67: flipchat.chat.v1.StreamChatEventsResponse.StreamError.code:type_name -> flipchat.chat.v1.StreamChatEventsResponse.StreamError.Code
+	48, // 68: flipchat.chat.v1.StreamChatEventsResponse.EventBatch.updates:type_name -> flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate
+	58, // 69: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.chat_id:type_name -> flipchat.common.v1.ChatId
+	42, // 70: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.metadata:type_name -> flipchat.chat.v1.Metadata
+	49, // 71: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.member_update:type_name -> flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate
+	65, // 72: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.last_message:type_name -> flipchat.messaging.v1.Message
+	50, // 73: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.pointer:type_name -> flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate
+	66, // 74: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.is_typing:type_name -> flipchat.messaging.v1.IsTyping
+	51, // 75: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.refresh:type_name -> flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh
+	59, // 76: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate.member:type_name -> flipchat.common.v1.UserId
+	64, // 77: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate.pointer:type_name -> flipchat.messaging.v1.Pointer
+	43, // 78: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh.members:type_name -> flipchat.chat.v1.Member
+	59, // 79: flipchat.chat.v1.StartChatRequest.StartTwoWayChatParameters.other_user_id:type_name -> flipchat.common.v1.UserId
+	59, // 80: flipchat.chat.v1.StartChatRequest.StartGroupChatParameters.users:type_name -> flipchat.common.v1.UserId
+	60, // 81: flipchat.chat.v1.StartChatRequest.StartGroupChatParameters.payment_intent:type_name -> flipchat.common.v1.IntentId
+	14, // 82: flipchat.chat.v1.Chat.StreamChatEvents:input_type -> flipchat.chat.v1.StreamChatEventsRequest
+	16, // 83: flipchat.chat.v1.Chat.GetChats:input_type -> flipchat.chat.v1.GetChatsRequest
+	18, // 84: flipchat.chat.v1.Chat.GetChat:input_type -> flipchat.chat.v1.GetChatRequest
+	20, // 85: flipchat.chat.v1.Chat.StartChat:input_type -> flipchat.chat.v1.StartChatRequest
+	23, // 86: flipchat.chat.v1.Chat.JoinChat:input_type -> flipchat.chat.v1.JoinChatRequest
+	26, // 87: flipchat.chat.v1.Chat.LeaveChat:input_type -> flipchat.chat.v1.LeaveChatRequest
+	28, // 88: flipchat.chat.v1.Chat.SetDisplayName:input_type -> flipchat.chat.v1.SetDisplayNameRequest
+	30, // 89: flipchat.chat.v1.Chat.SetCoverCharge:input_type -> flipchat.chat.v1.SetCoverChargeRequest
+	32, // 90: flipchat.chat.v1.Chat.RemoveUser:input_type -> flipchat.chat.v1.RemoveUserRequest
+	34, // 91: flipchat.chat.v1.Chat.MuteUser:input_type -> flipchat.chat.v1.MuteUserRequest
+	36, // 92: flipchat.chat.v1.Chat.MuteChat:input_type -> flipchat.chat.v1.MuteChatRequest
+	38, // 93: flipchat.chat.v1.Chat.UnmuteChat:input_type -> flipchat.chat.v1.UnmuteChatRequest
+	40, // 94: flipchat.chat.v1.Chat.ReportUser:input_type -> flipchat.chat.v1.ReportUserRequest
+	15, // 95: flipchat.chat.v1.Chat.StreamChatEvents:output_type -> flipchat.chat.v1.StreamChatEventsResponse
+	17, // 96: flipchat.chat.v1.Chat.GetChats:output_type -> flipchat.chat.v1.GetChatsResponse
+	19, // 97: flipchat.chat.v1.Chat.GetChat:output_type -> flipchat.chat.v1.GetChatResponse
+	21, // 98: flipchat.chat.v1.Chat.StartChat:output_type -> flipchat.chat.v1.StartChatResponse
+	24, // 99: flipchat.chat.v1.Chat.JoinChat:output_type -> flipchat.chat.v1.JoinChatResponse
+	27, // 100: flipchat.chat.v1.Chat.LeaveChat:output_type -> flipchat.chat.v1.LeaveChatResponse
+	29, // 101: flipchat.chat.v1.Chat.SetDisplayName:output_type -> flipchat.chat.v1.SetDisplayNameResponse
+	31, // 102: flipchat.chat.v1.Chat.SetCoverCharge:output_type -> flipchat.chat.v1.SetCoverChargeResponse
+	33, // 103: flipchat.chat.v1.Chat.RemoveUser:output_type -> flipchat.chat.v1.RemoveUserResponse
+	35, // 104: flipchat.chat.v1.Chat.MuteUser:output_type -> flipchat.chat.v1.MuteUserResponse
+	37, // 105: flipchat.chat.v1.Chat.MuteChat:output_type -> flipchat.chat.v1.MuteChatResponse
+	39, // 106: flipchat.chat.v1.Chat.UnmuteChat:output_type -> flipchat.chat.v1.UnmuteChatResponse
+	41, // 107: flipchat.chat.v1.Chat.ReportUser:output_type -> flipchat.chat.v1.ReportUserResponse
+	95, // [95:108] is the sub-list for method output_type
+	82, // [82:95] is the sub-list for method input_type
+	82, // [82:82] is the sub-list for extension type_name
+	82, // [82:82] is the sub-list for extension extendee
+	0,  // [0:82] is the sub-list for field type_name
 }
 
 func init() { file_chat_v1_flipchat_service_proto_init() }
@@ -3771,7 +3984,7 @@ func file_chat_v1_flipchat_service_proto_init() {
 		(*JoinChatRequest_ChatId)(nil),
 		(*JoinChatRequest_RoomId)(nil),
 	}
-	file_chat_v1_flipchat_service_proto_msgTypes[33].OneofWrappers = []any{
+	file_chat_v1_flipchat_service_proto_msgTypes[35].OneofWrappers = []any{
 		(*StreamChatEventsResponse_MemberUpdate_Refresh_)(nil),
 	}
 	type x struct{}
@@ -3779,8 +3992,8 @@ func file_chat_v1_flipchat_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_chat_v1_flipchat_service_proto_rawDesc,
-			NumEnums:      13,
-			NumMessages:   38,
+			NumEnums:      14,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

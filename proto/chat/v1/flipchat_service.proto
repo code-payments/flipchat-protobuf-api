@@ -46,6 +46,10 @@ service Chat {
     // LeaveChat leaves a given chat.
     rpc LeaveChat(LeaveChatRequest) returns (LeaveChatResponse);
 
+    // SetDisplayName sets a chat's display name. If the display name isn't allowed,
+    // then a set of alternate suggestions may be provided
+    rpc SetDisplayName(SetDisplayNameRequest) returns (SetDisplayNameResponse);
+
     // SetCoverCharge sets a chat's cover charge
     rpc SetCoverCharge(SetCoverChargeRequest) returns (SetCoverChargeResponse);
 
@@ -314,6 +318,30 @@ message LeaveChatResponse {
     }
 }
 
+message SetDisplayNameRequest {
+    common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
+
+    string display_name = 2 [(validate.rules).string = {
+		min_len: 1
+		max_len: 64
+	}];
+
+    common.v1.Auth auth = 3 [(validate.rules).message.required = true];
+}
+message SetDisplayNameResponse {
+    Result result = 1;
+    enum Result {
+        OK       = 0;
+        DENIED   = 1;
+        CANT_SET = 2;
+    }
+
+    repeated string alternate_suggestions = 2 [(validate.rules).repeated = {
+        min_items: 0
+        max_items: 10
+    }];
+}
+
 message SetCoverChargeRequest {
     common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
 
@@ -447,6 +475,11 @@ message Metadata {
     // If there are more unread messages than indicated by num_unread. If this is
     // true, client should show num_unread+ as the unread count.
     bool has_more_unread = 11;
+
+    string display_name = 12 [(validate.rules).string = {
+		min_len: 0
+		max_len: 64
+	}];
 }
 
 message Member {

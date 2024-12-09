@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./flipchat_service_pb";
+import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./flipchat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -92,6 +92,18 @@ export const Chat = {
       name: "LeaveChat",
       I: LeaveChatRequest,
       O: LeaveChatResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * SetDisplayName sets a chat's display name. If the display name isn't allowed,
+     * then a set of alternate suggestions may be provided
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.SetDisplayName
+     */
+    setDisplayName: {
+      name: "SetDisplayName",
+      I: SetDisplayNameRequest,
+      O: SetDisplayNameResponse,
       kind: MethodKind.Unary,
     },
     /**

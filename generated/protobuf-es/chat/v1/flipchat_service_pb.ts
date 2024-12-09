@@ -1262,6 +1262,124 @@ proto3.util.setEnumType(LeaveChatResponse_Result, "flipchat.chat.v1.LeaveChatRes
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.SetDisplayNameRequest
+ */
+export class SetDisplayNameRequest extends Message<SetDisplayNameRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: string display_name = 2;
+   */
+  displayName = "";
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<SetDisplayNameRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.SetDisplayNameRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetDisplayNameRequest {
+    return new SetDisplayNameRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetDisplayNameRequest {
+    return new SetDisplayNameRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetDisplayNameRequest {
+    return new SetDisplayNameRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetDisplayNameRequest | PlainMessage<SetDisplayNameRequest> | undefined, b: SetDisplayNameRequest | PlainMessage<SetDisplayNameRequest> | undefined): boolean {
+    return proto3.util.equals(SetDisplayNameRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.SetDisplayNameResponse
+ */
+export class SetDisplayNameResponse extends Message<SetDisplayNameResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.SetDisplayNameResponse.Result result = 1;
+   */
+  result = SetDisplayNameResponse_Result.OK;
+
+  /**
+   * @generated from field: repeated string alternate_suggestions = 2;
+   */
+  alternateSuggestions: string[] = [];
+
+  constructor(data?: PartialMessage<SetDisplayNameResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.SetDisplayNameResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(SetDisplayNameResponse_Result) },
+    { no: 2, name: "alternate_suggestions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetDisplayNameResponse {
+    return new SetDisplayNameResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetDisplayNameResponse {
+    return new SetDisplayNameResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetDisplayNameResponse {
+    return new SetDisplayNameResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetDisplayNameResponse | PlainMessage<SetDisplayNameResponse> | undefined, b: SetDisplayNameResponse | PlainMessage<SetDisplayNameResponse> | undefined): boolean {
+    return proto3.util.equals(SetDisplayNameResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.SetDisplayNameResponse.Result
+ */
+export enum SetDisplayNameResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * @generated from enum value: CANT_SET = 2;
+   */
+  CANT_SET = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(SetDisplayNameResponse_Result)
+proto3.util.setEnumType(SetDisplayNameResponse_Result, "flipchat.chat.v1.SetDisplayNameResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "CANT_SET" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.SetCoverChargeRequest
  */
 export class SetCoverChargeRequest extends Message<SetCoverChargeRequest> {
@@ -1969,6 +2087,11 @@ export class Metadata extends Message<Metadata> {
    */
   hasMoreUnread = false;
 
+  /**
+   * @generated from field: string display_name = 12;
+   */
+  displayName = "";
+
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1988,6 +2111,7 @@ export class Metadata extends Message<Metadata> {
     { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },
     { no: 10, name: "last_activity", kind: "message", T: Timestamp },
     { no: 11, name: "has_more_unread", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 12, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
