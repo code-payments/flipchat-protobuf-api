@@ -415,10 +415,10 @@ export class StreamChatEventsResponse_MetadataUpdate extends Message<StreamChatE
     case: "fullRefresh";
   } | {
     /**
-     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCount unread_count = 2;
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCountChanged unread_count_changed = 2;
      */
-    value: StreamChatEventsResponse_MetadataUpdate_UnreadCount;
-    case: "unreadCount";
+    value: StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged;
+    case: "unreadCountChanged";
   } | {
     /**
      * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.DisplayNameChanged display_name_changed = 3;
@@ -448,7 +448,7 @@ export class StreamChatEventsResponse_MetadataUpdate extends Message<StreamChatE
   static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "full_refresh", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_FullRefresh, oneof: "kind" },
-    { no: 2, name: "unread_count", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_UnreadCount, oneof: "kind" },
+    { no: 2, name: "unread_count_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged, oneof: "kind" },
     { no: 3, name: "display_name_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged, oneof: "kind" },
     { no: 4, name: "cover_charge_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged, oneof: "kind" },
     { no: 5, name: "last_activity_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_LastActivityChanged, oneof: "kind" },
@@ -511,11 +511,11 @@ export class StreamChatEventsResponse_MetadataUpdate_FullRefresh extends Message
 }
 
 /**
- * New message has generated an unread count
+ * New message in the chat has generated a new unread count
  *
- * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCount
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCountChanged
  */
-export class StreamChatEventsResponse_MetadataUpdate_UnreadCount extends Message<StreamChatEventsResponse_MetadataUpdate_UnreadCount> {
+export class StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged extends Message<StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged> {
   /**
    * Number of (estimated) unread message
    *
@@ -531,32 +531,32 @@ export class StreamChatEventsResponse_MetadataUpdate_UnreadCount extends Message
    */
   hasMoreUnread = false;
 
-  constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCount>) {
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCount";
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCountChanged";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 2, name: "has_more_unread", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCount {
-    return new StreamChatEventsResponse_MetadataUpdate_UnreadCount().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCount {
-    return new StreamChatEventsResponse_MetadataUpdate_UnreadCount().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCount {
-    return new StreamChatEventsResponse_MetadataUpdate_UnreadCount().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StreamChatEventsResponse_MetadataUpdate_UnreadCount | PlainMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCount> | undefined, b: StreamChatEventsResponse_MetadataUpdate_UnreadCount | PlainMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCount> | undefined): boolean {
-    return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate_UnreadCount, a, b);
+  static equals(a: StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged> | undefined, b: StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged, a, b);
   }
 }
 

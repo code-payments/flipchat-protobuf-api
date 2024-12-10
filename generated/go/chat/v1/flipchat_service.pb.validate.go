@@ -6193,7 +6193,7 @@ func (m *StreamChatEventsResponse_MetadataUpdate) validate(all bool) error {
 			}
 		}
 
-	case *StreamChatEventsResponse_MetadataUpdate_UnreadCount_:
+	case *StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged_:
 		if v == nil {
 			err := StreamChatEventsResponse_MetadataUpdateValidationError{
 				field:  "Kind",
@@ -6207,11 +6207,11 @@ func (m *StreamChatEventsResponse_MetadataUpdate) validate(all bool) error {
 		oneofKindPresent = true
 
 		if all {
-			switch v := interface{}(m.GetUnreadCount()).(type) {
+			switch v := interface{}(m.GetUnreadCountChanged()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "UnreadCount",
+						field:  "UnreadCountChanged",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -6219,16 +6219,16 @@ func (m *StreamChatEventsResponse_MetadataUpdate) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "UnreadCount",
+						field:  "UnreadCountChanged",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetUnreadCount()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetUnreadCountChanged()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return StreamChatEventsResponse_MetadataUpdateValidationError{
-					field:  "UnreadCount",
+					field:  "UnreadCountChanged",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -7178,24 +7178,24 @@ var _ interface {
 } = StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError{}
 
 // Validate checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_UnreadCount with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCount) Validate() error {
+// StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged) Validate() error {
 	return m.validate(false)
 }
 
 // ValidateAll checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_UnreadCount with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountMultiError, or nil if
-// none found.
-func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCount) ValidateAll() error {
+// StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError, or
+// nil if none found.
+func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCount) validate(all bool) error {
+func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -7207,20 +7207,20 @@ func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCount) validate(all bool)
 	// no validation rules for HasMoreUnread
 
 	if len(errors) > 0 {
-		return StreamChatEventsResponse_MetadataUpdate_UnreadCountMultiError(errors)
+		return StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError(errors)
 	}
 
 	return nil
 }
 
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountMultiError is an error
-// wrapping multiple validation errors returned by
-// StreamChatEventsResponse_MetadataUpdate_UnreadCount.ValidateAll() if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_UnreadCountMultiError []error
+// StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError is an
+// error wrapping multiple validation errors returned by
+// StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged.ValidateAll() if
+// the designated constraints aren't met.
+type StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MetadataUpdate_UnreadCountMultiError) Error() string {
+func (m StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -7229,13 +7229,15 @@ func (m StreamChatEventsResponse_MetadataUpdate_UnreadCountMultiError) Error() s
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MetadataUpdate_UnreadCountMultiError) AllErrors() []error { return m }
+func (m StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError) AllErrors() []error {
+	return m
+}
 
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError is the
-// validation error returned by
-// StreamChatEventsResponse_MetadataUpdate_UnreadCount.Validate if the
+// StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError is
+// the validation error returned by
+// StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged.Validate if the
 // designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError struct {
+type StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -7243,30 +7245,32 @@ type StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError struct {
 }
 
 // Field function returns field value.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError) Field() string {
+func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Field() string {
 	return e.field
 }
 
 // Reason function returns reason value.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError) Reason() string {
+func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Reason() string {
 	return e.reason
 }
 
 // Cause function returns cause value.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError) Cause() error {
+func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Cause() error {
 	return e.cause
 }
 
 // Key function returns key value.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError) Key() bool { return e.key }
+func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Key() bool {
+	return e.key
+}
 
 // ErrorName returns error name.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError"
+func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) ErrorName() string {
+	return "StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError) Error() string {
+func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -7278,14 +7282,14 @@ func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError) Erro
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MetadataUpdate_UnreadCount.%s: %s%s",
+		"invalid %sStreamChatEventsResponse_MetadataUpdate_UnreadCountChanged.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError{}
+var _ error = StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError{}
 
 var _ interface {
 	Field() string
@@ -7293,7 +7297,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StreamChatEventsResponse_MetadataUpdate_UnreadCountValidationError{}
+} = StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError{}
 
 // Validate checks the field values on
 // StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged with the rules
