@@ -21,7 +21,7 @@ export const Chat = {
      *   3. Latest messages.
      *
      * The server will optionally filter out some events depending on load
-     * and chat type. For example, Broadcast chats will not receive latest
+     * and chat type. For example, Broadcast chats may not receive latest
      * messages.
      *
      * Clients should use GetMessages to backfill in any historical messages

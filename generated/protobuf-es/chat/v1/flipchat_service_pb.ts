@@ -266,18 +266,38 @@ export class StreamChatEventsResponse_ChatUpdate extends Message<StreamChatEvent
   chatId?: ChatId;
 
   /**
-   * metadata contains the latest (full) metadata of the chat.
+   * Metadata contains the latest (full) chat metadata.
+   *
+   * Deprecated: Use metadata_updates instead. For backwards compatibility
+   * this will only contain full metadata refreshes.
    *
    * @generated from field: flipchat.chat.v1.Metadata metadata = 2;
    */
   metadata?: Metadata;
 
   /**
+   * MetadataUpdate contains updates to a chat metadata
+   *
+   * @generated from field: repeated flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate metadata_updates = 7;
+   */
+  metadataUpdates: StreamChatEventsResponse_MetadataUpdate[] = [];
+
+  /**
    * MemberUpdate contains an update to the membership set.
+   *
+   * Deprecated: Use member_updates instead. For backwards compatibility
+   * this will only contain full member refreshes.
    *
    * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate member_update = 3;
    */
   memberUpdate?: StreamChatEventsResponse_MemberUpdate;
+
+  /**
+   * MemberUpdate contains updates to the membership set.
+   *
+   * @generated from field: repeated flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate member_updates = 8;
+   */
+  memberUpdates: StreamChatEventsResponse_MemberUpdate[] = [];
 
   /**
    * Message contains the last known message of the chat.
@@ -287,8 +307,9 @@ export class StreamChatEventsResponse_ChatUpdate extends Message<StreamChatEvent
   lastMessage?: Message$1;
 
   /**
-   * where 'relevant' means "relevant to UI updates". For example,
-   * when a user has read the latest message.
+   * Relevant update to a chat member's pointer state, where 'relevant' means
+   * "relevant to UI updates". For example, when a user has read the latest
+   * message.
    *
    * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate pointer = 5;
    */
@@ -311,7 +332,9 @@ export class StreamChatEventsResponse_ChatUpdate extends Message<StreamChatEvent
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
     { no: 2, name: "metadata", kind: "message", T: Metadata },
+    { no: 7, name: "metadata_updates", kind: "message", T: StreamChatEventsResponse_MetadataUpdate, repeated: true },
     { no: 3, name: "member_update", kind: "message", T: StreamChatEventsResponse_MemberUpdate },
+    { no: 8, name: "member_updates", kind: "message", T: StreamChatEventsResponse_MemberUpdate, repeated: true },
     { no: 4, name: "last_message", kind: "message", T: Message$1 },
     { no: 5, name: "pointer", kind: "message", T: StreamChatEventsResponse_ChatUpdate_PointerUpdate },
     { no: 6, name: "is_typing", kind: "message", T: IsTyping },
@@ -378,6 +401,237 @@ export class StreamChatEventsResponse_ChatUpdate_PointerUpdate extends Message<S
 }
 
 /**
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate
+ */
+export class StreamChatEventsResponse_MetadataUpdate extends Message<StreamChatEventsResponse_MetadataUpdate> {
+  /**
+   * @generated from oneof flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.kind
+   */
+  kind: {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.FullRefresh full_refresh = 1;
+     */
+    value: StreamChatEventsResponse_MetadataUpdate_FullRefresh;
+    case: "fullRefresh";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCount unread_count = 2;
+     */
+    value: StreamChatEventsResponse_MetadataUpdate_UnreadCount;
+    case: "unreadCount";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.DisplayNameChanged display_name_changed = 3;
+     */
+    value: StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged;
+    case: "displayNameChanged";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.CoverChargeChanged cover_charge_changed = 4;
+     */
+    value: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged;
+    case: "coverChargeChanged";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "full_refresh", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_FullRefresh, oneof: "kind" },
+    { no: 2, name: "unread_count", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_UnreadCount, oneof: "kind" },
+    { no: 3, name: "display_name_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged, oneof: "kind" },
+    { no: 4, name: "cover_charge_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged, oneof: "kind" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate {
+    return new StreamChatEventsResponse_MetadataUpdate().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate {
+    return new StreamChatEventsResponse_MetadataUpdate().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate {
+    return new StreamChatEventsResponse_MetadataUpdate().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MetadataUpdate | PlainMessage<StreamChatEventsResponse_MetadataUpdate> | undefined, b: StreamChatEventsResponse_MetadataUpdate | PlainMessage<StreamChatEventsResponse_MetadataUpdate> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate, a, b);
+  }
+}
+
+/**
+ * Refreshes the entire chat metadata
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.FullRefresh
+ */
+export class StreamChatEventsResponse_MetadataUpdate_FullRefresh extends Message<StreamChatEventsResponse_MetadataUpdate_FullRefresh> {
+  /**
+   * @generated from field: flipchat.chat.v1.Metadata metadata = 1;
+   */
+  metadata?: Metadata;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate_FullRefresh>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.FullRefresh";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "metadata", kind: "message", T: Metadata },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate_FullRefresh {
+    return new StreamChatEventsResponse_MetadataUpdate_FullRefresh().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_FullRefresh {
+    return new StreamChatEventsResponse_MetadataUpdate_FullRefresh().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_FullRefresh {
+    return new StreamChatEventsResponse_MetadataUpdate_FullRefresh().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MetadataUpdate_FullRefresh | PlainMessage<StreamChatEventsResponse_MetadataUpdate_FullRefresh> | undefined, b: StreamChatEventsResponse_MetadataUpdate_FullRefresh | PlainMessage<StreamChatEventsResponse_MetadataUpdate_FullRefresh> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate_FullRefresh, a, b);
+  }
+}
+
+/**
+ * New message has generated an unread count
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCount
+ */
+export class StreamChatEventsResponse_MetadataUpdate_UnreadCount extends Message<StreamChatEventsResponse_MetadataUpdate_UnreadCount> {
+  /**
+   * Number of (estimated) unread message
+   *
+   * @generated from field: uint32 num_unread = 1;
+   */
+  numUnread = 0;
+
+  /**
+   * If there are more unread messages than indicated by num_unread.
+   * If this is true, client should show num_unread+ as the unread count.
+   *
+   * @generated from field: bool has_more_unread = 2;
+   */
+  hasMoreUnread = false;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCount>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.UnreadCount";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 2, name: "has_more_unread", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCount {
+    return new StreamChatEventsResponse_MetadataUpdate_UnreadCount().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCount {
+    return new StreamChatEventsResponse_MetadataUpdate_UnreadCount().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_UnreadCount {
+    return new StreamChatEventsResponse_MetadataUpdate_UnreadCount().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MetadataUpdate_UnreadCount | PlainMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCount> | undefined, b: StreamChatEventsResponse_MetadataUpdate_UnreadCount | PlainMessage<StreamChatEventsResponse_MetadataUpdate_UnreadCount> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate_UnreadCount, a, b);
+  }
+}
+
+/**
+ * The chat display name has been updated to a new value
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.DisplayNameChanged
+ */
+export class StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged extends Message<StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged> {
+  /**
+   * @generated from field: string new_display_name = 1;
+   */
+  newDisplayName = "";
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.DisplayNameChanged";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "new_display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged> | undefined, b: StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged, a, b);
+  }
+}
+
+/**
+ * The chat cover charge has been updated to a new value
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.CoverChargeChanged
+ */
+export class StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged extends Message<StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged> {
+  /**
+   * @generated from field: flipchat.common.v1.PaymentAmount new_cover_charge = 1;
+   */
+  newCoverCharge?: PaymentAmount;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.CoverChargeChanged";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "new_cover_charge", kind: "message", T: PaymentAmount },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged> | undefined, b: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate
  */
 export class StreamChatEventsResponse_MemberUpdate extends Message<StreamChatEventsResponse_MemberUpdate> {
@@ -386,10 +640,40 @@ export class StreamChatEventsResponse_MemberUpdate extends Message<StreamChatEve
    */
   kind: {
     /**
-     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh refresh = 1;
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.FullRefresh full_refresh = 1;
      */
-    value: StreamChatEventsResponse_MemberUpdate_Refresh;
-    case: "refresh";
+    value: StreamChatEventsResponse_MemberUpdate_FullRefresh;
+    case: "fullRefresh";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.IndividualRefresh individual_refresh = 2;
+     */
+    value: StreamChatEventsResponse_MemberUpdate_IndividualRefresh;
+    case: "individualRefresh";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Joined joined = 3;
+     */
+    value: StreamChatEventsResponse_MemberUpdate_Joined;
+    case: "joined";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Left left = 4;
+     */
+    value: StreamChatEventsResponse_MemberUpdate_Left;
+    case: "left";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Removed removed = 5;
+     */
+    value: StreamChatEventsResponse_MemberUpdate_Removed;
+    case: "removed";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Muted muted = 6;
+     */
+    value: StreamChatEventsResponse_MemberUpdate_Muted;
+    case: "muted";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<StreamChatEventsResponse_MemberUpdate>) {
@@ -400,7 +684,12 @@ export class StreamChatEventsResponse_MemberUpdate extends Message<StreamChatEve
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "refresh", kind: "message", T: StreamChatEventsResponse_MemberUpdate_Refresh, oneof: "kind" },
+    { no: 1, name: "full_refresh", kind: "message", T: StreamChatEventsResponse_MemberUpdate_FullRefresh, oneof: "kind" },
+    { no: 2, name: "individual_refresh", kind: "message", T: StreamChatEventsResponse_MemberUpdate_IndividualRefresh, oneof: "kind" },
+    { no: 3, name: "joined", kind: "message", T: StreamChatEventsResponse_MemberUpdate_Joined, oneof: "kind" },
+    { no: 4, name: "left", kind: "message", T: StreamChatEventsResponse_MemberUpdate_Left, oneof: "kind" },
+    { no: 5, name: "removed", kind: "message", T: StreamChatEventsResponse_MemberUpdate_Removed, oneof: "kind" },
+    { no: 6, name: "muted", kind: "message", T: StreamChatEventsResponse_MemberUpdate_Muted, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MemberUpdate {
@@ -421,39 +710,248 @@ export class StreamChatEventsResponse_MemberUpdate extends Message<StreamChatEve
 }
 
 /**
- * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh
+ * Refreshes the state of the entire chat membership
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.FullRefresh
  */
-export class StreamChatEventsResponse_MemberUpdate_Refresh extends Message<StreamChatEventsResponse_MemberUpdate_Refresh> {
+export class StreamChatEventsResponse_MemberUpdate_FullRefresh extends Message<StreamChatEventsResponse_MemberUpdate_FullRefresh> {
   /**
    * @generated from field: repeated flipchat.chat.v1.Member members = 1;
    */
   members: Member[] = [];
 
-  constructor(data?: PartialMessage<StreamChatEventsResponse_MemberUpdate_Refresh>) {
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MemberUpdate_FullRefresh>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Refresh";
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.FullRefresh";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "members", kind: "message", T: Member, repeated: true },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MemberUpdate_Refresh {
-    return new StreamChatEventsResponse_MemberUpdate_Refresh().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MemberUpdate_FullRefresh {
+    return new StreamChatEventsResponse_MemberUpdate_FullRefresh().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Refresh {
-    return new StreamChatEventsResponse_MemberUpdate_Refresh().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_FullRefresh {
+    return new StreamChatEventsResponse_MemberUpdate_FullRefresh().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Refresh {
-    return new StreamChatEventsResponse_MemberUpdate_Refresh().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_FullRefresh {
+    return new StreamChatEventsResponse_MemberUpdate_FullRefresh().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StreamChatEventsResponse_MemberUpdate_Refresh | PlainMessage<StreamChatEventsResponse_MemberUpdate_Refresh> | undefined, b: StreamChatEventsResponse_MemberUpdate_Refresh | PlainMessage<StreamChatEventsResponse_MemberUpdate_Refresh> | undefined): boolean {
-    return proto3.util.equals(StreamChatEventsResponse_MemberUpdate_Refresh, a, b);
+  static equals(a: StreamChatEventsResponse_MemberUpdate_FullRefresh | PlainMessage<StreamChatEventsResponse_MemberUpdate_FullRefresh> | undefined, b: StreamChatEventsResponse_MemberUpdate_FullRefresh | PlainMessage<StreamChatEventsResponse_MemberUpdate_FullRefresh> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MemberUpdate_FullRefresh, a, b);
+  }
+}
+
+/**
+ * Refreshes the state of an individual member in the chat
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.IndividualRefresh
+ */
+export class StreamChatEventsResponse_MemberUpdate_IndividualRefresh extends Message<StreamChatEventsResponse_MemberUpdate_IndividualRefresh> {
+  /**
+   * @generated from field: flipchat.chat.v1.Member member = 1;
+   */
+  member?: Member;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MemberUpdate_IndividualRefresh>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.IndividualRefresh";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: Member },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MemberUpdate_IndividualRefresh {
+    return new StreamChatEventsResponse_MemberUpdate_IndividualRefresh().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_IndividualRefresh {
+    return new StreamChatEventsResponse_MemberUpdate_IndividualRefresh().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_IndividualRefresh {
+    return new StreamChatEventsResponse_MemberUpdate_IndividualRefresh().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MemberUpdate_IndividualRefresh | PlainMessage<StreamChatEventsResponse_MemberUpdate_IndividualRefresh> | undefined, b: StreamChatEventsResponse_MemberUpdate_IndividualRefresh | PlainMessage<StreamChatEventsResponse_MemberUpdate_IndividualRefresh> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MemberUpdate_IndividualRefresh, a, b);
+  }
+}
+
+/**
+ * Member joined the chat via the JoinChat RPC
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Joined
+ */
+export class StreamChatEventsResponse_MemberUpdate_Joined extends Message<StreamChatEventsResponse_MemberUpdate_Joined> {
+  /**
+   * @generated from field: flipchat.chat.v1.Member member = 1;
+   */
+  member?: Member;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MemberUpdate_Joined>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Joined";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: Member },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MemberUpdate_Joined {
+    return new StreamChatEventsResponse_MemberUpdate_Joined().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Joined {
+    return new StreamChatEventsResponse_MemberUpdate_Joined().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Joined {
+    return new StreamChatEventsResponse_MemberUpdate_Joined().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MemberUpdate_Joined | PlainMessage<StreamChatEventsResponse_MemberUpdate_Joined> | undefined, b: StreamChatEventsResponse_MemberUpdate_Joined | PlainMessage<StreamChatEventsResponse_MemberUpdate_Joined> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MemberUpdate_Joined, a, b);
+  }
+}
+
+/**
+ * Member left the chat via the LeaveChat RPC
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Left
+ */
+export class StreamChatEventsResponse_MemberUpdate_Left extends Message<StreamChatEventsResponse_MemberUpdate_Left> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MemberUpdate_Left>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Left";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MemberUpdate_Left {
+    return new StreamChatEventsResponse_MemberUpdate_Left().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Left {
+    return new StreamChatEventsResponse_MemberUpdate_Left().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Left {
+    return new StreamChatEventsResponse_MemberUpdate_Left().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MemberUpdate_Left | PlainMessage<StreamChatEventsResponse_MemberUpdate_Left> | undefined, b: StreamChatEventsResponse_MemberUpdate_Left | PlainMessage<StreamChatEventsResponse_MemberUpdate_Left> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MemberUpdate_Left, a, b);
+  }
+}
+
+/**
+ * Member was removed from the chat via the RemoveUser RPC
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Removed
+ */
+export class StreamChatEventsResponse_MemberUpdate_Removed extends Message<StreamChatEventsResponse_MemberUpdate_Removed> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId removed_by = 2;
+   */
+  removedBy?: UserId;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MemberUpdate_Removed>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Removed";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+    { no: 2, name: "removed_by", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MemberUpdate_Removed {
+    return new StreamChatEventsResponse_MemberUpdate_Removed().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Removed {
+    return new StreamChatEventsResponse_MemberUpdate_Removed().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Removed {
+    return new StreamChatEventsResponse_MemberUpdate_Removed().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MemberUpdate_Removed | PlainMessage<StreamChatEventsResponse_MemberUpdate_Removed> | undefined, b: StreamChatEventsResponse_MemberUpdate_Removed | PlainMessage<StreamChatEventsResponse_MemberUpdate_Removed> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MemberUpdate_Removed, a, b);
+  }
+}
+
+/**
+ * Member was muted in the chat via the MuteUser RPC
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Muted
+ */
+export class StreamChatEventsResponse_MemberUpdate_Muted extends Message<StreamChatEventsResponse_MemberUpdate_Muted> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId muted_by = 2;
+   */
+  mutedBy?: UserId;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MemberUpdate_Muted>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MemberUpdate.Muted";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+    { no: 2, name: "muted_by", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MemberUpdate_Muted {
+    return new StreamChatEventsResponse_MemberUpdate_Muted().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Muted {
+    return new StreamChatEventsResponse_MemberUpdate_Muted().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MemberUpdate_Muted {
+    return new StreamChatEventsResponse_MemberUpdate_Muted().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MemberUpdate_Muted | PlainMessage<StreamChatEventsResponse_MemberUpdate_Muted> | undefined, b: StreamChatEventsResponse_MemberUpdate_Muted | PlainMessage<StreamChatEventsResponse_MemberUpdate_Muted> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MemberUpdate_Muted, a, b);
   }
 }
 
