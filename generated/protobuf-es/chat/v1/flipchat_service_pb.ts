@@ -431,6 +431,12 @@ export class StreamChatEventsResponse_MetadataUpdate extends Message<StreamChatE
      */
     value: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged;
     case: "coverChargeChanged";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.LastActivityChanged last_activity_changed = 5;
+     */
+    value: StreamChatEventsResponse_MetadataUpdate_LastActivityChanged;
+    case: "lastActivityChanged";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate>) {
@@ -445,6 +451,7 @@ export class StreamChatEventsResponse_MetadataUpdate extends Message<StreamChatE
     { no: 2, name: "unread_count", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_UnreadCount, oneof: "kind" },
     { no: 3, name: "display_name_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged, oneof: "kind" },
     { no: 4, name: "cover_charge_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged, oneof: "kind" },
+    { no: 5, name: "last_activity_changed", kind: "message", T: StreamChatEventsResponse_MetadataUpdate_LastActivityChanged, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate {
@@ -628,6 +635,45 @@ export class StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged extends 
 
   static equals(a: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged> | undefined, b: StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged> | undefined): boolean {
     return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged, a, b);
+  }
+}
+
+/**
+ * The last activity timestamp has changed to a newer value
+ *
+ * @generated from message flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.LastActivityChanged
+ */
+export class StreamChatEventsResponse_MetadataUpdate_LastActivityChanged extends Message<StreamChatEventsResponse_MetadataUpdate_LastActivityChanged> {
+  /**
+   * @generated from field: google.protobuf.Timestamp new_last_activity = 1;
+   */
+  newLastActivity?: Timestamp;
+
+  constructor(data?: PartialMessage<StreamChatEventsResponse_MetadataUpdate_LastActivityChanged>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.MetadataUpdate.LastActivityChanged";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "new_last_activity", kind: "message", T: Timestamp },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_MetadataUpdate_LastActivityChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_LastActivityChanged().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_LastActivityChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_LastActivityChanged().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_MetadataUpdate_LastActivityChanged {
+    return new StreamChatEventsResponse_MetadataUpdate_LastActivityChanged().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamChatEventsResponse_MetadataUpdate_LastActivityChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_LastActivityChanged> | undefined, b: StreamChatEventsResponse_MetadataUpdate_LastActivityChanged | PlainMessage<StreamChatEventsResponse_MetadataUpdate_LastActivityChanged> | undefined): boolean {
+    return proto3.util.equals(StreamChatEventsResponse_MetadataUpdate_LastActivityChanged, a, b);
   }
 }
 
@@ -2551,6 +2597,14 @@ export class Metadata extends Message<Metadata> {
   numUnread = 0;
 
   /**
+   * If there are more unread messages than indicated by num_unread. If this is
+   * true, client should show num_unread+ as the unread count.
+   *
+   * @generated from field: bool has_more_unread = 11;
+   */
+  hasMoreUnread = false;
+
+  /**
    * Owner is the owner/creator of the chat.
    *
    * This is a super priviledge role, in which there can only be one.
@@ -2574,14 +2628,6 @@ export class Metadata extends Message<Metadata> {
    */
   lastActivity?: Timestamp;
 
-  /**
-   * If there are more unread messages than indicated by num_unread. If this is
-   * true, client should show num_unread+ as the unread count.
-   *
-   * @generated from field: bool has_more_unread = 11;
-   */
-  hasMoreUnread = false;
-
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2597,10 +2643,10 @@ export class Metadata extends Message<Metadata> {
     { no: 5, name: "is_push_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "can_disable_push", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 11, name: "has_more_unread", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "owner", kind: "message", T: UserId },
     { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },
     { no: 10, name: "last_activity", kind: "message", T: Timestamp },
-    { no: 11, name: "has_more_unread", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {

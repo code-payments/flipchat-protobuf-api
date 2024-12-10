@@ -4844,6 +4844,8 @@ func (m *Metadata) validate(all bool) error {
 
 	// no validation rules for NumUnread
 
+	// no validation rules for HasMoreUnread
+
 	if all {
 		switch v := interface{}(m.GetOwner()).(type) {
 		case interface{ ValidateAll() error }:
@@ -4930,8 +4932,6 @@ func (m *Metadata) validate(all bool) error {
 			}
 		}
 	}
-
-	// no validation rules for HasMoreUnread
 
 	if len(errors) > 0 {
 		return MetadataMultiError(errors)
@@ -6319,6 +6319,48 @@ func (m *StreamChatEventsResponse_MetadataUpdate) validate(all bool) error {
 			}
 		}
 
+	case *StreamChatEventsResponse_MetadataUpdate_LastActivityChanged_:
+		if v == nil {
+			err := StreamChatEventsResponse_MetadataUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetLastActivityChanged()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
+						field:  "LastActivityChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
+						field:  "LastActivityChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetLastActivityChanged()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamChatEventsResponse_MetadataUpdateValidationError{
+					field:  "LastActivityChanged",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		_ = v // ensures v is used
 	}
@@ -7539,6 +7581,135 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError{}
+
+// Validate checks the field values on
+// StreamChatEventsResponse_MetadataUpdate_LastActivityChanged with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *StreamChatEventsResponse_MetadataUpdate_LastActivityChanged) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// StreamChatEventsResponse_MetadataUpdate_LastActivityChanged with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError, or
+// nil if none found.
+func (m *StreamChatEventsResponse_MetadataUpdate_LastActivityChanged) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *StreamChatEventsResponse_MetadataUpdate_LastActivityChanged) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetNewLastActivity() == nil {
+		err := StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError{
+			field:  "NewLastActivity",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError(errors)
+	}
+
+	return nil
+}
+
+// StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError is an
+// error wrapping multiple validation errors returned by
+// StreamChatEventsResponse_MetadataUpdate_LastActivityChanged.ValidateAll()
+// if the designated constraints aren't met.
+type StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError) AllErrors() []error {
+	return m
+}
+
+// StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError
+// is the validation error returned by
+// StreamChatEventsResponse_MetadataUpdate_LastActivityChanged.Validate if the
+// designated constraints aren't met.
+type StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) ErrorName() string {
+	return "StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStreamChatEventsResponse_MetadataUpdate_LastActivityChanged.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError{}
 
 // Validate checks the field values on
 // StreamChatEventsResponse_MemberUpdate_FullRefresh with the rules defined in

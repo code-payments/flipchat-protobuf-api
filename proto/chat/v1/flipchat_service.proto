@@ -157,10 +157,11 @@ message StreamChatEventsResponse {
         oneof kind {
             option (validate.required) = true;
 
-            FullRefresh        full_refresh         = 1;
-            UnreadCount        unread_count         = 2;
-            DisplayNameChanged display_name_changed = 3;
-            CoverChargeChanged cover_charge_changed = 4;
+            FullRefresh         full_refresh          = 1;
+            UnreadCount         unread_count          = 2;
+            DisplayNameChanged  display_name_changed  = 3;
+            CoverChargeChanged  cover_charge_changed  = 4;
+            LastActivityChanged last_activity_changed = 5;
         }
 
         // Refreshes the entire chat metadata
@@ -189,6 +190,11 @@ message StreamChatEventsResponse {
         // The chat cover charge has been updated to a new value
         message CoverChargeChanged {
             common.v1.PaymentAmount new_cover_charge = 1 [(validate.rules).message.required = true];
+        }
+
+        // The last activity timestamp has changed to a newer value
+        message LastActivityChanged {
+            google.protobuf.Timestamp new_last_activity = 1 [(validate.rules).timestamp.required = true];
         }
     }
 
@@ -543,6 +549,10 @@ message Metadata {
     // Number of (estimated) unread message (from the perspective of the caller).
     uint32 num_unread = 7;
 
+    // If there are more unread messages than indicated by num_unread. If this is
+    // true, client should show num_unread+ as the unread count.
+    bool has_more_unread = 11;
+
     // Owner is the owner/creator of the chat.
     //
     // This is a super priviledge role, in which there can only be one.
@@ -554,10 +564,6 @@ message Metadata {
 
     // The timestamp of the last activity in this chat
     google.protobuf.Timestamp last_activity = 10;
-
-    // If there are more unread messages than indicated by num_unread. If this is
-    // true, client should show num_unread+ as the unread count.
-    bool has_more_unread = 11;
 }
 
 message Member {
