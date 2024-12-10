@@ -579,6 +579,11 @@ export class GetChatRequest extends Message<GetChatRequest> {
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
+   * @generated from field: bool exclude_members = 9;
+   */
+  excludeMembers = false;
+
+  /**
    * Auth is an optional field that authenticates the call, which
    * can be used to fill out extra information in the Metadata.
    *
@@ -596,6 +601,7 @@ export class GetChatRequest extends Message<GetChatRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId, oneof: "identifier" },
     { no: 2, name: "room_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "identifier" },
+    { no: 9, name: "exclude_members", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 10, name: "auth", kind: "message", T: Auth },
   ]);
 
@@ -636,7 +642,7 @@ export class GetChatResponse extends Message<GetChatResponse> {
   metadata?: Metadata;
 
   /**
-   * Members contains the chat members, if result == OK.
+   * Members contains the chat members, if result == OK and were requested.
    *
    * @generated from field: repeated flipchat.chat.v1.Member members = 3;
    */

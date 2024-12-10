@@ -819,6 +819,8 @@ func (m *GetChatRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for ExcludeMembers
+
 	if all {
 		switch v := interface{}(m.GetAuth()).(type) {
 		case interface{ ValidateAll() error }:

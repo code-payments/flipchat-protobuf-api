@@ -185,6 +185,8 @@ message GetChatRequest {
         uint64 room_number = 2;
     }
 
+    bool exclude_members = 9;
+
     // Auth is an optional field that authenticates the call, which
     // can be used to fill out extra information in the Metadata.
     common.v1.Auth auth = 10;
@@ -202,7 +204,7 @@ message GetChatResponse {
     // call was authenticated.
     Metadata metadata = 2;
 
-    // Members contains the chat members, if result == OK.
+    // Members contains the chat members, if result == OK and were requested.
     repeated Member members = 3;
 }
 
