@@ -1,1 +1,1 @@
-export * from './flipchat_pb';
+export * from './common_pb';

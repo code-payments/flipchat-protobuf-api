@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import { Auth, Platform } from "../../common/v1/flipchat_pb";
+import { Auth, Platform } from "../../common/v1/common_pb";
 
 /**
  * @generated from message flipchat.iap.v1.OnPurchaseCompletedRequest

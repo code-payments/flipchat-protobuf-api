@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import { Auth, UserId } from "../../common/v1/flipchat_pb";
+import { Auth, UserId } from "../../common/v1/common_pb";
 import { UserProfile } from "./model_pb";
 
 /**
