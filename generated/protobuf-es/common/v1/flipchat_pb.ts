@@ -7,6 +7,32 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Duration, Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum flipchat.common.v1.Platform
+ */
+export enum Platform {
+  /**
+   * @generated from enum value: UNKNOWN = 0;
+   */
+  UNKNOWN = 0,
+
+  /**
+   * @generated from enum value: APPLE = 1;
+   */
+  APPLE = 1,
+
+  /**
+   * @generated from enum value: GOOGLE = 2;
+   */
+  GOOGLE = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(Platform)
+proto3.util.setEnumType(Platform, "flipchat.common.v1.Platform", [
+  { no: 0, name: "UNKNOWN" },
+  { no: 1, name: "APPLE" },
+  { no: 2, name: "GOOGLE" },
+]);
+
+/**
  * Auth provides an authentication information for RPCs/messages.
  *
  * Currently, only a single form is supported, but it may be useful in

@@ -23,6 +23,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Platform int32
+
+const (
+	Platform_UNKNOWN Platform = 0
+	Platform_APPLE   Platform = 1
+	Platform_GOOGLE  Platform = 2
+)
+
+// Enum value maps for Platform.
+var (
+	Platform_name = map[int32]string{
+		0: "UNKNOWN",
+		1: "APPLE",
+		2: "GOOGLE",
+	}
+	Platform_value = map[string]int32{
+		"UNKNOWN": 0,
+		"APPLE":   1,
+		"GOOGLE":  2,
+	}
+)
+
+func (x Platform) Enum() *Platform {
+	p := new(Platform)
+	*p = x
+	return p
+}
+
+func (x Platform) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Platform) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_flipchat_proto_enumTypes[0].Descriptor()
+}
+
+func (Platform) Type() protoreflect.EnumType {
+	return &file_common_v1_flipchat_proto_enumTypes[0]
+}
+
+func (x Platform) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Platform.Descriptor instead.
+func (Platform) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_flipchat_proto_rawDescGZIP(), []int{0}
+}
+
 type QueryOptions_Order int32
 
 const (
@@ -53,11 +102,11 @@ func (x QueryOptions_Order) String() string {
 }
 
 func (QueryOptions_Order) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_v1_flipchat_proto_enumTypes[0].Descriptor()
+	return file_common_v1_flipchat_proto_enumTypes[1].Descriptor()
 }
 
 func (QueryOptions_Order) Type() protoreflect.EnumType {
-	return &file_common_v1_flipchat_proto_enumTypes[0]
+	return &file_common_v1_flipchat_proto_enumTypes[1]
 }
 
 func (x QueryOptions_Order) Number() protoreflect.EnumNumber {
@@ -864,7 +913,10 @@ var file_common_v1_flipchat_proto_rawDesc = []byte{
 	0x72, 0x79, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52,
 	0x05, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x22, 0x1a, 0x0a, 0x05, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12,
 	0x07, 0x0a, 0x03, 0x41, 0x53, 0x43, 0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x44, 0x45, 0x53, 0x43,
-	0x10, 0x01, 0x42, 0x82, 0x01, 0x0a, 0x22, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x64, 0x65, 0x69,
+	0x10, 0x01, 0x2a, 0x2e, 0x0a, 0x08, 0x50, 0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x12, 0x0b,
+	0x0a, 0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05, 0x41,
+	0x50, 0x50, 0x4c, 0x45, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x47, 0x4f, 0x4f, 0x47, 0x4c, 0x45,
+	0x10, 0x02, 0x42, 0x82, 0x01, 0x0a, 0x22, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x64, 0x65, 0x69,
 	0x6e, 0x63, 0x2e, 0x66, 0x6c, 0x69, 0x70, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x67, 0x65, 0x6e, 0x2e,
 	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x5a, 0x4e, 0x67, 0x69, 0x74, 0x68, 0x75,
 	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x2d, 0x70, 0x61, 0x79, 0x6d, 0x65,
@@ -887,36 +939,37 @@ func file_common_v1_flipchat_proto_rawDescGZIP() []byte {
 	return file_common_v1_flipchat_proto_rawDescData
 }
 
-var file_common_v1_flipchat_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_common_v1_flipchat_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_common_v1_flipchat_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_common_v1_flipchat_proto_goTypes = []any{
-	(QueryOptions_Order)(0),       // 0: flipchat.common.v1.QueryOptions.Order
-	(*Auth)(nil),                  // 1: flipchat.common.v1.Auth
-	(*UserId)(nil),                // 2: flipchat.common.v1.UserId
-	(*ChatId)(nil),                // 3: flipchat.common.v1.ChatId
-	(*AppInstallId)(nil),          // 4: flipchat.common.v1.AppInstallId
-	(*Locale)(nil),                // 5: flipchat.common.v1.Locale
-	(*PublicKey)(nil),             // 6: flipchat.common.v1.PublicKey
-	(*IntentId)(nil),              // 7: flipchat.common.v1.IntentId
-	(*Signature)(nil),             // 8: flipchat.common.v1.Signature
-	(*PaymentAmount)(nil),         // 9: flipchat.common.v1.PaymentAmount
-	(*ServerPing)(nil),            // 10: flipchat.common.v1.ServerPing
-	(*ClientPong)(nil),            // 11: flipchat.common.v1.ClientPong
-	(*PagingToken)(nil),           // 12: flipchat.common.v1.PagingToken
-	(*QueryOptions)(nil),          // 13: flipchat.common.v1.QueryOptions
-	(*Auth_KeyPair)(nil),          // 14: flipchat.common.v1.Auth.KeyPair
-	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),   // 16: google.protobuf.Duration
+	(Platform)(0),                 // 0: flipchat.common.v1.Platform
+	(QueryOptions_Order)(0),       // 1: flipchat.common.v1.QueryOptions.Order
+	(*Auth)(nil),                  // 2: flipchat.common.v1.Auth
+	(*UserId)(nil),                // 3: flipchat.common.v1.UserId
+	(*ChatId)(nil),                // 4: flipchat.common.v1.ChatId
+	(*AppInstallId)(nil),          // 5: flipchat.common.v1.AppInstallId
+	(*Locale)(nil),                // 6: flipchat.common.v1.Locale
+	(*PublicKey)(nil),             // 7: flipchat.common.v1.PublicKey
+	(*IntentId)(nil),              // 8: flipchat.common.v1.IntentId
+	(*Signature)(nil),             // 9: flipchat.common.v1.Signature
+	(*PaymentAmount)(nil),         // 10: flipchat.common.v1.PaymentAmount
+	(*ServerPing)(nil),            // 11: flipchat.common.v1.ServerPing
+	(*ClientPong)(nil),            // 12: flipchat.common.v1.ClientPong
+	(*PagingToken)(nil),           // 13: flipchat.common.v1.PagingToken
+	(*QueryOptions)(nil),          // 14: flipchat.common.v1.QueryOptions
+	(*Auth_KeyPair)(nil),          // 15: flipchat.common.v1.Auth.KeyPair
+	(*timestamppb.Timestamp)(nil), // 16: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),   // 17: google.protobuf.Duration
 }
 var file_common_v1_flipchat_proto_depIdxs = []int32{
-	14, // 0: flipchat.common.v1.Auth.key_pair:type_name -> flipchat.common.v1.Auth.KeyPair
-	15, // 1: flipchat.common.v1.ServerPing.timestamp:type_name -> google.protobuf.Timestamp
-	16, // 2: flipchat.common.v1.ServerPing.ping_delay:type_name -> google.protobuf.Duration
-	15, // 3: flipchat.common.v1.ClientPong.timestamp:type_name -> google.protobuf.Timestamp
-	12, // 4: flipchat.common.v1.QueryOptions.paging_token:type_name -> flipchat.common.v1.PagingToken
-	0,  // 5: flipchat.common.v1.QueryOptions.order:type_name -> flipchat.common.v1.QueryOptions.Order
-	6,  // 6: flipchat.common.v1.Auth.KeyPair.pub_key:type_name -> flipchat.common.v1.PublicKey
-	8,  // 7: flipchat.common.v1.Auth.KeyPair.signature:type_name -> flipchat.common.v1.Signature
+	15, // 0: flipchat.common.v1.Auth.key_pair:type_name -> flipchat.common.v1.Auth.KeyPair
+	16, // 1: flipchat.common.v1.ServerPing.timestamp:type_name -> google.protobuf.Timestamp
+	17, // 2: flipchat.common.v1.ServerPing.ping_delay:type_name -> google.protobuf.Duration
+	16, // 3: flipchat.common.v1.ClientPong.timestamp:type_name -> google.protobuf.Timestamp
+	13, // 4: flipchat.common.v1.QueryOptions.paging_token:type_name -> flipchat.common.v1.PagingToken
+	1,  // 5: flipchat.common.v1.QueryOptions.order:type_name -> flipchat.common.v1.QueryOptions.Order
+	7,  // 6: flipchat.common.v1.Auth.KeyPair.pub_key:type_name -> flipchat.common.v1.PublicKey
+	9,  // 7: flipchat.common.v1.Auth.KeyPair.signature:type_name -> flipchat.common.v1.Signature
 	8,  // [8:8] is the sub-list for method output_type
 	8,  // [8:8] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
@@ -937,7 +990,7 @@ func file_common_v1_flipchat_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_common_v1_flipchat_proto_rawDesc,
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
