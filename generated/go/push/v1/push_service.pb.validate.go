@@ -79,6 +79,17 @@ func (m *AddTokenRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if m.GetAppInstall() == nil {
+		err := AddTokenRequestValidationError{
+			field:  "AppInstall",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if all {
 		switch v := interface{}(m.GetAppInstall()).(type) {
 		case interface{ ValidateAll() error }:
@@ -106,6 +117,17 @@ func (m *AddTokenRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.GetAuth() == nil {
+		err := AddTokenRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	if all {
@@ -616,6 +638,17 @@ func (m *DeleteTokensRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if m.GetAppInstall() == nil {
+		err := DeleteTokensRequestValidationError{
+			field:  "AppInstall",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if all {
 		switch v := interface{}(m.GetAppInstall()).(type) {
