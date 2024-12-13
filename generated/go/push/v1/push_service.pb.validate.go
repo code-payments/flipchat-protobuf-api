@@ -594,3 +594,278 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeleteTokenResponseValidationError{}
+
+// Validate checks the field values on DeleteTokensRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTokensRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTokensRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteTokensRequestMultiError, or nil if none found.
+func (m *DeleteTokensRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTokensRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetAppInstall()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteTokensRequestValidationError{
+					field:  "AppInstall",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteTokensRequestValidationError{
+					field:  "AppInstall",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAppInstall()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteTokensRequestValidationError{
+				field:  "AppInstall",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := DeleteTokensRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteTokensRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteTokensRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteTokensRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return DeleteTokensRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTokensRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteTokensRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteTokensRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTokensRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTokensRequestMultiError) AllErrors() []error { return m }
+
+// DeleteTokensRequestValidationError is the validation error returned by
+// DeleteTokensRequest.Validate if the designated constraints aren't met.
+type DeleteTokensRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTokensRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTokensRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTokensRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTokensRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTokensRequestValidationError) ErrorName() string {
+	return "DeleteTokensRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTokensRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTokensRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTokensRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTokensRequestValidationError{}
+
+// Validate checks the field values on DeleteTokensResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTokensResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTokensResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteTokensResponseMultiError, or nil if none found.
+func (m *DeleteTokensResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTokensResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return DeleteTokensResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTokensResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteTokensResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteTokensResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTokensResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTokensResponseMultiError) AllErrors() []error { return m }
+
+// DeleteTokensResponseValidationError is the validation error returned by
+// DeleteTokensResponse.Validate if the designated constraints aren't met.
+type DeleteTokensResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTokensResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTokensResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTokensResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTokensResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTokensResponseValidationError) ErrorName() string {
+	return "DeleteTokensResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTokensResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTokensResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTokensResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTokensResponseValidationError{}

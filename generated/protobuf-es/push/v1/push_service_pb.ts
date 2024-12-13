@@ -249,3 +249,97 @@ proto3.util.setEnumType(DeleteTokenResponse_Result, "flipchat.push.v1.DeleteToke
   { no: 0, name: "OK" },
 ]);
 
+/**
+ * @generated from message flipchat.push.v1.DeleteTokensRequest
+ */
+export class DeleteTokensRequest extends Message<DeleteTokensRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.AppInstallId app_install = 1;
+   */
+  appInstall?: AppInstallId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 2;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<DeleteTokensRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.push.v1.DeleteTokensRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "app_install", kind: "message", T: AppInstallId },
+    { no: 2, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteTokensRequest {
+    return new DeleteTokensRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteTokensRequest {
+    return new DeleteTokensRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteTokensRequest {
+    return new DeleteTokensRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteTokensRequest | PlainMessage<DeleteTokensRequest> | undefined, b: DeleteTokensRequest | PlainMessage<DeleteTokensRequest> | undefined): boolean {
+    return proto3.util.equals(DeleteTokensRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.push.v1.DeleteTokensResponse
+ */
+export class DeleteTokensResponse extends Message<DeleteTokensResponse> {
+  /**
+   * @generated from field: flipchat.push.v1.DeleteTokensResponse.Result result = 1;
+   */
+  result = DeleteTokensResponse_Result.OK;
+
+  constructor(data?: PartialMessage<DeleteTokensResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.push.v1.DeleteTokensResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(DeleteTokensResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteTokensResponse {
+    return new DeleteTokensResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteTokensResponse {
+    return new DeleteTokensResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteTokensResponse {
+    return new DeleteTokensResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteTokensResponse | PlainMessage<DeleteTokensResponse> | undefined, b: DeleteTokensResponse | PlainMessage<DeleteTokensResponse> | undefined): boolean {
+    return proto3.util.equals(DeleteTokensResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.push.v1.DeleteTokensResponse.Result
+ */
+export enum DeleteTokensResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+}
+// Retrieve enum metadata with: proto3.getEnumType(DeleteTokensResponse_Result)
+proto3.util.setEnumType(DeleteTokensResponse_Result, "flipchat.push.v1.DeleteTokensResponse.Result", [
+  { no: 0, name: "OK" },
+]);
+

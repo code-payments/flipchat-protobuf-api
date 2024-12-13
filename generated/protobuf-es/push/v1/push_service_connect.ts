@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AddTokenRequest, AddTokenResponse, DeleteTokenRequest, DeleteTokenResponse } from "./push_service_pb";
+import { AddTokenRequest, AddTokenResponse, DeleteTokenRequest, DeleteTokenResponse, DeleteTokensRequest, DeleteTokensResponse } from "./push_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -13,7 +13,7 @@ export const Push = {
   typeName: "flipchat.push.v1.Push",
   methods: {
     /**
-     * AddToken adds a push token associated with a user/device.
+     * AddToken adds a push token associated with a user.
      *
      * @generated from rpc flipchat.push.v1.Push.AddToken
      */
@@ -24,7 +24,9 @@ export const Push = {
       kind: MethodKind.Unary,
     },
     /**
-     * DeleteToken removes a push token from a user/device.
+     * DeleteToken removes a specific push token from a user.
+     *
+     * Deprecated: Use DeleteTokens intead
      *
      * @generated from rpc flipchat.push.v1.Push.DeleteToken
      */
@@ -32,6 +34,17 @@ export const Push = {
       name: "DeleteToken",
       I: DeleteTokenRequest,
       O: DeleteTokenResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * DeleteTokens removes all push tokens within an app install for a user
+     *
+     * @generated from rpc flipchat.push.v1.Push.DeleteTokens
+     */
+    deleteTokens: {
+      name: "DeleteTokens",
+      I: DeleteTokensRequest,
+      O: DeleteTokensResponse,
       kind: MethodKind.Unary,
     },
   }

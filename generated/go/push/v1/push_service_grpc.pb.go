@@ -19,18 +19,23 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Push_AddToken_FullMethodName    = "/flipchat.push.v1.Push/AddToken"
-	Push_DeleteToken_FullMethodName = "/flipchat.push.v1.Push/DeleteToken"
+	Push_AddToken_FullMethodName     = "/flipchat.push.v1.Push/AddToken"
+	Push_DeleteToken_FullMethodName  = "/flipchat.push.v1.Push/DeleteToken"
+	Push_DeleteTokens_FullMethodName = "/flipchat.push.v1.Push/DeleteTokens"
 )
 
 // PushClient is the client API for Push service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PushClient interface {
-	// AddToken adds a push token associated with a user/device.
+	// AddToken adds a push token associated with a user.
 	AddToken(ctx context.Context, in *AddTokenRequest, opts ...grpc.CallOption) (*AddTokenResponse, error)
-	// DeleteToken removes a push token from a user/device.
+	// DeleteToken removes a specific push token from a user.
+	//
+	// Deprecated: Use DeleteTokens intead
 	DeleteToken(ctx context.Context, in *DeleteTokenRequest, opts ...grpc.CallOption) (*DeleteTokenResponse, error)
+	// DeleteTokens removes all push tokens within an app install for a user
+	DeleteTokens(ctx context.Context, in *DeleteTokensRequest, opts ...grpc.CallOption) (*DeleteTokensResponse, error)
 }
 
 type pushClient struct {
@@ -61,14 +66,28 @@ func (c *pushClient) DeleteToken(ctx context.Context, in *DeleteTokenRequest, op
 	return out, nil
 }
 
+func (c *pushClient) DeleteTokens(ctx context.Context, in *DeleteTokensRequest, opts ...grpc.CallOption) (*DeleteTokensResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTokensResponse)
+	err := c.cc.Invoke(ctx, Push_DeleteTokens_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PushServer is the server API for Push service.
 // All implementations must embed UnimplementedPushServer
 // for forward compatibility.
 type PushServer interface {
-	// AddToken adds a push token associated with a user/device.
+	// AddToken adds a push token associated with a user.
 	AddToken(context.Context, *AddTokenRequest) (*AddTokenResponse, error)
-	// DeleteToken removes a push token from a user/device.
+	// DeleteToken removes a specific push token from a user.
+	//
+	// Deprecated: Use DeleteTokens intead
 	DeleteToken(context.Context, *DeleteTokenRequest) (*DeleteTokenResponse, error)
+	// DeleteTokens removes all push tokens within an app install for a user
+	DeleteTokens(context.Context, *DeleteTokensRequest) (*DeleteTokensResponse, error)
 	mustEmbedUnimplementedPushServer()
 }
 
@@ -84,6 +103,9 @@ func (UnimplementedPushServer) AddToken(context.Context, *AddTokenRequest) (*Add
 }
 func (UnimplementedPushServer) DeleteToken(context.Context, *DeleteTokenRequest) (*DeleteTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteToken not implemented")
+}
+func (UnimplementedPushServer) DeleteTokens(context.Context, *DeleteTokensRequest) (*DeleteTokensResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTokens not implemented")
 }
 func (UnimplementedPushServer) mustEmbedUnimplementedPushServer() {}
 func (UnimplementedPushServer) testEmbeddedByValue()              {}
@@ -142,6 +164,24 @@ func _Push_DeleteToken_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Push_DeleteTokens_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTokensRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PushServer).DeleteTokens(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Push_DeleteTokens_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PushServer).DeleteTokens(ctx, req.(*DeleteTokensRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Push_ServiceDesc is the grpc.ServiceDesc for Push service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +196,10 @@ var Push_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteToken",
 			Handler:    _Push_DeleteToken_Handler,
+		},
+		{
+			MethodName: "DeleteTokens",
+			Handler:    _Push_DeleteTokens_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
