@@ -27,9 +27,7 @@ export class RegisterRequest extends Message<RegisterRequest> {
   signature?: Signature;
 
   /**
-   * Optional DisplayName of the new user
-   *
-   * If the user already exists, this is not used.
+   * Deprecated: New account creation flow requires using profile service after IAP
    *
    * @generated from field: string display_name = 3;
    */
@@ -138,12 +136,18 @@ export enum RegisterResponse_Result {
    * @generated from enum value: INVALID_DISPLAY_NAME = 2;
    */
   INVALID_DISPLAY_NAME = 2,
+
+  /**
+   * @generated from enum value: DENIED = 3;
+   */
+  DENIED = 3,
 }
 // Retrieve enum metadata with: proto3.getEnumType(RegisterResponse_Result)
 proto3.util.setEnumType(RegisterResponse_Result, "flipchat.account.v1.RegisterResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "INVALID_SIGNATURE" },
   { no: 2, name: "INVALID_DISPLAY_NAME" },
+  { no: 3, name: "DENIED" },
 ]);
 
 /**
