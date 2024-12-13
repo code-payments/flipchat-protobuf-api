@@ -208,10 +208,16 @@ export enum SetDisplayNameResponse_Result {
    * @generated from enum value: INVALID_DISPLAY_NAME = 1;
    */
   INVALID_DISPLAY_NAME = 1,
+
+  /**
+   * @generated from enum value: DENIED = 2;
+   */
+  DENIED = 2,
 }
 // Retrieve enum metadata with: proto3.getEnumType(SetDisplayNameResponse_Result)
 proto3.util.setEnumType(SetDisplayNameResponse_Result, "flipchat.profile.v1.SetDisplayNameResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "INVALID_DISPLAY_NAME" },
+  { no: 2, name: "DENIED" },
 ]);
 
