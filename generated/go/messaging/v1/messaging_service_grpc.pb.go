@@ -33,10 +33,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MessagingClient interface {
 	// StreamMessages streams all messages/message states for the requested chat.
-	//
-	// By default, streams will resume messages from the last acknowledged delivery
-	// pointer of the caller. This can be overridden by setting 'last_message',
-	// 'latest_only'.
 	StreamMessages(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamMessagesRequest, StreamMessagesResponse], error)
 	// GetMessage gets a single message in a chat
 	GetMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*GetMessageResponse, error)
@@ -140,10 +136,6 @@ func (c *messagingClient) DeleteMessage(ctx context.Context, in *DeleteMessageRe
 // for forward compatibility.
 type MessagingServer interface {
 	// StreamMessages streams all messages/message states for the requested chat.
-	//
-	// By default, streams will resume messages from the last acknowledged delivery
-	// pointer of the caller. This can be overridden by setting 'last_message',
-	// 'latest_only'.
 	StreamMessages(grpc.BidiStreamingServer[StreamMessagesRequest, StreamMessagesResponse]) error
 	// GetMessage gets a single message in a chat
 	GetMessage(context.Context, *GetMessageRequest) (*GetMessageResponse, error)

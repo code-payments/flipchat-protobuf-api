@@ -15,10 +15,6 @@ export const Messaging = {
     /**
      * StreamMessages streams all messages/message states for the requested chat.
      *
-     * By default, streams will resume messages from the last acknowledged delivery
-     * pointer of the caller. This can be overridden by setting 'last_message',
-     * 'latest_only'.
-     *
      * @generated from rpc flipchat.messaging.v1.Messaging.StreamMessages
      */
     streamMessages: {

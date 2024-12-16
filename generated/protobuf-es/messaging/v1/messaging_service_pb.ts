@@ -68,22 +68,18 @@ export class StreamMessagesRequest_Params extends Message<StreamMessagesRequest_
   chatId?: ChatId;
 
   /**
-   * Callers may optionally specify a resume mode other than last delivery pointer.
+   * Deprecated: stream flushes are no longer supported
    *
    * @generated from oneof flipchat.messaging.v1.StreamMessagesRequest.Params.resume
    */
   resume: {
     /**
-     * Server will return all messages newer than this message id.
-     *
      * @generated from field: flipchat.messaging.v1.MessageId last_known_message_id = 2;
      */
     value: MessageId;
     case: "lastKnownMessageId";
   } | {
     /**
-     * Server will not load any previous messages.
-     *
      * @generated from field: bool latest_only = 3;
      */
     value: boolean;

@@ -1183,7 +1183,7 @@ type StreamMessagesRequest_Params struct {
 	unknownFields protoimpl.UnknownFields
 
 	ChatId *v1.ChatId `protobuf:"bytes,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
-	// Callers may optionally specify a resume mode other than last delivery pointer.
+	// Deprecated: stream flushes are no longer supported
 	//
 	// Types that are assignable to Resume:
 	//
@@ -1263,12 +1263,10 @@ type isStreamMessagesRequest_Params_Resume interface {
 }
 
 type StreamMessagesRequest_Params_LastKnownMessageId struct {
-	// Server will return all messages newer than this message id.
 	LastKnownMessageId *MessageId `protobuf:"bytes,2,opt,name=last_known_message_id,json=lastKnownMessageId,proto3,oneof"`
 }
 
 type StreamMessagesRequest_Params_LatestOnly struct {
-	// Server will not load any previous messages.
 	LatestOnly bool `protobuf:"varint,3,opt,name=latest_only,json=latestOnly,proto3,oneof"`
 }
 
