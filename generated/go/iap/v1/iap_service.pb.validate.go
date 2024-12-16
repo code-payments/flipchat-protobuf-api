@@ -363,10 +363,10 @@ func (m *Receipt) validate(all bool) error {
 
 	var errors []error
 
-	if l := utf8.RuneCountInString(m.GetValue()); l < 1 || l > 4096 {
+	if utf8.RuneCountInString(m.GetValue()) < 1 {
 		err := ReceiptValidationError{
 			field:  "Value",
-			reason: "value length must be between 1 and 4096 runes, inclusive",
+			reason: "value length must be at least 1 runes",
 		}
 		if !all {
 			return err
