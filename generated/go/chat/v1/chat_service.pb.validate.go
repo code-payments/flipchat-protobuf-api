@@ -3210,6 +3210,355 @@ var _ interface {
 	ErrorName() string
 } = SetCoverChargeResponseValidationError{}
 
+// Validate checks the field values on GetMemberUpdatesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetMemberUpdatesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetMemberUpdatesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetMemberUpdatesRequestMultiError, or nil if none found.
+func (m *GetMemberUpdatesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetMemberUpdatesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := GetMemberUpdatesRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetMemberUpdatesRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetMemberUpdatesRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetMemberUpdatesRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetPagingToken()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetMemberUpdatesRequestValidationError{
+					field:  "PagingToken",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetMemberUpdatesRequestValidationError{
+					field:  "PagingToken",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPagingToken()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetMemberUpdatesRequestValidationError{
+				field:  "PagingToken",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetMemberUpdatesRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetMemberUpdatesRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetMemberUpdatesRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetMemberUpdatesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetMemberUpdatesRequestMultiError is an error wrapping multiple validation
+// errors returned by GetMemberUpdatesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetMemberUpdatesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetMemberUpdatesRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetMemberUpdatesRequestMultiError) AllErrors() []error { return m }
+
+// GetMemberUpdatesRequestValidationError is the validation error returned by
+// GetMemberUpdatesRequest.Validate if the designated constraints aren't met.
+type GetMemberUpdatesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetMemberUpdatesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetMemberUpdatesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetMemberUpdatesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetMemberUpdatesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetMemberUpdatesRequestValidationError) ErrorName() string {
+	return "GetMemberUpdatesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetMemberUpdatesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetMemberUpdatesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetMemberUpdatesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetMemberUpdatesRequestValidationError{}
+
+// Validate checks the field values on GetMemberUpdatesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetMemberUpdatesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetMemberUpdatesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetMemberUpdatesResponseMultiError, or nil if none found.
+func (m *GetMemberUpdatesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetMemberUpdatesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(m.GetUpdates()) > 1024 {
+		err := GetMemberUpdatesResponseValidationError{
+			field:  "Updates",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetUpdates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetMemberUpdatesResponseValidationError{
+						field:  fmt.Sprintf("Updates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetMemberUpdatesResponseValidationError{
+						field:  fmt.Sprintf("Updates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetMemberUpdatesResponseValidationError{
+					field:  fmt.Sprintf("Updates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetMemberUpdatesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetMemberUpdatesResponseMultiError is an error wrapping multiple validation
+// errors returned by GetMemberUpdatesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetMemberUpdatesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetMemberUpdatesResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetMemberUpdatesResponseMultiError) AllErrors() []error { return m }
+
+// GetMemberUpdatesResponseValidationError is the validation error returned by
+// GetMemberUpdatesResponse.Validate if the designated constraints aren't met.
+type GetMemberUpdatesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetMemberUpdatesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetMemberUpdatesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetMemberUpdatesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetMemberUpdatesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetMemberUpdatesResponseValidationError) ErrorName() string {
+	return "GetMemberUpdatesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetMemberUpdatesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetMemberUpdatesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetMemberUpdatesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetMemberUpdatesResponseValidationError{}
+
 // Validate checks the field values on RemoveUserRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -5014,6 +5363,332 @@ var _Metadata_Type_NotInLookup = map[Metadata_ChatType]struct{}{
 	0: {},
 }
 
+// Validate checks the field values on MetadataUpdate with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *MetadataUpdate) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MetadataUpdate with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in MetadataUpdateMultiError,
+// or nil if none found.
+func (m *MetadataUpdate) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MetadataUpdate) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	oneofKindPresent := false
+	switch v := m.Kind.(type) {
+	case *MetadataUpdate_FullRefresh_:
+		if v == nil {
+			err := MetadataUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetFullRefresh()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "FullRefresh",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "FullRefresh",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFullRefresh()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MetadataUpdateValidationError{
+					field:  "FullRefresh",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MetadataUpdate_UnreadCountChanged_:
+		if v == nil {
+			err := MetadataUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetUnreadCountChanged()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "UnreadCountChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "UnreadCountChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetUnreadCountChanged()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MetadataUpdateValidationError{
+					field:  "UnreadCountChanged",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MetadataUpdate_DisplayNameChanged_:
+		if v == nil {
+			err := MetadataUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetDisplayNameChanged()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "DisplayNameChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "DisplayNameChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetDisplayNameChanged()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MetadataUpdateValidationError{
+					field:  "DisplayNameChanged",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MetadataUpdate_CoverChargeChanged_:
+		if v == nil {
+			err := MetadataUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetCoverChargeChanged()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "CoverChargeChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "CoverChargeChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetCoverChargeChanged()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MetadataUpdateValidationError{
+					field:  "CoverChargeChanged",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MetadataUpdate_LastActivityChanged_:
+		if v == nil {
+			err := MetadataUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetLastActivityChanged()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "LastActivityChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "LastActivityChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetLastActivityChanged()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MetadataUpdateValidationError{
+					field:  "LastActivityChanged",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+	if !oneofKindPresent {
+		err := MetadataUpdateValidationError{
+			field:  "Kind",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return MetadataUpdateMultiError(errors)
+	}
+
+	return nil
+}
+
+// MetadataUpdateMultiError is an error wrapping multiple validation errors
+// returned by MetadataUpdate.ValidateAll() if the designated constraints
+// aren't met.
+type MetadataUpdateMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MetadataUpdateMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MetadataUpdateMultiError) AllErrors() []error { return m }
+
+// MetadataUpdateValidationError is the validation error returned by
+// MetadataUpdate.Validate if the designated constraints aren't met.
+type MetadataUpdateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MetadataUpdateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MetadataUpdateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MetadataUpdateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MetadataUpdateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MetadataUpdateValidationError) ErrorName() string { return "MetadataUpdateValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MetadataUpdateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMetadataUpdate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MetadataUpdateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MetadataUpdateValidationError{}
+
 // Validate checks the field values on Member with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -5355,6 +6030,402 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = MemberIdentityValidationError{}
+
+// Validate checks the field values on MemberUpdate with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in MemberUpdateMultiError, or
+// nil if none found.
+func (m *MemberUpdate) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetPagingToken()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdateValidationError{
+					field:  "PagingToken",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdateValidationError{
+					field:  "PagingToken",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPagingToken()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdateValidationError{
+				field:  "PagingToken",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	oneofKindPresent := false
+	switch v := m.Kind.(type) {
+	case *MemberUpdate_FullRefresh_:
+		if v == nil {
+			err := MemberUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetFullRefresh()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "FullRefresh",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "FullRefresh",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFullRefresh()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdateValidationError{
+					field:  "FullRefresh",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MemberUpdate_IndividualRefresh_:
+		if v == nil {
+			err := MemberUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetIndividualRefresh()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "IndividualRefresh",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "IndividualRefresh",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetIndividualRefresh()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdateValidationError{
+					field:  "IndividualRefresh",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MemberUpdate_Joined_:
+		if v == nil {
+			err := MemberUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetJoined()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Joined",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Joined",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetJoined()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdateValidationError{
+					field:  "Joined",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MemberUpdate_Left_:
+		if v == nil {
+			err := MemberUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetLeft()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Left",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Left",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetLeft()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdateValidationError{
+					field:  "Left",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MemberUpdate_Removed_:
+		if v == nil {
+			err := MemberUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetRemoved()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Removed",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Removed",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRemoved()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdateValidationError{
+					field:  "Removed",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MemberUpdate_Muted_:
+		if v == nil {
+			err := MemberUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetMuted()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Muted",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Muted",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetMuted()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdateValidationError{
+					field:  "Muted",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+	if !oneofKindPresent {
+		err := MemberUpdateValidationError{
+			field:  "Kind",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return MemberUpdateMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdateMultiError is an error wrapping multiple validation errors
+// returned by MemberUpdate.ValidateAll() if the designated constraints aren't met.
+type MemberUpdateMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdateMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdateMultiError) AllErrors() []error { return m }
+
+// MemberUpdateValidationError is the validation error returned by
+// MemberUpdate.Validate if the designated constraints aren't met.
+type MemberUpdateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdateValidationError) ErrorName() string { return "MemberUpdateValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MemberUpdateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdateValidationError{}
 
 // Validate checks the field values on StreamChatEventsRequest_Params with the
 // rules defined in the proto definition for this message. If any rules are
@@ -6125,711 +7196,6 @@ var _ interface {
 	ErrorName() string
 } = StreamChatEventsResponse_ChatUpdateValidationError{}
 
-// Validate checks the field values on StreamChatEventsResponse_MetadataUpdate
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *StreamChatEventsResponse_MetadataUpdate) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MetadataUpdate with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// StreamChatEventsResponse_MetadataUpdateMultiError, or nil if none found.
-func (m *StreamChatEventsResponse_MetadataUpdate) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MetadataUpdate) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	oneofKindPresent := false
-	switch v := m.Kind.(type) {
-	case *StreamChatEventsResponse_MetadataUpdate_FullRefresh_:
-		if v == nil {
-			err := StreamChatEventsResponse_MetadataUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetFullRefresh()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "FullRefresh",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "FullRefresh",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetFullRefresh()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MetadataUpdateValidationError{
-					field:  "FullRefresh",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged_:
-		if v == nil {
-			err := StreamChatEventsResponse_MetadataUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetUnreadCountChanged()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "UnreadCountChanged",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "UnreadCountChanged",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetUnreadCountChanged()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MetadataUpdateValidationError{
-					field:  "UnreadCountChanged",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged_:
-		if v == nil {
-			err := StreamChatEventsResponse_MetadataUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetDisplayNameChanged()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "DisplayNameChanged",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "DisplayNameChanged",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetDisplayNameChanged()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MetadataUpdateValidationError{
-					field:  "DisplayNameChanged",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged_:
-		if v == nil {
-			err := StreamChatEventsResponse_MetadataUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetCoverChargeChanged()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "CoverChargeChanged",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "CoverChargeChanged",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetCoverChargeChanged()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MetadataUpdateValidationError{
-					field:  "CoverChargeChanged",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MetadataUpdate_LastActivityChanged_:
-		if v == nil {
-			err := StreamChatEventsResponse_MetadataUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetLastActivityChanged()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "LastActivityChanged",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MetadataUpdateValidationError{
-						field:  "LastActivityChanged",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetLastActivityChanged()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MetadataUpdateValidationError{
-					field:  "LastActivityChanged",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	default:
-		_ = v // ensures v is used
-	}
-	if !oneofKindPresent {
-		err := StreamChatEventsResponse_MetadataUpdateValidationError{
-			field:  "Kind",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MetadataUpdateMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MetadataUpdateMultiError is an error wrapping
-// multiple validation errors returned by
-// StreamChatEventsResponse_MetadataUpdate.ValidateAll() if the designated
-// constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdateMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MetadataUpdateMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MetadataUpdateMultiError) AllErrors() []error { return m }
-
-// StreamChatEventsResponse_MetadataUpdateValidationError is the validation
-// error returned by StreamChatEventsResponse_MetadataUpdate.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdateValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MetadataUpdateValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MetadataUpdateValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MetadataUpdateValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MetadataUpdateValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MetadataUpdateValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MetadataUpdateValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MetadataUpdateValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MetadataUpdate.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MetadataUpdateValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MetadataUpdateValidationError{}
-
-// Validate checks the field values on StreamChatEventsResponse_MemberUpdate
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the first error encountered is returned, or nil if
-// there are no violations.
-func (m *StreamChatEventsResponse_MemberUpdate) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on StreamChatEventsResponse_MemberUpdate
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MemberUpdateMultiError, or nil if none found.
-func (m *StreamChatEventsResponse_MemberUpdate) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MemberUpdate) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	oneofKindPresent := false
-	switch v := m.Kind.(type) {
-	case *StreamChatEventsResponse_MemberUpdate_FullRefresh_:
-		if v == nil {
-			err := StreamChatEventsResponse_MemberUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetFullRefresh()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "FullRefresh",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "FullRefresh",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetFullRefresh()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MemberUpdateValidationError{
-					field:  "FullRefresh",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MemberUpdate_IndividualRefresh_:
-		if v == nil {
-			err := StreamChatEventsResponse_MemberUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetIndividualRefresh()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "IndividualRefresh",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "IndividualRefresh",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetIndividualRefresh()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MemberUpdateValidationError{
-					field:  "IndividualRefresh",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MemberUpdate_Joined_:
-		if v == nil {
-			err := StreamChatEventsResponse_MemberUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetJoined()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "Joined",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "Joined",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetJoined()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MemberUpdateValidationError{
-					field:  "Joined",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MemberUpdate_Left_:
-		if v == nil {
-			err := StreamChatEventsResponse_MemberUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetLeft()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "Left",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "Left",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetLeft()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MemberUpdateValidationError{
-					field:  "Left",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MemberUpdate_Removed_:
-		if v == nil {
-			err := StreamChatEventsResponse_MemberUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetRemoved()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "Removed",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "Removed",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetRemoved()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MemberUpdateValidationError{
-					field:  "Removed",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *StreamChatEventsResponse_MemberUpdate_Muted_:
-		if v == nil {
-			err := StreamChatEventsResponse_MemberUpdateValidationError{
-				field:  "Kind",
-				reason: "oneof value cannot be a typed-nil",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		}
-		oneofKindPresent = true
-
-		if all {
-			switch v := interface{}(m.GetMuted()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "Muted",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdateValidationError{
-						field:  "Muted",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetMuted()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MemberUpdateValidationError{
-					field:  "Muted",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	default:
-		_ = v // ensures v is used
-	}
-	if !oneofKindPresent {
-		err := StreamChatEventsResponse_MemberUpdateValidationError{
-			field:  "Kind",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MemberUpdateMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MemberUpdateMultiError is an error wrapping
-// multiple validation errors returned by
-// StreamChatEventsResponse_MemberUpdate.ValidateAll() if the designated
-// constraints aren't met.
-type StreamChatEventsResponse_MemberUpdateMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MemberUpdateMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MemberUpdateMultiError) AllErrors() []error { return m }
-
-// StreamChatEventsResponse_MemberUpdateValidationError is the validation error
-// returned by StreamChatEventsResponse_MemberUpdate.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdateValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MemberUpdateValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MemberUpdateValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MemberUpdateValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MemberUpdateValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MemberUpdateValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MemberUpdateValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MemberUpdateValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MemberUpdate.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MemberUpdateValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MemberUpdateValidationError{}
-
 // Validate checks the field values on
 // StreamChatEventsResponse_ChatUpdate_PointerUpdate with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -7022,1682 +7388,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = StreamChatEventsResponse_ChatUpdate_PointerUpdateValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_FullRefresh with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MetadataUpdate_FullRefresh) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_FullRefresh with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MetadataUpdate_FullRefreshMultiError, or nil if
-// none found.
-func (m *StreamChatEventsResponse_MetadataUpdate_FullRefresh) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MetadataUpdate_FullRefresh) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetMetadata() == nil {
-		err := StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError{
-			field:  "Metadata",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetMetadata()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError{
-					field:  "Metadata",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError{
-					field:  "Metadata",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetMetadata()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError{
-				field:  "Metadata",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MetadataUpdate_FullRefreshMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MetadataUpdate_FullRefreshMultiError is an error
-// wrapping multiple validation errors returned by
-// StreamChatEventsResponse_MetadataUpdate_FullRefresh.ValidateAll() if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_FullRefreshMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MetadataUpdate_FullRefreshMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MetadataUpdate_FullRefreshMultiError) AllErrors() []error { return m }
-
-// StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError is the
-// validation error returned by
-// StreamChatEventsResponse_MetadataUpdate_FullRefresh.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MetadataUpdate_FullRefresh.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MetadataUpdate_FullRefreshValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError, or
-// nil if none found.
-func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for NumUnread
-
-	// no validation rules for HasMoreUnread
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError is an
-// error wrapping multiple validation errors returned by
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged.ValidateAll() if
-// the designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedMultiError) AllErrors() []error {
-	return m
-}
-
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError is
-// the validation error returned by
-// StreamChatEventsResponse_MetadataUpdate_UnreadCountChanged.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Key() bool {
-	return e.key
-}
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MetadataUpdate_UnreadCountChanged.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MetadataUpdate_UnreadCountChangedValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedMultiError, or
-// nil if none found.
-func (m *StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if l := utf8.RuneCountInString(m.GetNewDisplayName()); l < 1 || l > 64 {
-		err := StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError{
-			field:  "NewDisplayName",
-			reason: "value length must be between 1 and 64 runes, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedMultiError is an
-// error wrapping multiple validation errors returned by
-// StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged.ValidateAll() if
-// the designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedMultiError) AllErrors() []error {
-	return m
-}
-
-// StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError is
-// the validation error returned by
-// StreamChatEventsResponse_MetadataUpdate_DisplayNameChanged.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError) Key() bool {
-	return e.key
-}
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MetadataUpdate_DisplayNameChanged.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MetadataUpdate_DisplayNameChangedValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedMultiError, or
-// nil if none found.
-func (m *StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetNewCoverCharge() == nil {
-		err := StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError{
-			field:  "NewCoverCharge",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetNewCoverCharge()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError{
-					field:  "NewCoverCharge",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError{
-					field:  "NewCoverCharge",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetNewCoverCharge()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError{
-				field:  "NewCoverCharge",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedMultiError is an
-// error wrapping multiple validation errors returned by
-// StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged.ValidateAll() if
-// the designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedMultiError) AllErrors() []error {
-	return m
-}
-
-// StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError is
-// the validation error returned by
-// StreamChatEventsResponse_MetadataUpdate_CoverChargeChanged.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError) Key() bool {
-	return e.key
-}
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MetadataUpdate_CoverChargeChanged.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MetadataUpdate_CoverChargeChangedValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_LastActivityChanged with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MetadataUpdate_LastActivityChanged) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MetadataUpdate_LastActivityChanged with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError, or
-// nil if none found.
-func (m *StreamChatEventsResponse_MetadataUpdate_LastActivityChanged) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MetadataUpdate_LastActivityChanged) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetNewLastActivity() == nil {
-		err := StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError{
-			field:  "NewLastActivity",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError is an
-// error wrapping multiple validation errors returned by
-// StreamChatEventsResponse_MetadataUpdate_LastActivityChanged.ValidateAll()
-// if the designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MetadataUpdate_LastActivityChangedMultiError) AllErrors() []error {
-	return m
-}
-
-// StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError
-// is the validation error returned by
-// StreamChatEventsResponse_MetadataUpdate_LastActivityChanged.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Key() bool {
-	return e.key
-}
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MetadataUpdate_LastActivityChanged.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MetadataUpdate_LastActivityChangedValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MemberUpdate_FullRefresh with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MemberUpdate_FullRefresh) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MemberUpdate_FullRefresh with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MemberUpdate_FullRefreshMultiError, or nil if none found.
-func (m *StreamChatEventsResponse_MemberUpdate_FullRefresh) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MemberUpdate_FullRefresh) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(m.GetMembers()) < 1 {
-		err := StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError{
-			field:  "Members",
-			reason: "value must contain at least 1 item(s)",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	for idx, item := range m.GetMembers() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError{
-						field:  fmt.Sprintf("Members[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError{
-						field:  fmt.Sprintf("Members[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError{
-					field:  fmt.Sprintf("Members[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MemberUpdate_FullRefreshMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MemberUpdate_FullRefreshMultiError is an error
-// wrapping multiple validation errors returned by
-// StreamChatEventsResponse_MemberUpdate_FullRefresh.ValidateAll() if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_FullRefreshMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MemberUpdate_FullRefreshMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MemberUpdate_FullRefreshMultiError) AllErrors() []error { return m }
-
-// StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError is the
-// validation error returned by
-// StreamChatEventsResponse_MemberUpdate_FullRefresh.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MemberUpdate_FullRefresh.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MemberUpdate_FullRefreshValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MemberUpdate_IndividualRefresh with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MemberUpdate_IndividualRefresh) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MemberUpdate_IndividualRefresh with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// StreamChatEventsResponse_MemberUpdate_IndividualRefreshMultiError, or nil
-// if none found.
-func (m *StreamChatEventsResponse_MemberUpdate_IndividualRefresh) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MemberUpdate_IndividualRefresh) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetMember() == nil {
-		err := StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError{
-			field:  "Member",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetMember()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError{
-				field:  "Member",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MemberUpdate_IndividualRefreshMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MemberUpdate_IndividualRefreshMultiError is an
-// error wrapping multiple validation errors returned by
-// StreamChatEventsResponse_MemberUpdate_IndividualRefresh.ValidateAll() if
-// the designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_IndividualRefreshMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MemberUpdate_IndividualRefreshMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MemberUpdate_IndividualRefreshMultiError) AllErrors() []error {
-	return m
-}
-
-// StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError is
-// the validation error returned by
-// StreamChatEventsResponse_MemberUpdate_IndividualRefresh.Validate if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError) Key() bool {
-	return e.key
-}
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MemberUpdate_IndividualRefresh.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MemberUpdate_IndividualRefreshValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MemberUpdate_Joined with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MemberUpdate_Joined) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MemberUpdate_Joined with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// StreamChatEventsResponse_MemberUpdate_JoinedMultiError, or nil if none found.
-func (m *StreamChatEventsResponse_MemberUpdate_Joined) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MemberUpdate_Joined) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetMember() == nil {
-		err := StreamChatEventsResponse_MemberUpdate_JoinedValidationError{
-			field:  "Member",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetMember()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_JoinedValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_JoinedValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MemberUpdate_JoinedValidationError{
-				field:  "Member",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MemberUpdate_JoinedMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MemberUpdate_JoinedMultiError is an error wrapping
-// multiple validation errors returned by
-// StreamChatEventsResponse_MemberUpdate_Joined.ValidateAll() if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_JoinedMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MemberUpdate_JoinedMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MemberUpdate_JoinedMultiError) AllErrors() []error { return m }
-
-// StreamChatEventsResponse_MemberUpdate_JoinedValidationError is the
-// validation error returned by
-// StreamChatEventsResponse_MemberUpdate_Joined.Validate if the designated
-// constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_JoinedValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MemberUpdate_JoinedValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MemberUpdate_JoinedValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MemberUpdate_JoinedValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MemberUpdate_JoinedValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MemberUpdate_JoinedValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MemberUpdate_JoinedValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MemberUpdate_JoinedValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MemberUpdate_Joined.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MemberUpdate_JoinedValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MemberUpdate_JoinedValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MemberUpdate_Left with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MemberUpdate_Left) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MemberUpdate_Left with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// StreamChatEventsResponse_MemberUpdate_LeftMultiError, or nil if none found.
-func (m *StreamChatEventsResponse_MemberUpdate_Left) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MemberUpdate_Left) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetMember() == nil {
-		err := StreamChatEventsResponse_MemberUpdate_LeftValidationError{
-			field:  "Member",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetMember()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_LeftValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_LeftValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MemberUpdate_LeftValidationError{
-				field:  "Member",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MemberUpdate_LeftMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MemberUpdate_LeftMultiError is an error wrapping
-// multiple validation errors returned by
-// StreamChatEventsResponse_MemberUpdate_Left.ValidateAll() if the designated
-// constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_LeftMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MemberUpdate_LeftMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MemberUpdate_LeftMultiError) AllErrors() []error { return m }
-
-// StreamChatEventsResponse_MemberUpdate_LeftValidationError is the validation
-// error returned by StreamChatEventsResponse_MemberUpdate_Left.Validate if
-// the designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_LeftValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MemberUpdate_LeftValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MemberUpdate_LeftValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MemberUpdate_LeftValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MemberUpdate_LeftValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MemberUpdate_LeftValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MemberUpdate_LeftValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MemberUpdate_LeftValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MemberUpdate_Left.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MemberUpdate_LeftValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MemberUpdate_LeftValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MemberUpdate_Removed with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MemberUpdate_Removed) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MemberUpdate_Removed with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// StreamChatEventsResponse_MemberUpdate_RemovedMultiError, or nil if none found.
-func (m *StreamChatEventsResponse_MemberUpdate_Removed) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MemberUpdate_Removed) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetMember() == nil {
-		err := StreamChatEventsResponse_MemberUpdate_RemovedValidationError{
-			field:  "Member",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetMember()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_RemovedValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_RemovedValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MemberUpdate_RemovedValidationError{
-				field:  "Member",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetRemovedBy() == nil {
-		err := StreamChatEventsResponse_MemberUpdate_RemovedValidationError{
-			field:  "RemovedBy",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetRemovedBy()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_RemovedValidationError{
-					field:  "RemovedBy",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_RemovedValidationError{
-					field:  "RemovedBy",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetRemovedBy()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MemberUpdate_RemovedValidationError{
-				field:  "RemovedBy",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MemberUpdate_RemovedMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MemberUpdate_RemovedMultiError is an error wrapping
-// multiple validation errors returned by
-// StreamChatEventsResponse_MemberUpdate_Removed.ValidateAll() if the
-// designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_RemovedMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MemberUpdate_RemovedMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MemberUpdate_RemovedMultiError) AllErrors() []error { return m }
-
-// StreamChatEventsResponse_MemberUpdate_RemovedValidationError is the
-// validation error returned by
-// StreamChatEventsResponse_MemberUpdate_Removed.Validate if the designated
-// constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_RemovedValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MemberUpdate_RemovedValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MemberUpdate_RemovedValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MemberUpdate_RemovedValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MemberUpdate_RemovedValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MemberUpdate_RemovedValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MemberUpdate_RemovedValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MemberUpdate_RemovedValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MemberUpdate_Removed.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MemberUpdate_RemovedValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MemberUpdate_RemovedValidationError{}
-
-// Validate checks the field values on
-// StreamChatEventsResponse_MemberUpdate_Muted with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *StreamChatEventsResponse_MemberUpdate_Muted) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// StreamChatEventsResponse_MemberUpdate_Muted with the rules defined in the
-// proto definition for this message. If any rules are violated, the result is
-// a list of violation errors wrapped in
-// StreamChatEventsResponse_MemberUpdate_MutedMultiError, or nil if none found.
-func (m *StreamChatEventsResponse_MemberUpdate_Muted) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamChatEventsResponse_MemberUpdate_Muted) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetMember() == nil {
-		err := StreamChatEventsResponse_MemberUpdate_MutedValidationError{
-			field:  "Member",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetMember()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_MutedValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_MutedValidationError{
-					field:  "Member",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MemberUpdate_MutedValidationError{
-				field:  "Member",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetMutedBy() == nil {
-		err := StreamChatEventsResponse_MemberUpdate_MutedValidationError{
-			field:  "MutedBy",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetMutedBy()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_MutedValidationError{
-					field:  "MutedBy",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, StreamChatEventsResponse_MemberUpdate_MutedValidationError{
-					field:  "MutedBy",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetMutedBy()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StreamChatEventsResponse_MemberUpdate_MutedValidationError{
-				field:  "MutedBy",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return StreamChatEventsResponse_MemberUpdate_MutedMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamChatEventsResponse_MemberUpdate_MutedMultiError is an error wrapping
-// multiple validation errors returned by
-// StreamChatEventsResponse_MemberUpdate_Muted.ValidateAll() if the designated
-// constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_MutedMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamChatEventsResponse_MemberUpdate_MutedMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamChatEventsResponse_MemberUpdate_MutedMultiError) AllErrors() []error { return m }
-
-// StreamChatEventsResponse_MemberUpdate_MutedValidationError is the validation
-// error returned by StreamChatEventsResponse_MemberUpdate_Muted.Validate if
-// the designated constraints aren't met.
-type StreamChatEventsResponse_MemberUpdate_MutedValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamChatEventsResponse_MemberUpdate_MutedValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e StreamChatEventsResponse_MemberUpdate_MutedValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e StreamChatEventsResponse_MemberUpdate_MutedValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e StreamChatEventsResponse_MemberUpdate_MutedValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamChatEventsResponse_MemberUpdate_MutedValidationError) ErrorName() string {
-	return "StreamChatEventsResponse_MemberUpdate_MutedValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamChatEventsResponse_MemberUpdate_MutedValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamChatEventsResponse_MemberUpdate_Muted.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamChatEventsResponse_MemberUpdate_MutedValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamChatEventsResponse_MemberUpdate_MutedValidationError{}
 
 // Validate checks the field values on
 // StartChatRequest_StartTwoWayChatParameters with the rules defined in the
@@ -9024,3 +7714,1569 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = StartChatRequest_StartGroupChatParametersValidationError{}
+
+// Validate checks the field values on MetadataUpdate_FullRefresh with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MetadataUpdate_FullRefresh) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MetadataUpdate_FullRefresh with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MetadataUpdate_FullRefreshMultiError, or nil if none found.
+func (m *MetadataUpdate_FullRefresh) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MetadataUpdate_FullRefresh) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMetadata() == nil {
+		err := MetadataUpdate_FullRefreshValidationError{
+			field:  "Metadata",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMetadata()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MetadataUpdate_FullRefreshValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MetadataUpdate_FullRefreshValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMetadata()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MetadataUpdate_FullRefreshValidationError{
+				field:  "Metadata",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MetadataUpdate_FullRefreshMultiError(errors)
+	}
+
+	return nil
+}
+
+// MetadataUpdate_FullRefreshMultiError is an error wrapping multiple
+// validation errors returned by MetadataUpdate_FullRefresh.ValidateAll() if
+// the designated constraints aren't met.
+type MetadataUpdate_FullRefreshMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MetadataUpdate_FullRefreshMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MetadataUpdate_FullRefreshMultiError) AllErrors() []error { return m }
+
+// MetadataUpdate_FullRefreshValidationError is the validation error returned
+// by MetadataUpdate_FullRefresh.Validate if the designated constraints aren't met.
+type MetadataUpdate_FullRefreshValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MetadataUpdate_FullRefreshValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MetadataUpdate_FullRefreshValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MetadataUpdate_FullRefreshValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MetadataUpdate_FullRefreshValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MetadataUpdate_FullRefreshValidationError) ErrorName() string {
+	return "MetadataUpdate_FullRefreshValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MetadataUpdate_FullRefreshValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMetadataUpdate_FullRefresh.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MetadataUpdate_FullRefreshValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MetadataUpdate_FullRefreshValidationError{}
+
+// Validate checks the field values on MetadataUpdate_UnreadCountChanged with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *MetadataUpdate_UnreadCountChanged) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MetadataUpdate_UnreadCountChanged
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// MetadataUpdate_UnreadCountChangedMultiError, or nil if none found.
+func (m *MetadataUpdate_UnreadCountChanged) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MetadataUpdate_UnreadCountChanged) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for NumUnread
+
+	// no validation rules for HasMoreUnread
+
+	if len(errors) > 0 {
+		return MetadataUpdate_UnreadCountChangedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MetadataUpdate_UnreadCountChangedMultiError is an error wrapping multiple
+// validation errors returned by
+// MetadataUpdate_UnreadCountChanged.ValidateAll() if the designated
+// constraints aren't met.
+type MetadataUpdate_UnreadCountChangedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MetadataUpdate_UnreadCountChangedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MetadataUpdate_UnreadCountChangedMultiError) AllErrors() []error { return m }
+
+// MetadataUpdate_UnreadCountChangedValidationError is the validation error
+// returned by MetadataUpdate_UnreadCountChanged.Validate if the designated
+// constraints aren't met.
+type MetadataUpdate_UnreadCountChangedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MetadataUpdate_UnreadCountChangedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MetadataUpdate_UnreadCountChangedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MetadataUpdate_UnreadCountChangedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MetadataUpdate_UnreadCountChangedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MetadataUpdate_UnreadCountChangedValidationError) ErrorName() string {
+	return "MetadataUpdate_UnreadCountChangedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MetadataUpdate_UnreadCountChangedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMetadataUpdate_UnreadCountChanged.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MetadataUpdate_UnreadCountChangedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MetadataUpdate_UnreadCountChangedValidationError{}
+
+// Validate checks the field values on MetadataUpdate_DisplayNameChanged with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *MetadataUpdate_DisplayNameChanged) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MetadataUpdate_DisplayNameChanged
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// MetadataUpdate_DisplayNameChangedMultiError, or nil if none found.
+func (m *MetadataUpdate_DisplayNameChanged) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MetadataUpdate_DisplayNameChanged) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := utf8.RuneCountInString(m.GetNewDisplayName()); l < 1 || l > 64 {
+		err := MetadataUpdate_DisplayNameChangedValidationError{
+			field:  "NewDisplayName",
+			reason: "value length must be between 1 and 64 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return MetadataUpdate_DisplayNameChangedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MetadataUpdate_DisplayNameChangedMultiError is an error wrapping multiple
+// validation errors returned by
+// MetadataUpdate_DisplayNameChanged.ValidateAll() if the designated
+// constraints aren't met.
+type MetadataUpdate_DisplayNameChangedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MetadataUpdate_DisplayNameChangedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MetadataUpdate_DisplayNameChangedMultiError) AllErrors() []error { return m }
+
+// MetadataUpdate_DisplayNameChangedValidationError is the validation error
+// returned by MetadataUpdate_DisplayNameChanged.Validate if the designated
+// constraints aren't met.
+type MetadataUpdate_DisplayNameChangedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MetadataUpdate_DisplayNameChangedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MetadataUpdate_DisplayNameChangedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MetadataUpdate_DisplayNameChangedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MetadataUpdate_DisplayNameChangedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MetadataUpdate_DisplayNameChangedValidationError) ErrorName() string {
+	return "MetadataUpdate_DisplayNameChangedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MetadataUpdate_DisplayNameChangedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMetadataUpdate_DisplayNameChanged.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MetadataUpdate_DisplayNameChangedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MetadataUpdate_DisplayNameChangedValidationError{}
+
+// Validate checks the field values on MetadataUpdate_CoverChargeChanged with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *MetadataUpdate_CoverChargeChanged) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MetadataUpdate_CoverChargeChanged
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// MetadataUpdate_CoverChargeChangedMultiError, or nil if none found.
+func (m *MetadataUpdate_CoverChargeChanged) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MetadataUpdate_CoverChargeChanged) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetNewCoverCharge() == nil {
+		err := MetadataUpdate_CoverChargeChangedValidationError{
+			field:  "NewCoverCharge",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetNewCoverCharge()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MetadataUpdate_CoverChargeChangedValidationError{
+					field:  "NewCoverCharge",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MetadataUpdate_CoverChargeChangedValidationError{
+					field:  "NewCoverCharge",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetNewCoverCharge()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MetadataUpdate_CoverChargeChangedValidationError{
+				field:  "NewCoverCharge",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MetadataUpdate_CoverChargeChangedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MetadataUpdate_CoverChargeChangedMultiError is an error wrapping multiple
+// validation errors returned by
+// MetadataUpdate_CoverChargeChanged.ValidateAll() if the designated
+// constraints aren't met.
+type MetadataUpdate_CoverChargeChangedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MetadataUpdate_CoverChargeChangedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MetadataUpdate_CoverChargeChangedMultiError) AllErrors() []error { return m }
+
+// MetadataUpdate_CoverChargeChangedValidationError is the validation error
+// returned by MetadataUpdate_CoverChargeChanged.Validate if the designated
+// constraints aren't met.
+type MetadataUpdate_CoverChargeChangedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MetadataUpdate_CoverChargeChangedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MetadataUpdate_CoverChargeChangedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MetadataUpdate_CoverChargeChangedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MetadataUpdate_CoverChargeChangedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MetadataUpdate_CoverChargeChangedValidationError) ErrorName() string {
+	return "MetadataUpdate_CoverChargeChangedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MetadataUpdate_CoverChargeChangedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMetadataUpdate_CoverChargeChanged.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MetadataUpdate_CoverChargeChangedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MetadataUpdate_CoverChargeChangedValidationError{}
+
+// Validate checks the field values on MetadataUpdate_LastActivityChanged with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *MetadataUpdate_LastActivityChanged) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MetadataUpdate_LastActivityChanged
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// MetadataUpdate_LastActivityChangedMultiError, or nil if none found.
+func (m *MetadataUpdate_LastActivityChanged) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MetadataUpdate_LastActivityChanged) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetNewLastActivity() == nil {
+		err := MetadataUpdate_LastActivityChangedValidationError{
+			field:  "NewLastActivity",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return MetadataUpdate_LastActivityChangedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MetadataUpdate_LastActivityChangedMultiError is an error wrapping multiple
+// validation errors returned by
+// MetadataUpdate_LastActivityChanged.ValidateAll() if the designated
+// constraints aren't met.
+type MetadataUpdate_LastActivityChangedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MetadataUpdate_LastActivityChangedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MetadataUpdate_LastActivityChangedMultiError) AllErrors() []error { return m }
+
+// MetadataUpdate_LastActivityChangedValidationError is the validation error
+// returned by MetadataUpdate_LastActivityChanged.Validate if the designated
+// constraints aren't met.
+type MetadataUpdate_LastActivityChangedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MetadataUpdate_LastActivityChangedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MetadataUpdate_LastActivityChangedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MetadataUpdate_LastActivityChangedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MetadataUpdate_LastActivityChangedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MetadataUpdate_LastActivityChangedValidationError) ErrorName() string {
+	return "MetadataUpdate_LastActivityChangedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MetadataUpdate_LastActivityChangedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMetadataUpdate_LastActivityChanged.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MetadataUpdate_LastActivityChangedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MetadataUpdate_LastActivityChangedValidationError{}
+
+// Validate checks the field values on MemberUpdate_FullRefresh with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate_FullRefresh) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate_FullRefresh with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MemberUpdate_FullRefreshMultiError, or nil if none found.
+func (m *MemberUpdate_FullRefresh) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate_FullRefresh) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(m.GetMembers()) < 1 {
+		err := MemberUpdate_FullRefreshValidationError{
+			field:  "Members",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetMembers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdate_FullRefreshValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdate_FullRefreshValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdate_FullRefreshValidationError{
+					field:  fmt.Sprintf("Members[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return MemberUpdate_FullRefreshMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdate_FullRefreshMultiError is an error wrapping multiple validation
+// errors returned by MemberUpdate_FullRefresh.ValidateAll() if the designated
+// constraints aren't met.
+type MemberUpdate_FullRefreshMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdate_FullRefreshMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdate_FullRefreshMultiError) AllErrors() []error { return m }
+
+// MemberUpdate_FullRefreshValidationError is the validation error returned by
+// MemberUpdate_FullRefresh.Validate if the designated constraints aren't met.
+type MemberUpdate_FullRefreshValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdate_FullRefreshValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdate_FullRefreshValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdate_FullRefreshValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdate_FullRefreshValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdate_FullRefreshValidationError) ErrorName() string {
+	return "MemberUpdate_FullRefreshValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MemberUpdate_FullRefreshValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate_FullRefresh.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdate_FullRefreshValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdate_FullRefreshValidationError{}
+
+// Validate checks the field values on MemberUpdate_IndividualRefresh with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate_IndividualRefresh) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate_IndividualRefresh with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// MemberUpdate_IndividualRefreshMultiError, or nil if none found.
+func (m *MemberUpdate_IndividualRefresh) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate_IndividualRefresh) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMember() == nil {
+		err := MemberUpdate_IndividualRefreshValidationError{
+			field:  "Member",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMember()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_IndividualRefreshValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_IndividualRefreshValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_IndividualRefreshValidationError{
+				field:  "Member",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MemberUpdate_IndividualRefreshMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdate_IndividualRefreshMultiError is an error wrapping multiple
+// validation errors returned by MemberUpdate_IndividualRefresh.ValidateAll()
+// if the designated constraints aren't met.
+type MemberUpdate_IndividualRefreshMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdate_IndividualRefreshMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdate_IndividualRefreshMultiError) AllErrors() []error { return m }
+
+// MemberUpdate_IndividualRefreshValidationError is the validation error
+// returned by MemberUpdate_IndividualRefresh.Validate if the designated
+// constraints aren't met.
+type MemberUpdate_IndividualRefreshValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdate_IndividualRefreshValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdate_IndividualRefreshValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdate_IndividualRefreshValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdate_IndividualRefreshValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdate_IndividualRefreshValidationError) ErrorName() string {
+	return "MemberUpdate_IndividualRefreshValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MemberUpdate_IndividualRefreshValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate_IndividualRefresh.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdate_IndividualRefreshValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdate_IndividualRefreshValidationError{}
+
+// Validate checks the field values on MemberUpdate_Joined with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate_Joined) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate_Joined with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MemberUpdate_JoinedMultiError, or nil if none found.
+func (m *MemberUpdate_Joined) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate_Joined) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMember() == nil {
+		err := MemberUpdate_JoinedValidationError{
+			field:  "Member",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMember()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_JoinedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_JoinedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_JoinedValidationError{
+				field:  "Member",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MemberUpdate_JoinedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdate_JoinedMultiError is an error wrapping multiple validation
+// errors returned by MemberUpdate_Joined.ValidateAll() if the designated
+// constraints aren't met.
+type MemberUpdate_JoinedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdate_JoinedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdate_JoinedMultiError) AllErrors() []error { return m }
+
+// MemberUpdate_JoinedValidationError is the validation error returned by
+// MemberUpdate_Joined.Validate if the designated constraints aren't met.
+type MemberUpdate_JoinedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdate_JoinedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdate_JoinedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdate_JoinedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdate_JoinedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdate_JoinedValidationError) ErrorName() string {
+	return "MemberUpdate_JoinedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MemberUpdate_JoinedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate_Joined.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdate_JoinedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdate_JoinedValidationError{}
+
+// Validate checks the field values on MemberUpdate_Left with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate_Left) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate_Left with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MemberUpdate_LeftMultiError, or nil if none found.
+func (m *MemberUpdate_Left) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate_Left) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMember() == nil {
+		err := MemberUpdate_LeftValidationError{
+			field:  "Member",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMember()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_LeftValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_LeftValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_LeftValidationError{
+				field:  "Member",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MemberUpdate_LeftMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdate_LeftMultiError is an error wrapping multiple validation errors
+// returned by MemberUpdate_Left.ValidateAll() if the designated constraints
+// aren't met.
+type MemberUpdate_LeftMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdate_LeftMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdate_LeftMultiError) AllErrors() []error { return m }
+
+// MemberUpdate_LeftValidationError is the validation error returned by
+// MemberUpdate_Left.Validate if the designated constraints aren't met.
+type MemberUpdate_LeftValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdate_LeftValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdate_LeftValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdate_LeftValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdate_LeftValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdate_LeftValidationError) ErrorName() string {
+	return "MemberUpdate_LeftValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MemberUpdate_LeftValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate_Left.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdate_LeftValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdate_LeftValidationError{}
+
+// Validate checks the field values on MemberUpdate_Removed with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate_Removed) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate_Removed with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MemberUpdate_RemovedMultiError, or nil if none found.
+func (m *MemberUpdate_Removed) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate_Removed) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMember() == nil {
+		err := MemberUpdate_RemovedValidationError{
+			field:  "Member",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMember()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_RemovedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_RemovedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_RemovedValidationError{
+				field:  "Member",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetRemovedBy() == nil {
+		err := MemberUpdate_RemovedValidationError{
+			field:  "RemovedBy",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetRemovedBy()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_RemovedValidationError{
+					field:  "RemovedBy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_RemovedValidationError{
+					field:  "RemovedBy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRemovedBy()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_RemovedValidationError{
+				field:  "RemovedBy",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MemberUpdate_RemovedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdate_RemovedMultiError is an error wrapping multiple validation
+// errors returned by MemberUpdate_Removed.ValidateAll() if the designated
+// constraints aren't met.
+type MemberUpdate_RemovedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdate_RemovedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdate_RemovedMultiError) AllErrors() []error { return m }
+
+// MemberUpdate_RemovedValidationError is the validation error returned by
+// MemberUpdate_Removed.Validate if the designated constraints aren't met.
+type MemberUpdate_RemovedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdate_RemovedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdate_RemovedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdate_RemovedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdate_RemovedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdate_RemovedValidationError) ErrorName() string {
+	return "MemberUpdate_RemovedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MemberUpdate_RemovedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate_Removed.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdate_RemovedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdate_RemovedValidationError{}
+
+// Validate checks the field values on MemberUpdate_Muted with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate_Muted) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate_Muted with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MemberUpdate_MutedMultiError, or nil if none found.
+func (m *MemberUpdate_Muted) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate_Muted) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMember() == nil {
+		err := MemberUpdate_MutedValidationError{
+			field:  "Member",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMember()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_MutedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_MutedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_MutedValidationError{
+				field:  "Member",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetMutedBy() == nil {
+		err := MemberUpdate_MutedValidationError{
+			field:  "MutedBy",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMutedBy()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_MutedValidationError{
+					field:  "MutedBy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_MutedValidationError{
+					field:  "MutedBy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMutedBy()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_MutedValidationError{
+				field:  "MutedBy",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return MemberUpdate_MutedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdate_MutedMultiError is an error wrapping multiple validation errors
+// returned by MemberUpdate_Muted.ValidateAll() if the designated constraints
+// aren't met.
+type MemberUpdate_MutedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdate_MutedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdate_MutedMultiError) AllErrors() []error { return m }
+
+// MemberUpdate_MutedValidationError is the validation error returned by
+// MemberUpdate_Muted.Validate if the designated constraints aren't met.
+type MemberUpdate_MutedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdate_MutedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdate_MutedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdate_MutedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdate_MutedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdate_MutedValidationError) ErrorName() string {
+	return "MemberUpdate_MutedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MemberUpdate_MutedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate_Muted.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdate_MutedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdate_MutedValidationError{}
