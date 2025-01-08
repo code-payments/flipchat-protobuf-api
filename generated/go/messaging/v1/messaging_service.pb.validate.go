@@ -1665,6 +1665,46 @@ func (m *SendTipMessagePaymentMetadata) validate(all bool) error {
 		}
 	}
 
+	if m.GetTipperId() == nil {
+		err := SendTipMessagePaymentMetadataValidationError{
+			field:  "TipperId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetTipperId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendTipMessagePaymentMetadataValidationError{
+					field:  "TipperId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendTipMessagePaymentMetadataValidationError{
+					field:  "TipperId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTipperId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendTipMessagePaymentMetadataValidationError{
+				field:  "TipperId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return SendTipMessagePaymentMetadataMultiError(errors)
 	}

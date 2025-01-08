@@ -158,6 +158,9 @@ message SendTipMessagePaymentMetadata {
 
     // The message that is being tipped
     MessageId message_id = 2 [(validate.rules).message.required = true];
+
+    // The user sending the tip
+    common.v1.UserId tipper_id = 3 [(validate.rules).message.required = true];
 }
 
 message AdvancePointerRequest {
