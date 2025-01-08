@@ -853,6 +853,48 @@ func (m *Content) validate(all bool) error {
 			}
 		}
 
+	case *Content_Tip:
+		if v == nil {
+			err := ContentValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetTip()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "Tip",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "Tip",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetTip()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ContentValidationError{
+					field:  "Tip",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		_ = v // ensures v is used
 	}
@@ -1468,3 +1510,182 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ReplyContentValidationError{}
+
+// Validate checks the field values on TipContent with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *TipContent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on TipContent with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in TipContentMultiError, or
+// nil if none found.
+func (m *TipContent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *TipContent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOriginalMessageId() == nil {
+		err := TipContentValidationError{
+			field:  "OriginalMessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetOriginalMessageId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TipContentValidationError{
+					field:  "OriginalMessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TipContentValidationError{
+					field:  "OriginalMessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOriginalMessageId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TipContentValidationError{
+				field:  "OriginalMessageId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetTipAmount() == nil {
+		err := TipContentValidationError{
+			field:  "TipAmount",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetTipAmount()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TipContentValidationError{
+					field:  "TipAmount",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TipContentValidationError{
+					field:  "TipAmount",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTipAmount()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TipContentValidationError{
+				field:  "TipAmount",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return TipContentMultiError(errors)
+	}
+
+	return nil
+}
+
+// TipContentMultiError is an error wrapping multiple validation errors
+// returned by TipContent.ValidateAll() if the designated constraints aren't met.
+type TipContentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TipContentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TipContentMultiError) AllErrors() []error { return m }
+
+// TipContentValidationError is the validation error returned by
+// TipContent.Validate if the designated constraints aren't met.
+type TipContentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TipContentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TipContentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TipContentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TipContentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TipContentValidationError) ErrorName() string { return "TipContentValidationError" }
+
+// Error satisfies the builtin error interface
+func (e TipContentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTipContent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TipContentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TipContentValidationError{}

@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message as Message$1, proto3, Timestamp } from "@bufbuild/protobuf";
-import { UserId } from "../../common/v1/common_pb";
+import { PaymentAmount, UserId } from "../../common/v1/common_pb";
 
 /**
  * @generated from message flipchat.messaging.v1.MessageId
@@ -280,6 +280,12 @@ export class Content extends Message$1<Content> {
      */
     value: ReplyContent;
     case: "reply";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.TipContent tip = 7;
+     */
+    value: TipContent;
+    case: "tip";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<Content>) {
@@ -294,6 +300,7 @@ export class Content extends Message$1<Content> {
     { no: 2, name: "localized_announcement", kind: "message", T: LocalizedAnnouncementContent, oneof: "type" },
     { no: 5, name: "reaction", kind: "message", T: ReactionContent, oneof: "type" },
     { no: 6, name: "reply", kind: "message", T: ReplyContent, oneof: "type" },
+    { no: 7, name: "tip", kind: "message", T: TipContent, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content {
@@ -488,6 +495,53 @@ export class ReplyContent extends Message$1<ReplyContent> {
 
   static equals(a: ReplyContent | PlainMessage<ReplyContent> | undefined, b: ReplyContent | PlainMessage<ReplyContent> | undefined): boolean {
     return proto3.util.equals(ReplyContent, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.TipContent
+ */
+export class TipContent extends Message$1<TipContent> {
+  /**
+   * The message ID of the message this tip is referencing
+   *
+   * @generated from field: flipchat.messaging.v1.MessageId original_message_id = 1;
+   */
+  originalMessageId?: MessageId;
+
+  /**
+   * The amount tipped for the message
+   *
+   * @generated from field: flipchat.common.v1.PaymentAmount tip_amount = 2;
+   */
+  tipAmount?: PaymentAmount;
+
+  constructor(data?: PartialMessage<TipContent>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.TipContent";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "original_message_id", kind: "message", T: MessageId },
+    { no: 2, name: "tip_amount", kind: "message", T: PaymentAmount },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TipContent {
+    return new TipContent().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TipContent {
+    return new TipContent().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TipContent {
+    return new TipContent().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: TipContent | PlainMessage<TipContent> | undefined, b: TipContent | PlainMessage<TipContent> | undefined): boolean {
+    return proto3.util.equals(TipContent, a, b);
   }
 }
 

@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import { Auth, ChatId, ClientPong, QueryOptions, ServerPing } from "../../common/v1/common_pb";
+import { Auth, ChatId, ClientPong, IntentId, QueryOptions, ServerPing, UserId } from "../../common/v1/common_pb";
 import { Content, Message as Message$1, MessageId, Pointer } from "./model_pb";
 
 /**
@@ -511,6 +511,7 @@ export class SendMessageRequest extends Message<SendMessageRequest> {
    *  - TextContent
    *  - ReactionContent
    *  - ReplyContent
+   *  - TipContent
    *
    * @generated from field: repeated flipchat.messaging.v1.Content content = 2;
    */
@@ -520,6 +521,13 @@ export class SendMessageRequest extends Message<SendMessageRequest> {
    * @generated from field: flipchat.common.v1.Auth auth = 3;
    */
   auth?: Auth;
+
+  /**
+   * Intent ID for message contents that require a payment
+   *
+   * @generated from field: flipchat.common.v1.IntentId payment_intent = 4;
+   */
+  paymentIntent?: IntentId;
 
   constructor(data?: PartialMessage<SendMessageRequest>) {
     super();
@@ -532,6 +540,7 @@ export class SendMessageRequest extends Message<SendMessageRequest> {
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
     { no: 2, name: "content", kind: "message", T: Content, repeated: true },
     { no: 3, name: "auth", kind: "message", T: Auth },
+    { no: 4, name: "payment_intent", kind: "message", T: IntentId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendMessageRequest {
@@ -616,6 +625,61 @@ proto3.util.setEnumType(SendMessageResponse_Result, "flipchat.messaging.v1.SendM
   { no: 0, name: "OK" },
   { no: 1, name: "DENIED" },
 ]);
+
+/**
+ * @generated from message flipchat.messaging.v1.SendTipMessagePaymentMetadata
+ */
+export class SendTipMessagePaymentMetadata extends Message<SendTipMessagePaymentMetadata> {
+  /**
+   * The chat where the message is being tipped
+   *
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * The message that is being tipped
+   *
+   * @generated from field: flipchat.messaging.v1.MessageId message_id = 2;
+   */
+  messageId?: MessageId;
+
+  /**
+   * The user sending the tip
+   *
+   * @generated from field: flipchat.common.v1.UserId tipper_id = 3;
+   */
+  tipperId?: UserId;
+
+  constructor(data?: PartialMessage<SendTipMessagePaymentMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.SendTipMessagePaymentMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "message_id", kind: "message", T: MessageId },
+    { no: 3, name: "tipper_id", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendTipMessagePaymentMetadata {
+    return new SendTipMessagePaymentMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendTipMessagePaymentMetadata {
+    return new SendTipMessagePaymentMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendTipMessagePaymentMetadata {
+    return new SendTipMessagePaymentMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SendTipMessagePaymentMetadata | PlainMessage<SendTipMessagePaymentMetadata> | undefined, b: SendTipMessagePaymentMetadata | PlainMessage<SendTipMessagePaymentMetadata> | undefined): boolean {
+    return proto3.util.equals(SendTipMessagePaymentMetadata, a, b);
+  }
+}
 
 /**
  * @generated from message flipchat.messaging.v1.AdvancePointerRequest

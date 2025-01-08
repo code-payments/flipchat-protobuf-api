@@ -1321,6 +1321,35 @@ func (m *SendMessageRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetPaymentIntent()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendMessageRequestValidationError{
+					field:  "PaymentIntent",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendMessageRequestValidationError{
+					field:  "PaymentIntent",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPaymentIntent()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendMessageRequestValidationError{
+				field:  "PaymentIntent",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return SendMessageRequestMultiError(errors)
 	}
@@ -1533,6 +1562,229 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SendMessageResponseValidationError{}
+
+// Validate checks the field values on SendTipMessagePaymentMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SendTipMessagePaymentMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendTipMessagePaymentMetadata with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SendTipMessagePaymentMetadataMultiError, or nil if none found.
+func (m *SendTipMessagePaymentMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendTipMessagePaymentMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := SendTipMessagePaymentMetadataValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendTipMessagePaymentMetadataValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendTipMessagePaymentMetadataValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendTipMessagePaymentMetadataValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetMessageId() == nil {
+		err := SendTipMessagePaymentMetadataValidationError{
+			field:  "MessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMessageId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendTipMessagePaymentMetadataValidationError{
+					field:  "MessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendTipMessagePaymentMetadataValidationError{
+					field:  "MessageId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMessageId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendTipMessagePaymentMetadataValidationError{
+				field:  "MessageId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetTipperId() == nil {
+		err := SendTipMessagePaymentMetadataValidationError{
+			field:  "TipperId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetTipperId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendTipMessagePaymentMetadataValidationError{
+					field:  "TipperId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendTipMessagePaymentMetadataValidationError{
+					field:  "TipperId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTipperId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendTipMessagePaymentMetadataValidationError{
+				field:  "TipperId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SendTipMessagePaymentMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendTipMessagePaymentMetadataMultiError is an error wrapping multiple
+// validation errors returned by SendTipMessagePaymentMetadata.ValidateAll()
+// if the designated constraints aren't met.
+type SendTipMessagePaymentMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendTipMessagePaymentMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendTipMessagePaymentMetadataMultiError) AllErrors() []error { return m }
+
+// SendTipMessagePaymentMetadataValidationError is the validation error
+// returned by SendTipMessagePaymentMetadata.Validate if the designated
+// constraints aren't met.
+type SendTipMessagePaymentMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendTipMessagePaymentMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendTipMessagePaymentMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendTipMessagePaymentMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendTipMessagePaymentMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendTipMessagePaymentMetadataValidationError) ErrorName() string {
+	return "SendTipMessagePaymentMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendTipMessagePaymentMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendTipMessagePaymentMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendTipMessagePaymentMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendTipMessagePaymentMetadataValidationError{}
 
 // Validate checks the field values on AdvancePointerRequest with the rules
 // defined in the proto definition for this message. If any rules are
