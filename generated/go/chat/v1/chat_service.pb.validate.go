@@ -2649,10 +2649,10 @@ func (m *SetDisplayNameRequest) validate(all bool) error {
 		}
 	}
 
-	if l := utf8.RuneCountInString(m.GetDisplayName()); l < 1 || l > 64 {
+	if utf8.RuneCountInString(m.GetDisplayName()) > 64 {
 		err := SetDisplayNameRequestValidationError{
 			field:  "DisplayName",
-			reason: "value length must be between 1 and 64 runes, inclusive",
+			reason: "value length must be at most 64 runes",
 		}
 		if !all {
 			return err
@@ -7989,10 +7989,10 @@ func (m *MetadataUpdate_DisplayNameChanged) validate(all bool) error {
 
 	var errors []error
 
-	if l := utf8.RuneCountInString(m.GetNewDisplayName()); l < 1 || l > 64 {
+	if utf8.RuneCountInString(m.GetNewDisplayName()) > 64 {
 		err := MetadataUpdate_DisplayNameChangedValidationError{
 			field:  "NewDisplayName",
-			reason: "value length must be between 1 and 64 runes, inclusive",
+			reason: "value length must be at most 64 runes",
 		}
 		if !all {
 			return err
