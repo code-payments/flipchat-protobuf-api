@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import { Auth, ChatId, ClientPong, IntentId, QueryOptions, ServerPing, UserId } from "../../common/v1/common_pb";
+import { Auth, ChatId, ClientPong, IntentId, QueryOptions, ServerPing } from "../../common/v1/common_pb";
 import { Content, Message as Message$1, MessageId, Pointer } from "./model_pb";
 
 /**
@@ -644,13 +644,6 @@ export class SendTipMessagePaymentMetadata extends Message<SendTipMessagePayment
    */
   messageId?: MessageId;
 
-  /**
-   * The user sending the tip
-   *
-   * @generated from field: flipchat.common.v1.UserId tipper_id = 3;
-   */
-  tipperId?: UserId;
-
   constructor(data?: PartialMessage<SendTipMessagePaymentMetadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -661,7 +654,6 @@ export class SendTipMessagePaymentMetadata extends Message<SendTipMessagePayment
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
     { no: 2, name: "message_id", kind: "message", T: MessageId },
-    { no: 3, name: "tipper_id", kind: "message", T: UserId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendTipMessagePaymentMetadata {
