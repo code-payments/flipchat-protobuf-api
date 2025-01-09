@@ -286,6 +286,12 @@ export class Content extends Message$1<Content> {
      */
     value: TipContent;
     case: "tip";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.DeleteMessageContent deleted = 8;
+     */
+    value: DeleteMessageContent;
+    case: "deleted";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<Content>) {
@@ -301,6 +307,7 @@ export class Content extends Message$1<Content> {
     { no: 5, name: "reaction", kind: "message", T: ReactionContent, oneof: "type" },
     { no: 6, name: "reply", kind: "message", T: ReplyContent, oneof: "type" },
     { no: 7, name: "tip", kind: "message", T: TipContent, oneof: "type" },
+    { no: 8, name: "deleted", kind: "message", T: DeleteMessageContent, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content {
@@ -542,6 +549,45 @@ export class TipContent extends Message$1<TipContent> {
 
   static equals(a: TipContent | PlainMessage<TipContent> | undefined, b: TipContent | PlainMessage<TipContent> | undefined): boolean {
     return proto3.util.equals(TipContent, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.DeleteMessageContent
+ */
+export class DeleteMessageContent extends Message$1<DeleteMessageContent> {
+  /**
+   * The message ID of the message that was deleted
+   *
+   * @generated from field: flipchat.messaging.v1.MessageId original_message_id = 1;
+   */
+  originalMessageId?: MessageId;
+
+  constructor(data?: PartialMessage<DeleteMessageContent>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.DeleteMessageContent";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "original_message_id", kind: "message", T: MessageId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteMessageContent {
+    return new DeleteMessageContent().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteMessageContent {
+    return new DeleteMessageContent().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteMessageContent {
+    return new DeleteMessageContent().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteMessageContent | PlainMessage<DeleteMessageContent> | undefined, b: DeleteMessageContent | PlainMessage<DeleteMessageContent> | undefined): boolean {
+    return proto3.util.equals(DeleteMessageContent, a, b);
   }
 }
 

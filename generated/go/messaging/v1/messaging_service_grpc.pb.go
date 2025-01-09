@@ -25,7 +25,6 @@ const (
 	Messaging_SendMessage_FullMethodName    = "/flipchat.messaging.v1.Messaging/SendMessage"
 	Messaging_AdvancePointer_FullMethodName = "/flipchat.messaging.v1.Messaging/AdvancePointer"
 	Messaging_NotifyIsTyping_FullMethodName = "/flipchat.messaging.v1.Messaging/NotifyIsTyping"
-	Messaging_DeleteMessage_FullMethodName  = "/flipchat.messaging.v1.Messaging/DeleteMessage"
 )
 
 // MessagingClient is the client API for Messaging service.
@@ -46,8 +45,6 @@ type MessagingClient interface {
 	//
 	// These requests are transient, and may be dropped at any point.
 	NotifyIsTyping(ctx context.Context, in *NotifyIsTypingRequest, opts ...grpc.CallOption) (*NotifyIsTypingResponse, error)
-	// DeleteMessage deletes a message
-	DeleteMessage(ctx context.Context, in *DeleteMessageRequest, opts ...grpc.CallOption) (*DeleteMessageResponse, error)
 }
 
 type messagingClient struct {
@@ -121,16 +118,6 @@ func (c *messagingClient) NotifyIsTyping(ctx context.Context, in *NotifyIsTyping
 	return out, nil
 }
 
-func (c *messagingClient) DeleteMessage(ctx context.Context, in *DeleteMessageRequest, opts ...grpc.CallOption) (*DeleteMessageResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteMessageResponse)
-	err := c.cc.Invoke(ctx, Messaging_DeleteMessage_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // MessagingServer is the server API for Messaging service.
 // All implementations must embed UnimplementedMessagingServer
 // for forward compatibility.
@@ -149,8 +136,6 @@ type MessagingServer interface {
 	//
 	// These requests are transient, and may be dropped at any point.
 	NotifyIsTyping(context.Context, *NotifyIsTypingRequest) (*NotifyIsTypingResponse, error)
-	// DeleteMessage deletes a message
-	DeleteMessage(context.Context, *DeleteMessageRequest) (*DeleteMessageResponse, error)
 	mustEmbedUnimplementedMessagingServer()
 }
 
@@ -178,9 +163,6 @@ func (UnimplementedMessagingServer) AdvancePointer(context.Context, *AdvancePoin
 }
 func (UnimplementedMessagingServer) NotifyIsTyping(context.Context, *NotifyIsTypingRequest) (*NotifyIsTypingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyIsTyping not implemented")
-}
-func (UnimplementedMessagingServer) DeleteMessage(context.Context, *DeleteMessageRequest) (*DeleteMessageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteMessage not implemented")
 }
 func (UnimplementedMessagingServer) mustEmbedUnimplementedMessagingServer() {}
 func (UnimplementedMessagingServer) testEmbeddedByValue()                   {}
@@ -300,24 +282,6 @@ func _Messaging_NotifyIsTyping_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Messaging_DeleteMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteMessageRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MessagingServer).DeleteMessage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Messaging_DeleteMessage_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MessagingServer).DeleteMessage(ctx, req.(*DeleteMessageRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Messaging_ServiceDesc is the grpc.ServiceDesc for Messaging service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -344,10 +308,6 @@ var Messaging_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NotifyIsTyping",
 			Handler:    _Messaging_NotifyIsTyping_Handler,
-		},
-		{
-			MethodName: "DeleteMessage",
-			Handler:    _Messaging_DeleteMessage_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
