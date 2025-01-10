@@ -35,7 +35,7 @@ export const Messaging = {
       kind: MethodKind.Unary,
     },
     /**
-     * GetMessages gets the set of messages for a chat using a paged API
+     * GetMessages gets the set of messages for a chat using a paged and batched APIs
      *
      * @generated from rpc flipchat.messaging.v1.Messaging.GetMessages
      */

@@ -888,35 +888,6 @@ func (m *GetMessagesRequest) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetQueryOptions()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetMessagesRequestValidationError{
-					field:  "QueryOptions",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetMessagesRequestValidationError{
-					field:  "QueryOptions",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetQueryOptions()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetMessagesRequestValidationError{
-				field:  "QueryOptions",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
 		switch v := interface{}(m.GetAuth()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
@@ -943,6 +914,93 @@ func (m *GetMessagesRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	switch v := m.Query.(type) {
+	case *GetMessagesRequest_Options:
+		if v == nil {
+			err := GetMessagesRequestValidationError{
+				field:  "Query",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetOptions()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetMessagesRequestValidationError{
+						field:  "Options",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetMessagesRequestValidationError{
+						field:  "Options",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetOptions()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetMessagesRequestValidationError{
+					field:  "Options",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *GetMessagesRequest_MessageIds:
+		if v == nil {
+			err := GetMessagesRequestValidationError{
+				field:  "Query",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetMessageIds()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetMessagesRequestValidationError{
+						field:  "MessageIds",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetMessagesRequestValidationError{
+						field:  "MessageIds",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetMessageIds()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetMessagesRequestValidationError{
+					field:  "MessageIds",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
 	}
 
 	if len(errors) > 0 {
@@ -2736,153 +2794,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = StreamMessagesResponse_StreamErrorValidationError{}
-
-// Validate checks the field values on StreamMessagesResponse_MessageBatch with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *StreamMessagesResponse_MessageBatch) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on StreamMessagesResponse_MessageBatch
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// StreamMessagesResponse_MessageBatchMultiError, or nil if none found.
-func (m *StreamMessagesResponse_MessageBatch) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *StreamMessagesResponse_MessageBatch) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if l := len(m.GetMessages()); l < 1 || l > 1024 {
-		err := StreamMessagesResponse_MessageBatchValidationError{
-			field:  "Messages",
-			reason: "value must contain between 1 and 1024 items, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	for idx, item := range m.GetMessages() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, StreamMessagesResponse_MessageBatchValidationError{
-						field:  fmt.Sprintf("Messages[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, StreamMessagesResponse_MessageBatchValidationError{
-						field:  fmt.Sprintf("Messages[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return StreamMessagesResponse_MessageBatchValidationError{
-					field:  fmt.Sprintf("Messages[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return StreamMessagesResponse_MessageBatchMultiError(errors)
-	}
-
-	return nil
-}
-
-// StreamMessagesResponse_MessageBatchMultiError is an error wrapping multiple
-// validation errors returned by
-// StreamMessagesResponse_MessageBatch.ValidateAll() if the designated
-// constraints aren't met.
-type StreamMessagesResponse_MessageBatchMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m StreamMessagesResponse_MessageBatchMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m StreamMessagesResponse_MessageBatchMultiError) AllErrors() []error { return m }
-
-// StreamMessagesResponse_MessageBatchValidationError is the validation error
-// returned by StreamMessagesResponse_MessageBatch.Validate if the designated
-// constraints aren't met.
-type StreamMessagesResponse_MessageBatchValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StreamMessagesResponse_MessageBatchValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e StreamMessagesResponse_MessageBatchValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e StreamMessagesResponse_MessageBatchValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e StreamMessagesResponse_MessageBatchValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StreamMessagesResponse_MessageBatchValidationError) ErrorName() string {
-	return "StreamMessagesResponse_MessageBatchValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StreamMessagesResponse_MessageBatchValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStreamMessagesResponse_MessageBatch.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StreamMessagesResponse_MessageBatchValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StreamMessagesResponse_MessageBatchValidationError{}

@@ -35,7 +35,7 @@ type MessagingClient interface {
 	StreamMessages(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamMessagesRequest, StreamMessagesResponse], error)
 	// GetMessage gets a single message in a chat
 	GetMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*GetMessageResponse, error)
-	// GetMessages gets the set of messages for a chat using a paged API
+	// GetMessages gets the set of messages for a chat using a paged and batched APIs
 	GetMessages(ctx context.Context, in *GetMessagesRequest, opts ...grpc.CallOption) (*GetMessagesResponse, error)
 	// SendMessage sends a message to a chat.
 	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error)
@@ -126,7 +126,7 @@ type MessagingServer interface {
 	StreamMessages(grpc.BidiStreamingServer[StreamMessagesRequest, StreamMessagesResponse]) error
 	// GetMessage gets a single message in a chat
 	GetMessage(context.Context, *GetMessageRequest) (*GetMessageResponse, error)
-	// GetMessages gets the set of messages for a chat using a paged API
+	// GetMessages gets the set of messages for a chat using a paged and batched APIs
 	GetMessages(context.Context, *GetMessagesRequest) (*GetMessagesResponse, error)
 	// SendMessage sends a message to a chat.
 	SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error)

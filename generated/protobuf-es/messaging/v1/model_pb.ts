@@ -48,6 +48,43 @@ export class MessageId extends Message$1<MessageId> {
 }
 
 /**
+ * @generated from message flipchat.messaging.v1.MessageIdBatch
+ */
+export class MessageIdBatch extends Message$1<MessageIdBatch> {
+  /**
+   * @generated from field: repeated flipchat.messaging.v1.MessageId message_ids = 1;
+   */
+  messageIds: MessageId[] = [];
+
+  constructor(data?: PartialMessage<MessageIdBatch>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.MessageIdBatch";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "message_ids", kind: "message", T: MessageId, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MessageIdBatch {
+    return new MessageIdBatch().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MessageIdBatch {
+    return new MessageIdBatch().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MessageIdBatch {
+    return new MessageIdBatch().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MessageIdBatch | PlainMessage<MessageIdBatch> | undefined, b: MessageIdBatch | PlainMessage<MessageIdBatch> | undefined): boolean {
+    return proto3.util.equals(MessageIdBatch, a, b);
+  }
+}
+
+/**
  * A message in a chat
  *
  * @generated from message flipchat.messaging.v1.Message
@@ -111,6 +148,43 @@ export class Message extends Message$1<Message> {
 
   static equals(a: Message | PlainMessage<Message> | undefined, b: Message | PlainMessage<Message> | undefined): boolean {
     return proto3.util.equals(Message, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.MessageBatch
+ */
+export class MessageBatch extends Message$1<MessageBatch> {
+  /**
+   * @generated from field: repeated flipchat.messaging.v1.Message messages = 1;
+   */
+  messages: Message[] = [];
+
+  constructor(data?: PartialMessage<MessageBatch>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.MessageBatch";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "messages", kind: "message", T: Message, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MessageBatch {
+    return new MessageBatch().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MessageBatch {
+    return new MessageBatch().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MessageBatch {
+    return new MessageBatch().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MessageBatch | PlainMessage<MessageBatch> | undefined, b: MessageBatch | PlainMessage<MessageBatch> | undefined): boolean {
+    return proto3.util.equals(MessageBatch, a, b);
   }
 }
 

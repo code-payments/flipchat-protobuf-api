@@ -145,6 +145,151 @@ var _ interface {
 	ErrorName() string
 } = MessageIdValidationError{}
 
+// Validate checks the field values on MessageIdBatch with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *MessageIdBatch) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MessageIdBatch with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in MessageIdBatchMultiError,
+// or nil if none found.
+func (m *MessageIdBatch) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MessageIdBatch) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := len(m.GetMessageIds()); l < 1 || l > 1024 {
+		err := MessageIdBatchValidationError{
+			field:  "MessageIds",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetMessageIds() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MessageIdBatchValidationError{
+						field:  fmt.Sprintf("MessageIds[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MessageIdBatchValidationError{
+						field:  fmt.Sprintf("MessageIds[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MessageIdBatchValidationError{
+					field:  fmt.Sprintf("MessageIds[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return MessageIdBatchMultiError(errors)
+	}
+
+	return nil
+}
+
+// MessageIdBatchMultiError is an error wrapping multiple validation errors
+// returned by MessageIdBatch.ValidateAll() if the designated constraints
+// aren't met.
+type MessageIdBatchMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MessageIdBatchMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MessageIdBatchMultiError) AllErrors() []error { return m }
+
+// MessageIdBatchValidationError is the validation error returned by
+// MessageIdBatch.Validate if the designated constraints aren't met.
+type MessageIdBatchValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MessageIdBatchValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MessageIdBatchValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MessageIdBatchValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MessageIdBatchValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MessageIdBatchValidationError) ErrorName() string { return "MessageIdBatchValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MessageIdBatchValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMessageIdBatch.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MessageIdBatchValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MessageIdBatchValidationError{}
+
 // Validate checks the field values on Message with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -367,6 +512,150 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = MessageValidationError{}
+
+// Validate checks the field values on MessageBatch with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *MessageBatch) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MessageBatch with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in MessageBatchMultiError, or
+// nil if none found.
+func (m *MessageBatch) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MessageBatch) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := len(m.GetMessages()); l < 1 || l > 1024 {
+		err := MessageBatchValidationError{
+			field:  "Messages",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetMessages() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MessageBatchValidationError{
+						field:  fmt.Sprintf("Messages[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MessageBatchValidationError{
+						field:  fmt.Sprintf("Messages[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MessageBatchValidationError{
+					field:  fmt.Sprintf("Messages[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return MessageBatchMultiError(errors)
+	}
+
+	return nil
+}
+
+// MessageBatchMultiError is an error wrapping multiple validation errors
+// returned by MessageBatch.ValidateAll() if the designated constraints aren't met.
+type MessageBatchMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MessageBatchMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MessageBatchMultiError) AllErrors() []error { return m }
+
+// MessageBatchValidationError is the validation error returned by
+// MessageBatch.Validate if the designated constraints aren't met.
+type MessageBatchValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MessageBatchValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MessageBatchValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MessageBatchValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MessageBatchValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MessageBatchValidationError) ErrorName() string { return "MessageBatchValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MessageBatchValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMessageBatch.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MessageBatchValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MessageBatchValidationError{}
 
 // Validate checks the field values on Pointer with the rules defined in the
 // proto definition for this message. If any rules are violated, the first

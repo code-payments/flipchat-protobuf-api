@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import { Auth, ChatId, ClientPong, IntentId, QueryOptions, ServerPing, UserId } from "../../common/v1/common_pb";
-import { Content, Message as Message$1, MessageId, Pointer } from "./model_pb";
+import { Content, Message as Message$1, MessageBatch, MessageId, MessageIdBatch, Pointer } from "./model_pb";
 
 /**
  * @generated from message flipchat.messaging.v1.StreamMessagesRequest
@@ -143,9 +143,9 @@ export class StreamMessagesResponse extends Message<StreamMessagesResponse> {
     case: "error";
   } | {
     /**
-     * @generated from field: flipchat.messaging.v1.StreamMessagesResponse.MessageBatch messages = 3;
+     * @generated from field: flipchat.messaging.v1.MessageBatch messages = 3;
      */
-    value: StreamMessagesResponse_MessageBatch;
+    value: MessageBatch;
     case: "messages";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
@@ -159,7 +159,7 @@ export class StreamMessagesResponse extends Message<StreamMessagesResponse> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "ping", kind: "message", T: ServerPing, oneof: "type" },
     { no: 2, name: "error", kind: "message", T: StreamMessagesResponse_StreamError, oneof: "type" },
-    { no: 3, name: "messages", kind: "message", T: StreamMessagesResponse_MessageBatch, oneof: "type" },
+    { no: 3, name: "messages", kind: "message", T: MessageBatch, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamMessagesResponse {
@@ -229,43 +229,6 @@ export enum StreamMessagesResponse_StreamError_Code {
 proto3.util.setEnumType(StreamMessagesResponse_StreamError_Code, "flipchat.messaging.v1.StreamMessagesResponse.StreamError.Code", [
   { no: 0, name: "DENIED" },
 ]);
-
-/**
- * @generated from message flipchat.messaging.v1.StreamMessagesResponse.MessageBatch
- */
-export class StreamMessagesResponse_MessageBatch extends Message<StreamMessagesResponse_MessageBatch> {
-  /**
-   * @generated from field: repeated flipchat.messaging.v1.Message messages = 1;
-   */
-  messages: Message$1[] = [];
-
-  constructor(data?: PartialMessage<StreamMessagesResponse_MessageBatch>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.messaging.v1.StreamMessagesResponse.MessageBatch";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "messages", kind: "message", T: Message$1, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamMessagesResponse_MessageBatch {
-    return new StreamMessagesResponse_MessageBatch().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamMessagesResponse_MessageBatch {
-    return new StreamMessagesResponse_MessageBatch().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamMessagesResponse_MessageBatch {
-    return new StreamMessagesResponse_MessageBatch().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: StreamMessagesResponse_MessageBatch | PlainMessage<StreamMessagesResponse_MessageBatch> | undefined, b: StreamMessagesResponse_MessageBatch | PlainMessage<StreamMessagesResponse_MessageBatch> | undefined): boolean {
-    return proto3.util.equals(StreamMessagesResponse_MessageBatch, a, b);
-  }
-}
 
 /**
  * @generated from message flipchat.messaging.v1.GetMessageRequest
@@ -395,9 +358,23 @@ export class GetMessagesRequest extends Message<GetMessagesRequest> {
   chatId?: ChatId;
 
   /**
-   * @generated from field: flipchat.common.v1.QueryOptions query_options = 2;
+   * If not set, defaults to an ascending query option without a page token and server-defined limit
+   *
+   * @generated from oneof flipchat.messaging.v1.GetMessagesRequest.query
    */
-  queryOptions?: QueryOptions;
+  query: {
+    /**
+     * @generated from field: flipchat.common.v1.QueryOptions options = 2;
+     */
+    value: QueryOptions;
+    case: "options";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.MessageIdBatch message_ids = 3;
+     */
+    value: MessageIdBatch;
+    case: "messageIds";
+  } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
    * @generated from field: flipchat.common.v1.Auth auth = 5;
@@ -413,7 +390,8 @@ export class GetMessagesRequest extends Message<GetMessagesRequest> {
   static readonly typeName = "flipchat.messaging.v1.GetMessagesRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
-    { no: 2, name: "query_options", kind: "message", T: QueryOptions },
+    { no: 2, name: "options", kind: "message", T: QueryOptions, oneof: "query" },
+    { no: 3, name: "message_ids", kind: "message", T: MessageIdBatch, oneof: "query" },
     { no: 5, name: "auth", kind: "message", T: Auth },
   ]);
 
