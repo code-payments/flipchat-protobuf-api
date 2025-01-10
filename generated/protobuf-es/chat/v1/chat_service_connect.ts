@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
+import { CloseChatRequest, CloseChatResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -92,6 +92,28 @@ export const Chat = {
       name: "LeaveChat",
       I: LeaveChatRequest,
       O: LeaveChatResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * OpenChat opens a chat up for messaging across all members
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.OpenChat
+     */
+    openChat: {
+      name: "OpenChat",
+      I: OpenChatRequest,
+      O: OpenChatResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * CloseChat closes a chat up for messaging to just the chat owner
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.CloseChat
+     */
+    closeChat: {
+      name: "CloseChat",
+      I: CloseChatRequest,
+      O: CloseChatResponse,
       kind: MethodKind.Unary,
     },
     /**

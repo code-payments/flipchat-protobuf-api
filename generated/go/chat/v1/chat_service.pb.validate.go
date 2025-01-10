@@ -2587,6 +2587,572 @@ var _ interface {
 	ErrorName() string
 } = LeaveChatResponseValidationError{}
 
+// Validate checks the field values on OpenChatRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *OpenChatRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OpenChatRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OpenChatRequestMultiError, or nil if none found.
+func (m *OpenChatRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OpenChatRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := OpenChatRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OpenChatRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OpenChatRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OpenChatRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := OpenChatRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, OpenChatRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, OpenChatRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OpenChatRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return OpenChatRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// OpenChatRequestMultiError is an error wrapping multiple validation errors
+// returned by OpenChatRequest.ValidateAll() if the designated constraints
+// aren't met.
+type OpenChatRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OpenChatRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OpenChatRequestMultiError) AllErrors() []error { return m }
+
+// OpenChatRequestValidationError is the validation error returned by
+// OpenChatRequest.Validate if the designated constraints aren't met.
+type OpenChatRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OpenChatRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OpenChatRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OpenChatRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OpenChatRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OpenChatRequestValidationError) ErrorName() string { return "OpenChatRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OpenChatRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOpenChatRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OpenChatRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OpenChatRequestValidationError{}
+
+// Validate checks the field values on OpenChatResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *OpenChatResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OpenChatResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OpenChatResponseMultiError, or nil if none found.
+func (m *OpenChatResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OpenChatResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return OpenChatResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// OpenChatResponseMultiError is an error wrapping multiple validation errors
+// returned by OpenChatResponse.ValidateAll() if the designated constraints
+// aren't met.
+type OpenChatResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OpenChatResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OpenChatResponseMultiError) AllErrors() []error { return m }
+
+// OpenChatResponseValidationError is the validation error returned by
+// OpenChatResponse.Validate if the designated constraints aren't met.
+type OpenChatResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OpenChatResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OpenChatResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OpenChatResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OpenChatResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OpenChatResponseValidationError) ErrorName() string { return "OpenChatResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OpenChatResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOpenChatResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OpenChatResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OpenChatResponseValidationError{}
+
+// Validate checks the field values on CloseChatRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CloseChatRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CloseChatRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CloseChatRequestMultiError, or nil if none found.
+func (m *CloseChatRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CloseChatRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := CloseChatRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CloseChatRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CloseChatRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CloseChatRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := CloseChatRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CloseChatRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CloseChatRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CloseChatRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CloseChatRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CloseChatRequestMultiError is an error wrapping multiple validation errors
+// returned by CloseChatRequest.ValidateAll() if the designated constraints
+// aren't met.
+type CloseChatRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CloseChatRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CloseChatRequestMultiError) AllErrors() []error { return m }
+
+// CloseChatRequestValidationError is the validation error returned by
+// CloseChatRequest.Validate if the designated constraints aren't met.
+type CloseChatRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CloseChatRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CloseChatRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CloseChatRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CloseChatRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CloseChatRequestValidationError) ErrorName() string { return "CloseChatRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CloseChatRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCloseChatRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CloseChatRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CloseChatRequestValidationError{}
+
+// Validate checks the field values on CloseChatResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CloseChatResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CloseChatResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CloseChatResponseMultiError, or nil if none found.
+func (m *CloseChatResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CloseChatResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return CloseChatResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CloseChatResponseMultiError is an error wrapping multiple validation errors
+// returned by CloseChatResponse.ValidateAll() if the designated constraints
+// aren't met.
+type CloseChatResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CloseChatResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CloseChatResponseMultiError) AllErrors() []error { return m }
+
+// CloseChatResponseValidationError is the validation error returned by
+// CloseChatResponse.Validate if the designated constraints aren't met.
+type CloseChatResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CloseChatResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CloseChatResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CloseChatResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CloseChatResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CloseChatResponseValidationError) ErrorName() string {
+	return "CloseChatResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CloseChatResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCloseChatResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CloseChatResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CloseChatResponseValidationError{}
+
 // Validate checks the field values on SetDisplayNameRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5282,6 +5848,35 @@ func (m *Metadata) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOpenStatus()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MetadataValidationError{
+					field:  "OpenStatus",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MetadataValidationError{
+					field:  "OpenStatus",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOpenStatus()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MetadataValidationError{
+				field:  "OpenStatus",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return MetadataMultiError(errors)
 	}
@@ -5362,6 +5957,107 @@ var _ interface {
 var _Metadata_Type_NotInLookup = map[Metadata_ChatType]struct{}{
 	0: {},
 }
+
+// Validate checks the field values on OpenStatus with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *OpenStatus) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OpenStatus with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in OpenStatusMultiError, or
+// nil if none found.
+func (m *OpenStatus) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OpenStatus) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IsCurrentlyOpen
+
+	if len(errors) > 0 {
+		return OpenStatusMultiError(errors)
+	}
+
+	return nil
+}
+
+// OpenStatusMultiError is an error wrapping multiple validation errors
+// returned by OpenStatus.ValidateAll() if the designated constraints aren't met.
+type OpenStatusMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OpenStatusMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OpenStatusMultiError) AllErrors() []error { return m }
+
+// OpenStatusValidationError is the validation error returned by
+// OpenStatus.Validate if the designated constraints aren't met.
+type OpenStatusValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OpenStatusValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OpenStatusValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OpenStatusValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OpenStatusValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OpenStatusValidationError) ErrorName() string { return "OpenStatusValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OpenStatusValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOpenStatus.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OpenStatusValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OpenStatusValidationError{}
 
 // Validate checks the field values on MetadataUpdate with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -5591,6 +6287,48 @@ func (m *MetadataUpdate) validate(all bool) error {
 			if err := v.Validate(); err != nil {
 				return MetadataUpdateValidationError{
 					field:  "LastActivityChanged",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MetadataUpdate_OpenStatusChanged_:
+		if v == nil {
+			err := MetadataUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetOpenStatusChanged()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "OpenStatusChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "OpenStatusChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetOpenStatusChanged()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MetadataUpdateValidationError{
+					field:  "OpenStatusChanged",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -8342,6 +9080,122 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = MetadataUpdate_LastActivityChangedValidationError{}
+
+// Validate checks the field values on MetadataUpdate_OpenStatusChanged with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *MetadataUpdate_OpenStatusChanged) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MetadataUpdate_OpenStatusChanged with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// MetadataUpdate_OpenStatusChangedMultiError, or nil if none found.
+func (m *MetadataUpdate_OpenStatusChanged) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MetadataUpdate_OpenStatusChanged) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetNewOpenStatus() == nil {
+		err := MetadataUpdate_OpenStatusChangedValidationError{
+			field:  "NewOpenStatus",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return MetadataUpdate_OpenStatusChangedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MetadataUpdate_OpenStatusChangedMultiError is an error wrapping multiple
+// validation errors returned by
+// MetadataUpdate_OpenStatusChanged.ValidateAll() if the designated
+// constraints aren't met.
+type MetadataUpdate_OpenStatusChangedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MetadataUpdate_OpenStatusChangedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MetadataUpdate_OpenStatusChangedMultiError) AllErrors() []error { return m }
+
+// MetadataUpdate_OpenStatusChangedValidationError is the validation error
+// returned by MetadataUpdate_OpenStatusChanged.Validate if the designated
+// constraints aren't met.
+type MetadataUpdate_OpenStatusChangedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MetadataUpdate_OpenStatusChangedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MetadataUpdate_OpenStatusChangedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MetadataUpdate_OpenStatusChangedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MetadataUpdate_OpenStatusChangedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MetadataUpdate_OpenStatusChangedValidationError) ErrorName() string {
+	return "MetadataUpdate_OpenStatusChangedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MetadataUpdate_OpenStatusChangedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMetadataUpdate_OpenStatusChanged.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MetadataUpdate_OpenStatusChangedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MetadataUpdate_OpenStatusChangedValidationError{}
 
 // Validate checks the field values on MemberUpdate_FullRefresh with the rules
 // defined in the proto definition for this message. If any rules are

@@ -25,6 +25,8 @@ const (
 	Chat_StartChat_FullMethodName        = "/flipchat.chat.v1.Chat/StartChat"
 	Chat_JoinChat_FullMethodName         = "/flipchat.chat.v1.Chat/JoinChat"
 	Chat_LeaveChat_FullMethodName        = "/flipchat.chat.v1.Chat/LeaveChat"
+	Chat_OpenChat_FullMethodName         = "/flipchat.chat.v1.Chat/OpenChat"
+	Chat_CloseChat_FullMethodName        = "/flipchat.chat.v1.Chat/CloseChat"
 	Chat_SetDisplayName_FullMethodName   = "/flipchat.chat.v1.Chat/SetDisplayName"
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 	Chat_GetMemberUpdates_FullMethodName = "/flipchat.chat.v1.Chat/GetMemberUpdates"
@@ -67,6 +69,10 @@ type ChatClient interface {
 	JoinChat(ctx context.Context, in *JoinChatRequest, opts ...grpc.CallOption) (*JoinChatResponse, error)
 	// LeaveChat leaves a given chat.
 	LeaveChat(ctx context.Context, in *LeaveChatRequest, opts ...grpc.CallOption) (*LeaveChatResponse, error)
+	// OpenChat opens a chat up for messaging across all members
+	OpenChat(ctx context.Context, in *OpenChatRequest, opts ...grpc.CallOption) (*OpenChatResponse, error)
+	// CloseChat closes a chat up for messaging to just the chat owner
+	CloseChat(ctx context.Context, in *CloseChatRequest, opts ...grpc.CallOption) (*CloseChatResponse, error)
 	// SetDisplayName sets a chat's display name. If the display name isn't allowed,
 	// then a set of alternate suggestions may be provided
 	SetDisplayName(ctx context.Context, in *SetDisplayNameRequest, opts ...grpc.CallOption) (*SetDisplayNameResponse, error)
@@ -153,6 +159,26 @@ func (c *chatClient) LeaveChat(ctx context.Context, in *LeaveChatRequest, opts .
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LeaveChatResponse)
 	err := c.cc.Invoke(ctx, Chat_LeaveChat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) OpenChat(ctx context.Context, in *OpenChatRequest, opts ...grpc.CallOption) (*OpenChatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OpenChatResponse)
+	err := c.cc.Invoke(ctx, Chat_OpenChat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) CloseChat(ctx context.Context, in *CloseChatRequest, opts ...grpc.CallOption) (*CloseChatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloseChatResponse)
+	err := c.cc.Invoke(ctx, Chat_CloseChat_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -271,6 +297,10 @@ type ChatServer interface {
 	JoinChat(context.Context, *JoinChatRequest) (*JoinChatResponse, error)
 	// LeaveChat leaves a given chat.
 	LeaveChat(context.Context, *LeaveChatRequest) (*LeaveChatResponse, error)
+	// OpenChat opens a chat up for messaging across all members
+	OpenChat(context.Context, *OpenChatRequest) (*OpenChatResponse, error)
+	// CloseChat closes a chat up for messaging to just the chat owner
+	CloseChat(context.Context, *CloseChatRequest) (*CloseChatResponse, error)
 	// SetDisplayName sets a chat's display name. If the display name isn't allowed,
 	// then a set of alternate suggestions may be provided
 	SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error)
@@ -317,6 +347,12 @@ func (UnimplementedChatServer) JoinChat(context.Context, *JoinChatRequest) (*Joi
 }
 func (UnimplementedChatServer) LeaveChat(context.Context, *LeaveChatRequest) (*LeaveChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LeaveChat not implemented")
+}
+func (UnimplementedChatServer) OpenChat(context.Context, *OpenChatRequest) (*OpenChatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OpenChat not implemented")
+}
+func (UnimplementedChatServer) CloseChat(context.Context, *CloseChatRequest) (*CloseChatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CloseChat not implemented")
 }
 func (UnimplementedChatServer) SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetDisplayName not implemented")
@@ -456,6 +492,42 @@ func _Chat_LeaveChat_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatServer).LeaveChat(ctx, req.(*LeaveChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_OpenChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OpenChatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).OpenChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_OpenChat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).OpenChat(ctx, req.(*OpenChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_CloseChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloseChatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).CloseChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_CloseChat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).CloseChat(ctx, req.(*CloseChatRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -630,6 +702,14 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LeaveChat",
 			Handler:    _Chat_LeaveChat_Handler,
+		},
+		{
+			MethodName: "OpenChat",
+			Handler:    _Chat_OpenChat_Handler,
+		},
+		{
+			MethodName: "CloseChat",
+			Handler:    _Chat_CloseChat_Handler,
 		},
 		{
 			MethodName: "SetDisplayName",

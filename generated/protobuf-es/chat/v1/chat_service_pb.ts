@@ -1203,6 +1203,210 @@ proto3.util.setEnumType(LeaveChatResponse_Result, "flipchat.chat.v1.LeaveChatRes
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.OpenChatRequest
+ */
+export class OpenChatRequest extends Message<OpenChatRequest> {
+  /**
+   * The chat that is being opened
+   *
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 2;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<OpenChatRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.OpenChatRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpenChatRequest {
+    return new OpenChatRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpenChatRequest {
+    return new OpenChatRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpenChatRequest {
+    return new OpenChatRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpenChatRequest | PlainMessage<OpenChatRequest> | undefined, b: OpenChatRequest | PlainMessage<OpenChatRequest> | undefined): boolean {
+    return proto3.util.equals(OpenChatRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.OpenChatResponse
+ */
+export class OpenChatResponse extends Message<OpenChatResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.OpenChatResponse.Result result = 1;
+   */
+  result = OpenChatResponse_Result.OK;
+
+  constructor(data?: PartialMessage<OpenChatResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.OpenChatResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(OpenChatResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpenChatResponse {
+    return new OpenChatResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpenChatResponse {
+    return new OpenChatResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpenChatResponse {
+    return new OpenChatResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpenChatResponse | PlainMessage<OpenChatResponse> | undefined, b: OpenChatResponse | PlainMessage<OpenChatResponse> | undefined): boolean {
+    return proto3.util.equals(OpenChatResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.OpenChatResponse.Result
+ */
+export enum OpenChatResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(OpenChatResponse_Result)
+proto3.util.setEnumType(OpenChatResponse_Result, "flipchat.chat.v1.OpenChatResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message flipchat.chat.v1.CloseChatRequest
+ */
+export class CloseChatRequest extends Message<CloseChatRequest> {
+  /**
+   * / The chat that is being closed
+   *
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 2;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<CloseChatRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.CloseChatRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloseChatRequest {
+    return new CloseChatRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloseChatRequest {
+    return new CloseChatRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloseChatRequest {
+    return new CloseChatRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CloseChatRequest | PlainMessage<CloseChatRequest> | undefined, b: CloseChatRequest | PlainMessage<CloseChatRequest> | undefined): boolean {
+    return proto3.util.equals(CloseChatRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.CloseChatResponse
+ */
+export class CloseChatResponse extends Message<CloseChatResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.CloseChatResponse.Result result = 1;
+   */
+  result = CloseChatResponse_Result.OK;
+
+  constructor(data?: PartialMessage<CloseChatResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.CloseChatResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(CloseChatResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloseChatResponse {
+    return new CloseChatResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloseChatResponse {
+    return new CloseChatResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloseChatResponse {
+    return new CloseChatResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CloseChatResponse | PlainMessage<CloseChatResponse> | undefined, b: CloseChatResponse | PlainMessage<CloseChatResponse> | undefined): boolean {
+    return proto3.util.equals(CloseChatResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.CloseChatResponse.Result
+ */
+export enum CloseChatResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(CloseChatResponse_Result)
+proto3.util.setEnumType(CloseChatResponse_Result, "flipchat.chat.v1.CloseChatResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.SetDisplayNameRequest
  */
 export class SetDisplayNameRequest extends Message<SetDisplayNameRequest> {
@@ -2145,6 +2349,15 @@ export class Metadata extends Message<Metadata> {
    */
   lastActivity?: Timestamp;
 
+  /**
+   * The status as to whether the room is open or closed. This may be
+   * omitted for chats where it doesn't apply. If not provided, it's
+   * safe to assume the chat is open indefinitely until otherwise provided.
+   *
+   * @generated from field: flipchat.chat.v1.OpenStatus open_status = 12;
+   */
+  openStatus?: OpenStatus;
+
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2164,6 +2377,7 @@ export class Metadata extends Message<Metadata> {
     { no: 8, name: "owner", kind: "message", T: UserId },
     { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },
     { no: 10, name: "last_activity", kind: "message", T: Timestamp },
+    { no: 12, name: "open_status", kind: "message", T: OpenStatus },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
@@ -2210,6 +2424,48 @@ proto3.util.setEnumType(Metadata_ChatType, "flipchat.chat.v1.Metadata.ChatType",
 ]);
 
 /**
+ * todo: In the future, we may add additional fields like open/closed until a timestamp, etc.
+ *       For backwards compatibility, client can always refer to is_currently_open for whether
+ *       a room is open right now or not for the purposes of sending messages.
+ * todo: A better name for this
+ *
+ * @generated from message flipchat.chat.v1.OpenStatus
+ */
+export class OpenStatus extends Message<OpenStatus> {
+  /**
+   * @generated from field: bool is_currently_open = 1;
+   */
+  isCurrentlyOpen = false;
+
+  constructor(data?: PartialMessage<OpenStatus>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.OpenStatus";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "is_currently_open", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpenStatus {
+    return new OpenStatus().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpenStatus {
+    return new OpenStatus().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpenStatus {
+    return new OpenStatus().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpenStatus | PlainMessage<OpenStatus> | undefined, b: OpenStatus | PlainMessage<OpenStatus> | undefined): boolean {
+    return proto3.util.equals(OpenStatus, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.chat.v1.MetadataUpdate
  */
 export class MetadataUpdate extends Message<MetadataUpdate> {
@@ -2246,6 +2502,12 @@ export class MetadataUpdate extends Message<MetadataUpdate> {
      */
     value: MetadataUpdate_LastActivityChanged;
     case: "lastActivityChanged";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.MetadataUpdate.OpenStatusChanged open_status_changed = 6;
+     */
+    value: MetadataUpdate_OpenStatusChanged;
+    case: "openStatusChanged";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<MetadataUpdate>) {
@@ -2261,6 +2523,7 @@ export class MetadataUpdate extends Message<MetadataUpdate> {
     { no: 3, name: "display_name_changed", kind: "message", T: MetadataUpdate_DisplayNameChanged, oneof: "kind" },
     { no: 4, name: "cover_charge_changed", kind: "message", T: MetadataUpdate_CoverChargeChanged, oneof: "kind" },
     { no: 5, name: "last_activity_changed", kind: "message", T: MetadataUpdate_LastActivityChanged, oneof: "kind" },
+    { no: 6, name: "open_status_changed", kind: "message", T: MetadataUpdate_OpenStatusChanged, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MetadataUpdate {
@@ -2483,6 +2746,45 @@ export class MetadataUpdate_LastActivityChanged extends Message<MetadataUpdate_L
 
   static equals(a: MetadataUpdate_LastActivityChanged | PlainMessage<MetadataUpdate_LastActivityChanged> | undefined, b: MetadataUpdate_LastActivityChanged | PlainMessage<MetadataUpdate_LastActivityChanged> | undefined): boolean {
     return proto3.util.equals(MetadataUpdate_LastActivityChanged, a, b);
+  }
+}
+
+/**
+ * The open status has changed to a newer value
+ *
+ * @generated from message flipchat.chat.v1.MetadataUpdate.OpenStatusChanged
+ */
+export class MetadataUpdate_OpenStatusChanged extends Message<MetadataUpdate_OpenStatusChanged> {
+  /**
+   * @generated from field: flipchat.chat.v1.OpenStatus new_open_status = 1;
+   */
+  newOpenStatus?: OpenStatus;
+
+  constructor(data?: PartialMessage<MetadataUpdate_OpenStatusChanged>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MetadataUpdate.OpenStatusChanged";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "new_open_status", kind: "message", T: OpenStatus },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MetadataUpdate_OpenStatusChanged {
+    return new MetadataUpdate_OpenStatusChanged().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MetadataUpdate_OpenStatusChanged {
+    return new MetadataUpdate_OpenStatusChanged().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MetadataUpdate_OpenStatusChanged {
+    return new MetadataUpdate_OpenStatusChanged().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MetadataUpdate_OpenStatusChanged | PlainMessage<MetadataUpdate_OpenStatusChanged> | undefined, b: MetadataUpdate_OpenStatusChanged | PlainMessage<MetadataUpdate_OpenStatusChanged> | undefined): boolean {
+    return proto3.util.equals(MetadataUpdate_OpenStatusChanged, a, b);
   }
 }
 
