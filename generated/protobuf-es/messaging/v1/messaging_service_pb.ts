@@ -606,6 +606,55 @@ proto3.util.setEnumType(SendMessageResponse_Result, "flipchat.messaging.v1.SendM
 ]);
 
 /**
+ * todo: A better name?
+ *
+ * @generated from message flipchat.messaging.v1.SendMessageAsNonRegularPaymentMetadata
+ */
+export class SendMessageAsNonRegularPaymentMetadata extends Message<SendMessageAsNonRegularPaymentMetadata> {
+  /**
+   * The chat where the message is being sent
+   *
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * The user sending the message
+   *
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  constructor(data?: PartialMessage<SendMessageAsNonRegularPaymentMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.SendMessageAsNonRegularPaymentMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendMessageAsNonRegularPaymentMetadata {
+    return new SendMessageAsNonRegularPaymentMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendMessageAsNonRegularPaymentMetadata {
+    return new SendMessageAsNonRegularPaymentMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendMessageAsNonRegularPaymentMetadata {
+    return new SendMessageAsNonRegularPaymentMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SendMessageAsNonRegularPaymentMetadata | PlainMessage<SendMessageAsNonRegularPaymentMetadata> | undefined, b: SendMessageAsNonRegularPaymentMetadata | PlainMessage<SendMessageAsNonRegularPaymentMetadata> | undefined): boolean {
+    return proto3.util.equals(SendMessageAsNonRegularPaymentMetadata, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.messaging.v1.SendTipMessagePaymentMetadata
  */
 export class SendTipMessagePaymentMetadata extends Message<SendTipMessagePaymentMetadata> {
