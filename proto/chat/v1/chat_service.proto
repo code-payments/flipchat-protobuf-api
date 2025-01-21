@@ -57,7 +57,12 @@ service Chat {
     rpc SetDisplayName(SetDisplayNameRequest) returns (SetDisplayNameResponse);
 
     // SetCoverCharge sets a chat's cover charge
+    //
+    // Deprecated: Use SetMessagingFee instead
     rpc SetCoverCharge(SetCoverChargeRequest) returns (SetCoverChargeResponse);
+
+    // SetMessagingFee sets a chat's messaging fee
+    rpc SetMessagingFee(SetMessagingFeeRequest) returns (SetMessagingFeeResponse);
 
     // GetMemberUpdates gets member updates for a given chat
     rpc GetMemberUpdates(GetMemberUpdatesRequest) returns (GetMemberUpdatesResponse);
@@ -390,6 +395,22 @@ message SetCoverChargeResponse {
     }
 }
 
+message SetMessagingFeeRequest {
+    common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
+
+    common.v1.PaymentAmount messaging_fee = 2 [(validate.rules).message.required = true];
+
+    common.v1.Auth auth = 3 [(validate.rules).message.required = true];
+}
+message SetMessagingFeeResponse {
+    Result result = 1;
+    enum Result {
+        OK       = 0;
+        DENIED   = 1;
+        CANT_SET = 2;
+    }
+}
+
 message GetMemberUpdatesRequest {
     common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
 
@@ -524,8 +545,11 @@ message Metadata {
     // This role is displayed as a 'host' currently.
     common.v1.UserId owner = 8;
 
-    // If present, the cover charge that must be paid to join the chat
-    common.v1.PaymentAmount cover_charge = 9;
+    // If present, the fee that must be paid to send a message as a non-regular
+    // chat member.
+    //
+    // This replaces the legacy cover charge mechanic, which is deprecated
+    common.v1.PaymentAmount messaging_fee = 9;
 
     // The timestamp of the last activity in this chat
     google.protobuf.Timestamp last_activity = 10;
@@ -551,7 +575,7 @@ message MetadataUpdate {
         FullRefresh         full_refresh          = 1;
         UnreadCountChanged  unread_count_changed  = 2;
         DisplayNameChanged  display_name_changed  = 3;
-        CoverChargeChanged  cover_charge_changed  = 4;
+        MessagingFeeChanged messaging_fee_changed  = 4;
         LastActivityChanged last_activity_changed = 5;
         OpenStatusChanged   open_status_changed   = 6;
     }
@@ -578,9 +602,9 @@ message MetadataUpdate {
         }];
     }
 
-    // The chat cover charge has been updated to a new value
-    message CoverChargeChanged {
-        common.v1.PaymentAmount new_cover_charge = 1 [(validate.rules).message.required = true];
+    // The chat messaging fee has been updated to a new value
+    message MessagingFeeChanged {
+        common.v1.PaymentAmount new_messaging_fee = 1 [(validate.rules).message.required = true];
     }
 
     // The last activity timestamp has changed to a newer value

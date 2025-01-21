@@ -3776,6 +3776,332 @@ var _ interface {
 	ErrorName() string
 } = SetCoverChargeResponseValidationError{}
 
+// Validate checks the field values on SetMessagingFeeRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetMessagingFeeRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetMessagingFeeRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetMessagingFeeRequestMultiError, or nil if none found.
+func (m *SetMessagingFeeRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetMessagingFeeRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := SetMessagingFeeRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetMessagingFeeRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetMessagingFeeRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetMessagingFeeRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetMessagingFee() == nil {
+		err := SetMessagingFeeRequestValidationError{
+			field:  "MessagingFee",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMessagingFee()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetMessagingFeeRequestValidationError{
+					field:  "MessagingFee",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetMessagingFeeRequestValidationError{
+					field:  "MessagingFee",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMessagingFee()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetMessagingFeeRequestValidationError{
+				field:  "MessagingFee",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetAuth() == nil {
+		err := SetMessagingFeeRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetMessagingFeeRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetMessagingFeeRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetMessagingFeeRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SetMessagingFeeRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetMessagingFeeRequestMultiError is an error wrapping multiple validation
+// errors returned by SetMessagingFeeRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetMessagingFeeRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetMessagingFeeRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetMessagingFeeRequestMultiError) AllErrors() []error { return m }
+
+// SetMessagingFeeRequestValidationError is the validation error returned by
+// SetMessagingFeeRequest.Validate if the designated constraints aren't met.
+type SetMessagingFeeRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetMessagingFeeRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetMessagingFeeRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetMessagingFeeRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetMessagingFeeRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetMessagingFeeRequestValidationError) ErrorName() string {
+	return "SetMessagingFeeRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetMessagingFeeRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetMessagingFeeRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetMessagingFeeRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetMessagingFeeRequestValidationError{}
+
+// Validate checks the field values on SetMessagingFeeResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetMessagingFeeResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetMessagingFeeResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetMessagingFeeResponseMultiError, or nil if none found.
+func (m *SetMessagingFeeResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetMessagingFeeResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return SetMessagingFeeResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetMessagingFeeResponseMultiError is an error wrapping multiple validation
+// errors returned by SetMessagingFeeResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetMessagingFeeResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetMessagingFeeResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetMessagingFeeResponseMultiError) AllErrors() []error { return m }
+
+// SetMessagingFeeResponseValidationError is the validation error returned by
+// SetMessagingFeeResponse.Validate if the designated constraints aren't met.
+type SetMessagingFeeResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetMessagingFeeResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetMessagingFeeResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetMessagingFeeResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetMessagingFeeResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetMessagingFeeResponseValidationError) ErrorName() string {
+	return "SetMessagingFeeResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetMessagingFeeResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetMessagingFeeResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetMessagingFeeResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetMessagingFeeResponseValidationError{}
+
 // Validate checks the field values on GetMemberUpdatesRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5791,11 +6117,11 @@ func (m *Metadata) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetCoverCharge()).(type) {
+		switch v := interface{}(m.GetMessagingFee()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, MetadataValidationError{
-					field:  "CoverCharge",
+					field:  "MessagingFee",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -5803,16 +6129,16 @@ func (m *Metadata) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, MetadataValidationError{
-					field:  "CoverCharge",
+					field:  "MessagingFee",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetCoverCharge()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetMessagingFee()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return MetadataValidationError{
-				field:  "CoverCharge",
+				field:  "MessagingFee",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -6209,7 +6535,7 @@ func (m *MetadataUpdate) validate(all bool) error {
 			}
 		}
 
-	case *MetadataUpdate_CoverChargeChanged_:
+	case *MetadataUpdate_MessagingFeeChanged_:
 		if v == nil {
 			err := MetadataUpdateValidationError{
 				field:  "Kind",
@@ -6223,11 +6549,11 @@ func (m *MetadataUpdate) validate(all bool) error {
 		oneofKindPresent = true
 
 		if all {
-			switch v := interface{}(m.GetCoverChargeChanged()).(type) {
+			switch v := interface{}(m.GetMessagingFeeChanged()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, MetadataUpdateValidationError{
-						field:  "CoverChargeChanged",
+						field:  "MessagingFeeChanged",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -6235,16 +6561,16 @@ func (m *MetadataUpdate) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, MetadataUpdateValidationError{
-						field:  "CoverChargeChanged",
+						field:  "MessagingFeeChanged",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetCoverChargeChanged()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetMessagingFeeChanged()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return MetadataUpdateValidationError{
-					field:  "CoverChargeChanged",
+					field:  "MessagingFeeChanged",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -8820,32 +9146,32 @@ var _ interface {
 	ErrorName() string
 } = MetadataUpdate_DisplayNameChangedValidationError{}
 
-// Validate checks the field values on MetadataUpdate_CoverChargeChanged with
+// Validate checks the field values on MetadataUpdate_MessagingFeeChanged with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
 // no violations.
-func (m *MetadataUpdate_CoverChargeChanged) Validate() error {
+func (m *MetadataUpdate_MessagingFeeChanged) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on MetadataUpdate_CoverChargeChanged
+// ValidateAll checks the field values on MetadataUpdate_MessagingFeeChanged
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// MetadataUpdate_CoverChargeChangedMultiError, or nil if none found.
-func (m *MetadataUpdate_CoverChargeChanged) ValidateAll() error {
+// MetadataUpdate_MessagingFeeChangedMultiError, or nil if none found.
+func (m *MetadataUpdate_MessagingFeeChanged) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *MetadataUpdate_CoverChargeChanged) validate(all bool) error {
+func (m *MetadataUpdate_MessagingFeeChanged) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if m.GetNewCoverCharge() == nil {
-		err := MetadataUpdate_CoverChargeChangedValidationError{
-			field:  "NewCoverCharge",
+	if m.GetNewMessagingFee() == nil {
+		err := MetadataUpdate_MessagingFeeChangedValidationError{
+			field:  "NewMessagingFee",
 			reason: "value is required",
 		}
 		if !all {
@@ -8855,28 +9181,28 @@ func (m *MetadataUpdate_CoverChargeChanged) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetNewCoverCharge()).(type) {
+		switch v := interface{}(m.GetNewMessagingFee()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, MetadataUpdate_CoverChargeChangedValidationError{
-					field:  "NewCoverCharge",
+				errors = append(errors, MetadataUpdate_MessagingFeeChangedValidationError{
+					field:  "NewMessagingFee",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, MetadataUpdate_CoverChargeChangedValidationError{
-					field:  "NewCoverCharge",
+				errors = append(errors, MetadataUpdate_MessagingFeeChangedValidationError{
+					field:  "NewMessagingFee",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetNewCoverCharge()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetNewMessagingFee()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return MetadataUpdate_CoverChargeChangedValidationError{
-				field:  "NewCoverCharge",
+			return MetadataUpdate_MessagingFeeChangedValidationError{
+				field:  "NewMessagingFee",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -8884,20 +9210,20 @@ func (m *MetadataUpdate_CoverChargeChanged) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return MetadataUpdate_CoverChargeChangedMultiError(errors)
+		return MetadataUpdate_MessagingFeeChangedMultiError(errors)
 	}
 
 	return nil
 }
 
-// MetadataUpdate_CoverChargeChangedMultiError is an error wrapping multiple
+// MetadataUpdate_MessagingFeeChangedMultiError is an error wrapping multiple
 // validation errors returned by
-// MetadataUpdate_CoverChargeChanged.ValidateAll() if the designated
+// MetadataUpdate_MessagingFeeChanged.ValidateAll() if the designated
 // constraints aren't met.
-type MetadataUpdate_CoverChargeChangedMultiError []error
+type MetadataUpdate_MessagingFeeChangedMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m MetadataUpdate_CoverChargeChangedMultiError) Error() string {
+func (m MetadataUpdate_MessagingFeeChangedMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -8906,12 +9232,12 @@ func (m MetadataUpdate_CoverChargeChangedMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m MetadataUpdate_CoverChargeChangedMultiError) AllErrors() []error { return m }
+func (m MetadataUpdate_MessagingFeeChangedMultiError) AllErrors() []error { return m }
 
-// MetadataUpdate_CoverChargeChangedValidationError is the validation error
-// returned by MetadataUpdate_CoverChargeChanged.Validate if the designated
+// MetadataUpdate_MessagingFeeChangedValidationError is the validation error
+// returned by MetadataUpdate_MessagingFeeChanged.Validate if the designated
 // constraints aren't met.
-type MetadataUpdate_CoverChargeChangedValidationError struct {
+type MetadataUpdate_MessagingFeeChangedValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -8919,24 +9245,24 @@ type MetadataUpdate_CoverChargeChangedValidationError struct {
 }
 
 // Field function returns field value.
-func (e MetadataUpdate_CoverChargeChangedValidationError) Field() string { return e.field }
+func (e MetadataUpdate_MessagingFeeChangedValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e MetadataUpdate_CoverChargeChangedValidationError) Reason() string { return e.reason }
+func (e MetadataUpdate_MessagingFeeChangedValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e MetadataUpdate_CoverChargeChangedValidationError) Cause() error { return e.cause }
+func (e MetadataUpdate_MessagingFeeChangedValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e MetadataUpdate_CoverChargeChangedValidationError) Key() bool { return e.key }
+func (e MetadataUpdate_MessagingFeeChangedValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e MetadataUpdate_CoverChargeChangedValidationError) ErrorName() string {
-	return "MetadataUpdate_CoverChargeChangedValidationError"
+func (e MetadataUpdate_MessagingFeeChangedValidationError) ErrorName() string {
+	return "MetadataUpdate_MessagingFeeChangedValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e MetadataUpdate_CoverChargeChangedValidationError) Error() string {
+func (e MetadataUpdate_MessagingFeeChangedValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -8948,14 +9274,14 @@ func (e MetadataUpdate_CoverChargeChangedValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sMetadataUpdate_CoverChargeChanged.%s: %s%s",
+		"invalid %sMetadataUpdate_MessagingFeeChanged.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = MetadataUpdate_CoverChargeChangedValidationError{}
+var _ error = MetadataUpdate_MessagingFeeChangedValidationError{}
 
 var _ interface {
 	Field() string
@@ -8963,7 +9289,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = MetadataUpdate_CoverChargeChangedValidationError{}
+} = MetadataUpdate_MessagingFeeChangedValidationError{}
 
 // Validate checks the field values on MetadataUpdate_LastActivityChanged with
 // the rules defined in the proto definition for this message. If any rules

@@ -29,6 +29,7 @@ const (
 	Chat_CloseChat_FullMethodName        = "/flipchat.chat.v1.Chat/CloseChat"
 	Chat_SetDisplayName_FullMethodName   = "/flipchat.chat.v1.Chat/SetDisplayName"
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
+	Chat_SetMessagingFee_FullMethodName  = "/flipchat.chat.v1.Chat/SetMessagingFee"
 	Chat_GetMemberUpdates_FullMethodName = "/flipchat.chat.v1.Chat/GetMemberUpdates"
 	Chat_RemoveUser_FullMethodName       = "/flipchat.chat.v1.Chat/RemoveUser"
 	Chat_MuteUser_FullMethodName         = "/flipchat.chat.v1.Chat/MuteUser"
@@ -77,7 +78,11 @@ type ChatClient interface {
 	// then a set of alternate suggestions may be provided
 	SetDisplayName(ctx context.Context, in *SetDisplayNameRequest, opts ...grpc.CallOption) (*SetDisplayNameResponse, error)
 	// SetCoverCharge sets a chat's cover charge
+	//
+	// Deprecated: Use SetMessagingFee instead
 	SetCoverCharge(ctx context.Context, in *SetCoverChargeRequest, opts ...grpc.CallOption) (*SetCoverChargeResponse, error)
+	// SetMessagingFee sets a chat's messaging fee
+	SetMessagingFee(ctx context.Context, in *SetMessagingFeeRequest, opts ...grpc.CallOption) (*SetMessagingFeeResponse, error)
 	// GetMemberUpdates gets member updates for a given chat
 	GetMemberUpdates(ctx context.Context, in *GetMemberUpdatesRequest, opts ...grpc.CallOption) (*GetMemberUpdatesResponse, error)
 	// RemoveUser removes a user from a chat
@@ -205,6 +210,16 @@ func (c *chatClient) SetCoverCharge(ctx context.Context, in *SetCoverChargeReque
 	return out, nil
 }
 
+func (c *chatClient) SetMessagingFee(ctx context.Context, in *SetMessagingFeeRequest, opts ...grpc.CallOption) (*SetMessagingFeeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetMessagingFeeResponse)
+	err := c.cc.Invoke(ctx, Chat_SetMessagingFee_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *chatClient) GetMemberUpdates(ctx context.Context, in *GetMemberUpdatesRequest, opts ...grpc.CallOption) (*GetMemberUpdatesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetMemberUpdatesResponse)
@@ -305,7 +320,11 @@ type ChatServer interface {
 	// then a set of alternate suggestions may be provided
 	SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error)
 	// SetCoverCharge sets a chat's cover charge
+	//
+	// Deprecated: Use SetMessagingFee instead
 	SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error)
+	// SetMessagingFee sets a chat's messaging fee
+	SetMessagingFee(context.Context, *SetMessagingFeeRequest) (*SetMessagingFeeResponse, error)
 	// GetMemberUpdates gets member updates for a given chat
 	GetMemberUpdates(context.Context, *GetMemberUpdatesRequest) (*GetMemberUpdatesResponse, error)
 	// RemoveUser removes a user from a chat
@@ -359,6 +378,9 @@ func (UnimplementedChatServer) SetDisplayName(context.Context, *SetDisplayNameRe
 }
 func (UnimplementedChatServer) SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCoverCharge not implemented")
+}
+func (UnimplementedChatServer) SetMessagingFee(context.Context, *SetMessagingFeeRequest) (*SetMessagingFeeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetMessagingFee not implemented")
 }
 func (UnimplementedChatServer) GetMemberUpdates(context.Context, *GetMemberUpdatesRequest) (*GetMemberUpdatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMemberUpdates not implemented")
@@ -568,6 +590,24 @@ func _Chat_SetCoverCharge_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_SetMessagingFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetMessagingFeeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).SetMessagingFee(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_SetMessagingFee_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).SetMessagingFee(ctx, req.(*SetMessagingFeeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Chat_GetMemberUpdates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMemberUpdatesRequest)
 	if err := dec(in); err != nil {
@@ -718,6 +758,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetCoverCharge",
 			Handler:    _Chat_SetCoverCharge_Handler,
+		},
+		{
+			MethodName: "SetMessagingFee",
+			Handler:    _Chat_SetMessagingFee_Handler,
 		},
 		{
 			MethodName: "GetMemberUpdates",

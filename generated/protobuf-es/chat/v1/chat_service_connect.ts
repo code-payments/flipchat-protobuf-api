@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CloseChatRequest, CloseChatResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
+import { CloseChatRequest, CloseChatResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, SetMessagingFeeRequest, SetMessagingFeeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -131,12 +131,25 @@ export const Chat = {
     /**
      * SetCoverCharge sets a chat's cover charge
      *
+     * Deprecated: Use SetMessagingFee instead
+     *
      * @generated from rpc flipchat.chat.v1.Chat.SetCoverCharge
      */
     setCoverCharge: {
       name: "SetCoverCharge",
       I: SetCoverChargeRequest,
       O: SetCoverChargeResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * SetMessagingFee sets a chat's messaging fee
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.SetMessagingFee
+     */
+    setMessagingFee: {
+      name: "SetMessagingFee",
+      I: SetMessagingFeeRequest,
+      O: SetMessagingFeeResponse,
       kind: MethodKind.Unary,
     },
     /**
