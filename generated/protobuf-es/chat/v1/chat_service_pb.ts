@@ -1867,6 +1867,234 @@ proto3.util.setEnumType(GetMemberUpdatesResponse_Result, "flipchat.chat.v1.GetMe
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.PromoteUserRequest
+ */
+export class PromoteUserRequest extends Message<PromoteUserRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  /**
+   * Enables send permissions when value is true
+   *
+   * @generated from field: bool enable_send_permission = 3;
+   */
+  enableSendPermission = false;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 100;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<PromoteUserRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.PromoteUserRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+    { no: 3, name: "enable_send_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 100, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PromoteUserRequest {
+    return new PromoteUserRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PromoteUserRequest {
+    return new PromoteUserRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PromoteUserRequest {
+    return new PromoteUserRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PromoteUserRequest | PlainMessage<PromoteUserRequest> | undefined, b: PromoteUserRequest | PlainMessage<PromoteUserRequest> | undefined): boolean {
+    return proto3.util.equals(PromoteUserRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.PromoteUserResponse
+ */
+export class PromoteUserResponse extends Message<PromoteUserResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.PromoteUserResponse.Result result = 1;
+   */
+  result = PromoteUserResponse_Result.OK;
+
+  constructor(data?: PartialMessage<PromoteUserResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.PromoteUserResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(PromoteUserResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PromoteUserResponse {
+    return new PromoteUserResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PromoteUserResponse {
+    return new PromoteUserResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PromoteUserResponse {
+    return new PromoteUserResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PromoteUserResponse | PlainMessage<PromoteUserResponse> | undefined, b: PromoteUserResponse | PlainMessage<PromoteUserResponse> | undefined): boolean {
+    return proto3.util.equals(PromoteUserResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.PromoteUserResponse.Result
+ */
+export enum PromoteUserResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(PromoteUserResponse_Result)
+proto3.util.setEnumType(PromoteUserResponse_Result, "flipchat.chat.v1.PromoteUserResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message flipchat.chat.v1.DemoteUserRequest
+ */
+export class DemoteUserRequest extends Message<DemoteUserRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  /**
+   * Disables send permissions when value is true
+   *
+   * @generated from field: bool disable_send_permission = 3;
+   */
+  disableSendPermission = false;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 100;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<DemoteUserRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.DemoteUserRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+    { no: 3, name: "disable_send_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 100, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DemoteUserRequest {
+    return new DemoteUserRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DemoteUserRequest {
+    return new DemoteUserRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DemoteUserRequest {
+    return new DemoteUserRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DemoteUserRequest | PlainMessage<DemoteUserRequest> | undefined, b: DemoteUserRequest | PlainMessage<DemoteUserRequest> | undefined): boolean {
+    return proto3.util.equals(DemoteUserRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.DemoteUserResponse
+ */
+export class DemoteUserResponse extends Message<DemoteUserResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.DemoteUserResponse.Result result = 1;
+   */
+  result = DemoteUserResponse_Result.OK;
+
+  constructor(data?: PartialMessage<DemoteUserResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.DemoteUserResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(DemoteUserResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DemoteUserResponse {
+    return new DemoteUserResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DemoteUserResponse {
+    return new DemoteUserResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DemoteUserResponse {
+    return new DemoteUserResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DemoteUserResponse | PlainMessage<DemoteUserResponse> | undefined, b: DemoteUserResponse | PlainMessage<DemoteUserResponse> | undefined): boolean {
+    return proto3.util.equals(DemoteUserResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.DemoteUserResponse.Result
+ */
+export enum DemoteUserResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(DemoteUserResponse_Result)
+proto3.util.setEnumType(DemoteUserResponse_Result, "flipchat.chat.v1.DemoteUserResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.RemoveUserRequest
  */
 export class RemoveUserRequest extends Message<RemoveUserRequest> {
@@ -3374,6 +3602,108 @@ export class MemberUpdate_Muted extends Message<MemberUpdate_Muted> {
 
   static equals(a: MemberUpdate_Muted | PlainMessage<MemberUpdate_Muted> | undefined, b: MemberUpdate_Muted | PlainMessage<MemberUpdate_Muted> | undefined): boolean {
     return proto3.util.equals(MemberUpdate_Muted, a, b);
+  }
+}
+
+/**
+ * Member was promoted in the chat via the PromoteUser RPC
+ *
+ * @generated from message flipchat.chat.v1.MemberUpdate.Promoted
+ */
+export class MemberUpdate_Promoted extends Message<MemberUpdate_Promoted> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId promoted_by = 2;
+   */
+  promotedBy?: UserId;
+
+  /**
+   * @generated from field: bool send_permission_enabled = 3;
+   */
+  sendPermissionEnabled = false;
+
+  constructor(data?: PartialMessage<MemberUpdate_Promoted>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MemberUpdate.Promoted";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+    { no: 2, name: "promoted_by", kind: "message", T: UserId },
+    { no: 3, name: "send_permission_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MemberUpdate_Promoted {
+    return new MemberUpdate_Promoted().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MemberUpdate_Promoted {
+    return new MemberUpdate_Promoted().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MemberUpdate_Promoted {
+    return new MemberUpdate_Promoted().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MemberUpdate_Promoted | PlainMessage<MemberUpdate_Promoted> | undefined, b: MemberUpdate_Promoted | PlainMessage<MemberUpdate_Promoted> | undefined): boolean {
+    return proto3.util.equals(MemberUpdate_Promoted, a, b);
+  }
+}
+
+/**
+ * Member was demoted in the chat via the DemoteUser RPC
+ *
+ * @generated from message flipchat.chat.v1.MemberUpdate.Demoted
+ */
+export class MemberUpdate_Demoted extends Message<MemberUpdate_Demoted> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId promoted_by = 2;
+   */
+  promotedBy?: UserId;
+
+  /**
+   * @generated from field: bool send_permission_disabled = 3;
+   */
+  sendPermissionDisabled = false;
+
+  constructor(data?: PartialMessage<MemberUpdate_Demoted>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MemberUpdate.Demoted";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+    { no: 2, name: "promoted_by", kind: "message", T: UserId },
+    { no: 3, name: "send_permission_disabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MemberUpdate_Demoted {
+    return new MemberUpdate_Demoted().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MemberUpdate_Demoted {
+    return new MemberUpdate_Demoted().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MemberUpdate_Demoted {
+    return new MemberUpdate_Demoted().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MemberUpdate_Demoted | PlainMessage<MemberUpdate_Demoted> | undefined, b: MemberUpdate_Demoted | PlainMessage<MemberUpdate_Demoted> | undefined): boolean {
+    return proto3.util.equals(MemberUpdate_Demoted, a, b);
   }
 }
 

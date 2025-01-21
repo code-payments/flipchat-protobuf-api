@@ -4451,6 +4451,662 @@ var _ interface {
 	ErrorName() string
 } = GetMemberUpdatesResponseValidationError{}
 
+// Validate checks the field values on PromoteUserRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PromoteUserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PromoteUserRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PromoteUserRequestMultiError, or nil if none found.
+func (m *PromoteUserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PromoteUserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := PromoteUserRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PromoteUserRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PromoteUserRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PromoteUserRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetUserId() == nil {
+		err := PromoteUserRequestValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PromoteUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PromoteUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PromoteUserRequestValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for EnableSendPermission
+
+	if m.GetAuth() == nil {
+		err := PromoteUserRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PromoteUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PromoteUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PromoteUserRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return PromoteUserRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PromoteUserRequestMultiError is an error wrapping multiple validation errors
+// returned by PromoteUserRequest.ValidateAll() if the designated constraints
+// aren't met.
+type PromoteUserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PromoteUserRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PromoteUserRequestMultiError) AllErrors() []error { return m }
+
+// PromoteUserRequestValidationError is the validation error returned by
+// PromoteUserRequest.Validate if the designated constraints aren't met.
+type PromoteUserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PromoteUserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PromoteUserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PromoteUserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PromoteUserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PromoteUserRequestValidationError) ErrorName() string {
+	return "PromoteUserRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PromoteUserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPromoteUserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PromoteUserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PromoteUserRequestValidationError{}
+
+// Validate checks the field values on PromoteUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PromoteUserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PromoteUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PromoteUserResponseMultiError, or nil if none found.
+func (m *PromoteUserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PromoteUserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return PromoteUserResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PromoteUserResponseMultiError is an error wrapping multiple validation
+// errors returned by PromoteUserResponse.ValidateAll() if the designated
+// constraints aren't met.
+type PromoteUserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PromoteUserResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PromoteUserResponseMultiError) AllErrors() []error { return m }
+
+// PromoteUserResponseValidationError is the validation error returned by
+// PromoteUserResponse.Validate if the designated constraints aren't met.
+type PromoteUserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PromoteUserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PromoteUserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PromoteUserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PromoteUserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PromoteUserResponseValidationError) ErrorName() string {
+	return "PromoteUserResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PromoteUserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPromoteUserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PromoteUserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PromoteUserResponseValidationError{}
+
+// Validate checks the field values on DemoteUserRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *DemoteUserRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DemoteUserRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DemoteUserRequestMultiError, or nil if none found.
+func (m *DemoteUserRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DemoteUserRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := DemoteUserRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DemoteUserRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DemoteUserRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DemoteUserRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetUserId() == nil {
+		err := DemoteUserRequestValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DemoteUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DemoteUserRequestValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DemoteUserRequestValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for DisableSendPermission
+
+	if m.GetAuth() == nil {
+		err := DemoteUserRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DemoteUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DemoteUserRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DemoteUserRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return DemoteUserRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DemoteUserRequestMultiError is an error wrapping multiple validation errors
+// returned by DemoteUserRequest.ValidateAll() if the designated constraints
+// aren't met.
+type DemoteUserRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DemoteUserRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DemoteUserRequestMultiError) AllErrors() []error { return m }
+
+// DemoteUserRequestValidationError is the validation error returned by
+// DemoteUserRequest.Validate if the designated constraints aren't met.
+type DemoteUserRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DemoteUserRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DemoteUserRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DemoteUserRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DemoteUserRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DemoteUserRequestValidationError) ErrorName() string {
+	return "DemoteUserRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DemoteUserRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDemoteUserRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DemoteUserRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DemoteUserRequestValidationError{}
+
+// Validate checks the field values on DemoteUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DemoteUserResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DemoteUserResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DemoteUserResponseMultiError, or nil if none found.
+func (m *DemoteUserResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DemoteUserResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return DemoteUserResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DemoteUserResponseMultiError is an error wrapping multiple validation errors
+// returned by DemoteUserResponse.ValidateAll() if the designated constraints
+// aren't met.
+type DemoteUserResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DemoteUserResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DemoteUserResponseMultiError) AllErrors() []error { return m }
+
+// DemoteUserResponseValidationError is the validation error returned by
+// DemoteUserResponse.Validate if the designated constraints aren't met.
+type DemoteUserResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DemoteUserResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DemoteUserResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DemoteUserResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DemoteUserResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DemoteUserResponseValidationError) ErrorName() string {
+	return "DemoteUserResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DemoteUserResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDemoteUserResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DemoteUserResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DemoteUserResponseValidationError{}
+
 // Validate checks the field values on RemoveUserRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -10460,3 +11116,371 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = MemberUpdate_MutedValidationError{}
+
+// Validate checks the field values on MemberUpdate_Promoted with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate_Promoted) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate_Promoted with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MemberUpdate_PromotedMultiError, or nil if none found.
+func (m *MemberUpdate_Promoted) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate_Promoted) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMember() == nil {
+		err := MemberUpdate_PromotedValidationError{
+			field:  "Member",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMember()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_PromotedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_PromotedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_PromotedValidationError{
+				field:  "Member",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetPromotedBy() == nil {
+		err := MemberUpdate_PromotedValidationError{
+			field:  "PromotedBy",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetPromotedBy()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_PromotedValidationError{
+					field:  "PromotedBy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_PromotedValidationError{
+					field:  "PromotedBy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPromotedBy()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_PromotedValidationError{
+				field:  "PromotedBy",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for SendPermissionEnabled
+
+	if len(errors) > 0 {
+		return MemberUpdate_PromotedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdate_PromotedMultiError is an error wrapping multiple validation
+// errors returned by MemberUpdate_Promoted.ValidateAll() if the designated
+// constraints aren't met.
+type MemberUpdate_PromotedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdate_PromotedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdate_PromotedMultiError) AllErrors() []error { return m }
+
+// MemberUpdate_PromotedValidationError is the validation error returned by
+// MemberUpdate_Promoted.Validate if the designated constraints aren't met.
+type MemberUpdate_PromotedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdate_PromotedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdate_PromotedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdate_PromotedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdate_PromotedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdate_PromotedValidationError) ErrorName() string {
+	return "MemberUpdate_PromotedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MemberUpdate_PromotedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate_Promoted.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdate_PromotedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdate_PromotedValidationError{}
+
+// Validate checks the field values on MemberUpdate_Demoted with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MemberUpdate_Demoted) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MemberUpdate_Demoted with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MemberUpdate_DemotedMultiError, or nil if none found.
+func (m *MemberUpdate_Demoted) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MemberUpdate_Demoted) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMember() == nil {
+		err := MemberUpdate_DemotedValidationError{
+			field:  "Member",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMember()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_DemotedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_DemotedValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_DemotedValidationError{
+				field:  "Member",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetPromotedBy() == nil {
+		err := MemberUpdate_DemotedValidationError{
+			field:  "PromotedBy",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetPromotedBy()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MemberUpdate_DemotedValidationError{
+					field:  "PromotedBy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MemberUpdate_DemotedValidationError{
+					field:  "PromotedBy",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPromotedBy()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MemberUpdate_DemotedValidationError{
+				field:  "PromotedBy",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for SendPermissionDisabled
+
+	if len(errors) > 0 {
+		return MemberUpdate_DemotedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberUpdate_DemotedMultiError is an error wrapping multiple validation
+// errors returned by MemberUpdate_Demoted.ValidateAll() if the designated
+// constraints aren't met.
+type MemberUpdate_DemotedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberUpdate_DemotedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberUpdate_DemotedMultiError) AllErrors() []error { return m }
+
+// MemberUpdate_DemotedValidationError is the validation error returned by
+// MemberUpdate_Demoted.Validate if the designated constraints aren't met.
+type MemberUpdate_DemotedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberUpdate_DemotedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberUpdate_DemotedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberUpdate_DemotedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberUpdate_DemotedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberUpdate_DemotedValidationError) ErrorName() string {
+	return "MemberUpdate_DemotedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MemberUpdate_DemotedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMemberUpdate_Demoted.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberUpdate_DemotedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberUpdate_DemotedValidationError{}

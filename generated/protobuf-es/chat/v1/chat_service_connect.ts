@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CloseChatRequest, CloseChatResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, SetMessagingFeeRequest, SetMessagingFeeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
+import { CloseChatRequest, CloseChatResponse, DemoteUserRequest, DemoteUserResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, PromoteUserRequest, PromoteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, SetMessagingFeeRequest, SetMessagingFeeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -161,6 +161,28 @@ export const Chat = {
       name: "GetMemberUpdates",
       I: GetMemberUpdatesRequest,
       O: GetMemberUpdatesResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * PromoteUser promotes a user to an elevated permission state
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.PromoteUser
+     */
+    promoteUser: {
+      name: "PromoteUser",
+      I: PromoteUserRequest,
+      O: PromoteUserResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * DemoteUser demotes a user to a lower permission state
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.DemoteUser
+     */
+    demoteUser: {
+      name: "DemoteUser",
+      I: DemoteUserRequest,
+      O: DemoteUserResponse,
       kind: MethodKind.Unary,
     },
     /**

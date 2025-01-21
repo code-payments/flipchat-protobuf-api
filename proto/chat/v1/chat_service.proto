@@ -67,6 +67,12 @@ service Chat {
     // GetMemberUpdates gets member updates for a given chat
     rpc GetMemberUpdates(GetMemberUpdatesRequest) returns (GetMemberUpdatesResponse);
 
+    // PromoteUser promotes a user to an elevated permission state
+    rpc PromoteUser(PromoteUserRequest) returns (PromoteUserResponse);
+
+    // DemoteUser demotes a user to a lower permission state
+    rpc DemoteUser(DemoteUserRequest) returns (DemoteUserResponse);
+
     // RemoveUser removes a user from a chat
     rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse);
 
@@ -434,6 +440,42 @@ message GetMemberUpdatesResponse {
     }];
 }
 
+message PromoteUserRequest {
+    common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
+
+    common.v1.UserId user_id = 2 [(validate.rules).message.required = true];
+
+    // Enables send permissions when value is true
+    bool enable_send_permission = 3;
+
+    common.v1.Auth auth = 100 [(validate.rules).message.required = true];
+}
+message PromoteUserResponse {
+    Result result = 1;
+    enum Result {
+        OK       = 0;
+        DENIED   = 1;
+    }
+}
+
+message DemoteUserRequest {
+    common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
+
+    common.v1.UserId user_id = 2 [(validate.rules).message.required = true];
+
+    // Disables send permissions when value is true
+    bool disable_send_permission = 3;
+
+    common.v1.Auth auth = 100 [(validate.rules).message.required = true];
+}
+message DemoteUserResponse {
+    Result result = 1;
+    enum Result {
+        OK       = 0;
+        DENIED   = 1;
+    }
+}
+
 message RemoveUserRequest{
     common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
 
@@ -715,5 +757,23 @@ message MemberUpdate {
         common.v1.UserId member = 1 [(validate.rules).message.required = true];
 
         common.v1.UserId muted_by = 2 [(validate.rules).message.required = true];
+    }
+
+    // Member was promoted in the chat via the PromoteUser RPC
+    message Promoted {
+        common.v1.UserId member = 1 [(validate.rules).message.required = true];
+
+        common.v1.UserId promoted_by = 2 [(validate.rules).message.required = true];
+
+        bool send_permission_enabled = 3;
+    }
+
+    // Member was demoted in the chat via the DemoteUser RPC
+    message Demoted {
+        common.v1.UserId member = 1 [(validate.rules).message.required = true];
+
+        common.v1.UserId promoted_by = 2 [(validate.rules).message.required = true];
+
+        bool send_permission_disabled = 3;
     }
 }

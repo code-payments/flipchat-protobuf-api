@@ -31,6 +31,8 @@ const (
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 	Chat_SetMessagingFee_FullMethodName  = "/flipchat.chat.v1.Chat/SetMessagingFee"
 	Chat_GetMemberUpdates_FullMethodName = "/flipchat.chat.v1.Chat/GetMemberUpdates"
+	Chat_PromoteUser_FullMethodName      = "/flipchat.chat.v1.Chat/PromoteUser"
+	Chat_DemoteUser_FullMethodName       = "/flipchat.chat.v1.Chat/DemoteUser"
 	Chat_RemoveUser_FullMethodName       = "/flipchat.chat.v1.Chat/RemoveUser"
 	Chat_MuteUser_FullMethodName         = "/flipchat.chat.v1.Chat/MuteUser"
 	Chat_MuteChat_FullMethodName         = "/flipchat.chat.v1.Chat/MuteChat"
@@ -85,6 +87,10 @@ type ChatClient interface {
 	SetMessagingFee(ctx context.Context, in *SetMessagingFeeRequest, opts ...grpc.CallOption) (*SetMessagingFeeResponse, error)
 	// GetMemberUpdates gets member updates for a given chat
 	GetMemberUpdates(ctx context.Context, in *GetMemberUpdatesRequest, opts ...grpc.CallOption) (*GetMemberUpdatesResponse, error)
+	// PromoteUser promotes a user to an elevated permission state
+	PromoteUser(ctx context.Context, in *PromoteUserRequest, opts ...grpc.CallOption) (*PromoteUserResponse, error)
+	// DemoteUser demotes a user to a lower permission state
+	DemoteUser(ctx context.Context, in *DemoteUserRequest, opts ...grpc.CallOption) (*DemoteUserResponse, error)
 	// RemoveUser removes a user from a chat
 	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error)
 	// MuteUser mutes a user in the chat and removes their ability to send messages
@@ -230,6 +236,26 @@ func (c *chatClient) GetMemberUpdates(ctx context.Context, in *GetMemberUpdatesR
 	return out, nil
 }
 
+func (c *chatClient) PromoteUser(ctx context.Context, in *PromoteUserRequest, opts ...grpc.CallOption) (*PromoteUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PromoteUserResponse)
+	err := c.cc.Invoke(ctx, Chat_PromoteUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) DemoteUser(ctx context.Context, in *DemoteUserRequest, opts ...grpc.CallOption) (*DemoteUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DemoteUserResponse)
+	err := c.cc.Invoke(ctx, Chat_DemoteUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *chatClient) RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RemoveUserResponse)
@@ -327,6 +353,10 @@ type ChatServer interface {
 	SetMessagingFee(context.Context, *SetMessagingFeeRequest) (*SetMessagingFeeResponse, error)
 	// GetMemberUpdates gets member updates for a given chat
 	GetMemberUpdates(context.Context, *GetMemberUpdatesRequest) (*GetMemberUpdatesResponse, error)
+	// PromoteUser promotes a user to an elevated permission state
+	PromoteUser(context.Context, *PromoteUserRequest) (*PromoteUserResponse, error)
+	// DemoteUser demotes a user to a lower permission state
+	DemoteUser(context.Context, *DemoteUserRequest) (*DemoteUserResponse, error)
 	// RemoveUser removes a user from a chat
 	RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error)
 	// MuteUser mutes a user in the chat and removes their ability to send messages
@@ -384,6 +414,12 @@ func (UnimplementedChatServer) SetMessagingFee(context.Context, *SetMessagingFee
 }
 func (UnimplementedChatServer) GetMemberUpdates(context.Context, *GetMemberUpdatesRequest) (*GetMemberUpdatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMemberUpdates not implemented")
+}
+func (UnimplementedChatServer) PromoteUser(context.Context, *PromoteUserRequest) (*PromoteUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PromoteUser not implemented")
+}
+func (UnimplementedChatServer) DemoteUser(context.Context, *DemoteUserRequest) (*DemoteUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DemoteUser not implemented")
 }
 func (UnimplementedChatServer) RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveUser not implemented")
@@ -626,6 +662,42 @@ func _Chat_GetMemberUpdates_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_PromoteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PromoteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).PromoteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_PromoteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).PromoteUser(ctx, req.(*PromoteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_DemoteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DemoteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).DemoteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_DemoteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).DemoteUser(ctx, req.(*DemoteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Chat_RemoveUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RemoveUserRequest)
 	if err := dec(in); err != nil {
@@ -766,6 +838,14 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMemberUpdates",
 			Handler:    _Chat_GetMemberUpdates_Handler,
+		},
+		{
+			MethodName: "PromoteUser",
+			Handler:    _Chat_PromoteUser_Handler,
+		},
+		{
+			MethodName: "DemoteUser",
+			Handler:    _Chat_DemoteUser_Handler,
 		},
 		{
 			MethodName: "RemoveUser",
