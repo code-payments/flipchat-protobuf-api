@@ -3682,9 +3682,9 @@ export class MemberUpdate_Demoted extends Message<MemberUpdate_Demoted> {
   member?: UserId;
 
   /**
-   * @generated from field: flipchat.common.v1.UserId promoted_by = 2;
+   * @generated from field: flipchat.common.v1.UserId demoted_by = 2;
    */
-  promotedBy?: UserId;
+  demotedBy?: UserId;
 
   /**
    * @generated from field: bool send_permission_disabled = 3;
@@ -3700,7 +3700,7 @@ export class MemberUpdate_Demoted extends Message<MemberUpdate_Demoted> {
   static readonly typeName = "flipchat.chat.v1.MemberUpdate.Demoted";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "member", kind: "message", T: UserId },
-    { no: 2, name: "promoted_by", kind: "message", T: UserId },
+    { no: 2, name: "demoted_by", kind: "message", T: UserId },
     { no: 3, name: "send_permission_disabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 

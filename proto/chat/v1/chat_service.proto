@@ -774,7 +774,7 @@ message MemberUpdate {
     message Demoted {
         common.v1.UserId member = 1 [(validate.rules).message.required = true];
 
-        common.v1.UserId promoted_by = 2 [(validate.rules).message.required = true];
+        common.v1.UserId demoted_by = 2 [(validate.rules).message.required = true];
 
         bool send_permission_disabled = 3;
     }
