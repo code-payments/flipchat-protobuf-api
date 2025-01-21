@@ -719,6 +719,8 @@ message MemberUpdate {
         Left              left               = 4;
         Removed           removed            = 5;
         Muted             muted              = 6;
+        Promoted          promoted           = 7;
+        Demoted           demoted            = 8;
     }
 
     common.v1.PagingToken paging_token = 1000;

@@ -3318,6 +3318,18 @@ export class MemberUpdate extends Message<MemberUpdate> {
      */
     value: MemberUpdate_Muted;
     case: "muted";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.MemberUpdate.Promoted promoted = 7;
+     */
+    value: MemberUpdate_Promoted;
+    case: "promoted";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.MemberUpdate.Demoted demoted = 8;
+     */
+    value: MemberUpdate_Demoted;
+    case: "demoted";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
@@ -3339,6 +3351,8 @@ export class MemberUpdate extends Message<MemberUpdate> {
     { no: 4, name: "left", kind: "message", T: MemberUpdate_Left, oneof: "kind" },
     { no: 5, name: "removed", kind: "message", T: MemberUpdate_Removed, oneof: "kind" },
     { no: 6, name: "muted", kind: "message", T: MemberUpdate_Muted, oneof: "kind" },
+    { no: 7, name: "promoted", kind: "message", T: MemberUpdate_Promoted, oneof: "kind" },
+    { no: 8, name: "demoted", kind: "message", T: MemberUpdate_Demoted, oneof: "kind" },
     { no: 1000, name: "paging_token", kind: "message", T: PagingToken },
   ]);
 

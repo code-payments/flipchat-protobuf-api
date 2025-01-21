@@ -8056,6 +8056,90 @@ func (m *MemberUpdate) validate(all bool) error {
 			}
 		}
 
+	case *MemberUpdate_Promoted_:
+		if v == nil {
+			err := MemberUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetPromoted()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Promoted",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Promoted",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetPromoted()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdateValidationError{
+					field:  "Promoted",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MemberUpdate_Demoted_:
+		if v == nil {
+			err := MemberUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetDemoted()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Demoted",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberUpdateValidationError{
+						field:  "Demoted",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetDemoted()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberUpdateValidationError{
+					field:  "Demoted",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		_ = v // ensures v is used
 	}
