@@ -6,6 +6,7 @@ option go_package = "github.com/code-payments/flipchat-protobuf-api/generated/go
 option java_package = "com.codeinc.flipchat.gen.blob.v1";
 option objc_class_prefix = "FCPBBlobV1";
 
+import "common/v1/common.proto";
 import "blob/v1/model.proto";
 
 service BlobService {
@@ -25,7 +26,7 @@ service BlobService {
 
 // Request for a smaller/single-shot upload
 message UploadRequest {
-  string owner_id = 1;
+  common.v1.UserId owner_id = 1;
   BlobType blob_type = 2;
   bytes raw_data = 3;
 }
@@ -37,7 +38,7 @@ message UploadResponse {
 
 // Client-streaming chunk for large uploads
 message UploadChunk {
-  string owner_id = 1;
+  common.v1.UserId owner_id = 1;
   BlobType blob_type = 2;
 
   bytes data = 3;
@@ -50,7 +51,7 @@ message UploadChunkedResponse {
 
 // Retrieve existing blob info
 message GetInfoRequest {
-  bytes blob_id = 1;
+  common.v1.BlobId blob_id = 1;
 }
 
 message GetInfoResponse {
