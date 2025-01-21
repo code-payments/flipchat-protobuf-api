@@ -3188,7 +3188,7 @@ export class Member extends Message<Member> {
 
   /**
    * Does the chat member have permission to send messages in the chat? If
-   * not, the user is considered to be a spectator.
+   * not, the user is considered to be a spectator or listener.
    *
    * @generated from field: bool has_send_permission = 7;
    */

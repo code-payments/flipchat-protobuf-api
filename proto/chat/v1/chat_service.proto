@@ -693,7 +693,7 @@ message Member {
     bool is_muted = 6;
 
     // Does the chat member have permission to send messages in the chat? If
-    // not, the user is considered to be a spectator.
+    // not, the user is considered to be a spectator or listener.
     bool has_send_permission = 7;
 }
 

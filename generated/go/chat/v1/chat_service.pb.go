@@ -3664,7 +3664,7 @@ type Member struct {
 	// messages, even if they paid for the permission.
 	IsMuted bool `protobuf:"varint,6,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
 	// Does the chat member have permission to send messages in the chat? If
-	// not, the user is considered to be a spectator.
+	// not, the user is considered to be a spectator or listener.
 	HasSendPermission bool `protobuf:"varint,7,opt,name=has_send_permission,json=hasSendPermission,proto3" json:"has_send_permission,omitempty"`
 }
 
