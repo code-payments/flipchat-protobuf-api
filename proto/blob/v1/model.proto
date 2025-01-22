@@ -19,7 +19,7 @@ enum BlobType {
 }
 
 // Common blob info returned in responses
-message Blob {
+message BlobMetadata {
   common.v1.BlobId blob_id = 1;
   BlobType blob_type = 2;
 
@@ -27,45 +27,5 @@ message Blob {
   string s3_url = 4;
 
   google.protobuf.Timestamp created_at = 5;
-
-  oneof metadata {
-    ImageMetadata image_metadata = 6;
-    VideoMetadata video_metadata = 7;
-    AudioMetadata audio_metadata = 8;
-  }
-}
-
-message ImageMetadata {
-  int32 version = 1;
-
-  int32 width = 2;
-  int32 height = 3;
-
-  enum Format {
-    IMAGE_FORMAT_UNKNOWN = 0;
-    IMAGE_FORMAT_JPEG = 1;
-    IMAGE_FORMAT_PNG = 2;
-    IMAGE_FORMAT_GIF = 3;
-    IMAGE_FORMAT_WEBP = 4;
-  }
-  Format format = 4;
-}
-
-message VideoMetadata {
-  int32 version = 1;
-
-  int32 width = 2;
-  int32 height = 3;
-
-  int32 duration_seconds = 4;
-  float frame_rate = 5;
-  string codec = 6;
-}
-
-message AudioMetadata {
-  int32 version = 1;
-
-  int32 duration_seconds = 2;
-  string codec = 3;
 }
 
