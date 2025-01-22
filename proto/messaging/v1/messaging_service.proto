@@ -147,8 +147,7 @@ message SendMessageResponse {
     Message message = 2;
 }
 
-// todo: A better name?
-message SendMessageAsNonRegularPaymentMetadata {
+message SendMessageAsListenerPaymentMetadata {
     // The chat where the message is being sent
     common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
 

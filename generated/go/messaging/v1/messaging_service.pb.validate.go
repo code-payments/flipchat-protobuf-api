@@ -1621,24 +1621,23 @@ var _ interface {
 	ErrorName() string
 } = SendMessageResponseValidationError{}
 
-// Validate checks the field values on SendMessageAsNonRegularPaymentMetadata
+// Validate checks the field values on SendMessageAsListenerPaymentMetadata
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
 // there are no violations.
-func (m *SendMessageAsNonRegularPaymentMetadata) Validate() error {
+func (m *SendMessageAsListenerPaymentMetadata) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on
-// SendMessageAsNonRegularPaymentMetadata with the rules defined in the proto
-// definition for this message. If any rules are violated, the result is a
-// list of violation errors wrapped in
-// SendMessageAsNonRegularPaymentMetadataMultiError, or nil if none found.
-func (m *SendMessageAsNonRegularPaymentMetadata) ValidateAll() error {
+// ValidateAll checks the field values on SendMessageAsListenerPaymentMetadata
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SendMessageAsListenerPaymentMetadataMultiError, or nil if none found.
+func (m *SendMessageAsListenerPaymentMetadata) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
+func (m *SendMessageAsListenerPaymentMetadata) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1646,7 +1645,7 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 	var errors []error
 
 	if m.GetChatId() == nil {
-		err := SendMessageAsNonRegularPaymentMetadataValidationError{
+		err := SendMessageAsListenerPaymentMetadataValidationError{
 			field:  "ChatId",
 			reason: "value is required",
 		}
@@ -1660,7 +1659,7 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 		switch v := interface{}(m.GetChatId()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SendMessageAsNonRegularPaymentMetadataValidationError{
+				errors = append(errors, SendMessageAsListenerPaymentMetadataValidationError{
 					field:  "ChatId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1668,7 +1667,7 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SendMessageAsNonRegularPaymentMetadataValidationError{
+				errors = append(errors, SendMessageAsListenerPaymentMetadataValidationError{
 					field:  "ChatId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1677,7 +1676,7 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SendMessageAsNonRegularPaymentMetadataValidationError{
+			return SendMessageAsListenerPaymentMetadataValidationError{
 				field:  "ChatId",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1686,7 +1685,7 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 	}
 
 	if m.GetUserId() == nil {
-		err := SendMessageAsNonRegularPaymentMetadataValidationError{
+		err := SendMessageAsListenerPaymentMetadataValidationError{
 			field:  "UserId",
 			reason: "value is required",
 		}
@@ -1700,7 +1699,7 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 		switch v := interface{}(m.GetUserId()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SendMessageAsNonRegularPaymentMetadataValidationError{
+				errors = append(errors, SendMessageAsListenerPaymentMetadataValidationError{
 					field:  "UserId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1708,7 +1707,7 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SendMessageAsNonRegularPaymentMetadataValidationError{
+				errors = append(errors, SendMessageAsListenerPaymentMetadataValidationError{
 					field:  "UserId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1717,7 +1716,7 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SendMessageAsNonRegularPaymentMetadataValidationError{
+			return SendMessageAsListenerPaymentMetadataValidationError{
 				field:  "UserId",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -1726,20 +1725,20 @@ func (m *SendMessageAsNonRegularPaymentMetadata) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SendMessageAsNonRegularPaymentMetadataMultiError(errors)
+		return SendMessageAsListenerPaymentMetadataMultiError(errors)
 	}
 
 	return nil
 }
 
-// SendMessageAsNonRegularPaymentMetadataMultiError is an error wrapping
-// multiple validation errors returned by
-// SendMessageAsNonRegularPaymentMetadata.ValidateAll() if the designated
+// SendMessageAsListenerPaymentMetadataMultiError is an error wrapping multiple
+// validation errors returned by
+// SendMessageAsListenerPaymentMetadata.ValidateAll() if the designated
 // constraints aren't met.
-type SendMessageAsNonRegularPaymentMetadataMultiError []error
+type SendMessageAsListenerPaymentMetadataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SendMessageAsNonRegularPaymentMetadataMultiError) Error() string {
+func (m SendMessageAsListenerPaymentMetadataMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1748,12 +1747,12 @@ func (m SendMessageAsNonRegularPaymentMetadataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SendMessageAsNonRegularPaymentMetadataMultiError) AllErrors() []error { return m }
+func (m SendMessageAsListenerPaymentMetadataMultiError) AllErrors() []error { return m }
 
-// SendMessageAsNonRegularPaymentMetadataValidationError is the validation
-// error returned by SendMessageAsNonRegularPaymentMetadata.Validate if the
-// designated constraints aren't met.
-type SendMessageAsNonRegularPaymentMetadataValidationError struct {
+// SendMessageAsListenerPaymentMetadataValidationError is the validation error
+// returned by SendMessageAsListenerPaymentMetadata.Validate if the designated
+// constraints aren't met.
+type SendMessageAsListenerPaymentMetadataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1761,24 +1760,24 @@ type SendMessageAsNonRegularPaymentMetadataValidationError struct {
 }
 
 // Field function returns field value.
-func (e SendMessageAsNonRegularPaymentMetadataValidationError) Field() string { return e.field }
+func (e SendMessageAsListenerPaymentMetadataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SendMessageAsNonRegularPaymentMetadataValidationError) Reason() string { return e.reason }
+func (e SendMessageAsListenerPaymentMetadataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SendMessageAsNonRegularPaymentMetadataValidationError) Cause() error { return e.cause }
+func (e SendMessageAsListenerPaymentMetadataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SendMessageAsNonRegularPaymentMetadataValidationError) Key() bool { return e.key }
+func (e SendMessageAsListenerPaymentMetadataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SendMessageAsNonRegularPaymentMetadataValidationError) ErrorName() string {
-	return "SendMessageAsNonRegularPaymentMetadataValidationError"
+func (e SendMessageAsListenerPaymentMetadataValidationError) ErrorName() string {
+	return "SendMessageAsListenerPaymentMetadataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SendMessageAsNonRegularPaymentMetadataValidationError) Error() string {
+func (e SendMessageAsListenerPaymentMetadataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1790,14 +1789,14 @@ func (e SendMessageAsNonRegularPaymentMetadataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSendMessageAsNonRegularPaymentMetadata.%s: %s%s",
+		"invalid %sSendMessageAsListenerPaymentMetadata.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SendMessageAsNonRegularPaymentMetadataValidationError{}
+var _ error = SendMessageAsListenerPaymentMetadataValidationError{}
 
 var _ interface {
 	Field() string
@@ -1805,7 +1804,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SendMessageAsNonRegularPaymentMetadataValidationError{}
+} = SendMessageAsListenerPaymentMetadataValidationError{}
 
 // Validate checks the field values on SendTipMessagePaymentMetadata with the
 // rules defined in the proto definition for this message. If any rules are

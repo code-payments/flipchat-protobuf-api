@@ -606,11 +606,9 @@ proto3.util.setEnumType(SendMessageResponse_Result, "flipchat.messaging.v1.SendM
 ]);
 
 /**
- * todo: A better name?
- *
- * @generated from message flipchat.messaging.v1.SendMessageAsNonRegularPaymentMetadata
+ * @generated from message flipchat.messaging.v1.SendMessageAsListenerPaymentMetadata
  */
-export class SendMessageAsNonRegularPaymentMetadata extends Message<SendMessageAsNonRegularPaymentMetadata> {
+export class SendMessageAsListenerPaymentMetadata extends Message<SendMessageAsListenerPaymentMetadata> {
   /**
    * The chat where the message is being sent
    *
@@ -625,32 +623,32 @@ export class SendMessageAsNonRegularPaymentMetadata extends Message<SendMessageA
    */
   userId?: UserId;
 
-  constructor(data?: PartialMessage<SendMessageAsNonRegularPaymentMetadata>) {
+  constructor(data?: PartialMessage<SendMessageAsListenerPaymentMetadata>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.messaging.v1.SendMessageAsNonRegularPaymentMetadata";
+  static readonly typeName = "flipchat.messaging.v1.SendMessageAsListenerPaymentMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
     { no: 2, name: "user_id", kind: "message", T: UserId },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendMessageAsNonRegularPaymentMetadata {
-    return new SendMessageAsNonRegularPaymentMetadata().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendMessageAsListenerPaymentMetadata {
+    return new SendMessageAsListenerPaymentMetadata().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendMessageAsNonRegularPaymentMetadata {
-    return new SendMessageAsNonRegularPaymentMetadata().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendMessageAsListenerPaymentMetadata {
+    return new SendMessageAsListenerPaymentMetadata().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendMessageAsNonRegularPaymentMetadata {
-    return new SendMessageAsNonRegularPaymentMetadata().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendMessageAsListenerPaymentMetadata {
+    return new SendMessageAsListenerPaymentMetadata().fromJsonString(jsonString, options);
   }
 
-  static equals(a: SendMessageAsNonRegularPaymentMetadata | PlainMessage<SendMessageAsNonRegularPaymentMetadata> | undefined, b: SendMessageAsNonRegularPaymentMetadata | PlainMessage<SendMessageAsNonRegularPaymentMetadata> | undefined): boolean {
-    return proto3.util.equals(SendMessageAsNonRegularPaymentMetadata, a, b);
+  static equals(a: SendMessageAsListenerPaymentMetadata | PlainMessage<SendMessageAsListenerPaymentMetadata> | undefined, b: SendMessageAsListenerPaymentMetadata | PlainMessage<SendMessageAsListenerPaymentMetadata> | undefined): boolean {
+    return proto3.util.equals(SendMessageAsListenerPaymentMetadata, a, b);
   }
 }
 
