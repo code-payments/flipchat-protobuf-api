@@ -44,6 +44,10 @@ message Message {
     // Timestamp this message was generated at. This value is also encoded in
     // any time-based UUID message IDs.
     google.protobuf.Timestamp ts = 4 [(validate.rules).timestamp.required = true];
+
+    // If sender_id is provided, were they off stage at the time of sending
+    // this message
+    bool was_sender_off_stage = 5;
 }
 
 message MessageBatch {

@@ -606,6 +606,53 @@ proto3.util.setEnumType(SendMessageResponse_Result, "flipchat.messaging.v1.SendM
 ]);
 
 /**
+ * @generated from message flipchat.messaging.v1.SendMessageAsListenerPaymentMetadata
+ */
+export class SendMessageAsListenerPaymentMetadata extends Message<SendMessageAsListenerPaymentMetadata> {
+  /**
+   * The chat where the message is being sent
+   *
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * The user sending the message
+   *
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  constructor(data?: PartialMessage<SendMessageAsListenerPaymentMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.SendMessageAsListenerPaymentMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendMessageAsListenerPaymentMetadata {
+    return new SendMessageAsListenerPaymentMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendMessageAsListenerPaymentMetadata {
+    return new SendMessageAsListenerPaymentMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendMessageAsListenerPaymentMetadata {
+    return new SendMessageAsListenerPaymentMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SendMessageAsListenerPaymentMetadata | PlainMessage<SendMessageAsListenerPaymentMetadata> | undefined, b: SendMessageAsListenerPaymentMetadata | PlainMessage<SendMessageAsListenerPaymentMetadata> | undefined): boolean {
+    return proto3.util.equals(SendMessageAsListenerPaymentMetadata, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.messaging.v1.SendTipMessagePaymentMetadata
  */
 export class SendTipMessagePaymentMetadata extends Message<SendTipMessagePaymentMetadata> {

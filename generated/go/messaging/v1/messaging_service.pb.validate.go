@@ -1621,6 +1621,191 @@ var _ interface {
 	ErrorName() string
 } = SendMessageResponseValidationError{}
 
+// Validate checks the field values on SendMessageAsListenerPaymentMetadata
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *SendMessageAsListenerPaymentMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendMessageAsListenerPaymentMetadata
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SendMessageAsListenerPaymentMetadataMultiError, or nil if none found.
+func (m *SendMessageAsListenerPaymentMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendMessageAsListenerPaymentMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := SendMessageAsListenerPaymentMetadataValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendMessageAsListenerPaymentMetadataValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendMessageAsListenerPaymentMetadataValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendMessageAsListenerPaymentMetadataValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetUserId() == nil {
+		err := SendMessageAsListenerPaymentMetadataValidationError{
+			field:  "UserId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetUserId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SendMessageAsListenerPaymentMetadataValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SendMessageAsListenerPaymentMetadataValidationError{
+					field:  "UserId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUserId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendMessageAsListenerPaymentMetadataValidationError{
+				field:  "UserId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SendMessageAsListenerPaymentMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendMessageAsListenerPaymentMetadataMultiError is an error wrapping multiple
+// validation errors returned by
+// SendMessageAsListenerPaymentMetadata.ValidateAll() if the designated
+// constraints aren't met.
+type SendMessageAsListenerPaymentMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendMessageAsListenerPaymentMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendMessageAsListenerPaymentMetadataMultiError) AllErrors() []error { return m }
+
+// SendMessageAsListenerPaymentMetadataValidationError is the validation error
+// returned by SendMessageAsListenerPaymentMetadata.Validate if the designated
+// constraints aren't met.
+type SendMessageAsListenerPaymentMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendMessageAsListenerPaymentMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendMessageAsListenerPaymentMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendMessageAsListenerPaymentMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendMessageAsListenerPaymentMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendMessageAsListenerPaymentMetadataValidationError) ErrorName() string {
+	return "SendMessageAsListenerPaymentMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendMessageAsListenerPaymentMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendMessageAsListenerPaymentMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendMessageAsListenerPaymentMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendMessageAsListenerPaymentMetadataValidationError{}
+
 // Validate checks the field values on SendTipMessagePaymentMetadata with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

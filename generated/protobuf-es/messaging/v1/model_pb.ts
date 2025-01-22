@@ -120,6 +120,14 @@ export class Message extends Message$1<Message> {
    */
   ts?: Timestamp;
 
+  /**
+   * If sender_id is provided, were they off stage at the time of sending
+   * this message
+   *
+   * @generated from field: bool was_sender_off_stage = 5;
+   */
+  wasSenderOffStage = false;
+
   constructor(data?: PartialMessage<Message>) {
     super();
     proto3.util.initPartial(data, this);
@@ -132,6 +140,7 @@ export class Message extends Message$1<Message> {
     { no: 2, name: "sender_id", kind: "message", T: UserId },
     { no: 3, name: "content", kind: "message", T: Content, repeated: true },
     { no: 4, name: "ts", kind: "message", T: Timestamp },
+    { no: 5, name: "was_sender_off_stage", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Message {

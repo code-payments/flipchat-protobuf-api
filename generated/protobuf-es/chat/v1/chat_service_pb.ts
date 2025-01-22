@@ -1637,6 +1637,118 @@ proto3.util.setEnumType(SetCoverChargeResponse_Result, "flipchat.chat.v1.SetCove
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.SetMessagingFeeRequest
+ */
+export class SetMessagingFeeRequest extends Message<SetMessagingFeeRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.PaymentAmount messaging_fee = 2;
+   */
+  messagingFee?: PaymentAmount;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<SetMessagingFeeRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.SetMessagingFeeRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "messaging_fee", kind: "message", T: PaymentAmount },
+    { no: 3, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetMessagingFeeRequest {
+    return new SetMessagingFeeRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetMessagingFeeRequest {
+    return new SetMessagingFeeRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetMessagingFeeRequest {
+    return new SetMessagingFeeRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetMessagingFeeRequest | PlainMessage<SetMessagingFeeRequest> | undefined, b: SetMessagingFeeRequest | PlainMessage<SetMessagingFeeRequest> | undefined): boolean {
+    return proto3.util.equals(SetMessagingFeeRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.SetMessagingFeeResponse
+ */
+export class SetMessagingFeeResponse extends Message<SetMessagingFeeResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.SetMessagingFeeResponse.Result result = 1;
+   */
+  result = SetMessagingFeeResponse_Result.OK;
+
+  constructor(data?: PartialMessage<SetMessagingFeeResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.SetMessagingFeeResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(SetMessagingFeeResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetMessagingFeeResponse {
+    return new SetMessagingFeeResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetMessagingFeeResponse {
+    return new SetMessagingFeeResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetMessagingFeeResponse {
+    return new SetMessagingFeeResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetMessagingFeeResponse | PlainMessage<SetMessagingFeeResponse> | undefined, b: SetMessagingFeeResponse | PlainMessage<SetMessagingFeeResponse> | undefined): boolean {
+    return proto3.util.equals(SetMessagingFeeResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.SetMessagingFeeResponse.Result
+ */
+export enum SetMessagingFeeResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * @generated from enum value: CANT_SET = 2;
+   */
+  CANT_SET = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(SetMessagingFeeResponse_Result)
+proto3.util.setEnumType(SetMessagingFeeResponse_Result, "flipchat.chat.v1.SetMessagingFeeResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "CANT_SET" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.GetMemberUpdatesRequest
  */
 export class GetMemberUpdatesRequest extends Message<GetMemberUpdatesRequest> {
@@ -1752,6 +1864,234 @@ export enum GetMemberUpdatesResponse_Result {
 proto3.util.setEnumType(GetMemberUpdatesResponse_Result, "flipchat.chat.v1.GetMemberUpdatesResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "NOT_FOUND" },
+]);
+
+/**
+ * @generated from message flipchat.chat.v1.PromoteUserRequest
+ */
+export class PromoteUserRequest extends Message<PromoteUserRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  /**
+   * Enables send permissions when value is true
+   *
+   * @generated from field: bool enable_send_permission = 3;
+   */
+  enableSendPermission = false;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 100;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<PromoteUserRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.PromoteUserRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+    { no: 3, name: "enable_send_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 100, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PromoteUserRequest {
+    return new PromoteUserRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PromoteUserRequest {
+    return new PromoteUserRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PromoteUserRequest {
+    return new PromoteUserRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PromoteUserRequest | PlainMessage<PromoteUserRequest> | undefined, b: PromoteUserRequest | PlainMessage<PromoteUserRequest> | undefined): boolean {
+    return proto3.util.equals(PromoteUserRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.PromoteUserResponse
+ */
+export class PromoteUserResponse extends Message<PromoteUserResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.PromoteUserResponse.Result result = 1;
+   */
+  result = PromoteUserResponse_Result.OK;
+
+  constructor(data?: PartialMessage<PromoteUserResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.PromoteUserResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(PromoteUserResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PromoteUserResponse {
+    return new PromoteUserResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PromoteUserResponse {
+    return new PromoteUserResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PromoteUserResponse {
+    return new PromoteUserResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PromoteUserResponse | PlainMessage<PromoteUserResponse> | undefined, b: PromoteUserResponse | PlainMessage<PromoteUserResponse> | undefined): boolean {
+    return proto3.util.equals(PromoteUserResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.PromoteUserResponse.Result
+ */
+export enum PromoteUserResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(PromoteUserResponse_Result)
+proto3.util.setEnumType(PromoteUserResponse_Result, "flipchat.chat.v1.PromoteUserResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message flipchat.chat.v1.DemoteUserRequest
+ */
+export class DemoteUserRequest extends Message<DemoteUserRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId user_id = 2;
+   */
+  userId?: UserId;
+
+  /**
+   * Disables send permissions when value is true
+   *
+   * @generated from field: bool disable_send_permission = 3;
+   */
+  disableSendPermission = false;
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 100;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<DemoteUserRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.DemoteUserRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "user_id", kind: "message", T: UserId },
+    { no: 3, name: "disable_send_permission", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 100, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DemoteUserRequest {
+    return new DemoteUserRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DemoteUserRequest {
+    return new DemoteUserRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DemoteUserRequest {
+    return new DemoteUserRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DemoteUserRequest | PlainMessage<DemoteUserRequest> | undefined, b: DemoteUserRequest | PlainMessage<DemoteUserRequest> | undefined): boolean {
+    return proto3.util.equals(DemoteUserRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.DemoteUserResponse
+ */
+export class DemoteUserResponse extends Message<DemoteUserResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.DemoteUserResponse.Result result = 1;
+   */
+  result = DemoteUserResponse_Result.OK;
+
+  constructor(data?: PartialMessage<DemoteUserResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.DemoteUserResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(DemoteUserResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DemoteUserResponse {
+    return new DemoteUserResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DemoteUserResponse {
+    return new DemoteUserResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DemoteUserResponse {
+    return new DemoteUserResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DemoteUserResponse | PlainMessage<DemoteUserResponse> | undefined, b: DemoteUserResponse | PlainMessage<DemoteUserResponse> | undefined): boolean {
+    return proto3.util.equals(DemoteUserResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.DemoteUserResponse.Result
+ */
+export enum DemoteUserResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(DemoteUserResponse_Result)
+proto3.util.setEnumType(DemoteUserResponse_Result, "flipchat.chat.v1.DemoteUserResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
 ]);
 
 /**
@@ -2336,11 +2676,14 @@ export class Metadata extends Message<Metadata> {
   owner?: UserId;
 
   /**
-   * If present, the cover charge that must be paid to join the chat
+   * If present, the fee that must be paid to send a message as a non-regular
+   * chat member.
    *
-   * @generated from field: flipchat.common.v1.PaymentAmount cover_charge = 9;
+   * This replaces the legacy cover charge mechanic, which is deprecated
+   *
+   * @generated from field: flipchat.common.v1.PaymentAmount messaging_fee = 9;
    */
-  coverCharge?: PaymentAmount;
+  messagingFee?: PaymentAmount;
 
   /**
    * The timestamp of the last activity in this chat
@@ -2375,7 +2718,7 @@ export class Metadata extends Message<Metadata> {
     { no: 7, name: "num_unread", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 11, name: "has_more_unread", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "owner", kind: "message", T: UserId },
-    { no: 9, name: "cover_charge", kind: "message", T: PaymentAmount },
+    { no: 9, name: "messaging_fee", kind: "message", T: PaymentAmount },
     { no: 10, name: "last_activity", kind: "message", T: Timestamp },
     { no: 12, name: "open_status", kind: "message", T: OpenStatus },
   ]);
@@ -2492,10 +2835,10 @@ export class MetadataUpdate extends Message<MetadataUpdate> {
     case: "displayNameChanged";
   } | {
     /**
-     * @generated from field: flipchat.chat.v1.MetadataUpdate.CoverChargeChanged cover_charge_changed = 4;
+     * @generated from field: flipchat.chat.v1.MetadataUpdate.MessagingFeeChanged messaging_fee_changed = 4;
      */
-    value: MetadataUpdate_CoverChargeChanged;
-    case: "coverChargeChanged";
+    value: MetadataUpdate_MessagingFeeChanged;
+    case: "messagingFeeChanged";
   } | {
     /**
      * @generated from field: flipchat.chat.v1.MetadataUpdate.LastActivityChanged last_activity_changed = 5;
@@ -2521,7 +2864,7 @@ export class MetadataUpdate extends Message<MetadataUpdate> {
     { no: 1, name: "full_refresh", kind: "message", T: MetadataUpdate_FullRefresh, oneof: "kind" },
     { no: 2, name: "unread_count_changed", kind: "message", T: MetadataUpdate_UnreadCountChanged, oneof: "kind" },
     { no: 3, name: "display_name_changed", kind: "message", T: MetadataUpdate_DisplayNameChanged, oneof: "kind" },
-    { no: 4, name: "cover_charge_changed", kind: "message", T: MetadataUpdate_CoverChargeChanged, oneof: "kind" },
+    { no: 4, name: "messaging_fee_changed", kind: "message", T: MetadataUpdate_MessagingFeeChanged, oneof: "kind" },
     { no: 5, name: "last_activity_changed", kind: "message", T: MetadataUpdate_LastActivityChanged, oneof: "kind" },
     { no: 6, name: "open_status_changed", kind: "message", T: MetadataUpdate_OpenStatusChanged, oneof: "kind" },
   ]);
@@ -2672,41 +3015,41 @@ export class MetadataUpdate_DisplayNameChanged extends Message<MetadataUpdate_Di
 }
 
 /**
- * The chat cover charge has been updated to a new value
+ * The chat messaging fee has been updated to a new value
  *
- * @generated from message flipchat.chat.v1.MetadataUpdate.CoverChargeChanged
+ * @generated from message flipchat.chat.v1.MetadataUpdate.MessagingFeeChanged
  */
-export class MetadataUpdate_CoverChargeChanged extends Message<MetadataUpdate_CoverChargeChanged> {
+export class MetadataUpdate_MessagingFeeChanged extends Message<MetadataUpdate_MessagingFeeChanged> {
   /**
-   * @generated from field: flipchat.common.v1.PaymentAmount new_cover_charge = 1;
+   * @generated from field: flipchat.common.v1.PaymentAmount new_messaging_fee = 1;
    */
-  newCoverCharge?: PaymentAmount;
+  newMessagingFee?: PaymentAmount;
 
-  constructor(data?: PartialMessage<MetadataUpdate_CoverChargeChanged>) {
+  constructor(data?: PartialMessage<MetadataUpdate_MessagingFeeChanged>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.chat.v1.MetadataUpdate.CoverChargeChanged";
+  static readonly typeName = "flipchat.chat.v1.MetadataUpdate.MessagingFeeChanged";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "new_cover_charge", kind: "message", T: PaymentAmount },
+    { no: 1, name: "new_messaging_fee", kind: "message", T: PaymentAmount },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MetadataUpdate_CoverChargeChanged {
-    return new MetadataUpdate_CoverChargeChanged().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MetadataUpdate_MessagingFeeChanged {
+    return new MetadataUpdate_MessagingFeeChanged().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MetadataUpdate_CoverChargeChanged {
-    return new MetadataUpdate_CoverChargeChanged().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MetadataUpdate_MessagingFeeChanged {
+    return new MetadataUpdate_MessagingFeeChanged().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MetadataUpdate_CoverChargeChanged {
-    return new MetadataUpdate_CoverChargeChanged().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MetadataUpdate_MessagingFeeChanged {
+    return new MetadataUpdate_MessagingFeeChanged().fromJsonString(jsonString, options);
   }
 
-  static equals(a: MetadataUpdate_CoverChargeChanged | PlainMessage<MetadataUpdate_CoverChargeChanged> | undefined, b: MetadataUpdate_CoverChargeChanged | PlainMessage<MetadataUpdate_CoverChargeChanged> | undefined): boolean {
-    return proto3.util.equals(MetadataUpdate_CoverChargeChanged, a, b);
+  static equals(a: MetadataUpdate_MessagingFeeChanged | PlainMessage<MetadataUpdate_MessagingFeeChanged> | undefined, b: MetadataUpdate_MessagingFeeChanged | PlainMessage<MetadataUpdate_MessagingFeeChanged> | undefined): boolean {
+    return proto3.util.equals(MetadataUpdate_MessagingFeeChanged, a, b);
   }
 }
 
@@ -2845,7 +3188,8 @@ export class Member extends Message<Member> {
 
   /**
    * Does the chat member have permission to send messages in the chat? If
-   * not, the user is considered to be a spectator.
+   * not, the user is considered to be a spectator or listener. Otherwise,
+   * they are a speaker.
    *
    * @generated from field: bool has_send_permission = 7;
    */
@@ -2975,6 +3319,18 @@ export class MemberUpdate extends Message<MemberUpdate> {
      */
     value: MemberUpdate_Muted;
     case: "muted";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.MemberUpdate.Promoted promoted = 7;
+     */
+    value: MemberUpdate_Promoted;
+    case: "promoted";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.MemberUpdate.Demoted demoted = 8;
+     */
+    value: MemberUpdate_Demoted;
+    case: "demoted";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
@@ -2996,6 +3352,8 @@ export class MemberUpdate extends Message<MemberUpdate> {
     { no: 4, name: "left", kind: "message", T: MemberUpdate_Left, oneof: "kind" },
     { no: 5, name: "removed", kind: "message", T: MemberUpdate_Removed, oneof: "kind" },
     { no: 6, name: "muted", kind: "message", T: MemberUpdate_Muted, oneof: "kind" },
+    { no: 7, name: "promoted", kind: "message", T: MemberUpdate_Promoted, oneof: "kind" },
+    { no: 8, name: "demoted", kind: "message", T: MemberUpdate_Demoted, oneof: "kind" },
     { no: 1000, name: "paging_token", kind: "message", T: PagingToken },
   ]);
 
@@ -3259,6 +3617,108 @@ export class MemberUpdate_Muted extends Message<MemberUpdate_Muted> {
 
   static equals(a: MemberUpdate_Muted | PlainMessage<MemberUpdate_Muted> | undefined, b: MemberUpdate_Muted | PlainMessage<MemberUpdate_Muted> | undefined): boolean {
     return proto3.util.equals(MemberUpdate_Muted, a, b);
+  }
+}
+
+/**
+ * Member was promoted in the chat via the PromoteUser RPC
+ *
+ * @generated from message flipchat.chat.v1.MemberUpdate.Promoted
+ */
+export class MemberUpdate_Promoted extends Message<MemberUpdate_Promoted> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId promoted_by = 2;
+   */
+  promotedBy?: UserId;
+
+  /**
+   * @generated from field: bool send_permission_enabled = 3;
+   */
+  sendPermissionEnabled = false;
+
+  constructor(data?: PartialMessage<MemberUpdate_Promoted>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MemberUpdate.Promoted";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+    { no: 2, name: "promoted_by", kind: "message", T: UserId },
+    { no: 3, name: "send_permission_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MemberUpdate_Promoted {
+    return new MemberUpdate_Promoted().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MemberUpdate_Promoted {
+    return new MemberUpdate_Promoted().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MemberUpdate_Promoted {
+    return new MemberUpdate_Promoted().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MemberUpdate_Promoted | PlainMessage<MemberUpdate_Promoted> | undefined, b: MemberUpdate_Promoted | PlainMessage<MemberUpdate_Promoted> | undefined): boolean {
+    return proto3.util.equals(MemberUpdate_Promoted, a, b);
+  }
+}
+
+/**
+ * Member was demoted in the chat via the DemoteUser RPC
+ *
+ * @generated from message flipchat.chat.v1.MemberUpdate.Demoted
+ */
+export class MemberUpdate_Demoted extends Message<MemberUpdate_Demoted> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId demoted_by = 2;
+   */
+  demotedBy?: UserId;
+
+  /**
+   * @generated from field: bool send_permission_disabled = 3;
+   */
+  sendPermissionDisabled = false;
+
+  constructor(data?: PartialMessage<MemberUpdate_Demoted>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MemberUpdate.Demoted";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+    { no: 2, name: "demoted_by", kind: "message", T: UserId },
+    { no: 3, name: "send_permission_disabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MemberUpdate_Demoted {
+    return new MemberUpdate_Demoted().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MemberUpdate_Demoted {
+    return new MemberUpdate_Demoted().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MemberUpdate_Demoted {
+    return new MemberUpdate_Demoted().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MemberUpdate_Demoted | PlainMessage<MemberUpdate_Demoted> | undefined, b: MemberUpdate_Demoted | PlainMessage<MemberUpdate_Demoted> | undefined): boolean {
+    return proto3.util.equals(MemberUpdate_Demoted, a, b);
   }
 }
 

@@ -147,6 +147,14 @@ message SendMessageResponse {
     Message message = 2;
 }
 
+message SendMessageAsListenerPaymentMetadata {
+    // The chat where the message is being sent
+    common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
+
+    // The user sending the message
+    common.v1.UserId user_id = 2 [(validate.rules).message.required = true];
+}
+
 message SendTipMessagePaymentMetadata {
     // The chat where the message is being tipped
     common.v1.ChatId chat_id = 1 [(validate.rules).message.required = true];
