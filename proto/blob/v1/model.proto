@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package flipchat.blob.v1;
+
+option go_package = "github.com/code-payments/flipchat-protobuf-api/generated/go/blob/v1;blobpb";
+option java_package = "com.codeinc.flipchat.gen.blob.v1";
+option objc_class_prefix = "FCPBBlobV1";
+
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+enum BlobType {
+  BLOB_TYPE_UNKNOWN = 0;
+  BLOB_TYPE_IMAGE = 1;
+  BLOB_TYPE_VIDEO = 2;
+  BLOB_TYPE_AUDIO = 3;
+}
+
+message Blob {
+  common.v1.BlobId blob_id = 1;
+  BlobType blob_type = 2;
+
+  common.v1.UserId owner_id = 3;
+  string s3_url = 4;
+
+  google.protobuf.Timestamp created_at = 5;
+}
+

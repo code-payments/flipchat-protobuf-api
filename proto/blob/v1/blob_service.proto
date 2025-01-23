@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package flipchat.blob.v1;
+
+option go_package = "github.com/code-payments/flipchat-protobuf-api/generated/go/blob/v1;blobpb";
+option java_package = "com.codeinc.flipchat.gen.blob.v1";
+option objc_class_prefix = "FCPBBlobV1";
+
+import "common/v1/common.proto";
+import "blob/v1/model.proto";
+
+service BlobService {
+  // Request for a smaller/single-shot upload
+  rpc Upload (UploadBlobRequest) returns (UploadBlobResponse);
+
+  // Get the metadata for a previously uploaded blob
+  rpc GetInfo (GetBlobInfoRequest) returns (GetBlobInfoResponse);
+}
+
+// Request for a smaller/single-shot upload
+message UploadBlobRequest {
+  common.v1.UserId owner_id = 1;
+  BlobType blob_type = 2;
+  bytes raw_data = 3;
+}
+
+// Single-shot upload response
+message UploadBlobResponse {
+  Blob blob = 1;
+}
+
+// Retrieve existing blob info
+message GetBlobInfoRequest {
+  common.v1.BlobId blob_id = 1;
+}
+
+message GetBlobInfoResponse {
+  Blob blob = 1;
+}
