@@ -35,22 +35,22 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on UploadRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *UploadRequest) Validate() error {
+// Validate checks the field values on UploadBlobRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UploadBlobRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UploadRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in UploadRequestMultiError, or
-// nil if none found.
-func (m *UploadRequest) ValidateAll() error {
+// ValidateAll checks the field values on UploadBlobRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadBlobRequestMultiError, or nil if none found.
+func (m *UploadBlobRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UploadRequest) validate(all bool) error {
+func (m *UploadBlobRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -61,7 +61,7 @@ func (m *UploadRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOwnerId()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UploadRequestValidationError{
+				errors = append(errors, UploadBlobRequestValidationError{
 					field:  "OwnerId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -69,7 +69,7 @@ func (m *UploadRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UploadRequestValidationError{
+				errors = append(errors, UploadBlobRequestValidationError{
 					field:  "OwnerId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -78,7 +78,7 @@ func (m *UploadRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOwnerId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return UploadRequestValidationError{
+			return UploadBlobRequestValidationError{
 				field:  "OwnerId",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -91,19 +91,19 @@ func (m *UploadRequest) validate(all bool) error {
 	// no validation rules for RawData
 
 	if len(errors) > 0 {
-		return UploadRequestMultiError(errors)
+		return UploadBlobRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// UploadRequestMultiError is an error wrapping multiple validation errors
-// returned by UploadRequest.ValidateAll() if the designated constraints
+// UploadBlobRequestMultiError is an error wrapping multiple validation errors
+// returned by UploadBlobRequest.ValidateAll() if the designated constraints
 // aren't met.
-type UploadRequestMultiError []error
+type UploadBlobRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UploadRequestMultiError) Error() string {
+func (m UploadBlobRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -112,11 +112,11 @@ func (m UploadRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UploadRequestMultiError) AllErrors() []error { return m }
+func (m UploadBlobRequestMultiError) AllErrors() []error { return m }
 
-// UploadRequestValidationError is the validation error returned by
-// UploadRequest.Validate if the designated constraints aren't met.
-type UploadRequestValidationError struct {
+// UploadBlobRequestValidationError is the validation error returned by
+// UploadBlobRequest.Validate if the designated constraints aren't met.
+type UploadBlobRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -124,22 +124,24 @@ type UploadRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e UploadRequestValidationError) Field() string { return e.field }
+func (e UploadBlobRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UploadRequestValidationError) Reason() string { return e.reason }
+func (e UploadBlobRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UploadRequestValidationError) Cause() error { return e.cause }
+func (e UploadBlobRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UploadRequestValidationError) Key() bool { return e.key }
+func (e UploadBlobRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UploadRequestValidationError) ErrorName() string { return "UploadRequestValidationError" }
+func (e UploadBlobRequestValidationError) ErrorName() string {
+	return "UploadBlobRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e UploadRequestValidationError) Error() string {
+func (e UploadBlobRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -151,14 +153,14 @@ func (e UploadRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUploadRequest.%s: %s%s",
+		"invalid %sUploadBlobRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UploadRequestValidationError{}
+var _ error = UploadBlobRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -166,24 +168,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UploadRequestValidationError{}
+} = UploadBlobRequestValidationError{}
 
-// Validate checks the field values on UploadResponse with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *UploadResponse) Validate() error {
+// Validate checks the field values on UploadBlobResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UploadBlobResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UploadResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in UploadResponseMultiError,
-// or nil if none found.
-func (m *UploadResponse) ValidateAll() error {
+// ValidateAll checks the field values on UploadBlobResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadBlobResponseMultiError, or nil if none found.
+func (m *UploadBlobResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UploadResponse) validate(all bool) error {
+func (m *UploadBlobResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -194,7 +196,7 @@ func (m *UploadResponse) validate(all bool) error {
 		switch v := interface{}(m.GetBlob()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UploadResponseValidationError{
+				errors = append(errors, UploadBlobResponseValidationError{
 					field:  "Blob",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -202,7 +204,7 @@ func (m *UploadResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UploadResponseValidationError{
+				errors = append(errors, UploadBlobResponseValidationError{
 					field:  "Blob",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -211,7 +213,7 @@ func (m *UploadResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetBlob()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return UploadResponseValidationError{
+			return UploadBlobResponseValidationError{
 				field:  "Blob",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -220,19 +222,19 @@ func (m *UploadResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return UploadResponseMultiError(errors)
+		return UploadBlobResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// UploadResponseMultiError is an error wrapping multiple validation errors
-// returned by UploadResponse.ValidateAll() if the designated constraints
+// UploadBlobResponseMultiError is an error wrapping multiple validation errors
+// returned by UploadBlobResponse.ValidateAll() if the designated constraints
 // aren't met.
-type UploadResponseMultiError []error
+type UploadBlobResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UploadResponseMultiError) Error() string {
+func (m UploadBlobResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -241,11 +243,11 @@ func (m UploadResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UploadResponseMultiError) AllErrors() []error { return m }
+func (m UploadBlobResponseMultiError) AllErrors() []error { return m }
 
-// UploadResponseValidationError is the validation error returned by
-// UploadResponse.Validate if the designated constraints aren't met.
-type UploadResponseValidationError struct {
+// UploadBlobResponseValidationError is the validation error returned by
+// UploadBlobResponse.Validate if the designated constraints aren't met.
+type UploadBlobResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -253,22 +255,24 @@ type UploadResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e UploadResponseValidationError) Field() string { return e.field }
+func (e UploadBlobResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UploadResponseValidationError) Reason() string { return e.reason }
+func (e UploadBlobResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UploadResponseValidationError) Cause() error { return e.cause }
+func (e UploadBlobResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UploadResponseValidationError) Key() bool { return e.key }
+func (e UploadBlobResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UploadResponseValidationError) ErrorName() string { return "UploadResponseValidationError" }
+func (e UploadBlobResponseValidationError) ErrorName() string {
+	return "UploadBlobResponseValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e UploadResponseValidationError) Error() string {
+func (e UploadBlobResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -280,14 +284,14 @@ func (e UploadResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUploadResponse.%s: %s%s",
+		"invalid %sUploadBlobResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UploadResponseValidationError{}
+var _ error = UploadBlobResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -295,24 +299,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UploadResponseValidationError{}
+} = UploadBlobResponseValidationError{}
 
-// Validate checks the field values on GetInfoRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *GetInfoRequest) Validate() error {
+// Validate checks the field values on GetBlobInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBlobInfoRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetInfoRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in GetInfoRequestMultiError,
-// or nil if none found.
-func (m *GetInfoRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetBlobInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBlobInfoRequestMultiError, or nil if none found.
+func (m *GetBlobInfoRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetInfoRequest) validate(all bool) error {
+func (m *GetBlobInfoRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -323,7 +327,7 @@ func (m *GetInfoRequest) validate(all bool) error {
 		switch v := interface{}(m.GetBlobId()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetInfoRequestValidationError{
+				errors = append(errors, GetBlobInfoRequestValidationError{
 					field:  "BlobId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -331,7 +335,7 @@ func (m *GetInfoRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetInfoRequestValidationError{
+				errors = append(errors, GetBlobInfoRequestValidationError{
 					field:  "BlobId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -340,7 +344,7 @@ func (m *GetInfoRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetBlobId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetInfoRequestValidationError{
+			return GetBlobInfoRequestValidationError{
 				field:  "BlobId",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -349,19 +353,19 @@ func (m *GetInfoRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetInfoRequestMultiError(errors)
+		return GetBlobInfoRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetInfoRequestMultiError is an error wrapping multiple validation errors
-// returned by GetInfoRequest.ValidateAll() if the designated constraints
+// GetBlobInfoRequestMultiError is an error wrapping multiple validation errors
+// returned by GetBlobInfoRequest.ValidateAll() if the designated constraints
 // aren't met.
-type GetInfoRequestMultiError []error
+type GetBlobInfoRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetInfoRequestMultiError) Error() string {
+func (m GetBlobInfoRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -370,11 +374,11 @@ func (m GetInfoRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetInfoRequestMultiError) AllErrors() []error { return m }
+func (m GetBlobInfoRequestMultiError) AllErrors() []error { return m }
 
-// GetInfoRequestValidationError is the validation error returned by
-// GetInfoRequest.Validate if the designated constraints aren't met.
-type GetInfoRequestValidationError struct {
+// GetBlobInfoRequestValidationError is the validation error returned by
+// GetBlobInfoRequest.Validate if the designated constraints aren't met.
+type GetBlobInfoRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -382,22 +386,24 @@ type GetInfoRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetInfoRequestValidationError) Field() string { return e.field }
+func (e GetBlobInfoRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetInfoRequestValidationError) Reason() string { return e.reason }
+func (e GetBlobInfoRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetInfoRequestValidationError) Cause() error { return e.cause }
+func (e GetBlobInfoRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetInfoRequestValidationError) Key() bool { return e.key }
+func (e GetBlobInfoRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetInfoRequestValidationError) ErrorName() string { return "GetInfoRequestValidationError" }
+func (e GetBlobInfoRequestValidationError) ErrorName() string {
+	return "GetBlobInfoRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e GetInfoRequestValidationError) Error() string {
+func (e GetBlobInfoRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -409,14 +415,14 @@ func (e GetInfoRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetInfoRequest.%s: %s%s",
+		"invalid %sGetBlobInfoRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetInfoRequestValidationError{}
+var _ error = GetBlobInfoRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -424,24 +430,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetInfoRequestValidationError{}
+} = GetBlobInfoRequestValidationError{}
 
-// Validate checks the field values on GetInfoResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *GetInfoResponse) Validate() error {
+// Validate checks the field values on GetBlobInfoResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBlobInfoResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetInfoResponse with the rules
+// ValidateAll checks the field values on GetBlobInfoResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetInfoResponseMultiError, or nil if none found.
-func (m *GetInfoResponse) ValidateAll() error {
+// GetBlobInfoResponseMultiError, or nil if none found.
+func (m *GetBlobInfoResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetInfoResponse) validate(all bool) error {
+func (m *GetBlobInfoResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -452,7 +458,7 @@ func (m *GetInfoResponse) validate(all bool) error {
 		switch v := interface{}(m.GetBlob()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetInfoResponseValidationError{
+				errors = append(errors, GetBlobInfoResponseValidationError{
 					field:  "Blob",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -460,7 +466,7 @@ func (m *GetInfoResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetInfoResponseValidationError{
+				errors = append(errors, GetBlobInfoResponseValidationError{
 					field:  "Blob",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -469,7 +475,7 @@ func (m *GetInfoResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetBlob()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetInfoResponseValidationError{
+			return GetBlobInfoResponseValidationError{
 				field:  "Blob",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -478,19 +484,19 @@ func (m *GetInfoResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return GetInfoResponseMultiError(errors)
+		return GetBlobInfoResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetInfoResponseMultiError is an error wrapping multiple validation errors
-// returned by GetInfoResponse.ValidateAll() if the designated constraints
-// aren't met.
-type GetInfoResponseMultiError []error
+// GetBlobInfoResponseMultiError is an error wrapping multiple validation
+// errors returned by GetBlobInfoResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetBlobInfoResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetInfoResponseMultiError) Error() string {
+func (m GetBlobInfoResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -499,11 +505,11 @@ func (m GetInfoResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetInfoResponseMultiError) AllErrors() []error { return m }
+func (m GetBlobInfoResponseMultiError) AllErrors() []error { return m }
 
-// GetInfoResponseValidationError is the validation error returned by
-// GetInfoResponse.Validate if the designated constraints aren't met.
-type GetInfoResponseValidationError struct {
+// GetBlobInfoResponseValidationError is the validation error returned by
+// GetBlobInfoResponse.Validate if the designated constraints aren't met.
+type GetBlobInfoResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -511,22 +517,24 @@ type GetInfoResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetInfoResponseValidationError) Field() string { return e.field }
+func (e GetBlobInfoResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetInfoResponseValidationError) Reason() string { return e.reason }
+func (e GetBlobInfoResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetInfoResponseValidationError) Cause() error { return e.cause }
+func (e GetBlobInfoResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetInfoResponseValidationError) Key() bool { return e.key }
+func (e GetBlobInfoResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetInfoResponseValidationError) ErrorName() string { return "GetInfoResponseValidationError" }
+func (e GetBlobInfoResponseValidationError) ErrorName() string {
+	return "GetBlobInfoResponseValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e GetInfoResponseValidationError) Error() string {
+func (e GetBlobInfoResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -538,14 +546,14 @@ func (e GetInfoResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetInfoResponse.%s: %s%s",
+		"invalid %sGetBlobInfoResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetInfoResponseValidationError{}
+var _ error = GetBlobInfoResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -553,4 +561,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetInfoResponseValidationError{}
+} = GetBlobInfoResponseValidationError{}

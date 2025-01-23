@@ -14,12 +14,9 @@ enum BlobType {
   BLOB_TYPE_IMAGE = 1;
   BLOB_TYPE_VIDEO = 2;
   BLOB_TYPE_AUDIO = 3;
-
-  // Additional types like can be added as needed
 }
 
-// Common blob info returned in responses
-message BlobMetadata {
+message Blob {
   common.v1.BlobId blob_id = 1;
   BlobType blob_type = 2;
 

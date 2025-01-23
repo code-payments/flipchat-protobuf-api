@@ -9,31 +9,31 @@ option objc_class_prefix = "FCPBBlobV1";
 import "common/v1/common.proto";
 import "blob/v1/model.proto";
 
-service Blob {
+service BlobService {
   // Request for a smaller/single-shot upload
-  rpc Upload (UploadRequest) returns (UploadResponse);
+  rpc Upload (UploadBlobRequest) returns (UploadBlobResponse);
 
   // Get the metadata for a previously uploaded blob
-  rpc GetInfo (GetInfoRequest) returns (GetInfoResponse);
+  rpc GetInfo (GetBlobInfoRequest) returns (GetBlobInfoResponse);
 }
 
 // Request for a smaller/single-shot upload
-message UploadRequest {
+message UploadBlobRequest {
   common.v1.UserId owner_id = 1;
   BlobType blob_type = 2;
   bytes raw_data = 3;
 }
 
 // Single-shot upload response
-message UploadResponse {
-  BlobMetadata blob = 1;
+message UploadBlobResponse {
+  Blob blob = 1;
 }
 
 // Retrieve existing blob info
-message GetInfoRequest {
+message GetBlobInfoRequest {
   common.v1.BlobId blob_id = 1;
 }
 
-message GetInfoResponse {
-  BlobMetadata blob = 1;
+message GetBlobInfoResponse {
+  Blob blob = 1;
 }

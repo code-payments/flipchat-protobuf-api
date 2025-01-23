@@ -19,143 +19,143 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Blob_Upload_FullMethodName  = "/flipchat.blob.v1.Blob/Upload"
-	Blob_GetInfo_FullMethodName = "/flipchat.blob.v1.Blob/GetInfo"
+	BlobService_Upload_FullMethodName  = "/flipchat.blob.v1.BlobService/Upload"
+	BlobService_GetInfo_FullMethodName = "/flipchat.blob.v1.BlobService/GetInfo"
 )
 
-// BlobClient is the client API for Blob service.
+// BlobServiceClient is the client API for BlobService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BlobClient interface {
+type BlobServiceClient interface {
 	// Request for a smaller/single-shot upload
-	Upload(ctx context.Context, in *UploadRequest, opts ...grpc.CallOption) (*UploadResponse, error)
+	Upload(ctx context.Context, in *UploadBlobRequest, opts ...grpc.CallOption) (*UploadBlobResponse, error)
 	// Get the metadata for a previously uploaded blob
-	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
+	GetInfo(ctx context.Context, in *GetBlobInfoRequest, opts ...grpc.CallOption) (*GetBlobInfoResponse, error)
 }
 
-type blobClient struct {
+type blobServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBlobClient(cc grpc.ClientConnInterface) BlobClient {
-	return &blobClient{cc}
+func NewBlobServiceClient(cc grpc.ClientConnInterface) BlobServiceClient {
+	return &blobServiceClient{cc}
 }
 
-func (c *blobClient) Upload(ctx context.Context, in *UploadRequest, opts ...grpc.CallOption) (*UploadResponse, error) {
+func (c *blobServiceClient) Upload(ctx context.Context, in *UploadBlobRequest, opts ...grpc.CallOption) (*UploadBlobResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UploadResponse)
-	err := c.cc.Invoke(ctx, Blob_Upload_FullMethodName, in, out, cOpts...)
+	out := new(UploadBlobResponse)
+	err := c.cc.Invoke(ctx, BlobService_Upload_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *blobClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error) {
+func (c *blobServiceClient) GetInfo(ctx context.Context, in *GetBlobInfoRequest, opts ...grpc.CallOption) (*GetBlobInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetInfoResponse)
-	err := c.cc.Invoke(ctx, Blob_GetInfo_FullMethodName, in, out, cOpts...)
+	out := new(GetBlobInfoResponse)
+	err := c.cc.Invoke(ctx, BlobService_GetInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// BlobServer is the server API for Blob service.
-// All implementations must embed UnimplementedBlobServer
+// BlobServiceServer is the server API for BlobService service.
+// All implementations must embed UnimplementedBlobServiceServer
 // for forward compatibility.
-type BlobServer interface {
+type BlobServiceServer interface {
 	// Request for a smaller/single-shot upload
-	Upload(context.Context, *UploadRequest) (*UploadResponse, error)
+	Upload(context.Context, *UploadBlobRequest) (*UploadBlobResponse, error)
 	// Get the metadata for a previously uploaded blob
-	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
-	mustEmbedUnimplementedBlobServer()
+	GetInfo(context.Context, *GetBlobInfoRequest) (*GetBlobInfoResponse, error)
+	mustEmbedUnimplementedBlobServiceServer()
 }
 
-// UnimplementedBlobServer must be embedded to have
+// UnimplementedBlobServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBlobServer struct{}
+type UnimplementedBlobServiceServer struct{}
 
-func (UnimplementedBlobServer) Upload(context.Context, *UploadRequest) (*UploadResponse, error) {
+func (UnimplementedBlobServiceServer) Upload(context.Context, *UploadBlobRequest) (*UploadBlobResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Upload not implemented")
 }
-func (UnimplementedBlobServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
+func (UnimplementedBlobServiceServer) GetInfo(context.Context, *GetBlobInfoRequest) (*GetBlobInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
 }
-func (UnimplementedBlobServer) mustEmbedUnimplementedBlobServer() {}
-func (UnimplementedBlobServer) testEmbeddedByValue()              {}
+func (UnimplementedBlobServiceServer) mustEmbedUnimplementedBlobServiceServer() {}
+func (UnimplementedBlobServiceServer) testEmbeddedByValue()                     {}
 
-// UnsafeBlobServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BlobServer will
+// UnsafeBlobServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BlobServiceServer will
 // result in compilation errors.
-type UnsafeBlobServer interface {
-	mustEmbedUnimplementedBlobServer()
+type UnsafeBlobServiceServer interface {
+	mustEmbedUnimplementedBlobServiceServer()
 }
 
-func RegisterBlobServer(s grpc.ServiceRegistrar, srv BlobServer) {
-	// If the following call pancis, it indicates UnimplementedBlobServer was
+func RegisterBlobServiceServer(s grpc.ServiceRegistrar, srv BlobServiceServer) {
+	// If the following call pancis, it indicates UnimplementedBlobServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Blob_ServiceDesc, srv)
+	s.RegisterService(&BlobService_ServiceDesc, srv)
 }
 
-func _Blob_Upload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UploadRequest)
+func _BlobService_Upload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadBlobRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BlobServer).Upload(ctx, in)
+		return srv.(BlobServiceServer).Upload(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Blob_Upload_FullMethodName,
+		FullMethod: BlobService_Upload_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BlobServer).Upload(ctx, req.(*UploadRequest))
+		return srv.(BlobServiceServer).Upload(ctx, req.(*UploadBlobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Blob_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetInfoRequest)
+func _BlobService_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBlobInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BlobServer).GetInfo(ctx, in)
+		return srv.(BlobServiceServer).GetInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Blob_GetInfo_FullMethodName,
+		FullMethod: BlobService_GetInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BlobServer).GetInfo(ctx, req.(*GetInfoRequest))
+		return srv.(BlobServiceServer).GetInfo(ctx, req.(*GetBlobInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Blob_ServiceDesc is the grpc.ServiceDesc for Blob service.
+// BlobService_ServiceDesc is the grpc.ServiceDesc for BlobService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Blob_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "flipchat.blob.v1.Blob",
-	HandlerType: (*BlobServer)(nil),
+var BlobService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "flipchat.blob.v1.BlobService",
+	HandlerType: (*BlobServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Upload",
-			Handler:    _Blob_Upload_Handler,
+			Handler:    _BlobService_Upload_Handler,
 		},
 		{
 			MethodName: "GetInfo",
-			Handler:    _Blob_GetInfo_Handler,
+			Handler:    _BlobService_GetInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -35,22 +35,21 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on BlobMetadata with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *BlobMetadata) Validate() error {
+// Validate checks the field values on Blob with the rules defined in the proto
+// definition for this message. If any rules are violated, the first error
+// encountered is returned, or nil if there are no violations.
+func (m *Blob) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on BlobMetadata with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in BlobMetadataMultiError, or
-// nil if none found.
-func (m *BlobMetadata) ValidateAll() error {
+// ValidateAll checks the field values on Blob with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in BlobMultiError, or nil if none found.
+func (m *Blob) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *BlobMetadata) validate(all bool) error {
+func (m *Blob) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -61,7 +60,7 @@ func (m *BlobMetadata) validate(all bool) error {
 		switch v := interface{}(m.GetBlobId()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BlobMetadataValidationError{
+				errors = append(errors, BlobValidationError{
 					field:  "BlobId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -69,7 +68,7 @@ func (m *BlobMetadata) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, BlobMetadataValidationError{
+				errors = append(errors, BlobValidationError{
 					field:  "BlobId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -78,7 +77,7 @@ func (m *BlobMetadata) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetBlobId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return BlobMetadataValidationError{
+			return BlobValidationError{
 				field:  "BlobId",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -92,7 +91,7 @@ func (m *BlobMetadata) validate(all bool) error {
 		switch v := interface{}(m.GetOwnerId()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BlobMetadataValidationError{
+				errors = append(errors, BlobValidationError{
 					field:  "OwnerId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -100,7 +99,7 @@ func (m *BlobMetadata) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, BlobMetadataValidationError{
+				errors = append(errors, BlobValidationError{
 					field:  "OwnerId",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -109,7 +108,7 @@ func (m *BlobMetadata) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOwnerId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return BlobMetadataValidationError{
+			return BlobValidationError{
 				field:  "OwnerId",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -123,7 +122,7 @@ func (m *BlobMetadata) validate(all bool) error {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BlobMetadataValidationError{
+				errors = append(errors, BlobValidationError{
 					field:  "CreatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -131,7 +130,7 @@ func (m *BlobMetadata) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, BlobMetadataValidationError{
+				errors = append(errors, BlobValidationError{
 					field:  "CreatedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -140,7 +139,7 @@ func (m *BlobMetadata) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return BlobMetadataValidationError{
+			return BlobValidationError{
 				field:  "CreatedAt",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -149,18 +148,18 @@ func (m *BlobMetadata) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return BlobMetadataMultiError(errors)
+		return BlobMultiError(errors)
 	}
 
 	return nil
 }
 
-// BlobMetadataMultiError is an error wrapping multiple validation errors
-// returned by BlobMetadata.ValidateAll() if the designated constraints aren't met.
-type BlobMetadataMultiError []error
+// BlobMultiError is an error wrapping multiple validation errors returned by
+// Blob.ValidateAll() if the designated constraints aren't met.
+type BlobMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m BlobMetadataMultiError) Error() string {
+func (m BlobMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -169,11 +168,11 @@ func (m BlobMetadataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m BlobMetadataMultiError) AllErrors() []error { return m }
+func (m BlobMultiError) AllErrors() []error { return m }
 
-// BlobMetadataValidationError is the validation error returned by
-// BlobMetadata.Validate if the designated constraints aren't met.
-type BlobMetadataValidationError struct {
+// BlobValidationError is the validation error returned by Blob.Validate if the
+// designated constraints aren't met.
+type BlobValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -181,22 +180,22 @@ type BlobMetadataValidationError struct {
 }
 
 // Field function returns field value.
-func (e BlobMetadataValidationError) Field() string { return e.field }
+func (e BlobValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e BlobMetadataValidationError) Reason() string { return e.reason }
+func (e BlobValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e BlobMetadataValidationError) Cause() error { return e.cause }
+func (e BlobValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e BlobMetadataValidationError) Key() bool { return e.key }
+func (e BlobValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e BlobMetadataValidationError) ErrorName() string { return "BlobMetadataValidationError" }
+func (e BlobValidationError) ErrorName() string { return "BlobValidationError" }
 
 // Error satisfies the builtin error interface
-func (e BlobMetadataValidationError) Error() string {
+func (e BlobValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -208,14 +207,14 @@ func (e BlobMetadataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sBlobMetadata.%s: %s%s",
+		"invalid %sBlob.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = BlobMetadataValidationError{}
+var _ error = BlobValidationError{}
 
 var _ interface {
 	Field() string
@@ -223,4 +222,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = BlobMetadataValidationError{}
+} = BlobValidationError{}
