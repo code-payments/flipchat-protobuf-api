@@ -749,6 +749,7 @@ type SendMessageRequest struct {
 	//   - ReplyContent
 	//   - TipContent
 	//   - DeleteMessageContent
+	//   - ReviewContent
 	Content []*Content `protobuf:"bytes,2,rep,name=content,proto3" json:"content,omitempty"`
 	Auth    *v1.Auth   `protobuf:"bytes,3,opt,name=auth,proto3" json:"auth,omitempty"`
 	// Intent ID for message contents that require a payment

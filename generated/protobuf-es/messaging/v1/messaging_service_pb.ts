@@ -491,6 +491,7 @@ export class SendMessageRequest extends Message<SendMessageRequest> {
    *  - ReplyContent
    *  - TipContent
    *  - DeleteMessageContent
+   *  - ReviewContent
    *
    * @generated from field: repeated flipchat.messaging.v1.Content content = 2;
    */
