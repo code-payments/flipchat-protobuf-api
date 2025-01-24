@@ -375,6 +375,12 @@ export class Content extends Message$1<Content> {
      */
     value: DeleteMessageContent;
     case: "deleted";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.ReviewContent review = 9;
+     */
+    value: ReviewContent;
+    case: "review";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<Content>) {
@@ -391,6 +397,7 @@ export class Content extends Message$1<Content> {
     { no: 6, name: "reply", kind: "message", T: ReplyContent, oneof: "type" },
     { no: 7, name: "tip", kind: "message", T: TipContent, oneof: "type" },
     { no: 8, name: "deleted", kind: "message", T: DeleteMessageContent, oneof: "type" },
+    { no: 9, name: "review", kind: "message", T: ReviewContent, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content {
@@ -671,6 +678,55 @@ export class DeleteMessageContent extends Message$1<DeleteMessageContent> {
 
   static equals(a: DeleteMessageContent | PlainMessage<DeleteMessageContent> | undefined, b: DeleteMessageContent | PlainMessage<DeleteMessageContent> | undefined): boolean {
     return proto3.util.equals(DeleteMessageContent, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.ReviewContent
+ */
+export class ReviewContent extends Message$1<ReviewContent> {
+  /**
+   * The message ID of the message that is being reviewed. Currently, only
+   * off stage messages can be reviewed
+   *
+   * @generated from field: flipchat.messaging.v1.MessageId original_message_id = 1;
+   */
+  originalMessageId?: MessageId;
+
+  /**
+   * Whether the message has been approved. In the event of multiple reviews,
+   * the first message in the message log takes priority.
+   *
+   * @generated from field: bool is_approved = 2;
+   */
+  isApproved = false;
+
+  constructor(data?: PartialMessage<ReviewContent>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.ReviewContent";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "original_message_id", kind: "message", T: MessageId },
+    { no: 2, name: "is_approved", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReviewContent {
+    return new ReviewContent().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReviewContent {
+    return new ReviewContent().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReviewContent {
+    return new ReviewContent().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ReviewContent | PlainMessage<ReviewContent> | undefined, b: ReviewContent | PlainMessage<ReviewContent> | undefined): boolean {
+    return proto3.util.equals(ReviewContent, a, b);
   }
 }
 
