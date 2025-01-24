@@ -93,6 +93,20 @@ message Content {
         ReplyContent                  reply                   = 6;
         TipContent                    tip                     = 7;
         DeleteMessageContent          deleted                 = 8;
+
+        // (9 - 19 Reserved for future use)
+
+        ImageContent                  image                   = 20; // Image with optional caption
+
+        // (21 - 29 Reserved for future use)
+
+        VideoContent                  video                   = 30; // Not implemented (placeholder)
+
+        // (31 - 39 Reserved for future use)
+
+        AudioContent                  audio                   = 40; // Not implemented (placeholder)
+
+        // (41 - 49 Reserved for future use)
     }
 
     reserved 3; // ExchangeDataContent
@@ -154,4 +168,28 @@ message TipContent {
 message DeleteMessageContent {
     // The message ID of the message that was deleted
     MessageId original_message_id = 1  [(validate.rules).message.required = true];
+}
+
+// Image content
+message ImageContent {
+    // The blob_id of the previously uploaded image
+    common.v1.BlobId blob_id = 1 [(validate.rules).message.required = true];
+    
+    // The caption text for the image (optional)
+    string caption_text = 2 [(validate.rules).string = {
+        min_len: 0
+        max_len: 1024
+    }];
+}
+
+// Video content
+message VideoContent {
+    // The blob_id of the previously uploaded video
+    common.v1.BlobId blob_id = 1 [(validate.rules).message.required = true];
+}
+
+// Audio content
+message AudioContent {
+    // The blob_id of the previously uploaded audio
+    common.v1.BlobId blob_id = 1 [(validate.rules).message.required = true];
 }
