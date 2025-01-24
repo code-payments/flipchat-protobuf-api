@@ -1653,6 +1653,317 @@ var _ interface {
 	ErrorName() string
 } = QueryOptionsValidationError{}
 
+// Validate checks the field values on ImageInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ImageInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ImageInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ImageInfoMultiError, or nil
+// if none found.
+func (m *ImageInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ImageInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Width
+
+	// no validation rules for Height
+
+	// no validation rules for BlurHash
+
+	if len(errors) > 0 {
+		return ImageInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// ImageInfoMultiError is an error wrapping multiple validation errors returned
+// by ImageInfo.ValidateAll() if the designated constraints aren't met.
+type ImageInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ImageInfoMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ImageInfoMultiError) AllErrors() []error { return m }
+
+// ImageInfoValidationError is the validation error returned by
+// ImageInfo.Validate if the designated constraints aren't met.
+type ImageInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ImageInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ImageInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ImageInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ImageInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ImageInfoValidationError) ErrorName() string { return "ImageInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ImageInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sImageInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ImageInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ImageInfoValidationError{}
+
+// Validate checks the field values on VideoInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *VideoInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VideoInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in VideoInfoMultiError, or nil
+// if none found.
+func (m *VideoInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VideoInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Width
+
+	// no validation rules for Height
+
+	// no validation rules for Duration
+
+	if len(errors) > 0 {
+		return VideoInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// VideoInfoMultiError is an error wrapping multiple validation errors returned
+// by VideoInfo.ValidateAll() if the designated constraints aren't met.
+type VideoInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VideoInfoMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VideoInfoMultiError) AllErrors() []error { return m }
+
+// VideoInfoValidationError is the validation error returned by
+// VideoInfo.Validate if the designated constraints aren't met.
+type VideoInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VideoInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VideoInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VideoInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VideoInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VideoInfoValidationError) ErrorName() string { return "VideoInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e VideoInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVideoInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VideoInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VideoInfoValidationError{}
+
+// Validate checks the field values on AudioInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AudioInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AudioInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AudioInfoMultiError, or nil
+// if none found.
+func (m *AudioInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AudioInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Duration
+
+	if len(errors) > 0 {
+		return AudioInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// AudioInfoMultiError is an error wrapping multiple validation errors returned
+// by AudioInfo.ValidateAll() if the designated constraints aren't met.
+type AudioInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AudioInfoMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AudioInfoMultiError) AllErrors() []error { return m }
+
+// AudioInfoValidationError is the validation error returned by
+// AudioInfo.Validate if the designated constraints aren't met.
+type AudioInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AudioInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AudioInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AudioInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AudioInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AudioInfoValidationError) ErrorName() string { return "AudioInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AudioInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAudioInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AudioInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AudioInfoValidationError{}
+
 // Validate checks the field values on Auth_KeyPair with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.

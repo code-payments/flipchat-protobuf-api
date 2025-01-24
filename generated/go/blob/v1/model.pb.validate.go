@@ -119,6 +119,35 @@ func (m *Blob) validate(all bool) error {
 	// no validation rules for S3Url
 
 	if all {
+		switch v := interface{}(m.GetMetadata()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BlobValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BlobValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMetadata()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BlobValidationError{
+				field:  "Metadata",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
@@ -223,3 +252,233 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BlobValidationError{}
+
+// Validate checks the field values on Blob_Metadata with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Blob_Metadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Blob_Metadata with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in Blob_MetadataMultiError, or
+// nil if none found.
+func (m *Blob_Metadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Blob_Metadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Version
+
+	switch v := m.Info.(type) {
+	case *Blob_Metadata_Image:
+		if v == nil {
+			err := Blob_MetadataValidationError{
+				field:  "Info",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetImage()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, Blob_MetadataValidationError{
+						field:  "Image",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, Blob_MetadataValidationError{
+						field:  "Image",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetImage()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return Blob_MetadataValidationError{
+					field:  "Image",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Blob_Metadata_Video:
+		if v == nil {
+			err := Blob_MetadataValidationError{
+				field:  "Info",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetVideo()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, Blob_MetadataValidationError{
+						field:  "Video",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, Blob_MetadataValidationError{
+						field:  "Video",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetVideo()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return Blob_MetadataValidationError{
+					field:  "Video",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Blob_Metadata_Audio:
+		if v == nil {
+			err := Blob_MetadataValidationError{
+				field:  "Info",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetAudio()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, Blob_MetadataValidationError{
+						field:  "Audio",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, Blob_MetadataValidationError{
+						field:  "Audio",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAudio()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return Blob_MetadataValidationError{
+					field:  "Audio",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+
+	if len(errors) > 0 {
+		return Blob_MetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// Blob_MetadataMultiError is an error wrapping multiple validation errors
+// returned by Blob_Metadata.ValidateAll() if the designated constraints
+// aren't met.
+type Blob_MetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Blob_MetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Blob_MetadataMultiError) AllErrors() []error { return m }
+
+// Blob_MetadataValidationError is the validation error returned by
+// Blob_Metadata.Validate if the designated constraints aren't met.
+type Blob_MetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Blob_MetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Blob_MetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Blob_MetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Blob_MetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Blob_MetadataValidationError) ErrorName() string { return "Blob_MetadataValidationError" }
+
+// Error satisfies the builtin error interface
+func (e Blob_MetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBlob_Metadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Blob_MetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Blob_MetadataValidationError{}

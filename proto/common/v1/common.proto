@@ -144,3 +144,19 @@ enum Platform {
     APPLE   = 1;
     GOOGLE  = 2;
 }
+
+message ImageInfo {
+  int32 width = 1;
+  int32 height = 2;
+  string blur_hash = 3;
+}
+
+message VideoInfo {
+  int32 width = 1;
+  int32 height = 2;
+  int32 duration = 3;
+}
+
+message AudioInfo {
+  int32 duration = 1;
+}

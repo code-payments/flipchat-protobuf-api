@@ -22,7 +22,18 @@ message Blob {
 
   common.v1.UserId owner_id = 3;
   string s3_url = 4;
+  Metadata metadata = 5;
 
-  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp created_at = 6;
+
+  message Metadata {
+    int32 version = 1;
+
+    oneof info {
+      common.v1.ImageInfo image = 2;
+      common.v1.VideoInfo video = 3;
+      common.v1.AudioInfo audio = 4;
+    }
+  }
 }
 
