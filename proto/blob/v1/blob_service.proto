@@ -8,6 +8,7 @@ option objc_class_prefix = "FCPBBlobV1";
 
 import "common/v1/common.proto";
 import "blob/v1/model.proto";
+import "validate/validate.proto";
 
 service BlobService {
   // Request for a smaller/single-shot upload
@@ -19,9 +20,16 @@ service BlobService {
 
 // Request for a smaller/single-shot upload
 message UploadBlobRequest {
-  common.v1.UserId owner_id = 1;
+  common.v1.UserId owner_id = 1 [(validate.rules).message.required = true];
   BlobType blob_type = 2;
-  bytes raw_data = 3;
+
+  // 4Mb max (keep in mind that grpc messages are limited to 4Mb total)
+  bytes raw_data = 3 [(validate.rules).bytes = {
+        min_len: 1
+        max_len: 4194304 
+    }];
+
+  common.v1.Auth auth = 4 [(validate.rules).message.required = true];
 }
 
 // Single-shot upload response
@@ -31,7 +39,7 @@ message UploadBlobResponse {
 
 // Retrieve existing blob info
 message GetBlobInfoRequest {
-  common.v1.BlobId blob_id = 1;
+  common.v1.BlobId blob_id = 1 [(validate.rules).message.required = true];
 }
 
 message GetBlobInfoResponse {

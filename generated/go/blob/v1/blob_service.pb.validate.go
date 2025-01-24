@@ -57,6 +57,17 @@ func (m *UploadBlobRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.GetOwnerId() == nil {
+		err := UploadBlobRequestValidationError{
+			field:  "OwnerId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if all {
 		switch v := interface{}(m.GetOwnerId()).(type) {
 		case interface{ ValidateAll() error }:
@@ -88,7 +99,56 @@ func (m *UploadBlobRequest) validate(all bool) error {
 
 	// no validation rules for BlobType
 
-	// no validation rules for RawData
+	if l := len(m.GetRawData()); l < 1 || l > 4194304 {
+		err := UploadBlobRequestValidationError{
+			field:  "RawData",
+			reason: "value length must be between 1 and 4194304 bytes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAuth() == nil {
+		err := UploadBlobRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UploadBlobRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UploadBlobRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UploadBlobRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return UploadBlobRequestMultiError(errors)
@@ -322,6 +382,17 @@ func (m *GetBlobInfoRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if m.GetBlobId() == nil {
+		err := GetBlobInfoRequestValidationError{
+			field:  "BlobId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if all {
 		switch v := interface{}(m.GetBlobId()).(type) {
