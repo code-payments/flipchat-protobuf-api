@@ -643,3 +643,51 @@ proto3.util.setEnumType(QueryOptions_Order, "flipchat.common.v1.QueryOptions.Ord
   { no: 1, name: "DESC" },
 ]);
 
+/**
+ * @generated from message flipchat.common.v1.LocalizedButton
+ */
+export class LocalizedButton extends Message<LocalizedButton> {
+  /**
+   * Localization key that should be translated on client, or a server-side
+   * translated piece of text that should be displayed on the button
+   *
+   * @generated from field: string key_or_text = 1;
+   */
+  keyOrText = "";
+
+  /**
+   * Link that is navigated to when the button is pressed
+   *
+   * @generated from field: string link = 3;
+   */
+  link = "";
+
+  constructor(data?: PartialMessage<LocalizedButton>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.common.v1.LocalizedButton";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "key_or_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "link", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LocalizedButton {
+    return new LocalizedButton().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LocalizedButton {
+    return new LocalizedButton().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LocalizedButton {
+    return new LocalizedButton().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LocalizedButton | PlainMessage<LocalizedButton> | undefined, b: LocalizedButton | PlainMessage<LocalizedButton> | undefined): boolean {
+    return proto3.util.equals(LocalizedButton, a, b);
+  }
+}
+

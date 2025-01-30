@@ -138,3 +138,21 @@ enum Platform {
     APPLE   = 1;
     GOOGLE  = 2;
 }
+
+message LocalizedButton {
+    // Localization key that should be translated on client, or a server-side
+    // translated piece of text that should be displayed on the button
+    string key_or_text = 1 [(validate.rules).string = {
+        min_len: 1
+        max_len: 1024
+    }];
+
+    // todo: define arguments list
+    reserved 2;
+
+    // Link that is navigated to when the button is pressed
+    string link = 3 [(validate.rules).string = {
+        min_len: 1
+        max_len: 1024
+    }];
+}

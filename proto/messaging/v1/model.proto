@@ -91,13 +91,14 @@ message Content {
     oneof type {
         option (validate.required) = true;
 
-        TextContent                   text                    = 1;
-        LocalizedAnnouncementContent  localized_announcement  = 2;
-        ReactionContent               reaction                = 5;
-        ReplyContent                  reply                   = 6;
-        TipContent                    tip                     = 7;
-        DeleteMessageContent          deleted                 = 8;
-        ReviewContent                 review                  = 9;
+        TextContent                    text                      = 1;
+        LocalizedAnnouncementContent   localized_announcement    = 2;
+        ReactionContent                reaction                  = 5;
+        ReplyContent                   reply                     = 6;
+        TipContent                     tip                       = 7;
+        DeleteMessageContent           deleted                   = 8;
+        ReviewContent                  review                    = 9;
+        LocalizedAnnouncementContentV2 localized_announcement_v2 = 10;
     }
 
     reserved 3; // ExchangeDataContent
@@ -115,13 +116,30 @@ message TextContent {
 // LocalizedAnnouncementContent content is an annoucement that is either a
 // localization key that should be translated on client, or a server-side
 // translated piece of text.
+//
+// Deprecated: Use v2 instead
 message LocalizedAnnouncementContent {
     string key_or_text = 1 [(validate.rules).string = {
         min_len: 1
         max_len: 1024
     }];
+}
 
-    // todo: define arguments
+// LocalizedAnnouncementContentV2 content is an annoucement that is either a
+// localization key that should be translated on client, or a server-side
+// translated piece of text. It also contains other metadata, like buttons for
+// CTAs.
+message LocalizedAnnouncementContentV2 {
+    string key_or_text = 1 [(validate.rules).string = {
+        min_len: 1
+        max_len: 1024
+    }];
+
+    // todo: define arguments list
+    reserved 2;
+
+    // Optional button to display at the end of the announcement
+    common.v1.LocalizedButton button = 3;
 }
 
 // Emoji reaction to another message

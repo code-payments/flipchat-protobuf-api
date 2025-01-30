@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message as Message$1, proto3, Timestamp } from "@bufbuild/protobuf";
-import { PaymentAmount, UserId } from "../../common/v1/common_pb";
+import { LocalizedButton, PaymentAmount, UserId } from "../../common/v1/common_pb";
 
 /**
  * @generated from message flipchat.messaging.v1.MessageId
@@ -381,6 +381,12 @@ export class Content extends Message$1<Content> {
      */
     value: ReviewContent;
     case: "review";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.LocalizedAnnouncementContentV2 localized_announcement_v2 = 10;
+     */
+    value: LocalizedAnnouncementContentV2;
+    case: "localizedAnnouncementV2";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<Content>) {
@@ -398,6 +404,7 @@ export class Content extends Message$1<Content> {
     { no: 7, name: "tip", kind: "message", T: TipContent, oneof: "type" },
     { no: 8, name: "deleted", kind: "message", T: DeleteMessageContent, oneof: "type" },
     { no: 9, name: "review", kind: "message", T: ReviewContent, oneof: "type" },
+    { no: 10, name: "localized_announcement_v2", kind: "message", T: LocalizedAnnouncementContentV2, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content {
@@ -461,6 +468,8 @@ export class TextContent extends Message$1<TextContent> {
  * localization key that should be translated on client, or a server-side
  * translated piece of text.
  *
+ * Deprecated: Use v2 instead
+ *
  * @generated from message flipchat.messaging.v1.LocalizedAnnouncementContent
  */
 export class LocalizedAnnouncementContent extends Message$1<LocalizedAnnouncementContent> {
@@ -494,6 +503,56 @@ export class LocalizedAnnouncementContent extends Message$1<LocalizedAnnouncemen
 
   static equals(a: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined, b: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined): boolean {
     return proto3.util.equals(LocalizedAnnouncementContent, a, b);
+  }
+}
+
+/**
+ * LocalizedAnnouncementContentV2 content is an annoucement that is either a
+ * localization key that should be translated on client, or a server-side
+ * translated piece of text. It also contains other metadata, like buttons for
+ * CTAs.
+ *
+ * @generated from message flipchat.messaging.v1.LocalizedAnnouncementContentV2
+ */
+export class LocalizedAnnouncementContentV2 extends Message$1<LocalizedAnnouncementContentV2> {
+  /**
+   * @generated from field: string key_or_text = 1;
+   */
+  keyOrText = "";
+
+  /**
+   * Optional button to display at the end of the announcement
+   *
+   * @generated from field: flipchat.common.v1.LocalizedButton button = 3;
+   */
+  button?: LocalizedButton;
+
+  constructor(data?: PartialMessage<LocalizedAnnouncementContentV2>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.LocalizedAnnouncementContentV2";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "key_or_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "button", kind: "message", T: LocalizedButton },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LocalizedAnnouncementContentV2 {
+    return new LocalizedAnnouncementContentV2().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LocalizedAnnouncementContentV2 {
+    return new LocalizedAnnouncementContentV2().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LocalizedAnnouncementContentV2 {
+    return new LocalizedAnnouncementContentV2().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LocalizedAnnouncementContentV2 | PlainMessage<LocalizedAnnouncementContentV2> | undefined, b: LocalizedAnnouncementContentV2 | PlainMessage<LocalizedAnnouncementContentV2> | undefined): boolean {
+    return proto3.util.equals(LocalizedAnnouncementContentV2, a, b);
   }
 }
 

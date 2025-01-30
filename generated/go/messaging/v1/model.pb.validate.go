@@ -1270,6 +1270,48 @@ func (m *Content) validate(all bool) error {
 			}
 		}
 
+	case *Content_LocalizedAnnouncementV2:
+		if v == nil {
+			err := ContentValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetLocalizedAnnouncementV2()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "LocalizedAnnouncementV2",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "LocalizedAnnouncementV2",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetLocalizedAnnouncementV2()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ContentValidationError{
+					field:  "LocalizedAnnouncementV2",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		_ = v // ensures v is used
 	}
@@ -1584,6 +1626,149 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LocalizedAnnouncementContentValidationError{}
+
+// Validate checks the field values on LocalizedAnnouncementContentV2 with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *LocalizedAnnouncementContentV2) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LocalizedAnnouncementContentV2 with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// LocalizedAnnouncementContentV2MultiError, or nil if none found.
+func (m *LocalizedAnnouncementContentV2) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LocalizedAnnouncementContentV2) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := utf8.RuneCountInString(m.GetKeyOrText()); l < 1 || l > 1024 {
+		err := LocalizedAnnouncementContentV2ValidationError{
+			field:  "KeyOrText",
+			reason: "value length must be between 1 and 1024 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetButton()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LocalizedAnnouncementContentV2ValidationError{
+					field:  "Button",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LocalizedAnnouncementContentV2ValidationError{
+					field:  "Button",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetButton()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LocalizedAnnouncementContentV2ValidationError{
+				field:  "Button",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return LocalizedAnnouncementContentV2MultiError(errors)
+	}
+
+	return nil
+}
+
+// LocalizedAnnouncementContentV2MultiError is an error wrapping multiple
+// validation errors returned by LocalizedAnnouncementContentV2.ValidateAll()
+// if the designated constraints aren't met.
+type LocalizedAnnouncementContentV2MultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LocalizedAnnouncementContentV2MultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LocalizedAnnouncementContentV2MultiError) AllErrors() []error { return m }
+
+// LocalizedAnnouncementContentV2ValidationError is the validation error
+// returned by LocalizedAnnouncementContentV2.Validate if the designated
+// constraints aren't met.
+type LocalizedAnnouncementContentV2ValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LocalizedAnnouncementContentV2ValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LocalizedAnnouncementContentV2ValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LocalizedAnnouncementContentV2ValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LocalizedAnnouncementContentV2ValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LocalizedAnnouncementContentV2ValidationError) ErrorName() string {
+	return "LocalizedAnnouncementContentV2ValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LocalizedAnnouncementContentV2ValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLocalizedAnnouncementContentV2.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LocalizedAnnouncementContentV2ValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LocalizedAnnouncementContentV2ValidationError{}
 
 // Validate checks the field values on ReactionContent with the rules defined
 // in the proto definition for this message. If any rules are violated, the
