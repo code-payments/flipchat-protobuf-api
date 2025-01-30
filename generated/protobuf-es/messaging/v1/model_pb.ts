@@ -596,7 +596,7 @@ export class ActionableAnnouncementContent_Action extends Message$1<ActionableAn
 }
 
 /**
- * Displays a button to share a link to a rom
+ * Displays a button to share a link to a room
  *
  * @generated from message flipchat.messaging.v1.ActionableAnnouncementContent.Action.ShareRoomLink
  */

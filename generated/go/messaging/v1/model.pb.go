@@ -1063,7 +1063,7 @@ type ActionableAnnouncementContent_Action_ShareRoomLink_ struct {
 func (*ActionableAnnouncementContent_Action_ShareRoomLink_) isActionableAnnouncementContent_Action_Type() {
 }
 
-// Displays a button to share a link to a rom
+// Displays a button to share a link to a room
 type ActionableAnnouncementContent_Action_ShareRoomLink struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

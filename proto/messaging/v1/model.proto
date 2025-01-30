@@ -147,7 +147,7 @@ message ActionableAnnouncementContent {
             ShareRoomLink share_room_link = 1;
         }
 
-        // Displays a button to share a link to a rom
+        // Displays a button to share a link to a room
         message ShareRoomLink {
         }
     }
