@@ -381,6 +381,12 @@ export class Content extends Message$1<Content> {
      */
     value: ReviewContent;
     case: "review";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.ActionableAnnouncementContent actionable_announcement = 10;
+     */
+    value: ActionableAnnouncementContent;
+    case: "actionableAnnouncement";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<Content>) {
@@ -398,6 +404,7 @@ export class Content extends Message$1<Content> {
     { no: 7, name: "tip", kind: "message", T: TipContent, oneof: "type" },
     { no: 8, name: "deleted", kind: "message", T: DeleteMessageContent, oneof: "type" },
     { no: 9, name: "review", kind: "message", T: ReviewContent, oneof: "type" },
+    { no: 10, name: "actionable_announcement", kind: "message", T: ActionableAnnouncementContent, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Content {
@@ -494,6 +501,130 @@ export class LocalizedAnnouncementContent extends Message$1<LocalizedAnnouncemen
 
   static equals(a: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined, b: LocalizedAnnouncementContent | PlainMessage<LocalizedAnnouncementContent> | undefined): boolean {
     return proto3.util.equals(LocalizedAnnouncementContent, a, b);
+  }
+}
+
+/**
+ * ActionableAnnouncementContent is like LocalizedAnnouncementContent, but
+ * contains additional metadata for actions
+ *
+ * @generated from message flipchat.messaging.v1.ActionableAnnouncementContent
+ */
+export class ActionableAnnouncementContent extends Message$1<ActionableAnnouncementContent> {
+  /**
+   * @generated from field: string key_or_text = 1;
+   */
+  keyOrText = "";
+
+  /**
+   * An action that can be taken by a user
+   *
+   * @generated from field: flipchat.messaging.v1.ActionableAnnouncementContent.Action action = 3;
+   */
+  action?: ActionableAnnouncementContent_Action;
+
+  constructor(data?: PartialMessage<ActionableAnnouncementContent>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.ActionableAnnouncementContent";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "key_or_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "action", kind: "message", T: ActionableAnnouncementContent_Action },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ActionableAnnouncementContent {
+    return new ActionableAnnouncementContent().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ActionableAnnouncementContent {
+    return new ActionableAnnouncementContent().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ActionableAnnouncementContent {
+    return new ActionableAnnouncementContent().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ActionableAnnouncementContent | PlainMessage<ActionableAnnouncementContent> | undefined, b: ActionableAnnouncementContent | PlainMessage<ActionableAnnouncementContent> | undefined): boolean {
+    return proto3.util.equals(ActionableAnnouncementContent, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.ActionableAnnouncementContent.Action
+ */
+export class ActionableAnnouncementContent_Action extends Message$1<ActionableAnnouncementContent_Action> {
+  /**
+   * @generated from oneof flipchat.messaging.v1.ActionableAnnouncementContent.Action.type
+   */
+  type: {
+    /**
+     * @generated from field: flipchat.messaging.v1.ActionableAnnouncementContent.Action.ShareRoomLink share_room_link = 1;
+     */
+    value: ActionableAnnouncementContent_Action_ShareRoomLink;
+    case: "shareRoomLink";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<ActionableAnnouncementContent_Action>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.ActionableAnnouncementContent.Action";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "share_room_link", kind: "message", T: ActionableAnnouncementContent_Action_ShareRoomLink, oneof: "type" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ActionableAnnouncementContent_Action {
+    return new ActionableAnnouncementContent_Action().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ActionableAnnouncementContent_Action {
+    return new ActionableAnnouncementContent_Action().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ActionableAnnouncementContent_Action {
+    return new ActionableAnnouncementContent_Action().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ActionableAnnouncementContent_Action | PlainMessage<ActionableAnnouncementContent_Action> | undefined, b: ActionableAnnouncementContent_Action | PlainMessage<ActionableAnnouncementContent_Action> | undefined): boolean {
+    return proto3.util.equals(ActionableAnnouncementContent_Action, a, b);
+  }
+}
+
+/**
+ * Displays a button to share a link to a room
+ *
+ * @generated from message flipchat.messaging.v1.ActionableAnnouncementContent.Action.ShareRoomLink
+ */
+export class ActionableAnnouncementContent_Action_ShareRoomLink extends Message$1<ActionableAnnouncementContent_Action_ShareRoomLink> {
+  constructor(data?: PartialMessage<ActionableAnnouncementContent_Action_ShareRoomLink>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.ActionableAnnouncementContent.Action.ShareRoomLink";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ActionableAnnouncementContent_Action_ShareRoomLink {
+    return new ActionableAnnouncementContent_Action_ShareRoomLink().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ActionableAnnouncementContent_Action_ShareRoomLink {
+    return new ActionableAnnouncementContent_Action_ShareRoomLink().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ActionableAnnouncementContent_Action_ShareRoomLink {
+    return new ActionableAnnouncementContent_Action_ShareRoomLink().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ActionableAnnouncementContent_Action_ShareRoomLink | PlainMessage<ActionableAnnouncementContent_Action_ShareRoomLink> | undefined, b: ActionableAnnouncementContent_Action_ShareRoomLink | PlainMessage<ActionableAnnouncementContent_Action_ShareRoomLink> | undefined): boolean {
+    return proto3.util.equals(ActionableAnnouncementContent_Action_ShareRoomLink, a, b);
   }
 }
 

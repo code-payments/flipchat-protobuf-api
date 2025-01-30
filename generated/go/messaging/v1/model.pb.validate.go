@@ -1270,6 +1270,48 @@ func (m *Content) validate(all bool) error {
 			}
 		}
 
+	case *Content_ActionableAnnouncement:
+		if v == nil {
+			err := ContentValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetActionableAnnouncement()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "ActionableAnnouncement",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ContentValidationError{
+						field:  "ActionableAnnouncement",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetActionableAnnouncement()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ContentValidationError{
+					field:  "ActionableAnnouncement",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		_ = v // ensures v is used
 	}
@@ -1584,6 +1626,160 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LocalizedAnnouncementContentValidationError{}
+
+// Validate checks the field values on ActionableAnnouncementContent with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ActionableAnnouncementContent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActionableAnnouncementContent with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ActionableAnnouncementContentMultiError, or nil if none found.
+func (m *ActionableAnnouncementContent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActionableAnnouncementContent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := utf8.RuneCountInString(m.GetKeyOrText()); l < 1 || l > 1024 {
+		err := ActionableAnnouncementContentValidationError{
+			field:  "KeyOrText",
+			reason: "value length must be between 1 and 1024 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAction() == nil {
+		err := ActionableAnnouncementContentValidationError{
+			field:  "Action",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAction()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ActionableAnnouncementContentValidationError{
+					field:  "Action",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ActionableAnnouncementContentValidationError{
+					field:  "Action",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAction()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ActionableAnnouncementContentValidationError{
+				field:  "Action",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ActionableAnnouncementContentMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActionableAnnouncementContentMultiError is an error wrapping multiple
+// validation errors returned by ActionableAnnouncementContent.ValidateAll()
+// if the designated constraints aren't met.
+type ActionableAnnouncementContentMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActionableAnnouncementContentMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActionableAnnouncementContentMultiError) AllErrors() []error { return m }
+
+// ActionableAnnouncementContentValidationError is the validation error
+// returned by ActionableAnnouncementContent.Validate if the designated
+// constraints aren't met.
+type ActionableAnnouncementContentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActionableAnnouncementContentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActionableAnnouncementContentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActionableAnnouncementContentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActionableAnnouncementContentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActionableAnnouncementContentValidationError) ErrorName() string {
+	return "ActionableAnnouncementContentValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ActionableAnnouncementContentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActionableAnnouncementContent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActionableAnnouncementContentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActionableAnnouncementContentValidationError{}
 
 // Validate checks the field values on ReactionContent with the rules defined
 // in the proto definition for this message. If any rules are violated, the
@@ -2348,3 +2544,280 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ReviewContentValidationError{}
+
+// Validate checks the field values on ActionableAnnouncementContent_Action
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ActionableAnnouncementContent_Action) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ActionableAnnouncementContent_Action
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ActionableAnnouncementContent_ActionMultiError, or nil if none found.
+func (m *ActionableAnnouncementContent_Action) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActionableAnnouncementContent_Action) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	oneofTypePresent := false
+	switch v := m.Type.(type) {
+	case *ActionableAnnouncementContent_Action_ShareRoomLink_:
+		if v == nil {
+			err := ActionableAnnouncementContent_ActionValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetShareRoomLink()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ActionableAnnouncementContent_ActionValidationError{
+						field:  "ShareRoomLink",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ActionableAnnouncementContent_ActionValidationError{
+						field:  "ShareRoomLink",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetShareRoomLink()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ActionableAnnouncementContent_ActionValidationError{
+					field:  "ShareRoomLink",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+	if !oneofTypePresent {
+		err := ActionableAnnouncementContent_ActionValidationError{
+			field:  "Type",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ActionableAnnouncementContent_ActionMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActionableAnnouncementContent_ActionMultiError is an error wrapping multiple
+// validation errors returned by
+// ActionableAnnouncementContent_Action.ValidateAll() if the designated
+// constraints aren't met.
+type ActionableAnnouncementContent_ActionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActionableAnnouncementContent_ActionMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActionableAnnouncementContent_ActionMultiError) AllErrors() []error { return m }
+
+// ActionableAnnouncementContent_ActionValidationError is the validation error
+// returned by ActionableAnnouncementContent_Action.Validate if the designated
+// constraints aren't met.
+type ActionableAnnouncementContent_ActionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActionableAnnouncementContent_ActionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ActionableAnnouncementContent_ActionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ActionableAnnouncementContent_ActionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ActionableAnnouncementContent_ActionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActionableAnnouncementContent_ActionValidationError) ErrorName() string {
+	return "ActionableAnnouncementContent_ActionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ActionableAnnouncementContent_ActionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActionableAnnouncementContent_Action.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActionableAnnouncementContent_ActionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActionableAnnouncementContent_ActionValidationError{}
+
+// Validate checks the field values on
+// ActionableAnnouncementContent_Action_ShareRoomLink with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ActionableAnnouncementContent_Action_ShareRoomLink) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ActionableAnnouncementContent_Action_ShareRoomLink with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// ActionableAnnouncementContent_Action_ShareRoomLinkMultiError, or nil if
+// none found.
+func (m *ActionableAnnouncementContent_Action_ShareRoomLink) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ActionableAnnouncementContent_Action_ShareRoomLink) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ActionableAnnouncementContent_Action_ShareRoomLinkMultiError(errors)
+	}
+
+	return nil
+}
+
+// ActionableAnnouncementContent_Action_ShareRoomLinkMultiError is an error
+// wrapping multiple validation errors returned by
+// ActionableAnnouncementContent_Action_ShareRoomLink.ValidateAll() if the
+// designated constraints aren't met.
+type ActionableAnnouncementContent_Action_ShareRoomLinkMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ActionableAnnouncementContent_Action_ShareRoomLinkMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ActionableAnnouncementContent_Action_ShareRoomLinkMultiError) AllErrors() []error { return m }
+
+// ActionableAnnouncementContent_Action_ShareRoomLinkValidationError is the
+// validation error returned by
+// ActionableAnnouncementContent_Action_ShareRoomLink.Validate if the
+// designated constraints aren't met.
+type ActionableAnnouncementContent_Action_ShareRoomLinkValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ActionableAnnouncementContent_Action_ShareRoomLinkValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ActionableAnnouncementContent_Action_ShareRoomLinkValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ActionableAnnouncementContent_Action_ShareRoomLinkValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ActionableAnnouncementContent_Action_ShareRoomLinkValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ActionableAnnouncementContent_Action_ShareRoomLinkValidationError) ErrorName() string {
+	return "ActionableAnnouncementContent_Action_ShareRoomLinkValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ActionableAnnouncementContent_Action_ShareRoomLinkValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sActionableAnnouncementContent_Action_ShareRoomLink.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ActionableAnnouncementContent_Action_ShareRoomLinkValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ActionableAnnouncementContent_Action_ShareRoomLinkValidationError{}

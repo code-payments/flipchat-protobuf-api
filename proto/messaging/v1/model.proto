@@ -98,6 +98,7 @@ message Content {
         TipContent                    tip                     = 7;
         DeleteMessageContent          deleted                 = 8;
         ReviewContent                 review                  = 9;
+        ActionableAnnouncementContent actionable_announcement = 10;
     }
 
     reserved 3; // ExchangeDataContent
@@ -121,7 +122,35 @@ message LocalizedAnnouncementContent {
         max_len: 1024
     }];
 
-    // todo: define arguments
+    // todo: define arguments list
+    reserved 2;
+}
+
+// ActionableAnnouncementContent is like LocalizedAnnouncementContent, but
+// contains additional metadata for actions
+message ActionableAnnouncementContent {
+    string key_or_text = 1 [(validate.rules).string = {
+        min_len: 1
+        max_len: 1024
+    }];
+
+    // todo: define arguments list
+    reserved 2;
+
+    // An action that can be taken by a user
+    Action action = 3 [(validate.rules).message.required = true];
+
+    message Action {
+        oneof type {
+            option (validate.required) = true;
+            
+            ShareRoomLink share_room_link = 1;
+        }
+
+        // Displays a button to share a link to a room
+        message ShareRoomLink {
+        }
+    }
 }
 
 // Emoji reaction to another message
