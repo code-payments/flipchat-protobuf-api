@@ -3153,6 +3153,225 @@ var _ interface {
 	ErrorName() string
 } = CloseChatResponseValidationError{}
 
+// Validate checks the field values on CheckDisplayNameRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckDisplayNameRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckDisplayNameRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CheckDisplayNameRequestMultiError, or nil if none found.
+func (m *CheckDisplayNameRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckDisplayNameRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := utf8.RuneCountInString(m.GetDisplayName()); l < 1 || l > 64 {
+		err := CheckDisplayNameRequestValidationError{
+			field:  "DisplayName",
+			reason: "value length must be between 1 and 64 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return CheckDisplayNameRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckDisplayNameRequestMultiError is an error wrapping multiple validation
+// errors returned by CheckDisplayNameRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CheckDisplayNameRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckDisplayNameRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckDisplayNameRequestMultiError) AllErrors() []error { return m }
+
+// CheckDisplayNameRequestValidationError is the validation error returned by
+// CheckDisplayNameRequest.Validate if the designated constraints aren't met.
+type CheckDisplayNameRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckDisplayNameRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckDisplayNameRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckDisplayNameRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckDisplayNameRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckDisplayNameRequestValidationError) ErrorName() string {
+	return "CheckDisplayNameRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckDisplayNameRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckDisplayNameRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckDisplayNameRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckDisplayNameRequestValidationError{}
+
+// Validate checks the field values on CheckDisplayNameResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CheckDisplayNameResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CheckDisplayNameResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CheckDisplayNameResponseMultiError, or nil if none found.
+func (m *CheckDisplayNameResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CheckDisplayNameResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	// no validation rules for IsAllowed
+
+	if len(errors) > 0 {
+		return CheckDisplayNameResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CheckDisplayNameResponseMultiError is an error wrapping multiple validation
+// errors returned by CheckDisplayNameResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CheckDisplayNameResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CheckDisplayNameResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CheckDisplayNameResponseMultiError) AllErrors() []error { return m }
+
+// CheckDisplayNameResponseValidationError is the validation error returned by
+// CheckDisplayNameResponse.Validate if the designated constraints aren't met.
+type CheckDisplayNameResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CheckDisplayNameResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CheckDisplayNameResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CheckDisplayNameResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CheckDisplayNameResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CheckDisplayNameResponseValidationError) ErrorName() string {
+	return "CheckDisplayNameResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CheckDisplayNameResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCheckDisplayNameResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CheckDisplayNameResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CheckDisplayNameResponseValidationError{}
+
 // Validate checks the field values on SetDisplayNameRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -9406,6 +9625,17 @@ func (m *StartChatRequest_StartGroupChatParameters) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if utf8.RuneCountInString(m.GetDisplayName()) > 64 {
+		err := StartChatRequest_StartGroupChatParametersValidationError{
+			field:  "DisplayName",
+			reason: "value length must be at most 64 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	if all {

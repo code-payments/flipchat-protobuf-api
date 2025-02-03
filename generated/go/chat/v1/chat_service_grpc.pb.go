@@ -27,6 +27,7 @@ const (
 	Chat_LeaveChat_FullMethodName        = "/flipchat.chat.v1.Chat/LeaveChat"
 	Chat_OpenChat_FullMethodName         = "/flipchat.chat.v1.Chat/OpenChat"
 	Chat_CloseChat_FullMethodName        = "/flipchat.chat.v1.Chat/CloseChat"
+	Chat_CheckDisplayName_FullMethodName = "/flipchat.chat.v1.Chat/CheckDisplayName"
 	Chat_SetDisplayName_FullMethodName   = "/flipchat.chat.v1.Chat/SetDisplayName"
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 	Chat_SetMessagingFee_FullMethodName  = "/flipchat.chat.v1.Chat/SetMessagingFee"
@@ -76,6 +77,8 @@ type ChatClient interface {
 	OpenChat(ctx context.Context, in *OpenChatRequest, opts ...grpc.CallOption) (*OpenChatResponse, error)
 	// CloseChat closes a chat up for messaging to just the chat owner
 	CloseChat(ctx context.Context, in *CloseChatRequest, opts ...grpc.CallOption) (*CloseChatResponse, error)
+	// CheckDisplayName checks whether a chat display name passes moderation
+	CheckDisplayName(ctx context.Context, in *CheckDisplayNameRequest, opts ...grpc.CallOption) (*CheckDisplayNameResponse, error)
 	// SetDisplayName sets a chat's display name. If the display name isn't allowed,
 	// then a set of alternate suggestions may be provided
 	SetDisplayName(ctx context.Context, in *SetDisplayNameRequest, opts ...grpc.CallOption) (*SetDisplayNameResponse, error)
@@ -190,6 +193,16 @@ func (c *chatClient) CloseChat(ctx context.Context, in *CloseChatRequest, opts .
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CloseChatResponse)
 	err := c.cc.Invoke(ctx, Chat_CloseChat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) CheckDisplayName(ctx context.Context, in *CheckDisplayNameRequest, opts ...grpc.CallOption) (*CheckDisplayNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckDisplayNameResponse)
+	err := c.cc.Invoke(ctx, Chat_CheckDisplayName_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -342,6 +355,8 @@ type ChatServer interface {
 	OpenChat(context.Context, *OpenChatRequest) (*OpenChatResponse, error)
 	// CloseChat closes a chat up for messaging to just the chat owner
 	CloseChat(context.Context, *CloseChatRequest) (*CloseChatResponse, error)
+	// CheckDisplayName checks whether a chat display name passes moderation
+	CheckDisplayName(context.Context, *CheckDisplayNameRequest) (*CheckDisplayNameResponse, error)
 	// SetDisplayName sets a chat's display name. If the display name isn't allowed,
 	// then a set of alternate suggestions may be provided
 	SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error)
@@ -402,6 +417,9 @@ func (UnimplementedChatServer) OpenChat(context.Context, *OpenChatRequest) (*Ope
 }
 func (UnimplementedChatServer) CloseChat(context.Context, *CloseChatRequest) (*CloseChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CloseChat not implemented")
+}
+func (UnimplementedChatServer) CheckDisplayName(context.Context, *CheckDisplayNameRequest) (*CheckDisplayNameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckDisplayName not implemented")
 }
 func (UnimplementedChatServer) SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetDisplayName not implemented")
@@ -586,6 +604,24 @@ func _Chat_CloseChat_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatServer).CloseChat(ctx, req.(*CloseChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_CheckDisplayName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckDisplayNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).CheckDisplayName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_CheckDisplayName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).CheckDisplayName(ctx, req.(*CheckDisplayNameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -822,6 +858,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CloseChat",
 			Handler:    _Chat_CloseChat_Handler,
+		},
+		{
+			MethodName: "CheckDisplayName",
+			Handler:    _Chat_CheckDisplayName_Handler,
 		},
 		{
 			MethodName: "SetDisplayName",

@@ -754,6 +754,13 @@ export class StartChatRequest_StartGroupChatParameters extends Message<StartChat
   users: UserId[] = [];
 
   /**
+   * Optional display name for the group chat
+   *
+   * @generated from field: string display_name = 2;
+   */
+  displayName = "";
+
+  /**
    * Optional payment for creating the group. It's up to server to decide
    * if the user is allowed to create a group without payment.
    *
@@ -770,6 +777,7 @@ export class StartChatRequest_StartGroupChatParameters extends Message<StartChat
   static readonly typeName = "flipchat.chat.v1.StartChatRequest.StartGroupChatParameters";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "users", kind: "message", T: UserId, repeated: true },
+    { no: 2, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "payment_intent", kind: "message", T: IntentId },
   ]);
 
@@ -1404,6 +1412,100 @@ export enum CloseChatResponse_Result {
 proto3.util.setEnumType(CloseChatResponse_Result, "flipchat.chat.v1.CloseChatResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message flipchat.chat.v1.CheckDisplayNameRequest
+ */
+export class CheckDisplayNameRequest extends Message<CheckDisplayNameRequest> {
+  /**
+   * @generated from field: string display_name = 1;
+   */
+  displayName = "";
+
+  constructor(data?: PartialMessage<CheckDisplayNameRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.CheckDisplayNameRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CheckDisplayNameRequest {
+    return new CheckDisplayNameRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CheckDisplayNameRequest {
+    return new CheckDisplayNameRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CheckDisplayNameRequest {
+    return new CheckDisplayNameRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CheckDisplayNameRequest | PlainMessage<CheckDisplayNameRequest> | undefined, b: CheckDisplayNameRequest | PlainMessage<CheckDisplayNameRequest> | undefined): boolean {
+    return proto3.util.equals(CheckDisplayNameRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.CheckDisplayNameResponse
+ */
+export class CheckDisplayNameResponse extends Message<CheckDisplayNameResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.CheckDisplayNameResponse.Result result = 1;
+   */
+  result = CheckDisplayNameResponse_Result.OK;
+
+  /**
+   * @generated from field: bool is_allowed = 2;
+   */
+  isAllowed = false;
+
+  constructor(data?: PartialMessage<CheckDisplayNameResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.CheckDisplayNameResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(CheckDisplayNameResponse_Result) },
+    { no: 2, name: "is_allowed", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CheckDisplayNameResponse {
+    return new CheckDisplayNameResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CheckDisplayNameResponse {
+    return new CheckDisplayNameResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CheckDisplayNameResponse {
+    return new CheckDisplayNameResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CheckDisplayNameResponse | PlainMessage<CheckDisplayNameResponse> | undefined, b: CheckDisplayNameResponse | PlainMessage<CheckDisplayNameResponse> | undefined): boolean {
+    return proto3.util.equals(CheckDisplayNameResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.CheckDisplayNameResponse.Result
+ */
+export enum CheckDisplayNameResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+}
+// Retrieve enum metadata with: proto3.getEnumType(CheckDisplayNameResponse_Result)
+proto3.util.setEnumType(CheckDisplayNameResponse_Result, "flipchat.chat.v1.CheckDisplayNameResponse.Result", [
+  { no: 0, name: "OK" },
 ]);
 
 /**

@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CloseChatRequest, CloseChatResponse, DemoteUserRequest, DemoteUserResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, PromoteUserRequest, PromoteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, SetMessagingFeeRequest, SetMessagingFeeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
+import { CheckDisplayNameRequest, CheckDisplayNameResponse, CloseChatRequest, CloseChatResponse, DemoteUserRequest, DemoteUserResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, PromoteUserRequest, PromoteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, SetMessagingFeeRequest, SetMessagingFeeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -114,6 +114,17 @@ export const Chat = {
       name: "CloseChat",
       I: CloseChatRequest,
       O: CloseChatResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * CheckDisplayName checks whether a chat display name passes moderation
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.CheckDisplayName
+     */
+    checkDisplayName: {
+      name: "CheckDisplayName",
+      I: CheckDisplayNameRequest,
+      O: CheckDisplayNameResponse,
       kind: MethodKind.Unary,
     },
     /**
