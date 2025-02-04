@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import { Auth, UserId } from "../../common/v1/common_pb";
-import { UserProfile } from "./model_pb";
+import { UserProfile, XProfile } from "./model_pb";
 
 /**
  * @generated from message flipchat.profile.v1.GetProfileRequest
@@ -219,5 +219,125 @@ proto3.util.setEnumType(SetDisplayNameResponse_Result, "flipchat.profile.v1.SetD
   { no: 0, name: "OK" },
   { no: 1, name: "INVALID_DISPLAY_NAME" },
   { no: 2, name: "DENIED" },
+]);
+
+/**
+ * @generated from message flipchat.profile.v1.LinkXAccountRequest
+ */
+export class LinkXAccountRequest extends Message<LinkXAccountRequest> {
+  /**
+   * Twitter access token from the OAuth 2.0 flow
+   *
+   * @generated from field: string access_token = 1;
+   */
+  accessToken = "";
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 10;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<LinkXAccountRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.profile.v1.LinkXAccountRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "access_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 10, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LinkXAccountRequest {
+    return new LinkXAccountRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LinkXAccountRequest {
+    return new LinkXAccountRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LinkXAccountRequest {
+    return new LinkXAccountRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LinkXAccountRequest | PlainMessage<LinkXAccountRequest> | undefined, b: LinkXAccountRequest | PlainMessage<LinkXAccountRequest> | undefined): boolean {
+    return proto3.util.equals(LinkXAccountRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.profile.v1.LinkXAccountResponse
+ */
+export class LinkXAccountResponse extends Message<LinkXAccountResponse> {
+  /**
+   * @generated from field: flipchat.profile.v1.LinkXAccountResponse.Result result = 1;
+   */
+  result = LinkXAccountResponse_Result.OK;
+
+  /**
+   * @generated from field: flipchat.profile.v1.XProfile x_profile = 2;
+   */
+  xProfile?: XProfile;
+
+  constructor(data?: PartialMessage<LinkXAccountResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.profile.v1.LinkXAccountResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(LinkXAccountResponse_Result) },
+    { no: 2, name: "x_profile", kind: "message", T: XProfile },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LinkXAccountResponse {
+    return new LinkXAccountResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LinkXAccountResponse {
+    return new LinkXAccountResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LinkXAccountResponse {
+    return new LinkXAccountResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LinkXAccountResponse | PlainMessage<LinkXAccountResponse> | undefined, b: LinkXAccountResponse | PlainMessage<LinkXAccountResponse> | undefined): boolean {
+    return proto3.util.equals(LinkXAccountResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.profile.v1.LinkXAccountResponse.Result
+ */
+export enum LinkXAccountResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: INVALID_ACCESS_TOKEN = 1;
+   */
+  INVALID_ACCESS_TOKEN = 1,
+
+  /**
+   * @generated from enum value: EXISTING_LINK = 2;
+   */
+  EXISTING_LINK = 2,
+
+  /**
+   * @generated from enum value: DENIED = 3;
+   */
+  DENIED = 3,
+}
+// Retrieve enum metadata with: proto3.getEnumType(LinkXAccountResponse_Result)
+proto3.util.setEnumType(LinkXAccountResponse_Result, "flipchat.profile.v1.LinkXAccountResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "INVALID_ACCESS_TOKEN" },
+  { no: 2, name: "EXISTING_LINK" },
+  { no: 3, name: "DENIED" },
 ]);
 

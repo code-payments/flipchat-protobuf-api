@@ -566,3 +566,289 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SetDisplayNameResponseValidationError{}
+
+// Validate checks the field values on LinkXAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *LinkXAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LinkXAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LinkXAccountRequestMultiError, or nil if none found.
+func (m *LinkXAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LinkXAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := utf8.RuneCountInString(m.GetAccessToken()); l < 1 || l > 4096 {
+		err := LinkXAccountRequestValidationError{
+			field:  "AccessToken",
+			reason: "value length must be between 1 and 4096 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAuth() == nil {
+		err := LinkXAccountRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LinkXAccountRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LinkXAccountRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LinkXAccountRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return LinkXAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// LinkXAccountRequestMultiError is an error wrapping multiple validation
+// errors returned by LinkXAccountRequest.ValidateAll() if the designated
+// constraints aren't met.
+type LinkXAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LinkXAccountRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LinkXAccountRequestMultiError) AllErrors() []error { return m }
+
+// LinkXAccountRequestValidationError is the validation error returned by
+// LinkXAccountRequest.Validate if the designated constraints aren't met.
+type LinkXAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LinkXAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LinkXAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LinkXAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LinkXAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LinkXAccountRequestValidationError) ErrorName() string {
+	return "LinkXAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LinkXAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLinkXAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LinkXAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LinkXAccountRequestValidationError{}
+
+// Validate checks the field values on LinkXAccountResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *LinkXAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LinkXAccountResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LinkXAccountResponseMultiError, or nil if none found.
+func (m *LinkXAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LinkXAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if all {
+		switch v := interface{}(m.GetXProfile()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LinkXAccountResponseValidationError{
+					field:  "XProfile",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LinkXAccountResponseValidationError{
+					field:  "XProfile",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetXProfile()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LinkXAccountResponseValidationError{
+				field:  "XProfile",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return LinkXAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// LinkXAccountResponseMultiError is an error wrapping multiple validation
+// errors returned by LinkXAccountResponse.ValidateAll() if the designated
+// constraints aren't met.
+type LinkXAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LinkXAccountResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LinkXAccountResponseMultiError) AllErrors() []error { return m }
+
+// LinkXAccountResponseValidationError is the validation error returned by
+// LinkXAccountResponse.Validate if the designated constraints aren't met.
+type LinkXAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LinkXAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LinkXAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LinkXAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LinkXAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LinkXAccountResponseValidationError) ErrorName() string {
+	return "LinkXAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LinkXAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLinkXAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LinkXAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LinkXAccountResponseValidationError{}

@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Profile_GetProfile_FullMethodName     = "/flipchat.profile.v1.Profile/GetProfile"
 	Profile_SetDisplayName_FullMethodName = "/flipchat.profile.v1.Profile/SetDisplayName"
+	Profile_LinkXAccount_FullMethodName   = "/flipchat.profile.v1.Profile/LinkXAccount"
 )
 
 // ProfileClient is the client API for Profile service.
@@ -29,6 +30,9 @@ const (
 type ProfileClient interface {
 	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*GetProfileResponse, error)
 	SetDisplayName(ctx context.Context, in *SetDisplayNameRequest, opts ...grpc.CallOption) (*SetDisplayNameResponse, error)
+	// LinkXAccount links a X account to a user. Any existing links will
+	// be removed.
+	LinkXAccount(ctx context.Context, in *LinkXAccountRequest, opts ...grpc.CallOption) (*LinkXAccountResponse, error)
 }
 
 type profileClient struct {
@@ -59,12 +63,25 @@ func (c *profileClient) SetDisplayName(ctx context.Context, in *SetDisplayNameRe
 	return out, nil
 }
 
+func (c *profileClient) LinkXAccount(ctx context.Context, in *LinkXAccountRequest, opts ...grpc.CallOption) (*LinkXAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LinkXAccountResponse)
+	err := c.cc.Invoke(ctx, Profile_LinkXAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProfileServer is the server API for Profile service.
 // All implementations must embed UnimplementedProfileServer
 // for forward compatibility.
 type ProfileServer interface {
 	GetProfile(context.Context, *GetProfileRequest) (*GetProfileResponse, error)
 	SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error)
+	// LinkXAccount links a X account to a user. Any existing links will
+	// be removed.
+	LinkXAccount(context.Context, *LinkXAccountRequest) (*LinkXAccountResponse, error)
 	mustEmbedUnimplementedProfileServer()
 }
 
@@ -80,6 +97,9 @@ func (UnimplementedProfileServer) GetProfile(context.Context, *GetProfileRequest
 }
 func (UnimplementedProfileServer) SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetDisplayName not implemented")
+}
+func (UnimplementedProfileServer) LinkXAccount(context.Context, *LinkXAccountRequest) (*LinkXAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LinkXAccount not implemented")
 }
 func (UnimplementedProfileServer) mustEmbedUnimplementedProfileServer() {}
 func (UnimplementedProfileServer) testEmbeddedByValue()                 {}
@@ -138,6 +158,24 @@ func _Profile_SetDisplayName_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Profile_LinkXAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LinkXAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServer).LinkXAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Profile_LinkXAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServer).LinkXAccount(ctx, req.(*LinkXAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Profile_ServiceDesc is the grpc.ServiceDesc for Profile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +190,10 @@ var Profile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetDisplayName",
 			Handler:    _Profile_SetDisplayName_Handler,
+		},
+		{
+			MethodName: "LinkXAccount",
+			Handler:    _Profile_LinkXAccount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
