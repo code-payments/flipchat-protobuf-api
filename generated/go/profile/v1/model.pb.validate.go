@@ -370,6 +370,17 @@ func (m *XProfile) validate(all bool) error {
 
 	var errors []error
 
+	if l := utf8.RuneCountInString(m.GetId()); l < 1 || l > 32 {
+		err := XProfileValidationError{
+			field:  "Id",
+			reason: "value length must be between 1 and 32 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if l := utf8.RuneCountInString(m.GetUsername()); l < 1 || l > 15 {
 		err := XProfileValidationError{
 			field:  "Username",

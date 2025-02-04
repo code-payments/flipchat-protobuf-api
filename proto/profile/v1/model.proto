@@ -31,32 +31,38 @@ message SocialProfile {
 }
 
 message XProfile {
+    // The user's ID on X
+    string id = 1 [(validate.rules).string = {
+        min_len: 1
+        max_len: 32
+    }];
+
     // The user's username on X
-    string username = 1 [(validate.rules).string = {
+    string username = 2 [(validate.rules).string = {
         min_len: 1
         max_len: 15
     }];
 
     // The user's friendly name on X
-    string name = 2 [(validate.rules).string = {
+    string name = 3 [(validate.rules).string = {
         min_len: 1
         max_len: 256
     }];
 
 	// The user's description on X
-	string description = 3 [(validate.rules).string = {
+	string description = 4 [(validate.rules).string = {
         min_len: 1
         max_len: 4096 // todo: arbitrary
     }];
 
     // URL to the user's X profile picture
-    string profile_pic_url = 4 [(validate.rules).string = {
+    string profile_pic_url = 5 [(validate.rules).string = {
         min_len: 1
         max_len: 2048 // todo: arbitrary
     }];
 
     // The type of X verification associated with the user
-    VerifiedType verified_type = 5;
+    VerifiedType verified_type = 6;
     enum VerifiedType {
         NONE       = 0;
         BLUE       = 1;
@@ -65,5 +71,5 @@ message XProfile {
     }
 
     // The number of followers the user has on X
-    uint32 follower_count = 6;    
+    uint32 follower_count = 7;    
 }

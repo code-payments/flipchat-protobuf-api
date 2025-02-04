@@ -101,44 +101,51 @@ export class SocialProfile extends Message<SocialProfile> {
  */
 export class XProfile extends Message<XProfile> {
   /**
+   * The user's ID on X
+   *
+   * @generated from field: string id = 1;
+   */
+  id = "";
+
+  /**
    * The user's username on X
    *
-   * @generated from field: string username = 1;
+   * @generated from field: string username = 2;
    */
   username = "";
 
   /**
    * The user's friendly name on X
    *
-   * @generated from field: string name = 2;
+   * @generated from field: string name = 3;
    */
   name = "";
 
   /**
    * The user's description on X
    *
-   * @generated from field: string description = 3;
+   * @generated from field: string description = 4;
    */
   description = "";
 
   /**
    * URL to the user's X profile picture
    *
-   * @generated from field: string profile_pic_url = 4;
+   * @generated from field: string profile_pic_url = 5;
    */
   profilePicUrl = "";
 
   /**
    * The type of X verification associated with the user
    *
-   * @generated from field: flipchat.profile.v1.XProfile.VerifiedType verified_type = 5;
+   * @generated from field: flipchat.profile.v1.XProfile.VerifiedType verified_type = 6;
    */
   verifiedType = XProfile_VerifiedType.NONE;
 
   /**
    * The number of followers the user has on X
    *
-   * @generated from field: uint32 follower_count = 6;
+   * @generated from field: uint32 follower_count = 7;
    */
   followerCount = 0;
 
@@ -150,12 +157,13 @@ export class XProfile extends Message<XProfile> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "flipchat.profile.v1.XProfile";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "profile_pic_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "verified_type", kind: "enum", T: proto3.getEnumType(XProfile_VerifiedType) },
-    { no: 6, name: "follower_count", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "profile_pic_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "verified_type", kind: "enum", T: proto3.getEnumType(XProfile_VerifiedType) },
+    { no: 7, name: "follower_count", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): XProfile {
