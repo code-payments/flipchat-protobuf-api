@@ -7,6 +7,7 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 import { Auth, ChatId, ClientPong, IntentId, PagingToken, PaymentAmount, QueryOptions, ServerPing, UserId } from "../../common/v1/common_pb";
 import { IsTyping, Message as Message$1, MessageId, Pointer } from "../../messaging/v1/model_pb";
+import { SocialProfile } from "../../profile/v1/model_pb";
 
 /**
  * @generated from message flipchat.chat.v1.StreamChatEventsRequest
@@ -3349,6 +3350,13 @@ export class MemberIdentity extends Message<MemberIdentity> {
    */
   profilePicUrl = "";
 
+  /**
+   * The linked social profiles of the user
+   *
+   * @generated from field: repeated flipchat.profile.v1.SocialProfile social_profiles = 3;
+   */
+  socialProfiles: SocialProfile[] = [];
+
   constructor(data?: PartialMessage<MemberIdentity>) {
     super();
     proto3.util.initPartial(data, this);
@@ -3359,6 +3367,7 @@ export class MemberIdentity extends Message<MemberIdentity> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "profile_pic_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "social_profiles", kind: "message", T: SocialProfile, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MemberIdentity {
@@ -3433,6 +3442,12 @@ export class MemberUpdate extends Message<MemberUpdate> {
      */
     value: MemberUpdate_Demoted;
     case: "demoted";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.MemberUpdate.IdentityChanged identity_changed = 9;
+     */
+    value: MemberUpdate_IdentityChanged;
+    case: "identityChanged";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
@@ -3456,6 +3471,7 @@ export class MemberUpdate extends Message<MemberUpdate> {
     { no: 6, name: "muted", kind: "message", T: MemberUpdate_Muted, oneof: "kind" },
     { no: 7, name: "promoted", kind: "message", T: MemberUpdate_Promoted, oneof: "kind" },
     { no: 8, name: "demoted", kind: "message", T: MemberUpdate_Demoted, oneof: "kind" },
+    { no: 9, name: "identity_changed", kind: "message", T: MemberUpdate_IdentityChanged, oneof: "kind" },
     { no: 1000, name: "paging_token", kind: "message", T: PagingToken },
   ]);
 
@@ -3821,6 +3837,51 @@ export class MemberUpdate_Demoted extends Message<MemberUpdate_Demoted> {
 
   static equals(a: MemberUpdate_Demoted | PlainMessage<MemberUpdate_Demoted> | undefined, b: MemberUpdate_Demoted | PlainMessage<MemberUpdate_Demoted> | undefined): boolean {
     return proto3.util.equals(MemberUpdate_Demoted, a, b);
+  }
+}
+
+/**
+ * Member identity has changed
+ *
+ * @generated from message flipchat.chat.v1.MemberUpdate.IdentityChanged
+ */
+export class MemberUpdate_IdentityChanged extends Message<MemberUpdate_IdentityChanged> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  /**
+   * @generated from field: flipchat.chat.v1.MemberIdentity new_identity = 2;
+   */
+  newIdentity?: MemberIdentity;
+
+  constructor(data?: PartialMessage<MemberUpdate_IdentityChanged>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MemberUpdate.IdentityChanged";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+    { no: 2, name: "new_identity", kind: "message", T: MemberIdentity },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MemberUpdate_IdentityChanged {
+    return new MemberUpdate_IdentityChanged().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MemberUpdate_IdentityChanged {
+    return new MemberUpdate_IdentityChanged().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MemberUpdate_IdentityChanged {
+    return new MemberUpdate_IdentityChanged().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MemberUpdate_IdentityChanged | PlainMessage<MemberUpdate_IdentityChanged> | undefined, b: MemberUpdate_IdentityChanged | PlainMessage<MemberUpdate_IdentityChanged> | undefined): boolean {
+    return proto3.util.equals(MemberUpdate_IdentityChanged, a, b);
   }
 }
 

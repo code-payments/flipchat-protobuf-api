@@ -8,6 +8,7 @@ option objc_class_prefix = "FCPBChatV1";
 
 import "common/v1/common.proto";
 import "messaging/v1/model.proto";
+import "profile/v1/model.proto";
 import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
 
@@ -728,6 +729,12 @@ message MemberIdentity {
     string profile_pic_url = 2 [(validate.rules).string = {
         max_len: 255 // Arbitrary limit
     }];
+
+    // The linked social profiles of the user
+    repeated profile.v1.SocialProfile social_profiles = 3 [(validate.rules).repeated = {
+        min_items: 0
+        max_items: 1
+    }];
 }
 
 message MemberUpdate {
@@ -742,6 +749,7 @@ message MemberUpdate {
         Muted             muted              = 6;
         Promoted          promoted           = 7;
         Demoted           demoted            = 8;
+        IdentityChanged   identity_changed   = 9;
     }
 
     common.v1.PagingToken paging_token = 1000;
@@ -798,5 +806,12 @@ message MemberUpdate {
         common.v1.UserId demoted_by = 2 [(validate.rules).message.required = true];
 
         bool send_permission_disabled = 3;
+    }
+
+    // Member identity has changed
+    message IdentityChanged {
+        common.v1.UserId member = 1 [(validate.rules).message.required = true];
+
+        MemberIdentity new_identity = 2 [(validate.rules).message.required = true];
     }
 }
