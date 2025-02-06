@@ -56,7 +56,7 @@ message SetDisplayNameResponse {
 }
 
 message LinkSocialAccountRequest {
-	LinkingToken linking_token = 1;
+	LinkingToken linking_token = 1 [(validate.rules).message.required = true];
 
 	message LinkingToken {
 		oneof type {

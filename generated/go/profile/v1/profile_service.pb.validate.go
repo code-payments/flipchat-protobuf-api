@@ -589,6 +589,17 @@ func (m *LinkSocialAccountRequest) validate(all bool) error {
 
 	var errors []error
 
+	if m.GetLinkingToken() == nil {
+		err := LinkSocialAccountRequestValidationError{
+			field:  "LinkingToken",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if all {
 		switch v := interface{}(m.GetLinkingToken()).(type) {
 		case interface{ ValidateAll() error }:
