@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import { Auth, UserId } from "../../common/v1/common_pb";
-import { UserProfile, XProfile } from "./model_pb";
+import { SocialProfile, UserProfile } from "./model_pb";
 
 /**
  * @generated from message flipchat.profile.v1.GetProfileRequest
@@ -222,106 +222,186 @@ proto3.util.setEnumType(SetDisplayNameResponse_Result, "flipchat.profile.v1.SetD
 ]);
 
 /**
- * @generated from message flipchat.profile.v1.LinkXAccountRequest
+ * @generated from message flipchat.profile.v1.LinkSocialAccountRequest
  */
-export class LinkXAccountRequest extends Message<LinkXAccountRequest> {
+export class LinkSocialAccountRequest extends Message<LinkSocialAccountRequest> {
   /**
-   * Twitter access token from the OAuth 2.0 flow
-   *
-   * @generated from field: string access_token = 1;
+   * @generated from field: flipchat.profile.v1.LinkSocialAccountRequest.LinkingToken linking_token = 1;
    */
-  accessToken = "";
+  linkingToken?: LinkSocialAccountRequest_LinkingToken;
 
   /**
    * @generated from field: flipchat.common.v1.Auth auth = 10;
    */
   auth?: Auth;
 
-  constructor(data?: PartialMessage<LinkXAccountRequest>) {
+  constructor(data?: PartialMessage<LinkSocialAccountRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.profile.v1.LinkXAccountRequest";
+  static readonly typeName = "flipchat.profile.v1.LinkSocialAccountRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "access_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "linking_token", kind: "message", T: LinkSocialAccountRequest_LinkingToken },
     { no: 10, name: "auth", kind: "message", T: Auth },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LinkXAccountRequest {
-    return new LinkXAccountRequest().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LinkSocialAccountRequest {
+    return new LinkSocialAccountRequest().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LinkXAccountRequest {
-    return new LinkXAccountRequest().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LinkSocialAccountRequest {
+    return new LinkSocialAccountRequest().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LinkXAccountRequest {
-    return new LinkXAccountRequest().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LinkSocialAccountRequest {
+    return new LinkSocialAccountRequest().fromJsonString(jsonString, options);
   }
 
-  static equals(a: LinkXAccountRequest | PlainMessage<LinkXAccountRequest> | undefined, b: LinkXAccountRequest | PlainMessage<LinkXAccountRequest> | undefined): boolean {
-    return proto3.util.equals(LinkXAccountRequest, a, b);
+  static equals(a: LinkSocialAccountRequest | PlainMessage<LinkSocialAccountRequest> | undefined, b: LinkSocialAccountRequest | PlainMessage<LinkSocialAccountRequest> | undefined): boolean {
+    return proto3.util.equals(LinkSocialAccountRequest, a, b);
   }
 }
 
 /**
- * @generated from message flipchat.profile.v1.LinkXAccountResponse
+ * @generated from message flipchat.profile.v1.LinkSocialAccountRequest.LinkingToken
  */
-export class LinkXAccountResponse extends Message<LinkXAccountResponse> {
+export class LinkSocialAccountRequest_LinkingToken extends Message<LinkSocialAccountRequest_LinkingToken> {
   /**
-   * @generated from field: flipchat.profile.v1.LinkXAccountResponse.Result result = 1;
+   * @generated from oneof flipchat.profile.v1.LinkSocialAccountRequest.LinkingToken.type
    */
-  result = LinkXAccountResponse_Result.OK;
+  type: {
+    /**
+     * @generated from field: flipchat.profile.v1.LinkSocialAccountRequest.LinkingToken.XLinkingToken x = 1;
+     */
+    value: LinkSocialAccountRequest_LinkingToken_XLinkingToken;
+    case: "x";
+  } | { case: undefined; value?: undefined } = { case: undefined };
 
-  /**
-   * @generated from field: flipchat.profile.v1.XProfile x_profile = 2;
-   */
-  xProfile?: XProfile;
-
-  constructor(data?: PartialMessage<LinkXAccountResponse>) {
+  constructor(data?: PartialMessage<LinkSocialAccountRequest_LinkingToken>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.profile.v1.LinkXAccountResponse";
+  static readonly typeName = "flipchat.profile.v1.LinkSocialAccountRequest.LinkingToken";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(LinkXAccountResponse_Result) },
-    { no: 2, name: "x_profile", kind: "message", T: XProfile },
+    { no: 1, name: "x", kind: "message", T: LinkSocialAccountRequest_LinkingToken_XLinkingToken, oneof: "type" },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LinkXAccountResponse {
-    return new LinkXAccountResponse().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LinkSocialAccountRequest_LinkingToken {
+    return new LinkSocialAccountRequest_LinkingToken().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LinkXAccountResponse {
-    return new LinkXAccountResponse().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LinkSocialAccountRequest_LinkingToken {
+    return new LinkSocialAccountRequest_LinkingToken().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LinkXAccountResponse {
-    return new LinkXAccountResponse().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LinkSocialAccountRequest_LinkingToken {
+    return new LinkSocialAccountRequest_LinkingToken().fromJsonString(jsonString, options);
   }
 
-  static equals(a: LinkXAccountResponse | PlainMessage<LinkXAccountResponse> | undefined, b: LinkXAccountResponse | PlainMessage<LinkXAccountResponse> | undefined): boolean {
-    return proto3.util.equals(LinkXAccountResponse, a, b);
+  static equals(a: LinkSocialAccountRequest_LinkingToken | PlainMessage<LinkSocialAccountRequest_LinkingToken> | undefined, b: LinkSocialAccountRequest_LinkingToken | PlainMessage<LinkSocialAccountRequest_LinkingToken> | undefined): boolean {
+    return proto3.util.equals(LinkSocialAccountRequest_LinkingToken, a, b);
   }
 }
 
 /**
- * @generated from enum flipchat.profile.v1.LinkXAccountResponse.Result
+ * @generated from message flipchat.profile.v1.LinkSocialAccountRequest.LinkingToken.XLinkingToken
  */
-export enum LinkXAccountResponse_Result {
+export class LinkSocialAccountRequest_LinkingToken_XLinkingToken extends Message<LinkSocialAccountRequest_LinkingToken_XLinkingToken> {
+  /**
+   * X access token from the OAuth 2.0 flow
+   *
+   * @generated from field: string access_token = 1;
+   */
+  accessToken = "";
+
+  constructor(data?: PartialMessage<LinkSocialAccountRequest_LinkingToken_XLinkingToken>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.profile.v1.LinkSocialAccountRequest.LinkingToken.XLinkingToken";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "access_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LinkSocialAccountRequest_LinkingToken_XLinkingToken {
+    return new LinkSocialAccountRequest_LinkingToken_XLinkingToken().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LinkSocialAccountRequest_LinkingToken_XLinkingToken {
+    return new LinkSocialAccountRequest_LinkingToken_XLinkingToken().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LinkSocialAccountRequest_LinkingToken_XLinkingToken {
+    return new LinkSocialAccountRequest_LinkingToken_XLinkingToken().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LinkSocialAccountRequest_LinkingToken_XLinkingToken | PlainMessage<LinkSocialAccountRequest_LinkingToken_XLinkingToken> | undefined, b: LinkSocialAccountRequest_LinkingToken_XLinkingToken | PlainMessage<LinkSocialAccountRequest_LinkingToken_XLinkingToken> | undefined): boolean {
+    return proto3.util.equals(LinkSocialAccountRequest_LinkingToken_XLinkingToken, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.profile.v1.LinkSocialAccountResponse
+ */
+export class LinkSocialAccountResponse extends Message<LinkSocialAccountResponse> {
+  /**
+   * @generated from field: flipchat.profile.v1.LinkSocialAccountResponse.Result result = 1;
+   */
+  result = LinkSocialAccountResponse_Result.OK;
+
+  /**
+   * @generated from field: flipchat.profile.v1.SocialProfile social_profile = 2;
+   */
+  socialProfile?: SocialProfile;
+
+  constructor(data?: PartialMessage<LinkSocialAccountResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.profile.v1.LinkSocialAccountResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(LinkSocialAccountResponse_Result) },
+    { no: 2, name: "social_profile", kind: "message", T: SocialProfile },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LinkSocialAccountResponse {
+    return new LinkSocialAccountResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LinkSocialAccountResponse {
+    return new LinkSocialAccountResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LinkSocialAccountResponse {
+    return new LinkSocialAccountResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LinkSocialAccountResponse | PlainMessage<LinkSocialAccountResponse> | undefined, b: LinkSocialAccountResponse | PlainMessage<LinkSocialAccountResponse> | undefined): boolean {
+    return proto3.util.equals(LinkSocialAccountResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.profile.v1.LinkSocialAccountResponse.Result
+ */
+export enum LinkSocialAccountResponse_Result {
   /**
    * @generated from enum value: OK = 0;
    */
   OK = 0,
 
   /**
-   * @generated from enum value: INVALID_ACCESS_TOKEN = 1;
+   * @generated from enum value: INVALID_LINKING_TOKEN = 1;
    */
-  INVALID_ACCESS_TOKEN = 1,
+  INVALID_LINKING_TOKEN = 1,
 
   /**
    * @generated from enum value: EXISTING_LINK = 2;
@@ -333,10 +413,10 @@ export enum LinkXAccountResponse_Result {
    */
   DENIED = 3,
 }
-// Retrieve enum metadata with: proto3.getEnumType(LinkXAccountResponse_Result)
-proto3.util.setEnumType(LinkXAccountResponse_Result, "flipchat.profile.v1.LinkXAccountResponse.Result", [
+// Retrieve enum metadata with: proto3.getEnumType(LinkSocialAccountResponse_Result)
+proto3.util.setEnumType(LinkSocialAccountResponse_Result, "flipchat.profile.v1.LinkSocialAccountResponse.Result", [
   { no: 0, name: "OK" },
-  { no: 1, name: "INVALID_ACCESS_TOKEN" },
+  { no: 1, name: "INVALID_LINKING_TOKEN" },
   { no: 2, name: "EXISTING_LINK" },
   { no: 3, name: "DENIED" },
 ]);

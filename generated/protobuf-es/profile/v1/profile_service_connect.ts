@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetProfileRequest, GetProfileResponse, LinkXAccountRequest, LinkXAccountResponse, SetDisplayNameRequest, SetDisplayNameResponse } from "./profile_service_pb";
+import { GetProfileRequest, GetProfileResponse, LinkSocialAccountRequest, LinkSocialAccountResponse, SetDisplayNameRequest, SetDisplayNameResponse } from "./profile_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -31,15 +31,14 @@ export const Profile = {
       kind: MethodKind.Unary,
     },
     /**
-     * LinkXAccount links a X account to a user. Any existing links will
-     * be removed.
+     * LinkSocialAccount links a social account to a user
      *
-     * @generated from rpc flipchat.profile.v1.Profile.LinkXAccount
+     * @generated from rpc flipchat.profile.v1.Profile.LinkSocialAccount
      */
-    linkXAccount: {
-      name: "LinkXAccount",
-      I: LinkXAccountRequest,
-      O: LinkXAccountResponse,
+    linkSocialAccount: {
+      name: "LinkSocialAccount",
+      I: LinkSocialAccountRequest,
+      O: LinkSocialAccountResponse,
       kind: MethodKind.Unary,
     },
   }

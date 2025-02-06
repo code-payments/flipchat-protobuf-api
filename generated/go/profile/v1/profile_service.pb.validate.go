@@ -567,41 +567,59 @@ var _ interface {
 	ErrorName() string
 } = SetDisplayNameResponseValidationError{}
 
-// Validate checks the field values on LinkXAccountRequest with the rules
+// Validate checks the field values on LinkSocialAccountRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *LinkXAccountRequest) Validate() error {
+func (m *LinkSocialAccountRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on LinkXAccountRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on LinkSocialAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// LinkXAccountRequestMultiError, or nil if none found.
-func (m *LinkXAccountRequest) ValidateAll() error {
+// LinkSocialAccountRequestMultiError, or nil if none found.
+func (m *LinkSocialAccountRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *LinkXAccountRequest) validate(all bool) error {
+func (m *LinkSocialAccountRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if l := utf8.RuneCountInString(m.GetAccessToken()); l < 1 || l > 4096 {
-		err := LinkXAccountRequestValidationError{
-			field:  "AccessToken",
-			reason: "value length must be between 1 and 4096 runes, inclusive",
+	if all {
+		switch v := interface{}(m.GetLinkingToken()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LinkSocialAccountRequestValidationError{
+					field:  "LinkingToken",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LinkSocialAccountRequestValidationError{
+					field:  "LinkingToken",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
 		}
-		if !all {
-			return err
+	} else if v, ok := interface{}(m.GetLinkingToken()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LinkSocialAccountRequestValidationError{
+				field:  "LinkingToken",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
-		errors = append(errors, err)
 	}
 
 	if m.GetAuth() == nil {
-		err := LinkXAccountRequestValidationError{
+		err := LinkSocialAccountRequestValidationError{
 			field:  "Auth",
 			reason: "value is required",
 		}
@@ -615,7 +633,7 @@ func (m *LinkXAccountRequest) validate(all bool) error {
 		switch v := interface{}(m.GetAuth()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, LinkXAccountRequestValidationError{
+				errors = append(errors, LinkSocialAccountRequestValidationError{
 					field:  "Auth",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -623,7 +641,7 @@ func (m *LinkXAccountRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, LinkXAccountRequestValidationError{
+				errors = append(errors, LinkSocialAccountRequestValidationError{
 					field:  "Auth",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -632,7 +650,7 @@ func (m *LinkXAccountRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return LinkXAccountRequestValidationError{
+			return LinkSocialAccountRequestValidationError{
 				field:  "Auth",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -641,19 +659,19 @@ func (m *LinkXAccountRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return LinkXAccountRequestMultiError(errors)
+		return LinkSocialAccountRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// LinkXAccountRequestMultiError is an error wrapping multiple validation
-// errors returned by LinkXAccountRequest.ValidateAll() if the designated
+// LinkSocialAccountRequestMultiError is an error wrapping multiple validation
+// errors returned by LinkSocialAccountRequest.ValidateAll() if the designated
 // constraints aren't met.
-type LinkXAccountRequestMultiError []error
+type LinkSocialAccountRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m LinkXAccountRequestMultiError) Error() string {
+func (m LinkSocialAccountRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -662,11 +680,11 @@ func (m LinkXAccountRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m LinkXAccountRequestMultiError) AllErrors() []error { return m }
+func (m LinkSocialAccountRequestMultiError) AllErrors() []error { return m }
 
-// LinkXAccountRequestValidationError is the validation error returned by
-// LinkXAccountRequest.Validate if the designated constraints aren't met.
-type LinkXAccountRequestValidationError struct {
+// LinkSocialAccountRequestValidationError is the validation error returned by
+// LinkSocialAccountRequest.Validate if the designated constraints aren't met.
+type LinkSocialAccountRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -674,24 +692,24 @@ type LinkXAccountRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e LinkXAccountRequestValidationError) Field() string { return e.field }
+func (e LinkSocialAccountRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e LinkXAccountRequestValidationError) Reason() string { return e.reason }
+func (e LinkSocialAccountRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e LinkXAccountRequestValidationError) Cause() error { return e.cause }
+func (e LinkSocialAccountRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e LinkXAccountRequestValidationError) Key() bool { return e.key }
+func (e LinkSocialAccountRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e LinkXAccountRequestValidationError) ErrorName() string {
-	return "LinkXAccountRequestValidationError"
+func (e LinkSocialAccountRequestValidationError) ErrorName() string {
+	return "LinkSocialAccountRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e LinkXAccountRequestValidationError) Error() string {
+func (e LinkSocialAccountRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -703,14 +721,14 @@ func (e LinkXAccountRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sLinkXAccountRequest.%s: %s%s",
+		"invalid %sLinkSocialAccountRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = LinkXAccountRequestValidationError{}
+var _ error = LinkSocialAccountRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -718,24 +736,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = LinkXAccountRequestValidationError{}
+} = LinkSocialAccountRequestValidationError{}
 
-// Validate checks the field values on LinkXAccountResponse with the rules
+// Validate checks the field values on LinkSocialAccountResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *LinkXAccountResponse) Validate() error {
+func (m *LinkSocialAccountResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on LinkXAccountResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on LinkSocialAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// LinkXAccountResponseMultiError, or nil if none found.
-func (m *LinkXAccountResponse) ValidateAll() error {
+// LinkSocialAccountResponseMultiError, or nil if none found.
+func (m *LinkSocialAccountResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *LinkXAccountResponse) validate(all bool) error {
+func (m *LinkSocialAccountResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -745,28 +763,28 @@ func (m *LinkXAccountResponse) validate(all bool) error {
 	// no validation rules for Result
 
 	if all {
-		switch v := interface{}(m.GetXProfile()).(type) {
+		switch v := interface{}(m.GetSocialProfile()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, LinkXAccountResponseValidationError{
-					field:  "XProfile",
+				errors = append(errors, LinkSocialAccountResponseValidationError{
+					field:  "SocialProfile",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, LinkXAccountResponseValidationError{
-					field:  "XProfile",
+				errors = append(errors, LinkSocialAccountResponseValidationError{
+					field:  "SocialProfile",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetXProfile()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetSocialProfile()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return LinkXAccountResponseValidationError{
-				field:  "XProfile",
+			return LinkSocialAccountResponseValidationError{
+				field:  "SocialProfile",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -774,19 +792,19 @@ func (m *LinkXAccountResponse) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return LinkXAccountResponseMultiError(errors)
+		return LinkSocialAccountResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// LinkXAccountResponseMultiError is an error wrapping multiple validation
-// errors returned by LinkXAccountResponse.ValidateAll() if the designated
-// constraints aren't met.
-type LinkXAccountResponseMultiError []error
+// LinkSocialAccountResponseMultiError is an error wrapping multiple validation
+// errors returned by LinkSocialAccountResponse.ValidateAll() if the
+// designated constraints aren't met.
+type LinkSocialAccountResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m LinkXAccountResponseMultiError) Error() string {
+func (m LinkSocialAccountResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -795,11 +813,11 @@ func (m LinkXAccountResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m LinkXAccountResponseMultiError) AllErrors() []error { return m }
+func (m LinkSocialAccountResponseMultiError) AllErrors() []error { return m }
 
-// LinkXAccountResponseValidationError is the validation error returned by
-// LinkXAccountResponse.Validate if the designated constraints aren't met.
-type LinkXAccountResponseValidationError struct {
+// LinkSocialAccountResponseValidationError is the validation error returned by
+// LinkSocialAccountResponse.Validate if the designated constraints aren't met.
+type LinkSocialAccountResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -807,24 +825,24 @@ type LinkXAccountResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e LinkXAccountResponseValidationError) Field() string { return e.field }
+func (e LinkSocialAccountResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e LinkXAccountResponseValidationError) Reason() string { return e.reason }
+func (e LinkSocialAccountResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e LinkXAccountResponseValidationError) Cause() error { return e.cause }
+func (e LinkSocialAccountResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e LinkXAccountResponseValidationError) Key() bool { return e.key }
+func (e LinkSocialAccountResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e LinkXAccountResponseValidationError) ErrorName() string {
-	return "LinkXAccountResponseValidationError"
+func (e LinkSocialAccountResponseValidationError) ErrorName() string {
+	return "LinkSocialAccountResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e LinkXAccountResponseValidationError) Error() string {
+func (e LinkSocialAccountResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -836,14 +854,14 @@ func (e LinkXAccountResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sLinkXAccountResponse.%s: %s%s",
+		"invalid %sLinkSocialAccountResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = LinkXAccountResponseValidationError{}
+var _ error = LinkSocialAccountResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -851,4 +869,292 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = LinkXAccountResponseValidationError{}
+} = LinkSocialAccountResponseValidationError{}
+
+// Validate checks the field values on LinkSocialAccountRequest_LinkingToken
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *LinkSocialAccountRequest_LinkingToken) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LinkSocialAccountRequest_LinkingToken
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// LinkSocialAccountRequest_LinkingTokenMultiError, or nil if none found.
+func (m *LinkSocialAccountRequest_LinkingToken) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LinkSocialAccountRequest_LinkingToken) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	oneofTypePresent := false
+	switch v := m.Type.(type) {
+	case *LinkSocialAccountRequest_LinkingToken_X:
+		if v == nil {
+			err := LinkSocialAccountRequest_LinkingTokenValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetX()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, LinkSocialAccountRequest_LinkingTokenValidationError{
+						field:  "X",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, LinkSocialAccountRequest_LinkingTokenValidationError{
+						field:  "X",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetX()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return LinkSocialAccountRequest_LinkingTokenValidationError{
+					field:  "X",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+	if !oneofTypePresent {
+		err := LinkSocialAccountRequest_LinkingTokenValidationError{
+			field:  "Type",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return LinkSocialAccountRequest_LinkingTokenMultiError(errors)
+	}
+
+	return nil
+}
+
+// LinkSocialAccountRequest_LinkingTokenMultiError is an error wrapping
+// multiple validation errors returned by
+// LinkSocialAccountRequest_LinkingToken.ValidateAll() if the designated
+// constraints aren't met.
+type LinkSocialAccountRequest_LinkingTokenMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LinkSocialAccountRequest_LinkingTokenMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LinkSocialAccountRequest_LinkingTokenMultiError) AllErrors() []error { return m }
+
+// LinkSocialAccountRequest_LinkingTokenValidationError is the validation error
+// returned by LinkSocialAccountRequest_LinkingToken.Validate if the
+// designated constraints aren't met.
+type LinkSocialAccountRequest_LinkingTokenValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LinkSocialAccountRequest_LinkingTokenValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LinkSocialAccountRequest_LinkingTokenValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LinkSocialAccountRequest_LinkingTokenValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LinkSocialAccountRequest_LinkingTokenValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LinkSocialAccountRequest_LinkingTokenValidationError) ErrorName() string {
+	return "LinkSocialAccountRequest_LinkingTokenValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LinkSocialAccountRequest_LinkingTokenValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLinkSocialAccountRequest_LinkingToken.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LinkSocialAccountRequest_LinkingTokenValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LinkSocialAccountRequest_LinkingTokenValidationError{}
+
+// Validate checks the field values on
+// LinkSocialAccountRequest_LinkingToken_XLinkingToken with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *LinkSocialAccountRequest_LinkingToken_XLinkingToken) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// LinkSocialAccountRequest_LinkingToken_XLinkingToken with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// LinkSocialAccountRequest_LinkingToken_XLinkingTokenMultiError, or nil if
+// none found.
+func (m *LinkSocialAccountRequest_LinkingToken_XLinkingToken) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LinkSocialAccountRequest_LinkingToken_XLinkingToken) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := utf8.RuneCountInString(m.GetAccessToken()); l < 1 || l > 4096 {
+		err := LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError{
+			field:  "AccessToken",
+			reason: "value length must be between 1 and 4096 runes, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return LinkSocialAccountRequest_LinkingToken_XLinkingTokenMultiError(errors)
+	}
+
+	return nil
+}
+
+// LinkSocialAccountRequest_LinkingToken_XLinkingTokenMultiError is an error
+// wrapping multiple validation errors returned by
+// LinkSocialAccountRequest_LinkingToken_XLinkingToken.ValidateAll() if the
+// designated constraints aren't met.
+type LinkSocialAccountRequest_LinkingToken_XLinkingTokenMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LinkSocialAccountRequest_LinkingToken_XLinkingTokenMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LinkSocialAccountRequest_LinkingToken_XLinkingTokenMultiError) AllErrors() []error { return m }
+
+// LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError is the
+// validation error returned by
+// LinkSocialAccountRequest_LinkingToken_XLinkingToken.Validate if the
+// designated constraints aren't met.
+type LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError) ErrorName() string {
+	return "LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLinkSocialAccountRequest_LinkingToken_XLinkingToken.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LinkSocialAccountRequest_LinkingToken_XLinkingTokenValidationError{}
