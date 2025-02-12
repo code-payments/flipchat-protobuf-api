@@ -2030,6 +2030,68 @@ func (m *UserFlags) validate(all bool) error {
 
 	// no validation rules for IsRegisteredAccount
 
+	// no validation rules for CanSendIsTypingNotifications
+
+	// no validation rules for CanSendIsTypingNotificationsAsListener
+
+	if all {
+		switch v := interface{}(m.GetIsTypingNotificationInterval()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UserFlagsValidationError{
+					field:  "IsTypingNotificationInterval",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UserFlagsValidationError{
+					field:  "IsTypingNotificationInterval",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetIsTypingNotificationInterval()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UserFlagsValidationError{
+				field:  "IsTypingNotificationInterval",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetIsTypingNotificationTimeout()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UserFlagsValidationError{
+					field:  "IsTypingNotificationTimeout",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UserFlagsValidationError{
+					field:  "IsTypingNotificationTimeout",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetIsTypingNotificationTimeout()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UserFlagsValidationError{
+				field:  "IsTypingNotificationTimeout",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return UserFlagsMultiError(errors)
 	}

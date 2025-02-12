@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Message, proto3, Timestamp } from "@bufbuild/protobuf";
+import { Duration, Message, proto3, Timestamp } from "@bufbuild/protobuf";
 import { Auth, PaymentAmount, PublicKey, Signature, UserId } from "../../common/v1/common_pb";
 
 /**
@@ -748,6 +748,35 @@ export class UserFlags extends Message<UserFlags> {
    */
   isRegisteredAccount = false;
 
+  /**
+   * Can this user call NotifyIsTyping at all?
+   *
+   * @generated from field: bool can_send_is_typing_notifications = 5;
+   */
+  canSendIsTypingNotifications = false;
+
+  /**
+   * Can this user call NotifyIsTyping in chats where they are a listener?
+   *
+   * @generated from field: bool can_send_is_typing_notifications_as_listener = 6;
+   */
+  canSendIsTypingNotificationsAsListener = false;
+
+  /**
+   * Interval between calling NotifyIsTyping
+   *
+   * @generated from field: google.protobuf.Duration is_typing_notification_interval = 7;
+   */
+  isTypingNotificationInterval?: Duration;
+
+  /**
+   * Client-side timeout for when they haven't seen an IsTyping event from a user.
+   * After this timeout has elapsed, client should assume the user has stopped typing.
+   *
+   * @generated from field: google.protobuf.Duration is_typing_notification_timeout = 8;
+   */
+  isTypingNotificationTimeout?: Duration;
+
   constructor(data?: PartialMessage<UserFlags>) {
     super();
     proto3.util.initPartial(data, this);
@@ -760,6 +789,10 @@ export class UserFlags extends Message<UserFlags> {
     { no: 2, name: "start_group_fee", kind: "message", T: PaymentAmount },
     { no: 3, name: "fee_destination", kind: "message", T: PublicKey },
     { no: 4, name: "is_registered_account", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "can_send_is_typing_notifications", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "can_send_is_typing_notifications_as_listener", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "is_typing_notification_interval", kind: "message", T: Duration },
+    { no: 8, name: "is_typing_notification_timeout", kind: "message", T: Duration },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserFlags {
