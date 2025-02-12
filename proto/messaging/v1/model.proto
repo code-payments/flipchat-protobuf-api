@@ -81,9 +81,17 @@ message Pointer {
 message IsTyping {
     common.v1.UserId user_id = 1 [(validate.rules).message.required = true];
 
-    // is_typing indicates whether or not the user is typing.
-    // If false, the user has explicitly stopped typing.
+    // Deprecated: Use typing_state instead
     bool is_typing = 2;
+
+    TypingState typing_state = 3;
+}
+
+enum TypingState {
+    STARTED_TYPING   = 0;
+    STILL_TYPING     = 1;
+    STOPPED_TYPING   = 2;
+    TYPING_TIMED_OUT = 3;
 }
 
 // Content for a chat message

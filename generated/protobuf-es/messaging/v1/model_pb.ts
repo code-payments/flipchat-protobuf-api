@@ -8,6 +8,38 @@ import { Message as Message$1, proto3, Timestamp } from "@bufbuild/protobuf";
 import { PaymentAmount, UserId } from "../../common/v1/common_pb";
 
 /**
+ * @generated from enum flipchat.messaging.v1.TypingState
+ */
+export enum TypingState {
+  /**
+   * @generated from enum value: STARTED_TYPING = 0;
+   */
+  STARTED_TYPING = 0,
+
+  /**
+   * @generated from enum value: STILL_TYPING = 1;
+   */
+  STILL_TYPING = 1,
+
+  /**
+   * @generated from enum value: STOPPED_TYPING = 2;
+   */
+  STOPPED_TYPING = 2,
+
+  /**
+   * @generated from enum value: TYPING_TIMED_OUT = 3;
+   */
+  TYPING_TIMED_OUT = 3,
+}
+// Retrieve enum metadata with: proto3.getEnumType(TypingState)
+proto3.util.setEnumType(TypingState, "flipchat.messaging.v1.TypingState", [
+  { no: 0, name: "STARTED_TYPING" },
+  { no: 1, name: "STILL_TYPING" },
+  { no: 2, name: "STOPPED_TYPING" },
+  { no: 3, name: "TYPING_TIMED_OUT" },
+]);
+
+/**
  * @generated from message flipchat.messaging.v1.MessageId
  */
 export class MessageId extends Message$1<MessageId> {
@@ -294,12 +326,16 @@ export class IsTyping extends Message$1<IsTyping> {
   userId?: UserId;
 
   /**
-   * is_typing indicates whether or not the user is typing.
-   * If false, the user has explicitly stopped typing.
+   * Deprecated: Use typing_state instead
    *
    * @generated from field: bool is_typing = 2;
    */
   isTyping = false;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.TypingState typing_state = 3;
+   */
+  typingState = TypingState.STARTED_TYPING;
 
   constructor(data?: PartialMessage<IsTyping>) {
     super();
@@ -311,6 +347,7 @@ export class IsTyping extends Message$1<IsTyping> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "user_id", kind: "message", T: UserId },
     { no: 2, name: "is_typing", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "typing_state", kind: "enum", T: proto3.getEnumType(TypingState) },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): IsTyping {

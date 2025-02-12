@@ -876,6 +876,8 @@ func (m *IsTyping) validate(all bool) error {
 
 	// no validation rules for IsTyping
 
+	// no validation rules for TypingState
+
 	if len(errors) > 0 {
 		return IsTypingMultiError(errors)
 	}

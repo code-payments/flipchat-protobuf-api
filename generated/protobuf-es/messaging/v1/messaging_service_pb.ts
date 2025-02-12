@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import { Auth, ChatId, ClientPong, IntentId, QueryOptions, ServerPing, UserId } from "../../common/v1/common_pb";
-import { Content, Message as Message$1, MessageBatch, MessageId, MessageIdBatch, Pointer } from "./model_pb";
+import { Content, Message as Message$1, MessageBatch, MessageId, MessageIdBatch, Pointer, TypingState } from "./model_pb";
 
 /**
  * @generated from message flipchat.messaging.v1.StreamMessagesRequest
@@ -830,9 +830,16 @@ export class NotifyIsTypingRequest extends Message<NotifyIsTypingRequest> {
   chatId?: ChatId;
 
   /**
+   * Deprecated: Use typing_state instead
+   *
    * @generated from field: bool is_typing = 2;
    */
   isTyping = false;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.TypingState typing_state = 4;
+   */
+  typingState = TypingState.STARTED_TYPING;
 
   /**
    * @generated from field: flipchat.common.v1.Auth auth = 3;
@@ -849,6 +856,7 @@ export class NotifyIsTypingRequest extends Message<NotifyIsTypingRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
     { no: 2, name: "is_typing", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "typing_state", kind: "enum", T: proto3.getEnumType(TypingState) },
     { no: 3, name: "auth", kind: "message", T: Auth },
   ]);
 

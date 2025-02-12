@@ -2419,6 +2419,8 @@ func (m *NotifyIsTypingRequest) validate(all bool) error {
 
 	// no validation rules for IsTyping
 
+	// no validation rules for TypingState
+
 	if m.GetAuth() == nil {
 		err := NotifyIsTypingRequestValidationError{
 			field:  "Auth",
