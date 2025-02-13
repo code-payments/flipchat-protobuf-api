@@ -882,6 +882,293 @@ var _ interface {
 	ErrorName() string
 } = LinkSocialAccountResponseValidationError{}
 
+// Validate checks the field values on UnlinkSocialAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UnlinkSocialAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UnlinkSocialAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UnlinkSocialAccountRequestMultiError, or nil if none found.
+func (m *UnlinkSocialAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UnlinkSocialAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetAuth() == nil {
+		err := UnlinkSocialAccountRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UnlinkSocialAccountRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UnlinkSocialAccountRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UnlinkSocialAccountRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	oneofSocialIdentifierPresent := false
+	switch v := m.SocialIdentifier.(type) {
+	case *UnlinkSocialAccountRequest_XUserId:
+		if v == nil {
+			err := UnlinkSocialAccountRequestValidationError{
+				field:  "SocialIdentifier",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofSocialIdentifierPresent = true
+
+		if utf8.RuneCountInString(m.GetXUserId()) > 32 {
+			err := UnlinkSocialAccountRequestValidationError{
+				field:  "XUserId",
+				reason: "value length must be at most 32 runes",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+	default:
+		_ = v // ensures v is used
+	}
+	if !oneofSocialIdentifierPresent {
+		err := UnlinkSocialAccountRequestValidationError{
+			field:  "SocialIdentifier",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return UnlinkSocialAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UnlinkSocialAccountRequestMultiError is an error wrapping multiple
+// validation errors returned by UnlinkSocialAccountRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UnlinkSocialAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UnlinkSocialAccountRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UnlinkSocialAccountRequestMultiError) AllErrors() []error { return m }
+
+// UnlinkSocialAccountRequestValidationError is the validation error returned
+// by UnlinkSocialAccountRequest.Validate if the designated constraints aren't met.
+type UnlinkSocialAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UnlinkSocialAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UnlinkSocialAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UnlinkSocialAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UnlinkSocialAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UnlinkSocialAccountRequestValidationError) ErrorName() string {
+	return "UnlinkSocialAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UnlinkSocialAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUnlinkSocialAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UnlinkSocialAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UnlinkSocialAccountRequestValidationError{}
+
+// Validate checks the field values on UnlinkSocialAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UnlinkSocialAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UnlinkSocialAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UnlinkSocialAccountResponseMultiError, or nil if none found.
+func (m *UnlinkSocialAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UnlinkSocialAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return UnlinkSocialAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UnlinkSocialAccountResponseMultiError is an error wrapping multiple
+// validation errors returned by UnlinkSocialAccountResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UnlinkSocialAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UnlinkSocialAccountResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UnlinkSocialAccountResponseMultiError) AllErrors() []error { return m }
+
+// UnlinkSocialAccountResponseValidationError is the validation error returned
+// by UnlinkSocialAccountResponse.Validate if the designated constraints
+// aren't met.
+type UnlinkSocialAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UnlinkSocialAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UnlinkSocialAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UnlinkSocialAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UnlinkSocialAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UnlinkSocialAccountResponseValidationError) ErrorName() string {
+	return "UnlinkSocialAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UnlinkSocialAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUnlinkSocialAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UnlinkSocialAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UnlinkSocialAccountResponseValidationError{}
+
 // Validate checks the field values on LinkSocialAccountRequest_LinkingToken
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if

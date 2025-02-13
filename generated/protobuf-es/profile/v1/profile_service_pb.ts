@@ -421,3 +421,109 @@ proto3.util.setEnumType(LinkSocialAccountResponse_Result, "flipchat.profile.v1.L
   { no: 3, name: "DENIED" },
 ]);
 
+/**
+ * @generated from message flipchat.profile.v1.UnlinkSocialAccountRequest
+ */
+export class UnlinkSocialAccountRequest extends Message<UnlinkSocialAccountRequest> {
+  /**
+   * @generated from oneof flipchat.profile.v1.UnlinkSocialAccountRequest.social_identifier
+   */
+  socialIdentifier: {
+    /**
+     * @generated from field: string x_user_id = 1;
+     */
+    value: string;
+    case: "xUserId";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 10;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<UnlinkSocialAccountRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.profile.v1.UnlinkSocialAccountRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "x_user_id", kind: "scalar", T: 9 /* ScalarType.STRING */, oneof: "social_identifier" },
+    { no: 10, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UnlinkSocialAccountRequest {
+    return new UnlinkSocialAccountRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UnlinkSocialAccountRequest {
+    return new UnlinkSocialAccountRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UnlinkSocialAccountRequest {
+    return new UnlinkSocialAccountRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UnlinkSocialAccountRequest | PlainMessage<UnlinkSocialAccountRequest> | undefined, b: UnlinkSocialAccountRequest | PlainMessage<UnlinkSocialAccountRequest> | undefined): boolean {
+    return proto3.util.equals(UnlinkSocialAccountRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.profile.v1.UnlinkSocialAccountResponse
+ */
+export class UnlinkSocialAccountResponse extends Message<UnlinkSocialAccountResponse> {
+  /**
+   * @generated from field: flipchat.profile.v1.UnlinkSocialAccountResponse.Result result = 1;
+   */
+  result = UnlinkSocialAccountResponse_Result.OK;
+
+  constructor(data?: PartialMessage<UnlinkSocialAccountResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.profile.v1.UnlinkSocialAccountResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(UnlinkSocialAccountResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UnlinkSocialAccountResponse {
+    return new UnlinkSocialAccountResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UnlinkSocialAccountResponse {
+    return new UnlinkSocialAccountResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UnlinkSocialAccountResponse {
+    return new UnlinkSocialAccountResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UnlinkSocialAccountResponse | PlainMessage<UnlinkSocialAccountResponse> | undefined, b: UnlinkSocialAccountResponse | PlainMessage<UnlinkSocialAccountResponse> | undefined): boolean {
+    return proto3.util.equals(UnlinkSocialAccountResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.profile.v1.UnlinkSocialAccountResponse.Result
+ */
+export enum UnlinkSocialAccountResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(UnlinkSocialAccountResponse_Result)
+proto3.util.setEnumType(UnlinkSocialAccountResponse_Result, "flipchat.profile.v1.UnlinkSocialAccountResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+

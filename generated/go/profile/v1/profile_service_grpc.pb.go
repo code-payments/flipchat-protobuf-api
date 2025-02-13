@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Profile_GetProfile_FullMethodName        = "/flipchat.profile.v1.Profile/GetProfile"
-	Profile_SetDisplayName_FullMethodName    = "/flipchat.profile.v1.Profile/SetDisplayName"
-	Profile_LinkSocialAccount_FullMethodName = "/flipchat.profile.v1.Profile/LinkSocialAccount"
+	Profile_GetProfile_FullMethodName          = "/flipchat.profile.v1.Profile/GetProfile"
+	Profile_SetDisplayName_FullMethodName      = "/flipchat.profile.v1.Profile/SetDisplayName"
+	Profile_LinkSocialAccount_FullMethodName   = "/flipchat.profile.v1.Profile/LinkSocialAccount"
+	Profile_UnlinkSocialAccount_FullMethodName = "/flipchat.profile.v1.Profile/UnlinkSocialAccount"
 )
 
 // ProfileClient is the client API for Profile service.
@@ -32,6 +33,8 @@ type ProfileClient interface {
 	SetDisplayName(ctx context.Context, in *SetDisplayNameRequest, opts ...grpc.CallOption) (*SetDisplayNameResponse, error)
 	// LinkSocialAccount links a social account to a user
 	LinkSocialAccount(ctx context.Context, in *LinkSocialAccountRequest, opts ...grpc.CallOption) (*LinkSocialAccountResponse, error)
+	// UnlinkSocialAccount removes a social account link from a user
+	UnlinkSocialAccount(ctx context.Context, in *UnlinkSocialAccountRequest, opts ...grpc.CallOption) (*UnlinkSocialAccountResponse, error)
 }
 
 type profileClient struct {
@@ -72,6 +75,16 @@ func (c *profileClient) LinkSocialAccount(ctx context.Context, in *LinkSocialAcc
 	return out, nil
 }
 
+func (c *profileClient) UnlinkSocialAccount(ctx context.Context, in *UnlinkSocialAccountRequest, opts ...grpc.CallOption) (*UnlinkSocialAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnlinkSocialAccountResponse)
+	err := c.cc.Invoke(ctx, Profile_UnlinkSocialAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProfileServer is the server API for Profile service.
 // All implementations must embed UnimplementedProfileServer
 // for forward compatibility.
@@ -80,6 +93,8 @@ type ProfileServer interface {
 	SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error)
 	// LinkSocialAccount links a social account to a user
 	LinkSocialAccount(context.Context, *LinkSocialAccountRequest) (*LinkSocialAccountResponse, error)
+	// UnlinkSocialAccount removes a social account link from a user
+	UnlinkSocialAccount(context.Context, *UnlinkSocialAccountRequest) (*UnlinkSocialAccountResponse, error)
 	mustEmbedUnimplementedProfileServer()
 }
 
@@ -98,6 +113,9 @@ func (UnimplementedProfileServer) SetDisplayName(context.Context, *SetDisplayNam
 }
 func (UnimplementedProfileServer) LinkSocialAccount(context.Context, *LinkSocialAccountRequest) (*LinkSocialAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LinkSocialAccount not implemented")
+}
+func (UnimplementedProfileServer) UnlinkSocialAccount(context.Context, *UnlinkSocialAccountRequest) (*UnlinkSocialAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnlinkSocialAccount not implemented")
 }
 func (UnimplementedProfileServer) mustEmbedUnimplementedProfileServer() {}
 func (UnimplementedProfileServer) testEmbeddedByValue()                 {}
@@ -174,6 +192,24 @@ func _Profile_LinkSocialAccount_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Profile_UnlinkSocialAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnlinkSocialAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServer).UnlinkSocialAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Profile_UnlinkSocialAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServer).UnlinkSocialAccount(ctx, req.(*UnlinkSocialAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Profile_ServiceDesc is the grpc.ServiceDesc for Profile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -192,6 +228,10 @@ var Profile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LinkSocialAccount",
 			Handler:    _Profile_LinkSocialAccount_Handler,
+		},
+		{
+			MethodName: "UnlinkSocialAccount",
+			Handler:    _Profile_UnlinkSocialAccount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

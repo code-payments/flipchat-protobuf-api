@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetProfileRequest, GetProfileResponse, LinkSocialAccountRequest, LinkSocialAccountResponse, SetDisplayNameRequest, SetDisplayNameResponse } from "./profile_service_pb";
+import { GetProfileRequest, GetProfileResponse, LinkSocialAccountRequest, LinkSocialAccountResponse, SetDisplayNameRequest, SetDisplayNameResponse, UnlinkSocialAccountRequest, UnlinkSocialAccountResponse } from "./profile_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -39,6 +39,17 @@ export const Profile = {
       name: "LinkSocialAccount",
       I: LinkSocialAccountRequest,
       O: LinkSocialAccountResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * UnlinkSocialAccount removes a social account link from a user
+     *
+     * @generated from rpc flipchat.profile.v1.Profile.UnlinkSocialAccount
+     */
+    unlinkSocialAccount: {
+      name: "UnlinkSocialAccount",
+      I: UnlinkSocialAccountRequest,
+      O: UnlinkSocialAccountResponse,
       kind: MethodKind.Unary,
     },
   }
