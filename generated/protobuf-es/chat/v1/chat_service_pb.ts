@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 import { Auth, ChatId, ClientPong, IntentId, PagingToken, PaymentAmount, QueryOptions, ServerPing, UserId } from "../../common/v1/common_pb";
-import { IsTyping, Message as Message$1, MessageId, Pointer } from "../../messaging/v1/model_pb";
+import { IsTyping, Message as Message$1, MessageId, Pointer, PointerUpdate } from "../../messaging/v1/model_pb";
 import { SocialProfile } from "../../profile/v1/model_pb";
 
 /**
@@ -312,12 +312,18 @@ export class StreamChatEventsResponse_ChatUpdate extends Message<StreamChatEvent
    * "relevant to UI updates". For example, when a user has read the latest
    * message.
    *
-   * @generated from field: flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate pointer = 5;
+   * Note: Updates now go through the message stream, but may be rediverted here
+   * in the future
+   *
+   * @generated from field: flipchat.messaging.v1.PointerUpdate pointer = 5;
    */
-  pointer?: StreamChatEventsResponse_ChatUpdate_PointerUpdate;
+  pointer?: PointerUpdate;
 
   /**
    * IsTyping indicates whether or not someone is typing in the group.
+   *
+   * Note: Updates now go through the message stream, but may be rediverted here
+   * in the future
    *
    * @generated from field: flipchat.messaging.v1.IsTyping is_typing = 6;
    */
@@ -337,7 +343,7 @@ export class StreamChatEventsResponse_ChatUpdate extends Message<StreamChatEvent
     { no: 3, name: "member_update", kind: "message", T: MemberUpdate },
     { no: 8, name: "member_updates", kind: "message", T: MemberUpdate, repeated: true },
     { no: 4, name: "last_message", kind: "message", T: Message$1 },
-    { no: 5, name: "pointer", kind: "message", T: StreamChatEventsResponse_ChatUpdate_PointerUpdate },
+    { no: 5, name: "pointer", kind: "message", T: PointerUpdate },
     { no: 6, name: "is_typing", kind: "message", T: IsTyping },
   ]);
 
@@ -355,49 +361,6 @@ export class StreamChatEventsResponse_ChatUpdate extends Message<StreamChatEvent
 
   static equals(a: StreamChatEventsResponse_ChatUpdate | PlainMessage<StreamChatEventsResponse_ChatUpdate> | undefined, b: StreamChatEventsResponse_ChatUpdate | PlainMessage<StreamChatEventsResponse_ChatUpdate> | undefined): boolean {
     return proto3.util.equals(StreamChatEventsResponse_ChatUpdate, a, b);
-  }
-}
-
-/**
- * @generated from message flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate
- */
-export class StreamChatEventsResponse_ChatUpdate_PointerUpdate extends Message<StreamChatEventsResponse_ChatUpdate_PointerUpdate> {
-  /**
-   * @generated from field: flipchat.common.v1.UserId member = 1;
-   */
-  member?: UserId;
-
-  /**
-   * @generated from field: flipchat.messaging.v1.Pointer pointer = 2;
-   */
-  pointer?: Pointer;
-
-  constructor(data?: PartialMessage<StreamChatEventsResponse_ChatUpdate_PointerUpdate>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.chat.v1.StreamChatEventsResponse.ChatUpdate.PointerUpdate";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "member", kind: "message", T: UserId },
-    { no: 2, name: "pointer", kind: "message", T: Pointer },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamChatEventsResponse_ChatUpdate_PointerUpdate {
-    return new StreamChatEventsResponse_ChatUpdate_PointerUpdate().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_ChatUpdate_PointerUpdate {
-    return new StreamChatEventsResponse_ChatUpdate_PointerUpdate().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamChatEventsResponse_ChatUpdate_PointerUpdate {
-    return new StreamChatEventsResponse_ChatUpdate_PointerUpdate().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: StreamChatEventsResponse_ChatUpdate_PointerUpdate | PlainMessage<StreamChatEventsResponse_ChatUpdate_PointerUpdate> | undefined, b: StreamChatEventsResponse_ChatUpdate_PointerUpdate | PlainMessage<StreamChatEventsResponse_ChatUpdate_PointerUpdate> | undefined): boolean {
-    return proto3.util.equals(StreamChatEventsResponse_ChatUpdate_PointerUpdate, a, b);
   }
 }
 

@@ -387,6 +387,90 @@ func (m *StreamMessagesResponse) validate(all bool) error {
 			}
 		}
 
+	case *StreamMessagesResponse_PointerUpdates:
+		if v == nil {
+			err := StreamMessagesResponseValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetPointerUpdates()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, StreamMessagesResponseValidationError{
+						field:  "PointerUpdates",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, StreamMessagesResponseValidationError{
+						field:  "PointerUpdates",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetPointerUpdates()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamMessagesResponseValidationError{
+					field:  "PointerUpdates",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *StreamMessagesResponse_IsTypingNotifications:
+		if v == nil {
+			err := StreamMessagesResponseValidationError{
+				field:  "Type",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofTypePresent = true
+
+		if all {
+			switch v := interface{}(m.GetIsTypingNotifications()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, StreamMessagesResponseValidationError{
+						field:  "IsTypingNotifications",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, StreamMessagesResponseValidationError{
+						field:  "IsTypingNotifications",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetIsTypingNotifications()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamMessagesResponseValidationError{
+					field:  "IsTypingNotifications",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		_ = v // ensures v is used
 	}

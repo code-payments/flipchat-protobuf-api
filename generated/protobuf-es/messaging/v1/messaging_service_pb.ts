@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import { Auth, ChatId, ClientPong, IntentId, QueryOptions, ServerPing, UserId } from "../../common/v1/common_pb";
-import { Content, Message as Message$1, MessageBatch, MessageId, MessageIdBatch, Pointer, TypingState } from "./model_pb";
+import { Content, IsTypingBatch, Message as Message$1, MessageBatch, MessageId, MessageIdBatch, Pointer, PointerUpdateBatch, TypingState } from "./model_pb";
 
 /**
  * @generated from message flipchat.messaging.v1.StreamMessagesRequest
@@ -147,6 +147,18 @@ export class StreamMessagesResponse extends Message<StreamMessagesResponse> {
      */
     value: MessageBatch;
     case: "messages";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.PointerUpdateBatch pointer_updates = 4;
+     */
+    value: PointerUpdateBatch;
+    case: "pointerUpdates";
+  } | {
+    /**
+     * @generated from field: flipchat.messaging.v1.IsTypingBatch is_typing_notifications = 5;
+     */
+    value: IsTypingBatch;
+    case: "isTypingNotifications";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<StreamMessagesResponse>) {
@@ -160,6 +172,8 @@ export class StreamMessagesResponse extends Message<StreamMessagesResponse> {
     { no: 1, name: "ping", kind: "message", T: ServerPing, oneof: "type" },
     { no: 2, name: "error", kind: "message", T: StreamMessagesResponse_StreamError, oneof: "type" },
     { no: 3, name: "messages", kind: "message", T: MessageBatch, oneof: "type" },
+    { no: 4, name: "pointer_updates", kind: "message", T: PointerUpdateBatch, oneof: "type" },
+    { no: 5, name: "is_typing_notifications", kind: "message", T: IsTypingBatch, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamMessagesResponse {

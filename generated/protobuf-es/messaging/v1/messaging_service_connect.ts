@@ -13,7 +13,8 @@ export const Messaging = {
   typeName: "flipchat.messaging.v1.Messaging",
   methods: {
     /**
-     * StreamMessages streams all messages/message states for the requested chat.
+     * StreamMessages streams all messages/message states (eg. pointers, typing, etc)
+     * for the requested chat.
      *
      * @generated from rpc flipchat.messaging.v1.Messaging.StreamMessages
      */

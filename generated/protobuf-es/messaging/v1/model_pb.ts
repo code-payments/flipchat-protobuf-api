@@ -317,6 +317,86 @@ proto3.util.setEnumType(Pointer_Type, "flipchat.messaging.v1.Pointer.Type", [
 ]);
 
 /**
+ * @generated from message flipchat.messaging.v1.PointerUpdate
+ */
+export class PointerUpdate extends Message$1<PointerUpdate> {
+  /**
+   * @generated from field: flipchat.common.v1.UserId member = 1;
+   */
+  member?: UserId;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.Pointer pointer = 2;
+   */
+  pointer?: Pointer;
+
+  constructor(data?: PartialMessage<PointerUpdate>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.PointerUpdate";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "member", kind: "message", T: UserId },
+    { no: 2, name: "pointer", kind: "message", T: Pointer },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PointerUpdate {
+    return new PointerUpdate().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PointerUpdate {
+    return new PointerUpdate().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PointerUpdate {
+    return new PointerUpdate().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PointerUpdate | PlainMessage<PointerUpdate> | undefined, b: PointerUpdate | PlainMessage<PointerUpdate> | undefined): boolean {
+    return proto3.util.equals(PointerUpdate, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.PointerUpdateBatch
+ */
+export class PointerUpdateBatch extends Message$1<PointerUpdateBatch> {
+  /**
+   * @generated from field: repeated flipchat.messaging.v1.PointerUpdate pointer_updates = 1;
+   */
+  pointerUpdates: PointerUpdate[] = [];
+
+  constructor(data?: PartialMessage<PointerUpdateBatch>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.PointerUpdateBatch";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "pointer_updates", kind: "message", T: PointerUpdate, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PointerUpdateBatch {
+    return new PointerUpdateBatch().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PointerUpdateBatch {
+    return new PointerUpdateBatch().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PointerUpdateBatch {
+    return new PointerUpdateBatch().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PointerUpdateBatch | PlainMessage<PointerUpdateBatch> | undefined, b: PointerUpdateBatch | PlainMessage<PointerUpdateBatch> | undefined): boolean {
+    return proto3.util.equals(PointerUpdateBatch, a, b);
+  }
+}
+
+/**
  * @generated from message flipchat.messaging.v1.IsTyping
  */
 export class IsTyping extends Message$1<IsTyping> {
@@ -364,6 +444,43 @@ export class IsTyping extends Message$1<IsTyping> {
 
   static equals(a: IsTyping | PlainMessage<IsTyping> | undefined, b: IsTyping | PlainMessage<IsTyping> | undefined): boolean {
     return proto3.util.equals(IsTyping, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.messaging.v1.IsTypingBatch
+ */
+export class IsTypingBatch extends Message$1<IsTypingBatch> {
+  /**
+   * @generated from field: repeated flipchat.messaging.v1.IsTyping is_typing_notifications = 1;
+   */
+  isTypingNotifications: IsTyping[] = [];
+
+  constructor(data?: PartialMessage<IsTypingBatch>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.messaging.v1.IsTypingBatch";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "is_typing_notifications", kind: "message", T: IsTyping, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): IsTypingBatch {
+    return new IsTypingBatch().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): IsTypingBatch {
+    return new IsTypingBatch().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): IsTypingBatch {
+    return new IsTypingBatch().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: IsTypingBatch | PlainMessage<IsTypingBatch> | undefined, b: IsTypingBatch | PlainMessage<IsTypingBatch> | undefined): boolean {
+    return proto3.util.equals(IsTypingBatch, a, b);
   }
 }
 

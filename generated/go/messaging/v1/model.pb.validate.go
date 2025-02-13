@@ -812,6 +812,333 @@ var _Pointer_Type_NotInLookup = map[Pointer_Type]struct{}{
 	0: {},
 }
 
+// Validate checks the field values on PointerUpdate with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *PointerUpdate) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PointerUpdate with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in PointerUpdateMultiError, or
+// nil if none found.
+func (m *PointerUpdate) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PointerUpdate) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetMember() == nil {
+		err := PointerUpdateValidationError{
+			field:  "Member",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetMember()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PointerUpdateValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PointerUpdateValidationError{
+					field:  "Member",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMember()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PointerUpdateValidationError{
+				field:  "Member",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetPointer() == nil {
+		err := PointerUpdateValidationError{
+			field:  "Pointer",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetPointer()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PointerUpdateValidationError{
+					field:  "Pointer",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PointerUpdateValidationError{
+					field:  "Pointer",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPointer()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PointerUpdateValidationError{
+				field:  "Pointer",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return PointerUpdateMultiError(errors)
+	}
+
+	return nil
+}
+
+// PointerUpdateMultiError is an error wrapping multiple validation errors
+// returned by PointerUpdate.ValidateAll() if the designated constraints
+// aren't met.
+type PointerUpdateMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PointerUpdateMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PointerUpdateMultiError) AllErrors() []error { return m }
+
+// PointerUpdateValidationError is the validation error returned by
+// PointerUpdate.Validate if the designated constraints aren't met.
+type PointerUpdateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PointerUpdateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PointerUpdateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PointerUpdateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PointerUpdateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PointerUpdateValidationError) ErrorName() string { return "PointerUpdateValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PointerUpdateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPointerUpdate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PointerUpdateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PointerUpdateValidationError{}
+
+// Validate checks the field values on PointerUpdateBatch with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PointerUpdateBatch) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PointerUpdateBatch with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PointerUpdateBatchMultiError, or nil if none found.
+func (m *PointerUpdateBatch) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PointerUpdateBatch) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := len(m.GetPointerUpdates()); l < 1 || l > 1024 {
+		err := PointerUpdateBatchValidationError{
+			field:  "PointerUpdates",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetPointerUpdates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PointerUpdateBatchValidationError{
+						field:  fmt.Sprintf("PointerUpdates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PointerUpdateBatchValidationError{
+						field:  fmt.Sprintf("PointerUpdates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PointerUpdateBatchValidationError{
+					field:  fmt.Sprintf("PointerUpdates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return PointerUpdateBatchMultiError(errors)
+	}
+
+	return nil
+}
+
+// PointerUpdateBatchMultiError is an error wrapping multiple validation errors
+// returned by PointerUpdateBatch.ValidateAll() if the designated constraints
+// aren't met.
+type PointerUpdateBatchMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PointerUpdateBatchMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PointerUpdateBatchMultiError) AllErrors() []error { return m }
+
+// PointerUpdateBatchValidationError is the validation error returned by
+// PointerUpdateBatch.Validate if the designated constraints aren't met.
+type PointerUpdateBatchValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PointerUpdateBatchValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PointerUpdateBatchValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PointerUpdateBatchValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PointerUpdateBatchValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PointerUpdateBatchValidationError) ErrorName() string {
+	return "PointerUpdateBatchValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PointerUpdateBatchValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPointerUpdateBatch.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PointerUpdateBatchValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PointerUpdateBatchValidationError{}
+
 // Validate checks the field values on IsTyping with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -954,6 +1281,151 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = IsTypingValidationError{}
+
+// Validate checks the field values on IsTypingBatch with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *IsTypingBatch) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on IsTypingBatch with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in IsTypingBatchMultiError, or
+// nil if none found.
+func (m *IsTypingBatch) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *IsTypingBatch) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if l := len(m.GetIsTypingNotifications()); l < 1 || l > 1024 {
+		err := IsTypingBatchValidationError{
+			field:  "IsTypingNotifications",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetIsTypingNotifications() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, IsTypingBatchValidationError{
+						field:  fmt.Sprintf("IsTypingNotifications[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, IsTypingBatchValidationError{
+						field:  fmt.Sprintf("IsTypingNotifications[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return IsTypingBatchValidationError{
+					field:  fmt.Sprintf("IsTypingNotifications[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return IsTypingBatchMultiError(errors)
+	}
+
+	return nil
+}
+
+// IsTypingBatchMultiError is an error wrapping multiple validation errors
+// returned by IsTypingBatch.ValidateAll() if the designated constraints
+// aren't met.
+type IsTypingBatchMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m IsTypingBatchMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m IsTypingBatchMultiError) AllErrors() []error { return m }
+
+// IsTypingBatchValidationError is the validation error returned by
+// IsTypingBatch.Validate if the designated constraints aren't met.
+type IsTypingBatchValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e IsTypingBatchValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e IsTypingBatchValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e IsTypingBatchValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e IsTypingBatchValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e IsTypingBatchValidationError) ErrorName() string { return "IsTypingBatchValidationError" }
+
+// Error satisfies the builtin error interface
+func (e IsTypingBatchValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sIsTypingBatch.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = IsTypingBatchValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = IsTypingBatchValidationError{}
 
 // Validate checks the field values on Content with the rules defined in the
 // proto definition for this message. If any rules are violated, the first

@@ -31,7 +31,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MessagingClient interface {
-	// StreamMessages streams all messages/message states for the requested chat.
+	// StreamMessages streams all messages/message states (eg. pointers, typing, etc)
+	// for the requested chat.
 	StreamMessages(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamMessagesRequest, StreamMessagesResponse], error)
 	// GetMessage gets a single message in a chat
 	GetMessage(ctx context.Context, in *GetMessageRequest, opts ...grpc.CallOption) (*GetMessageResponse, error)
@@ -122,7 +123,8 @@ func (c *messagingClient) NotifyIsTyping(ctx context.Context, in *NotifyIsTyping
 // All implementations must embed UnimplementedMessagingServer
 // for forward compatibility.
 type MessagingServer interface {
-	// StreamMessages streams all messages/message states for the requested chat.
+	// StreamMessages streams all messages/message states (eg. pointers, typing, etc)
+	// for the requested chat.
 	StreamMessages(grpc.BidiStreamingServer[StreamMessagesRequest, StreamMessagesResponse]) error
 	// GetMessage gets a single message in a chat
 	GetMessage(context.Context, *GetMessageRequest) (*GetMessageResponse, error)
