@@ -1182,7 +1182,7 @@ func (x *NotifyIsTypingRequest) GetTypingState() TypingState {
 	if x != nil {
 		return x.TypingState
 	}
-	return TypingState_STARTED_TYPING
+	return TypingState_UNKNOWN_TYPING_STATE
 }
 
 func (x *NotifyIsTypingRequest) GetAuth() *v1.Auth {

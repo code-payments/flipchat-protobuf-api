@@ -12,31 +12,37 @@ import { PaymentAmount, UserId } from "../../common/v1/common_pb";
  */
 export enum TypingState {
   /**
-   * @generated from enum value: STARTED_TYPING = 0;
+   * @generated from enum value: UNKNOWN_TYPING_STATE = 0;
    */
-  STARTED_TYPING = 0,
+  UNKNOWN_TYPING_STATE = 0,
 
   /**
-   * @generated from enum value: STILL_TYPING = 1;
+   * @generated from enum value: STARTED_TYPING = 1;
    */
-  STILL_TYPING = 1,
+  STARTED_TYPING = 1,
 
   /**
-   * @generated from enum value: STOPPED_TYPING = 2;
+   * @generated from enum value: STILL_TYPING = 2;
    */
-  STOPPED_TYPING = 2,
+  STILL_TYPING = 2,
 
   /**
-   * @generated from enum value: TYPING_TIMED_OUT = 3;
+   * @generated from enum value: STOPPED_TYPING = 3;
    */
-  TYPING_TIMED_OUT = 3,
+  STOPPED_TYPING = 3,
+
+  /**
+   * @generated from enum value: TYPING_TIMED_OUT = 4;
+   */
+  TYPING_TIMED_OUT = 4,
 }
 // Retrieve enum metadata with: proto3.getEnumType(TypingState)
 proto3.util.setEnumType(TypingState, "flipchat.messaging.v1.TypingState", [
-  { no: 0, name: "STARTED_TYPING" },
-  { no: 1, name: "STILL_TYPING" },
-  { no: 2, name: "STOPPED_TYPING" },
-  { no: 3, name: "TYPING_TIMED_OUT" },
+  { no: 0, name: "UNKNOWN_TYPING_STATE" },
+  { no: 1, name: "STARTED_TYPING" },
+  { no: 2, name: "STILL_TYPING" },
+  { no: 3, name: "STOPPED_TYPING" },
+  { no: 4, name: "TYPING_TIMED_OUT" },
 ]);
 
 /**
@@ -415,7 +421,7 @@ export class IsTyping extends Message$1<IsTyping> {
   /**
    * @generated from field: flipchat.messaging.v1.TypingState typing_state = 3;
    */
-  typingState = TypingState.STARTED_TYPING;
+  typingState = TypingState.UNKNOWN_TYPING_STATE;
 
   constructor(data?: PartialMessage<IsTyping>) {
     super();

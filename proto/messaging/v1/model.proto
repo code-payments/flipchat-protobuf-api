@@ -108,10 +108,11 @@ message IsTypingBatch {
 }
 
 enum TypingState {
-    STARTED_TYPING   = 0;
-    STILL_TYPING     = 1;
-    STOPPED_TYPING   = 2;
-    TYPING_TIMED_OUT = 3;
+    UNKNOWN_TYPING_STATE = 0;
+    STARTED_TYPING       = 1;
+    STILL_TYPING         = 2;
+    STOPPED_TYPING       = 3;
+    TYPING_TIMED_OUT     = 4;
 }
 
 // Content for a chat message

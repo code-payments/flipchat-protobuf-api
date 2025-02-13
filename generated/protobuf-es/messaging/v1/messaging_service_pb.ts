@@ -853,7 +853,7 @@ export class NotifyIsTypingRequest extends Message<NotifyIsTypingRequest> {
   /**
    * @generated from field: flipchat.messaging.v1.TypingState typing_state = 4;
    */
-  typingState = TypingState.STARTED_TYPING;
+  typingState = TypingState.UNKNOWN_TYPING_STATE;
 
   /**
    * @generated from field: flipchat.common.v1.Auth auth = 3;
