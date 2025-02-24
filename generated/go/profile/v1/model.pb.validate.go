@@ -392,10 +392,10 @@ func (m *XProfile) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if l := utf8.RuneCountInString(m.GetName()); l < 1 || l > 256 {
+	if utf8.RuneCountInString(m.GetName()) > 256 {
 		err := XProfileValidationError{
 			field:  "Name",
-			reason: "value length must be between 1 and 256 runes, inclusive",
+			reason: "value length must be at most 256 runes",
 		}
 		if !all {
 			return err
@@ -403,10 +403,10 @@ func (m *XProfile) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if l := utf8.RuneCountInString(m.GetDescription()); l < 1 || l > 4096 {
+	if utf8.RuneCountInString(m.GetDescription()) > 4096 {
 		err := XProfileValidationError{
 			field:  "Description",
-			reason: "value length must be between 1 and 4096 runes, inclusive",
+			reason: "value length must be at most 4096 runes",
 		}
 		if !all {
 			return err
