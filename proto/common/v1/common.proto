@@ -48,6 +48,12 @@ message ChatId {
     }];
 }
 
+message PreviewId {
+    bytes value = 1 [(validate.rules).bytes = {
+        min_len: 16
+        max_len: 32
+    }];
+}
 
 // AppInstallId is a unque ID tied to a client app installation. It does not
 // identify a device. Value should remain private and not be shared across
@@ -133,8 +139,41 @@ message QueryOptions {
     }
 }
 
+message ImageInfo {
+  int32 width = 1;
+  int32 height = 2;
+  string blur_hash = 3;
+}
+
+message VideoInfo {
+  int32 width = 1;
+  int32 height = 2;
+  int32 duration = 3;
+}
+
+message AudioInfo {
+  int32 duration = 1;
+}
+
 enum Platform {
     UNKNOWN = 0;
     APPLE   = 1;
     GOOGLE  = 2;
+}
+
+enum ModerationStatus {
+   MODERATION_UNKNOWN = 0;
+   MODERATION_PENDING = 1;
+   MODERATION_FLAGGED = 2;
+   MODERATION_APPROVED = 3;
+}
+
+enum ContentType {
+    CONTENT_TYPE_UNKNOWN = 0;
+    CONTENT_TYPE_TEXT = 1;
+    CONTENT_TYPE_IMAGE = 2;
+    CONTENT_TYPE_VIDEO = 3;
+    CONTENT_TYPE_AUDIO = 4;
+    CONTENT_TYPE_PDF = 5;
+    CONTENT_TYPE_FILE = 6;
 }

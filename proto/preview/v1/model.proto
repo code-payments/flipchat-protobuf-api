@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package flipchat.preview.v1;
+
+option go_package = "github.com/code-payments/flipchat-protobuf-api/generated/go/preview/v1;previewpb";
+option java_package = "com.codeinc.flipchat.gen.preview.v1";
+option objc_class_prefix = "FPBpreviewV1";
+
+import "common/v1/common.proto";
+import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+message PreviewUrl {
+  // ID for the preview url, can be used instead of the URL within chat messages.
+  common.v1.PreviewId preview_id = 1 [(validate.rules).message.required = true];
+
+  // The URL of the preview, we may put the original URL behind a short URL or
+  // add anlalytics.
+  string url = 2 [(validate.rules).string = {
+      min_len: 1
+      max_len: 2048
+  }];
+
+  // A title pulled from the URL, either a meta tag, title tag, or the first
+  // h1/h2 tag, falling back to the domain name.
+  string title = 3 [(validate.rules).string = {
+      min_len: 1
+      max_len: 255
+  }];
+
+  // A description pulled from the URL, either a meta tag, description tag, or
+  // the first p tag.
+  string description = 4 [(validate.rules).string = {
+      min_len: 1
+      max_len: 512
+  }];
+
+  // An image pulled from the URL, either a meta tag, og:image tag, or the first
+  // img tag, falling back to a generic image based on the content type.
+  PreviewImage image = 5;
+
+  // The content type of the URL, derived from the Content-Type header.
+  common.v1.ContentType content_type  = 6;
+
+  // The moderation status of the URL.
+  common.v1.ModerationStatus moderation_status  = 7;
+
+  // Timestamp this preview was generated at.
+  google.protobuf.Timestamp ts = 8 [(validate.rules).timestamp.required = true];
+}
+
+message PreviewImage {
+  // The URL of the preview image for the URL.
+  string image_url = 1 [(validate.rules).string = {
+      min_len: 1
+      max_len: 2048
+  }];
+
+  // A blurhash of the image.
+  string image_hash = 2 [(validate.rules).string = {
+      min_len: 1
+      max_len: 255
+  }];
+
+  int32 width = 3;
+  int32 height = 4;
+}

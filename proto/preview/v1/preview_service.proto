@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package flipchat.preview.v1;
+
+option go_package = "github.com/code-payments/flipchat-protobuf-api/generated/go/preview/v1;previewpb";
+option java_package = "com.codeinc.flipchat.gen.preview.v1";
+option objc_class_prefix = "FPBpreviewV1";
+
+import "preview/v1/model.proto";
+import "validate/validate.proto";
+
+service Preview {
+  rpc GetPreviewUrl(GetPreviewUrlRequest) returns (GetPreviewUrlResponse);
+}
+
+message GetPreviewUrlRequest {
+    string url = 1 [(validate.rules).string = {
+        min_len: 1
+        max_len: 2048
+    }];
+}
+
+message GetPreviewUrlResponse {
+    Result result = 1;
+    enum Result {
+        OK              = 0;
+        DENIED          = 1;
+        INVALID_REQUEST = 2;
+        INTERNAL_ERROR  = 3;
+        EXTERNAL_ERROR  = 4;
+    }
+
+    preview.v1.PreviewUrl preview_url = 2;
+}
+
