@@ -138,9 +138,9 @@ export class Notification extends Message<Notification> {
     case: "sendTip";
   } | {
     /**
-     * @generated from field: flipchat.activity.v1.ReceiveTipNotificationMetadata received_tip = 9;
+     * @generated from field: flipchat.activity.v1.ReceivedTipNotificationMetadata received_tip = 9;
      */
-    value: ReceiveTipNotificationMetadata;
+    value: ReceivedTipNotificationMetadata;
     case: "receivedTip";
   } | {
     /**
@@ -166,7 +166,7 @@ export class Notification extends Message<Notification> {
     { no: 6, name: "create_group", kind: "message", T: CreateGroupNotificationMetadata, oneof: "additional_metadata" },
     { no: 7, name: "send_listener_message", kind: "message", T: SendListenerMessageNotificationMetadata, oneof: "additional_metadata" },
     { no: 8, name: "send_tip", kind: "message", T: SendTipNotificationMetadata, oneof: "additional_metadata" },
-    { no: 9, name: "received_tip", kind: "message", T: ReceiveTipNotificationMetadata, oneof: "additional_metadata" },
+    { no: 9, name: "received_tip", kind: "message", T: ReceivedTipNotificationMetadata, oneof: "additional_metadata" },
     { no: 10, name: "promoted_to_speaker", kind: "message", T: PromotedToSpeakerNotificationMetadata, oneof: "additional_metadata" },
   ]);
 
@@ -403,9 +403,9 @@ export class SendTipNotificationMetadata extends Message<SendTipNotificationMeta
 }
 
 /**
- * @generated from message flipchat.activity.v1.ReceiveTipNotificationMetadata
+ * @generated from message flipchat.activity.v1.ReceivedTipNotificationMetadata
  */
-export class ReceiveTipNotificationMetadata extends Message<ReceiveTipNotificationMetadata> {
+export class ReceivedTipNotificationMetadata extends Message<ReceivedTipNotificationMetadata> {
   /**
    * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
    */
@@ -421,33 +421,33 @@ export class ReceiveTipNotificationMetadata extends Message<ReceiveTipNotificati
    */
   totalQuarksReceived = protoInt64.zero;
 
-  constructor(data?: PartialMessage<ReceiveTipNotificationMetadata>) {
+  constructor(data?: PartialMessage<ReceivedTipNotificationMetadata>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "flipchat.activity.v1.ReceiveTipNotificationMetadata";
+  static readonly typeName = "flipchat.activity.v1.ReceivedTipNotificationMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
     { no: 2, name: "message_id", kind: "message", T: MessageId },
     { no: 3, name: "total_quarks_received", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReceiveTipNotificationMetadata {
-    return new ReceiveTipNotificationMetadata().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReceivedTipNotificationMetadata {
+    return new ReceivedTipNotificationMetadata().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReceiveTipNotificationMetadata {
-    return new ReceiveTipNotificationMetadata().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReceivedTipNotificationMetadata {
+    return new ReceivedTipNotificationMetadata().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReceiveTipNotificationMetadata {
-    return new ReceiveTipNotificationMetadata().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReceivedTipNotificationMetadata {
+    return new ReceivedTipNotificationMetadata().fromJsonString(jsonString, options);
   }
 
-  static equals(a: ReceiveTipNotificationMetadata | PlainMessage<ReceiveTipNotificationMetadata> | undefined, b: ReceiveTipNotificationMetadata | PlainMessage<ReceiveTipNotificationMetadata> | undefined): boolean {
-    return proto3.util.equals(ReceiveTipNotificationMetadata, a, b);
+  static equals(a: ReceivedTipNotificationMetadata | PlainMessage<ReceivedTipNotificationMetadata> | undefined, b: ReceivedTipNotificationMetadata | PlainMessage<ReceivedTipNotificationMetadata> | undefined): boolean {
+    return proto3.util.equals(ReceivedTipNotificationMetadata, a, b);
   }
 }
 
@@ -461,12 +461,7 @@ export class PromotedToSpeakerNotificationMetadata extends Message<PromotedToSpe
   chatId?: ChatId;
 
   /**
-   * @generated from field: flipchat.messaging.v1.MessageId message_id = 2;
-   */
-  messageId?: MessageId;
-
-  /**
-   * @generated from field: flipchat.common.v1.UserId promted_by = 3;
+   * @generated from field: flipchat.common.v1.UserId promted_by = 2;
    */
   promtedBy?: UserId;
 
@@ -479,8 +474,7 @@ export class PromotedToSpeakerNotificationMetadata extends Message<PromotedToSpe
   static readonly typeName = "flipchat.activity.v1.PromotedToSpeakerNotificationMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "chat_id", kind: "message", T: ChatId },
-    { no: 2, name: "message_id", kind: "message", T: MessageId },
-    { no: 3, name: "promted_by", kind: "message", T: UserId },
+    { no: 2, name: "promted_by", kind: "message", T: UserId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PromotedToSpeakerNotificationMetadata {

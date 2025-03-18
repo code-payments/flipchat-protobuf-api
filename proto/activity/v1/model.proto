@@ -42,7 +42,7 @@ message Notification {
         CreateGroupNotificationMetadata         create_group          = 6;
         SendListenerMessageNotificationMetadata send_listener_message = 7;
         SendTipNotificationMetadata             send_tip              = 8;
-        ReceiveTipNotificationMetadata          received_tip          = 9;
+        ReceivedTipNotificationMetadata         received_tip          = 9;
         PromotedToSpeakerNotificationMetadata   promoted_to_speaker   = 10;
     }
 }
@@ -77,7 +77,7 @@ message SendTipNotificationMetadata {
     uint64 total_quarks_sent = 3;
 }
 
-message ReceiveTipNotificationMetadata {
+message ReceivedTipNotificationMetadata {
     common.v1.ChatId chat_id = 1 [(validate.rules).timestamp.required = true];
 
     messaging.v1.MessageId message_id = 2 [(validate.rules).timestamp.required = true];
@@ -88,9 +88,7 @@ message ReceiveTipNotificationMetadata {
 message PromotedToSpeakerNotificationMetadata {
     common.v1.ChatId chat_id = 1 [(validate.rules).timestamp.required = true];
 
-    messaging.v1.MessageId message_id = 2 [(validate.rules).timestamp.required = true];
-
-    common.v1.UserId promted_by = 3 [(validate.rules).timestamp.required = true];
+    common.v1.UserId promted_by = 2 [(validate.rules).timestamp.required = true];
 }
 
 // ActivityFeedType enables multiple activity feeds, where notifications may be

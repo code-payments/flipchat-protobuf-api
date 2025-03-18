@@ -1184,22 +1184,22 @@ var _ interface {
 	ErrorName() string
 } = SendTipNotificationMetadataValidationError{}
 
-// Validate checks the field values on ReceiveTipNotificationMetadata with the
+// Validate checks the field values on ReceivedTipNotificationMetadata with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ReceiveTipNotificationMetadata) Validate() error {
+func (m *ReceivedTipNotificationMetadata) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ReceiveTipNotificationMetadata with
+// ValidateAll checks the field values on ReceivedTipNotificationMetadata with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the result is a list of violation errors wrapped in
-// ReceiveTipNotificationMetadataMultiError, or nil if none found.
-func (m *ReceiveTipNotificationMetadata) ValidateAll() error {
+// ReceivedTipNotificationMetadataMultiError, or nil if none found.
+func (m *ReceivedTipNotificationMetadata) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ReceiveTipNotificationMetadata) validate(all bool) error {
+func (m *ReceivedTipNotificationMetadata) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1207,7 +1207,7 @@ func (m *ReceiveTipNotificationMetadata) validate(all bool) error {
 	var errors []error
 
 	if m.GetChatId() == nil {
-		err := ReceiveTipNotificationMetadataValidationError{
+		err := ReceivedTipNotificationMetadataValidationError{
 			field:  "ChatId",
 			reason: "value is required",
 		}
@@ -1218,7 +1218,7 @@ func (m *ReceiveTipNotificationMetadata) validate(all bool) error {
 	}
 
 	if m.GetMessageId() == nil {
-		err := ReceiveTipNotificationMetadataValidationError{
+		err := ReceivedTipNotificationMetadataValidationError{
 			field:  "MessageId",
 			reason: "value is required",
 		}
@@ -1231,19 +1231,19 @@ func (m *ReceiveTipNotificationMetadata) validate(all bool) error {
 	// no validation rules for TotalQuarksReceived
 
 	if len(errors) > 0 {
-		return ReceiveTipNotificationMetadataMultiError(errors)
+		return ReceivedTipNotificationMetadataMultiError(errors)
 	}
 
 	return nil
 }
 
-// ReceiveTipNotificationMetadataMultiError is an error wrapping multiple
-// validation errors returned by ReceiveTipNotificationMetadata.ValidateAll()
+// ReceivedTipNotificationMetadataMultiError is an error wrapping multiple
+// validation errors returned by ReceivedTipNotificationMetadata.ValidateAll()
 // if the designated constraints aren't met.
-type ReceiveTipNotificationMetadataMultiError []error
+type ReceivedTipNotificationMetadataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ReceiveTipNotificationMetadataMultiError) Error() string {
+func (m ReceivedTipNotificationMetadataMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1252,12 +1252,12 @@ func (m ReceiveTipNotificationMetadataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ReceiveTipNotificationMetadataMultiError) AllErrors() []error { return m }
+func (m ReceivedTipNotificationMetadataMultiError) AllErrors() []error { return m }
 
-// ReceiveTipNotificationMetadataValidationError is the validation error
-// returned by ReceiveTipNotificationMetadata.Validate if the designated
+// ReceivedTipNotificationMetadataValidationError is the validation error
+// returned by ReceivedTipNotificationMetadata.Validate if the designated
 // constraints aren't met.
-type ReceiveTipNotificationMetadataValidationError struct {
+type ReceivedTipNotificationMetadataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1265,24 +1265,24 @@ type ReceiveTipNotificationMetadataValidationError struct {
 }
 
 // Field function returns field value.
-func (e ReceiveTipNotificationMetadataValidationError) Field() string { return e.field }
+func (e ReceivedTipNotificationMetadataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ReceiveTipNotificationMetadataValidationError) Reason() string { return e.reason }
+func (e ReceivedTipNotificationMetadataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ReceiveTipNotificationMetadataValidationError) Cause() error { return e.cause }
+func (e ReceivedTipNotificationMetadataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ReceiveTipNotificationMetadataValidationError) Key() bool { return e.key }
+func (e ReceivedTipNotificationMetadataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ReceiveTipNotificationMetadataValidationError) ErrorName() string {
-	return "ReceiveTipNotificationMetadataValidationError"
+func (e ReceivedTipNotificationMetadataValidationError) ErrorName() string {
+	return "ReceivedTipNotificationMetadataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ReceiveTipNotificationMetadataValidationError) Error() string {
+func (e ReceivedTipNotificationMetadataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1294,14 +1294,14 @@ func (e ReceiveTipNotificationMetadataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sReceiveTipNotificationMetadata.%s: %s%s",
+		"invalid %sReceivedTipNotificationMetadata.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ReceiveTipNotificationMetadataValidationError{}
+var _ error = ReceivedTipNotificationMetadataValidationError{}
 
 var _ interface {
 	Field() string
@@ -1309,7 +1309,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ReceiveTipNotificationMetadataValidationError{}
+} = ReceivedTipNotificationMetadataValidationError{}
 
 // Validate checks the field values on PromotedToSpeakerNotificationMetadata
 // with the rules defined in the proto definition for this message. If any
@@ -1337,17 +1337,6 @@ func (m *PromotedToSpeakerNotificationMetadata) validate(all bool) error {
 	if m.GetChatId() == nil {
 		err := PromotedToSpeakerNotificationMetadataValidationError{
 			field:  "ChatId",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if m.GetMessageId() == nil {
-		err := PromotedToSpeakerNotificationMetadataValidationError{
-			field:  "MessageId",
 			reason: "value is required",
 		}
 		if !all {
