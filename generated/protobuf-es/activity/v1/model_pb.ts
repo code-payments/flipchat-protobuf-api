@@ -4,8 +4,8 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Message, proto3, Timestamp } from "@bufbuild/protobuf";
-import { ChatId } from "../../common/v1/common_pb";
+import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
+import { ChatId, UserId } from "../../common/v1/common_pb";
 import { MessageId } from "../../messaging/v1/model_pb";
 
 /**
@@ -21,6 +21,8 @@ export enum ActivityFeedType {
   UNKNOWN = 0,
 
   /**
+   * Activity feed displayed under the Balance tab
+   *
    * @generated from enum value: TRANSACTION_HISTORY = 1;
    */
   TRANSACTION_HISTORY = 1,
@@ -93,25 +95,60 @@ export class Notification extends Message<Notification> {
   localizedText = "";
 
   /**
-   * If relevant, the chat ID associated with this notification
-   *
-   * @generated from field: flipchat.common.v1.ChatId chat_id = 3;
-   */
-  chatId?: ChatId;
-
-  /**
-   * If relevant, the message ID associated with this notification
-   *
-   * @generated from field: flipchat.messaging.v1.MessageId message_id = 4;
-   */
-  messageId?: MessageId;
-
-  /**
    * The timestamp of this notification
    *
-   * @generated from field: google.protobuf.Timestamp ts = 10;
+   * @generated from field: google.protobuf.Timestamp ts = 3;
    */
   ts?: Timestamp;
+
+  /**
+   * Additional metadata for this notification specific to the notification
+   *
+   * @generated from oneof flipchat.activity.v1.Notification.additional_metadata
+   */
+  additionalMetadata: {
+    /**
+     * @generated from field: flipchat.activity.v1.WelcomeBonusNotificationMetadata welcome_bonus = 4;
+     */
+    value: WelcomeBonusNotificationMetadata;
+    case: "welcomeBonus";
+  } | {
+    /**
+     * @generated from field: flipchat.activity.v1.WeeklyBonusNotificationMetadata weekly_bonus = 5;
+     */
+    value: WeeklyBonusNotificationMetadata;
+    case: "weeklyBonus";
+  } | {
+    /**
+     * @generated from field: flipchat.activity.v1.CreateGroupNotificationMetadata create_group = 6;
+     */
+    value: CreateGroupNotificationMetadata;
+    case: "createGroup";
+  } | {
+    /**
+     * @generated from field: flipchat.activity.v1.SendListenerMessageNotificationMetadata send_listener_message = 7;
+     */
+    value: SendListenerMessageNotificationMetadata;
+    case: "sendListenerMessage";
+  } | {
+    /**
+     * @generated from field: flipchat.activity.v1.SendTipNotificationMetadata send_tip = 8;
+     */
+    value: SendTipNotificationMetadata;
+    case: "sendTip";
+  } | {
+    /**
+     * @generated from field: flipchat.activity.v1.ReceiveTipNotificationMetadata received_tip = 9;
+     */
+    value: ReceiveTipNotificationMetadata;
+    case: "receivedTip";
+  } | {
+    /**
+     * @generated from field: flipchat.activity.v1.PromotedToSpeakerNotificationMetadata promoted_to_speaker = 10;
+     */
+    value: PromotedToSpeakerNotificationMetadata;
+    case: "promotedToSpeaker";
+  } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<Notification>) {
     super();
@@ -123,9 +160,14 @@ export class Notification extends Message<Notification> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "id", kind: "message", T: NotificationId },
     { no: 2, name: "localized_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "chat_id", kind: "message", T: ChatId },
-    { no: 4, name: "message_id", kind: "message", T: MessageId },
-    { no: 10, name: "ts", kind: "message", T: Timestamp },
+    { no: 3, name: "ts", kind: "message", T: Timestamp },
+    { no: 4, name: "welcome_bonus", kind: "message", T: WelcomeBonusNotificationMetadata, oneof: "additional_metadata" },
+    { no: 5, name: "weekly_bonus", kind: "message", T: WeeklyBonusNotificationMetadata, oneof: "additional_metadata" },
+    { no: 6, name: "create_group", kind: "message", T: CreateGroupNotificationMetadata, oneof: "additional_metadata" },
+    { no: 7, name: "send_listener_message", kind: "message", T: SendListenerMessageNotificationMetadata, oneof: "additional_metadata" },
+    { no: 8, name: "send_tip", kind: "message", T: SendTipNotificationMetadata, oneof: "additional_metadata" },
+    { no: 9, name: "received_tip", kind: "message", T: ReceiveTipNotificationMetadata, oneof: "additional_metadata" },
+    { no: 10, name: "promoted_to_speaker", kind: "message", T: PromotedToSpeakerNotificationMetadata, oneof: "additional_metadata" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Notification {
@@ -142,6 +184,319 @@ export class Notification extends Message<Notification> {
 
   static equals(a: Notification | PlainMessage<Notification> | undefined, b: Notification | PlainMessage<Notification> | undefined): boolean {
     return proto3.util.equals(Notification, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.activity.v1.WelcomeBonusNotificationMetadata
+ */
+export class WelcomeBonusNotificationMetadata extends Message<WelcomeBonusNotificationMetadata> {
+  /**
+   * @generated from field: uint64 quarks_received = 1;
+   */
+  quarksReceived = protoInt64.zero;
+
+  constructor(data?: PartialMessage<WelcomeBonusNotificationMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.activity.v1.WelcomeBonusNotificationMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "quarks_received", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WelcomeBonusNotificationMetadata {
+    return new WelcomeBonusNotificationMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WelcomeBonusNotificationMetadata {
+    return new WelcomeBonusNotificationMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WelcomeBonusNotificationMetadata {
+    return new WelcomeBonusNotificationMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: WelcomeBonusNotificationMetadata | PlainMessage<WelcomeBonusNotificationMetadata> | undefined, b: WelcomeBonusNotificationMetadata | PlainMessage<WelcomeBonusNotificationMetadata> | undefined): boolean {
+    return proto3.util.equals(WelcomeBonusNotificationMetadata, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.activity.v1.WeeklyBonusNotificationMetadata
+ */
+export class WeeklyBonusNotificationMetadata extends Message<WeeklyBonusNotificationMetadata> {
+  /**
+   * @generated from field: uint64 quarks_received = 1;
+   */
+  quarksReceived = protoInt64.zero;
+
+  constructor(data?: PartialMessage<WeeklyBonusNotificationMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.activity.v1.WeeklyBonusNotificationMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "quarks_received", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WeeklyBonusNotificationMetadata {
+    return new WeeklyBonusNotificationMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WeeklyBonusNotificationMetadata {
+    return new WeeklyBonusNotificationMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WeeklyBonusNotificationMetadata {
+    return new WeeklyBonusNotificationMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: WeeklyBonusNotificationMetadata | PlainMessage<WeeklyBonusNotificationMetadata> | undefined, b: WeeklyBonusNotificationMetadata | PlainMessage<WeeklyBonusNotificationMetadata> | undefined): boolean {
+    return proto3.util.equals(WeeklyBonusNotificationMetadata, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.activity.v1.CreateGroupNotificationMetadata
+ */
+export class CreateGroupNotificationMetadata extends Message<CreateGroupNotificationMetadata> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: uint64 quarks_spent = 2;
+   */
+  quarksSpent = protoInt64.zero;
+
+  constructor(data?: PartialMessage<CreateGroupNotificationMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.activity.v1.CreateGroupNotificationMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "quarks_spent", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateGroupNotificationMetadata {
+    return new CreateGroupNotificationMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateGroupNotificationMetadata {
+    return new CreateGroupNotificationMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateGroupNotificationMetadata {
+    return new CreateGroupNotificationMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CreateGroupNotificationMetadata | PlainMessage<CreateGroupNotificationMetadata> | undefined, b: CreateGroupNotificationMetadata | PlainMessage<CreateGroupNotificationMetadata> | undefined): boolean {
+    return proto3.util.equals(CreateGroupNotificationMetadata, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.activity.v1.SendListenerMessageNotificationMetadata
+ */
+export class SendListenerMessageNotificationMetadata extends Message<SendListenerMessageNotificationMetadata> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.MessageId message_id = 2;
+   */
+  messageId?: MessageId;
+
+  /**
+   * @generated from field: uint64 quarks_spent = 3;
+   */
+  quarksSpent = protoInt64.zero;
+
+  constructor(data?: PartialMessage<SendListenerMessageNotificationMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.activity.v1.SendListenerMessageNotificationMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "message_id", kind: "message", T: MessageId },
+    { no: 3, name: "quarks_spent", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendListenerMessageNotificationMetadata {
+    return new SendListenerMessageNotificationMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendListenerMessageNotificationMetadata {
+    return new SendListenerMessageNotificationMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendListenerMessageNotificationMetadata {
+    return new SendListenerMessageNotificationMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SendListenerMessageNotificationMetadata | PlainMessage<SendListenerMessageNotificationMetadata> | undefined, b: SendListenerMessageNotificationMetadata | PlainMessage<SendListenerMessageNotificationMetadata> | undefined): boolean {
+    return proto3.util.equals(SendListenerMessageNotificationMetadata, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.activity.v1.SendTipNotificationMetadata
+ */
+export class SendTipNotificationMetadata extends Message<SendTipNotificationMetadata> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.MessageId message_id = 2;
+   */
+  messageId?: MessageId;
+
+  /**
+   * @generated from field: uint64 total_quarks_sent = 3;
+   */
+  totalQuarksSent = protoInt64.zero;
+
+  constructor(data?: PartialMessage<SendTipNotificationMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.activity.v1.SendTipNotificationMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "message_id", kind: "message", T: MessageId },
+    { no: 3, name: "total_quarks_sent", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendTipNotificationMetadata {
+    return new SendTipNotificationMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendTipNotificationMetadata {
+    return new SendTipNotificationMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendTipNotificationMetadata {
+    return new SendTipNotificationMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SendTipNotificationMetadata | PlainMessage<SendTipNotificationMetadata> | undefined, b: SendTipNotificationMetadata | PlainMessage<SendTipNotificationMetadata> | undefined): boolean {
+    return proto3.util.equals(SendTipNotificationMetadata, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.activity.v1.ReceiveTipNotificationMetadata
+ */
+export class ReceiveTipNotificationMetadata extends Message<ReceiveTipNotificationMetadata> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.MessageId message_id = 2;
+   */
+  messageId?: MessageId;
+
+  /**
+   * @generated from field: uint64 total_quarks_received = 3;
+   */
+  totalQuarksReceived = protoInt64.zero;
+
+  constructor(data?: PartialMessage<ReceiveTipNotificationMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.activity.v1.ReceiveTipNotificationMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "message_id", kind: "message", T: MessageId },
+    { no: 3, name: "total_quarks_received", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReceiveTipNotificationMetadata {
+    return new ReceiveTipNotificationMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReceiveTipNotificationMetadata {
+    return new ReceiveTipNotificationMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReceiveTipNotificationMetadata {
+    return new ReceiveTipNotificationMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ReceiveTipNotificationMetadata | PlainMessage<ReceiveTipNotificationMetadata> | undefined, b: ReceiveTipNotificationMetadata | PlainMessage<ReceiveTipNotificationMetadata> | undefined): boolean {
+    return proto3.util.equals(ReceiveTipNotificationMetadata, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.activity.v1.PromotedToSpeakerNotificationMetadata
+ */
+export class PromotedToSpeakerNotificationMetadata extends Message<PromotedToSpeakerNotificationMetadata> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: flipchat.messaging.v1.MessageId message_id = 2;
+   */
+  messageId?: MessageId;
+
+  /**
+   * @generated from field: flipchat.common.v1.UserId promted_by = 3;
+   */
+  promtedBy?: UserId;
+
+  constructor(data?: PartialMessage<PromotedToSpeakerNotificationMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.activity.v1.PromotedToSpeakerNotificationMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "message_id", kind: "message", T: MessageId },
+    { no: 3, name: "promted_by", kind: "message", T: UserId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PromotedToSpeakerNotificationMetadata {
+    return new PromotedToSpeakerNotificationMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PromotedToSpeakerNotificationMetadata {
+    return new PromotedToSpeakerNotificationMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PromotedToSpeakerNotificationMetadata {
+    return new PromotedToSpeakerNotificationMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PromotedToSpeakerNotificationMetadata | PlainMessage<PromotedToSpeakerNotificationMetadata> | undefined, b: PromotedToSpeakerNotificationMetadata | PlainMessage<PromotedToSpeakerNotificationMetadata> | undefined): boolean {
+    return proto3.util.equals(PromotedToSpeakerNotificationMetadata, a, b);
   }
 }
 

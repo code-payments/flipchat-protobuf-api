@@ -219,64 +219,6 @@ func (m *Notification) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if all {
-		switch v := interface{}(m.GetChatId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, NotificationValidationError{
-					field:  "ChatId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, NotificationValidationError{
-					field:  "ChatId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return NotificationValidationError{
-				field:  "ChatId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetMessageId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, NotificationValidationError{
-					field:  "MessageId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, NotificationValidationError{
-					field:  "MessageId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetMessageId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return NotificationValidationError{
-				field:  "MessageId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if m.GetTs() == nil {
 		err := NotificationValidationError{
 			field:  "Ts",
@@ -286,6 +228,298 @@ func (m *Notification) validate(all bool) error {
 			return err
 		}
 		errors = append(errors, err)
+	}
+
+	switch v := m.AdditionalMetadata.(type) {
+	case *Notification_WelcomeBonus:
+		if v == nil {
+			err := NotificationValidationError{
+				field:  "AdditionalMetadata",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetWelcomeBonus()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "WelcomeBonus",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "WelcomeBonus",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetWelcomeBonus()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return NotificationValidationError{
+					field:  "WelcomeBonus",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Notification_WeeklyBonus:
+		if v == nil {
+			err := NotificationValidationError{
+				field:  "AdditionalMetadata",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetWeeklyBonus()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "WeeklyBonus",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "WeeklyBonus",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetWeeklyBonus()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return NotificationValidationError{
+					field:  "WeeklyBonus",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Notification_CreateGroup:
+		if v == nil {
+			err := NotificationValidationError{
+				field:  "AdditionalMetadata",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetCreateGroup()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "CreateGroup",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "CreateGroup",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetCreateGroup()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return NotificationValidationError{
+					field:  "CreateGroup",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Notification_SendListenerMessage:
+		if v == nil {
+			err := NotificationValidationError{
+				field:  "AdditionalMetadata",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetSendListenerMessage()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "SendListenerMessage",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "SendListenerMessage",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetSendListenerMessage()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return NotificationValidationError{
+					field:  "SendListenerMessage",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Notification_SendTip:
+		if v == nil {
+			err := NotificationValidationError{
+				field:  "AdditionalMetadata",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetSendTip()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "SendTip",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "SendTip",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetSendTip()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return NotificationValidationError{
+					field:  "SendTip",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Notification_ReceivedTip:
+		if v == nil {
+			err := NotificationValidationError{
+				field:  "AdditionalMetadata",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetReceivedTip()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "ReceivedTip",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "ReceivedTip",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetReceivedTip()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return NotificationValidationError{
+					field:  "ReceivedTip",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *Notification_PromotedToSpeaker:
+		if v == nil {
+			err := NotificationValidationError{
+				field:  "AdditionalMetadata",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+
+		if all {
+			switch v := interface{}(m.GetPromotedToSpeaker()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "PromotedToSpeaker",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, NotificationValidationError{
+						field:  "PromotedToSpeaker",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetPromotedToSpeaker()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return NotificationValidationError{
+					field:  "PromotedToSpeaker",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		_ = v // ensures v is used
 	}
 
 	if len(errors) > 0 {
@@ -364,3 +598,853 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = NotificationValidationError{}
+
+// Validate checks the field values on WelcomeBonusNotificationMetadata with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *WelcomeBonusNotificationMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WelcomeBonusNotificationMetadata with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// WelcomeBonusNotificationMetadataMultiError, or nil if none found.
+func (m *WelcomeBonusNotificationMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WelcomeBonusNotificationMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for QuarksReceived
+
+	if len(errors) > 0 {
+		return WelcomeBonusNotificationMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// WelcomeBonusNotificationMetadataMultiError is an error wrapping multiple
+// validation errors returned by
+// WelcomeBonusNotificationMetadata.ValidateAll() if the designated
+// constraints aren't met.
+type WelcomeBonusNotificationMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WelcomeBonusNotificationMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WelcomeBonusNotificationMetadataMultiError) AllErrors() []error { return m }
+
+// WelcomeBonusNotificationMetadataValidationError is the validation error
+// returned by WelcomeBonusNotificationMetadata.Validate if the designated
+// constraints aren't met.
+type WelcomeBonusNotificationMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WelcomeBonusNotificationMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WelcomeBonusNotificationMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WelcomeBonusNotificationMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WelcomeBonusNotificationMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WelcomeBonusNotificationMetadataValidationError) ErrorName() string {
+	return "WelcomeBonusNotificationMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e WelcomeBonusNotificationMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWelcomeBonusNotificationMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WelcomeBonusNotificationMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WelcomeBonusNotificationMetadataValidationError{}
+
+// Validate checks the field values on WeeklyBonusNotificationMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *WeeklyBonusNotificationMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WeeklyBonusNotificationMetadata with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// WeeklyBonusNotificationMetadataMultiError, or nil if none found.
+func (m *WeeklyBonusNotificationMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WeeklyBonusNotificationMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for QuarksReceived
+
+	if len(errors) > 0 {
+		return WeeklyBonusNotificationMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// WeeklyBonusNotificationMetadataMultiError is an error wrapping multiple
+// validation errors returned by WeeklyBonusNotificationMetadata.ValidateAll()
+// if the designated constraints aren't met.
+type WeeklyBonusNotificationMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WeeklyBonusNotificationMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WeeklyBonusNotificationMetadataMultiError) AllErrors() []error { return m }
+
+// WeeklyBonusNotificationMetadataValidationError is the validation error
+// returned by WeeklyBonusNotificationMetadata.Validate if the designated
+// constraints aren't met.
+type WeeklyBonusNotificationMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WeeklyBonusNotificationMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WeeklyBonusNotificationMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WeeklyBonusNotificationMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WeeklyBonusNotificationMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WeeklyBonusNotificationMetadataValidationError) ErrorName() string {
+	return "WeeklyBonusNotificationMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e WeeklyBonusNotificationMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWeeklyBonusNotificationMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WeeklyBonusNotificationMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WeeklyBonusNotificationMetadataValidationError{}
+
+// Validate checks the field values on CreateGroupNotificationMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateGroupNotificationMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateGroupNotificationMetadata with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateGroupNotificationMetadataMultiError, or nil if none found.
+func (m *CreateGroupNotificationMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateGroupNotificationMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := CreateGroupNotificationMetadataValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for QuarksSpent
+
+	if len(errors) > 0 {
+		return CreateGroupNotificationMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateGroupNotificationMetadataMultiError is an error wrapping multiple
+// validation errors returned by CreateGroupNotificationMetadata.ValidateAll()
+// if the designated constraints aren't met.
+type CreateGroupNotificationMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateGroupNotificationMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateGroupNotificationMetadataMultiError) AllErrors() []error { return m }
+
+// CreateGroupNotificationMetadataValidationError is the validation error
+// returned by CreateGroupNotificationMetadata.Validate if the designated
+// constraints aren't met.
+type CreateGroupNotificationMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateGroupNotificationMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateGroupNotificationMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateGroupNotificationMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateGroupNotificationMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateGroupNotificationMetadataValidationError) ErrorName() string {
+	return "CreateGroupNotificationMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateGroupNotificationMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateGroupNotificationMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateGroupNotificationMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateGroupNotificationMetadataValidationError{}
+
+// Validate checks the field values on SendListenerMessageNotificationMetadata
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *SendListenerMessageNotificationMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// SendListenerMessageNotificationMetadata with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// SendListenerMessageNotificationMetadataMultiError, or nil if none found.
+func (m *SendListenerMessageNotificationMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendListenerMessageNotificationMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := SendListenerMessageNotificationMetadataValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetMessageId() == nil {
+		err := SendListenerMessageNotificationMetadataValidationError{
+			field:  "MessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for QuarksSpent
+
+	if len(errors) > 0 {
+		return SendListenerMessageNotificationMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendListenerMessageNotificationMetadataMultiError is an error wrapping
+// multiple validation errors returned by
+// SendListenerMessageNotificationMetadata.ValidateAll() if the designated
+// constraints aren't met.
+type SendListenerMessageNotificationMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendListenerMessageNotificationMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendListenerMessageNotificationMetadataMultiError) AllErrors() []error { return m }
+
+// SendListenerMessageNotificationMetadataValidationError is the validation
+// error returned by SendListenerMessageNotificationMetadata.Validate if the
+// designated constraints aren't met.
+type SendListenerMessageNotificationMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendListenerMessageNotificationMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendListenerMessageNotificationMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendListenerMessageNotificationMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendListenerMessageNotificationMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendListenerMessageNotificationMetadataValidationError) ErrorName() string {
+	return "SendListenerMessageNotificationMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendListenerMessageNotificationMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendListenerMessageNotificationMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendListenerMessageNotificationMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendListenerMessageNotificationMetadataValidationError{}
+
+// Validate checks the field values on SendTipNotificationMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SendTipNotificationMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SendTipNotificationMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SendTipNotificationMetadataMultiError, or nil if none found.
+func (m *SendTipNotificationMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SendTipNotificationMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := SendTipNotificationMetadataValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetMessageId() == nil {
+		err := SendTipNotificationMetadataValidationError{
+			field:  "MessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for TotalQuarksSent
+
+	if len(errors) > 0 {
+		return SendTipNotificationMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// SendTipNotificationMetadataMultiError is an error wrapping multiple
+// validation errors returned by SendTipNotificationMetadata.ValidateAll() if
+// the designated constraints aren't met.
+type SendTipNotificationMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SendTipNotificationMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SendTipNotificationMetadataMultiError) AllErrors() []error { return m }
+
+// SendTipNotificationMetadataValidationError is the validation error returned
+// by SendTipNotificationMetadata.Validate if the designated constraints
+// aren't met.
+type SendTipNotificationMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendTipNotificationMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendTipNotificationMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendTipNotificationMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendTipNotificationMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendTipNotificationMetadataValidationError) ErrorName() string {
+	return "SendTipNotificationMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendTipNotificationMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendTipNotificationMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendTipNotificationMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendTipNotificationMetadataValidationError{}
+
+// Validate checks the field values on ReceiveTipNotificationMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReceiveTipNotificationMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReceiveTipNotificationMetadata with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ReceiveTipNotificationMetadataMultiError, or nil if none found.
+func (m *ReceiveTipNotificationMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReceiveTipNotificationMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := ReceiveTipNotificationMetadataValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetMessageId() == nil {
+		err := ReceiveTipNotificationMetadataValidationError{
+			field:  "MessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for TotalQuarksReceived
+
+	if len(errors) > 0 {
+		return ReceiveTipNotificationMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReceiveTipNotificationMetadataMultiError is an error wrapping multiple
+// validation errors returned by ReceiveTipNotificationMetadata.ValidateAll()
+// if the designated constraints aren't met.
+type ReceiveTipNotificationMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReceiveTipNotificationMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReceiveTipNotificationMetadataMultiError) AllErrors() []error { return m }
+
+// ReceiveTipNotificationMetadataValidationError is the validation error
+// returned by ReceiveTipNotificationMetadata.Validate if the designated
+// constraints aren't met.
+type ReceiveTipNotificationMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReceiveTipNotificationMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReceiveTipNotificationMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReceiveTipNotificationMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReceiveTipNotificationMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReceiveTipNotificationMetadataValidationError) ErrorName() string {
+	return "ReceiveTipNotificationMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReceiveTipNotificationMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReceiveTipNotificationMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReceiveTipNotificationMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReceiveTipNotificationMetadataValidationError{}
+
+// Validate checks the field values on PromotedToSpeakerNotificationMetadata
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *PromotedToSpeakerNotificationMetadata) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PromotedToSpeakerNotificationMetadata
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// PromotedToSpeakerNotificationMetadataMultiError, or nil if none found.
+func (m *PromotedToSpeakerNotificationMetadata) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PromotedToSpeakerNotificationMetadata) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := PromotedToSpeakerNotificationMetadataValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetMessageId() == nil {
+		err := PromotedToSpeakerNotificationMetadataValidationError{
+			field:  "MessageId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetPromtedBy() == nil {
+		err := PromotedToSpeakerNotificationMetadataValidationError{
+			field:  "PromtedBy",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return PromotedToSpeakerNotificationMetadataMultiError(errors)
+	}
+
+	return nil
+}
+
+// PromotedToSpeakerNotificationMetadataMultiError is an error wrapping
+// multiple validation errors returned by
+// PromotedToSpeakerNotificationMetadata.ValidateAll() if the designated
+// constraints aren't met.
+type PromotedToSpeakerNotificationMetadataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PromotedToSpeakerNotificationMetadataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PromotedToSpeakerNotificationMetadataMultiError) AllErrors() []error { return m }
+
+// PromotedToSpeakerNotificationMetadataValidationError is the validation error
+// returned by PromotedToSpeakerNotificationMetadata.Validate if the
+// designated constraints aren't met.
+type PromotedToSpeakerNotificationMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PromotedToSpeakerNotificationMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PromotedToSpeakerNotificationMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PromotedToSpeakerNotificationMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PromotedToSpeakerNotificationMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PromotedToSpeakerNotificationMetadataValidationError) ErrorName() string {
+	return "PromotedToSpeakerNotificationMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PromotedToSpeakerNotificationMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPromotedToSpeakerNotificationMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PromotedToSpeakerNotificationMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PromotedToSpeakerNotificationMetadataValidationError{}
