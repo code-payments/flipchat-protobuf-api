@@ -3680,6 +3680,303 @@ var _ interface {
 	ErrorName() string
 } = SetDisplayNameResponseValidationError{}
 
+// Validate checks the field values on SetDescriptionRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetDescriptionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetDescriptionRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetDescriptionRequestMultiError, or nil if none found.
+func (m *SetDescriptionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetDescriptionRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetChatId() == nil {
+		err := SetDescriptionRequestValidationError{
+			field:  "ChatId",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetChatId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetDescriptionRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetDescriptionRequestValidationError{
+					field:  "ChatId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChatId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetDescriptionRequestValidationError{
+				field:  "ChatId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetDescription()) > 160 {
+		err := SetDescriptionRequestValidationError{
+			field:  "Description",
+			reason: "value length must be at most 160 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAuth() == nil {
+		err := SetDescriptionRequestValidationError{
+			field:  "Auth",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetAuth()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetDescriptionRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetDescriptionRequestValidationError{
+					field:  "Auth",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuth()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetDescriptionRequestValidationError{
+				field:  "Auth",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SetDescriptionRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetDescriptionRequestMultiError is an error wrapping multiple validation
+// errors returned by SetDescriptionRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetDescriptionRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetDescriptionRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetDescriptionRequestMultiError) AllErrors() []error { return m }
+
+// SetDescriptionRequestValidationError is the validation error returned by
+// SetDescriptionRequest.Validate if the designated constraints aren't met.
+type SetDescriptionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetDescriptionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetDescriptionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetDescriptionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetDescriptionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetDescriptionRequestValidationError) ErrorName() string {
+	return "SetDescriptionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetDescriptionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetDescriptionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetDescriptionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetDescriptionRequestValidationError{}
+
+// Validate checks the field values on SetDescriptionResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetDescriptionResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetDescriptionResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetDescriptionResponseMultiError, or nil if none found.
+func (m *SetDescriptionResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetDescriptionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Result
+
+	if len(errors) > 0 {
+		return SetDescriptionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetDescriptionResponseMultiError is an error wrapping multiple validation
+// errors returned by SetDescriptionResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetDescriptionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetDescriptionResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetDescriptionResponseMultiError) AllErrors() []error { return m }
+
+// SetDescriptionResponseValidationError is the validation error returned by
+// SetDescriptionResponse.Validate if the designated constraints aren't met.
+type SetDescriptionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetDescriptionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetDescriptionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetDescriptionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetDescriptionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetDescriptionResponseValidationError) ErrorName() string {
+	return "SetDescriptionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetDescriptionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetDescriptionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetDescriptionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetDescriptionResponseValidationError{}
+
 // Validate checks the field values on SetCoverChargeRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -7078,6 +7375,17 @@ func (m *Metadata) validate(all bool) error {
 		}
 	}
 
+	if utf8.RuneCountInString(m.GetDescription()) > 160 {
+		err := MetadataValidationError{
+			field:  "Description",
+			reason: "value length must be at most 160 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return MetadataMultiError(errors)
 	}
@@ -7530,6 +7838,48 @@ func (m *MetadataUpdate) validate(all bool) error {
 			if err := v.Validate(); err != nil {
 				return MetadataUpdateValidationError{
 					field:  "OpenStatusChanged",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *MetadataUpdate_DescriptionChanged_:
+		if v == nil {
+			err := MetadataUpdateValidationError{
+				field:  "Kind",
+				reason: "oneof value cannot be a typed-nil",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
+		oneofKindPresent = true
+
+		if all {
+			switch v := interface{}(m.GetDescriptionChanged()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "DescriptionChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MetadataUpdateValidationError{
+						field:  "DescriptionChanged",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetDescriptionChanged()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MetadataUpdateValidationError{
+					field:  "DescriptionChanged",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -10386,6 +10736,122 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = MetadataUpdate_OpenStatusChangedValidationError{}
+
+// Validate checks the field values on MetadataUpdate_DescriptionChanged with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *MetadataUpdate_DescriptionChanged) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MetadataUpdate_DescriptionChanged
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// MetadataUpdate_DescriptionChangedMultiError, or nil if none found.
+func (m *MetadataUpdate_DescriptionChanged) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MetadataUpdate_DescriptionChanged) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetNewDescription()) > 160 {
+		err := MetadataUpdate_DescriptionChangedValidationError{
+			field:  "NewDescription",
+			reason: "value length must be at most 160 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return MetadataUpdate_DescriptionChangedMultiError(errors)
+	}
+
+	return nil
+}
+
+// MetadataUpdate_DescriptionChangedMultiError is an error wrapping multiple
+// validation errors returned by
+// MetadataUpdate_DescriptionChanged.ValidateAll() if the designated
+// constraints aren't met.
+type MetadataUpdate_DescriptionChangedMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MetadataUpdate_DescriptionChangedMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MetadataUpdate_DescriptionChangedMultiError) AllErrors() []error { return m }
+
+// MetadataUpdate_DescriptionChangedValidationError is the validation error
+// returned by MetadataUpdate_DescriptionChanged.Validate if the designated
+// constraints aren't met.
+type MetadataUpdate_DescriptionChangedValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MetadataUpdate_DescriptionChangedValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MetadataUpdate_DescriptionChangedValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MetadataUpdate_DescriptionChangedValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MetadataUpdate_DescriptionChangedValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MetadataUpdate_DescriptionChangedValidationError) ErrorName() string {
+	return "MetadataUpdate_DescriptionChangedValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MetadataUpdate_DescriptionChangedValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMetadataUpdate_DescriptionChanged.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MetadataUpdate_DescriptionChangedValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MetadataUpdate_DescriptionChangedValidationError{}
 
 // Validate checks the field values on MemberUpdate_FullRefresh with the rules
 // defined in the proto definition for this message. If any rules are

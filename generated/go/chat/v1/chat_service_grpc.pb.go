@@ -29,6 +29,7 @@ const (
 	Chat_CloseChat_FullMethodName        = "/flipchat.chat.v1.Chat/CloseChat"
 	Chat_CheckDisplayName_FullMethodName = "/flipchat.chat.v1.Chat/CheckDisplayName"
 	Chat_SetDisplayName_FullMethodName   = "/flipchat.chat.v1.Chat/SetDisplayName"
+	Chat_SetDescription_FullMethodName   = "/flipchat.chat.v1.Chat/SetDescription"
 	Chat_SetCoverCharge_FullMethodName   = "/flipchat.chat.v1.Chat/SetCoverCharge"
 	Chat_SetMessagingFee_FullMethodName  = "/flipchat.chat.v1.Chat/SetMessagingFee"
 	Chat_GetMemberUpdates_FullMethodName = "/flipchat.chat.v1.Chat/GetMemberUpdates"
@@ -82,6 +83,8 @@ type ChatClient interface {
 	// SetDisplayName sets a chat's display name. If the display name isn't allowed,
 	// then a set of alternate suggestions may be provided
 	SetDisplayName(ctx context.Context, in *SetDisplayNameRequest, opts ...grpc.CallOption) (*SetDisplayNameResponse, error)
+	// SetDescription sets a chat's description
+	SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error)
 	// SetCoverCharge sets a chat's cover charge
 	//
 	// Deprecated: Use SetMessagingFee instead
@@ -213,6 +216,16 @@ func (c *chatClient) SetDisplayName(ctx context.Context, in *SetDisplayNameReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetDisplayNameResponse)
 	err := c.cc.Invoke(ctx, Chat_SetDisplayName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDescriptionResponse)
+	err := c.cc.Invoke(ctx, Chat_SetDescription_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -360,6 +373,8 @@ type ChatServer interface {
 	// SetDisplayName sets a chat's display name. If the display name isn't allowed,
 	// then a set of alternate suggestions may be provided
 	SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error)
+	// SetDescription sets a chat's description
+	SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error)
 	// SetCoverCharge sets a chat's cover charge
 	//
 	// Deprecated: Use SetMessagingFee instead
@@ -423,6 +438,9 @@ func (UnimplementedChatServer) CheckDisplayName(context.Context, *CheckDisplayNa
 }
 func (UnimplementedChatServer) SetDisplayName(context.Context, *SetDisplayNameRequest) (*SetDisplayNameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetDisplayName not implemented")
+}
+func (UnimplementedChatServer) SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetDescription not implemented")
 }
 func (UnimplementedChatServer) SetCoverCharge(context.Context, *SetCoverChargeRequest) (*SetCoverChargeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCoverCharge not implemented")
@@ -640,6 +658,24 @@ func _Chat_SetDisplayName_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatServer).SetDisplayName(ctx, req.(*SetDisplayNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_SetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).SetDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_SetDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).SetDescription(ctx, req.(*SetDescriptionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -866,6 +902,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetDisplayName",
 			Handler:    _Chat_SetDisplayName_Handler,
+		},
+		{
+			MethodName: "SetDescription",
+			Handler:    _Chat_SetDescription_Handler,
 		},
 		{
 			MethodName: "SetCoverCharge",

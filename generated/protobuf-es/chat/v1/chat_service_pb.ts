@@ -1591,6 +1591,118 @@ proto3.util.setEnumType(SetDisplayNameResponse_Result, "flipchat.chat.v1.SetDisp
 ]);
 
 /**
+ * @generated from message flipchat.chat.v1.SetDescriptionRequest
+ */
+export class SetDescriptionRequest extends Message<SetDescriptionRequest> {
+  /**
+   * @generated from field: flipchat.common.v1.ChatId chat_id = 1;
+   */
+  chatId?: ChatId;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description = "";
+
+  /**
+   * @generated from field: flipchat.common.v1.Auth auth = 3;
+   */
+  auth?: Auth;
+
+  constructor(data?: PartialMessage<SetDescriptionRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.SetDescriptionRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "chat_id", kind: "message", T: ChatId },
+    { no: 2, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "auth", kind: "message", T: Auth },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetDescriptionRequest {
+    return new SetDescriptionRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetDescriptionRequest {
+    return new SetDescriptionRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetDescriptionRequest {
+    return new SetDescriptionRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetDescriptionRequest | PlainMessage<SetDescriptionRequest> | undefined, b: SetDescriptionRequest | PlainMessage<SetDescriptionRequest> | undefined): boolean {
+    return proto3.util.equals(SetDescriptionRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.SetDescriptionResponse
+ */
+export class SetDescriptionResponse extends Message<SetDescriptionResponse> {
+  /**
+   * @generated from field: flipchat.chat.v1.SetDescriptionResponse.Result result = 1;
+   */
+  result = SetDescriptionResponse_Result.OK;
+
+  constructor(data?: PartialMessage<SetDescriptionResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.SetDescriptionResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(SetDescriptionResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetDescriptionResponse {
+    return new SetDescriptionResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetDescriptionResponse {
+    return new SetDescriptionResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetDescriptionResponse {
+    return new SetDescriptionResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SetDescriptionResponse | PlainMessage<SetDescriptionResponse> | undefined, b: SetDescriptionResponse | PlainMessage<SetDescriptionResponse> | undefined): boolean {
+    return proto3.util.equals(SetDescriptionResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum flipchat.chat.v1.SetDescriptionResponse.Result
+ */
+export enum SetDescriptionResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * @generated from enum value: CANT_SET = 2;
+   */
+  CANT_SET = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(SetDescriptionResponse_Result)
+proto3.util.setEnumType(SetDescriptionResponse_Result, "flipchat.chat.v1.SetDescriptionResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "CANT_SET" },
+]);
+
+/**
  * @generated from message flipchat.chat.v1.SetCoverChargeRequest
  */
 export class SetCoverChargeRequest extends Message<SetCoverChargeRequest> {
@@ -2773,6 +2885,13 @@ export class Metadata extends Message<Metadata> {
    */
   openStatus?: OpenStatus;
 
+  /**
+   * Chat description
+   *
+   * @generated from field: string description = 13;
+   */
+  description = "";
+
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2793,6 +2912,7 @@ export class Metadata extends Message<Metadata> {
     { no: 9, name: "messaging_fee", kind: "message", T: PaymentAmount },
     { no: 10, name: "last_activity", kind: "message", T: Timestamp },
     { no: 12, name: "open_status", kind: "message", T: OpenStatus },
+    { no: 13, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
@@ -2923,6 +3043,12 @@ export class MetadataUpdate extends Message<MetadataUpdate> {
      */
     value: MetadataUpdate_OpenStatusChanged;
     case: "openStatusChanged";
+  } | {
+    /**
+     * @generated from field: flipchat.chat.v1.MetadataUpdate.DescriptionChanged description_changed = 7;
+     */
+    value: MetadataUpdate_DescriptionChanged;
+    case: "descriptionChanged";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<MetadataUpdate>) {
@@ -2939,6 +3065,7 @@ export class MetadataUpdate extends Message<MetadataUpdate> {
     { no: 4, name: "messaging_fee_changed", kind: "message", T: MetadataUpdate_MessagingFeeChanged, oneof: "kind" },
     { no: 5, name: "last_activity_changed", kind: "message", T: MetadataUpdate_LastActivityChanged, oneof: "kind" },
     { no: 6, name: "open_status_changed", kind: "message", T: MetadataUpdate_OpenStatusChanged, oneof: "kind" },
+    { no: 7, name: "description_changed", kind: "message", T: MetadataUpdate_DescriptionChanged, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MetadataUpdate {
@@ -3200,6 +3327,43 @@ export class MetadataUpdate_OpenStatusChanged extends Message<MetadataUpdate_Ope
 
   static equals(a: MetadataUpdate_OpenStatusChanged | PlainMessage<MetadataUpdate_OpenStatusChanged> | undefined, b: MetadataUpdate_OpenStatusChanged | PlainMessage<MetadataUpdate_OpenStatusChanged> | undefined): boolean {
     return proto3.util.equals(MetadataUpdate_OpenStatusChanged, a, b);
+  }
+}
+
+/**
+ * @generated from message flipchat.chat.v1.MetadataUpdate.DescriptionChanged
+ */
+export class MetadataUpdate_DescriptionChanged extends Message<MetadataUpdate_DescriptionChanged> {
+  /**
+   * @generated from field: string new_description = 1;
+   */
+  newDescription = "";
+
+  constructor(data?: PartialMessage<MetadataUpdate_DescriptionChanged>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "flipchat.chat.v1.MetadataUpdate.DescriptionChanged";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "new_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MetadataUpdate_DescriptionChanged {
+    return new MetadataUpdate_DescriptionChanged().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MetadataUpdate_DescriptionChanged {
+    return new MetadataUpdate_DescriptionChanged().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MetadataUpdate_DescriptionChanged {
+    return new MetadataUpdate_DescriptionChanged().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MetadataUpdate_DescriptionChanged | PlainMessage<MetadataUpdate_DescriptionChanged> | undefined, b: MetadataUpdate_DescriptionChanged | PlainMessage<MetadataUpdate_DescriptionChanged> | undefined): boolean {
+    return proto3.util.equals(MetadataUpdate_DescriptionChanged, a, b);
   }
 }
 

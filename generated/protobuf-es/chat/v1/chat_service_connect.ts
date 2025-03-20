@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CheckDisplayNameRequest, CheckDisplayNameResponse, CloseChatRequest, CloseChatResponse, DemoteUserRequest, DemoteUserResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, PromoteUserRequest, PromoteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDisplayNameRequest, SetDisplayNameResponse, SetMessagingFeeRequest, SetMessagingFeeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
+import { CheckDisplayNameRequest, CheckDisplayNameResponse, CloseChatRequest, CloseChatResponse, DemoteUserRequest, DemoteUserResponse, GetChatRequest, GetChatResponse, GetChatsRequest, GetChatsResponse, GetMemberUpdatesRequest, GetMemberUpdatesResponse, JoinChatRequest, JoinChatResponse, LeaveChatRequest, LeaveChatResponse, MuteChatRequest, MuteChatResponse, MuteUserRequest, MuteUserResponse, OpenChatRequest, OpenChatResponse, PromoteUserRequest, PromoteUserResponse, RemoveUserRequest, RemoveUserResponse, ReportUserRequest, ReportUserResponse, SetCoverChargeRequest, SetCoverChargeResponse, SetDescriptionRequest, SetDescriptionResponse, SetDisplayNameRequest, SetDisplayNameResponse, SetMessagingFeeRequest, SetMessagingFeeResponse, StartChatRequest, StartChatResponse, StreamChatEventsRequest, StreamChatEventsResponse, UnmuteChatRequest, UnmuteChatResponse } from "./chat_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -137,6 +137,17 @@ export const Chat = {
       name: "SetDisplayName",
       I: SetDisplayNameRequest,
       O: SetDisplayNameResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * SetDescription sets a chat's description
+     *
+     * @generated from rpc flipchat.chat.v1.Chat.SetDescription
+     */
+    setDescription: {
+      name: "SetDescription",
+      I: SetDescriptionRequest,
+      O: SetDescriptionResponse,
       kind: MethodKind.Unary,
     },
     /**
